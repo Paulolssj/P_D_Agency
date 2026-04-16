@@ -1,17 +1,40 @@
 import React, { useState, useEffect } from 'react';
+import { 
+  Terminal, 
+  Smartphone, 
+  Globe, 
+  ArrowUpRight, 
+  ShieldCheck, 
+  Zap, 
+  Layout, 
+  CheckCircle2, 
+  Code2,
+  Menu,
+  X
+} from 'lucide-react';
 import ContactModal from '../components/ContactModal';
 
-const Icon = ({ name, className = '' }) => (
-  <span className={`material-symbols-outlined ${className}`}>{name}</span>
+const NavLink = ({ href, children, onClick }) => (
+  <a 
+    href={href} 
+    onClick={(e) => {
+      e.preventDefault();
+      onClick();
+    }}
+    className="text-sm font-medium text-white/70 hover:text-[#00D1FF] transition-colors cursor-pointer"
+  >
+    {children}
+  </a>
 );
 
 export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState('');
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -19,345 +42,238 @@ export default function LandingPage() {
   const openModal = (pkg = '') => {
     setSelectedPackage(pkg);
     setModalOpen(true);
+    setMobileMenuOpen(false);
   };
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMobileMenuOpen(false);
   };
 
   return (
-    <div
-      className="min-h-screen font-body selection:bg-pd-primary selection:text-[#005762]"
-      style={{ backgroundColor: '#0e0e0e', color: '#ffffff' }}
-    >
-      {/* ── HEADER ── */}
-      <header className={`fixed top-0 w-full z-50 glass-header transition-shadow duration-300 ${scrolled ? 'shadow-[0px_24px_80px_rgba(0,227,253,0.08)]' : ''}`}>
-        <div className="flex justify-between items-center px-6 py-5 max-w-screen-2xl mx-auto">
-          <div className="flex items-center gap-2">
-            <Icon name="architecture" className="text-pd-primary" />
-            <span className="text-2xl font-black tracking-tighter text-white font-headline uppercase">
-              P&amp;D AGENCY
-            </span>
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* ── NAVBAR ── */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-4' : 'bg-transparent py-6'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+            <div className="w-8 h-8 bg-[#00D1FF] rounded-lg flex items-center justify-center neon-glow-cyan">
+              <Terminal size={20} className="text-black" />
+            </div>
+            <span className="text-xl font-bold tracking-tighter">P&D AGENCY</span>
           </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <button onClick={() => scrollTo('servicos')} className="text-pd-on-surface-var text-sm hover:text-pd-primary transition-colors font-label uppercase tracking-widest cursor-pointer">
-              Serviços
+
+          <div className="hidden md:flex items-center gap-8">
+            <NavLink href="#servicos" onClick={() => scrollTo('servicos')}>SERVIÇOS</NavLink>
+            <NavLink href="#portfolio" onClick={() => scrollTo('portfolio')}>PORTFÓLIO</NavLink>
+            <NavLink href="#planos" onClick={() => scrollTo('planos')}>PLANOS</NavLink>
+            <button 
+              onClick={() => openModal()}
+              className="btn-primary py-2 px-6 text-xs uppercase tracking-widest"
+            >
+              CONTRATAR
             </button>
-            <button onClick={() => scrollTo('portfolio')} className="text-pd-on-surface-var text-sm hover:text-pd-primary transition-colors font-label uppercase tracking-widest cursor-pointer">
-              Portfólio
-            </button>
-            <button onClick={() => scrollTo('planos')} className="text-pd-on-surface-var text-sm hover:text-pd-primary transition-colors font-label uppercase tracking-widest cursor-pointer">
-              Planos
-            </button>
-          </nav>
-          <button
-            data-testid="nav-contact-trigger"
-            onClick={() => openModal()}
-            className="bg-gradient-to-r from-pd-primary to-pd-primary-container text-[#005762] px-4 py-2 rounded-md font-label font-bold uppercase tracking-wider text-xs active:scale-95 transition-transform"
-          >
-            VAMOS CONSTRUIR
+          </div>
+
+          <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
-      </header>
 
-      <main className="pt-24 pb-20">
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in">
+             <NavLink href="#servicos" onClick={() => scrollTo('servicos')}>SERVIÇOS</NavLink>
+             <NavLink href="#portfolio" onClick={() => scrollTo('portfolio')}>PORTFÓLIO</NavLink>
+             <NavLink href="#planos" onClick={() => scrollTo('planos')}>PLANOS</NavLink>
+             <button onClick={() => openModal()} className="btn-primary w-full py-4 text-xs uppercase tracking-widest">
+               CONTRATAR
+             </button>
+          </div>
+        )}
+      </nav>
 
+      <main>
         {/* ── HERO ── */}
-        <section className="px-6 py-16 min-h-[618px] flex flex-col justify-center relative overflow-hidden">
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-pd-primary/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute bottom-0 -left-24 w-80 h-80 bg-pd-secondary/10 rounded-full blur-[120px] pointer-events-none" />
+        <section className="relative pt-40 pb-20 px-6 min-h-[90vh] flex flex-col items-center justify-center text-center">
+          {/* Background Glows */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00D1FF]/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] bg-[#7C3AED]/5 rounded-full blur-[100px] pointer-events-none" />
 
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 mb-6 animate-fade-in anim-delay-1">
-              <span className="w-2 h-2 rounded-full bg-pd-primary animate-pulse shadow-[0_0_8px_#81ecff]" />
-              <span className="font-label text-xs tracking-[0.2em] uppercase text-pd-primary font-bold">
-                The Obsidian Architect
-              </span>
+          <div className="relative z-10 animate-fade-in-up">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00D1FF] animate-pulse" />
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/60">The Obsidian Architect</span>
             </div>
 
-            <h1 className="font-headline text-5xl font-bold tracking-tighter leading-[0.95] text-white mb-8 animate-fade-in-up anim-delay-2">
-              CONSTRUÍMOS <br />
-              <span className="text-pd-primary italic">INTERFACES</span> <br />
-              DO FUTURO.
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
+              CRIAMOS <br />
+              <span className="text-[#00D1FF] italic text-glow-cyan">ARTEFATOS</span> <br />
+              DIGITAIS.
             </h1>
 
-            <p className="text-pd-on-surface-var text-lg leading-relaxed mb-10 max-w-[90%] font-light animate-fade-in-up anim-delay-3">
-              Elevando negócios através de desenvolvimento web de alto nível e
-              aplicações digitais de próxima geração.
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-white/50 font-light leading-relaxed mb-12">
+              Arquitetura web de alta performance para marcas que não aceitam o comum. 
+              Transformamos código em experiência de elite.
             </p>
 
-            <div className="flex flex-col gap-4 animate-fade-in-up anim-delay-4">
-              <button
-                data-testid="hero-cta-button"
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+              <button 
                 onClick={() => openModal()}
-                className="w-full bg-gradient-to-r from-pd-primary to-pd-primary-container text-[#004d57] py-5 rounded-md font-label font-bold uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(0,227,253,0.2)] hover:shadow-[0_0_45px_rgba(0,227,253,0.35)] transition-all active:scale-[0.99]"
+                className="btn-primary w-full md:w-auto min-w-[200px]"
               >
-                COMEÇAR
+                COMEÇAR AGORA
               </button>
-              <button
+              <button 
                 onClick={() => scrollTo('servicos')}
-                className="w-full border border-pd-outline-var/20 bg-pd-surface-low text-white py-5 rounded-md font-label font-bold uppercase tracking-widest text-sm hover:bg-pd-surface-bright transition-colors"
+                className="btn-secondary w-full md:w-auto min-w-[200px]"
               >
-                VER SERVIÇOS
+                VER CAPACIDADES
               </button>
             </div>
           </div>
         </section>
 
-        {/* ── SERVICES ── */}
-        <section id="servicos" className="px-6 py-20 bg-pd-surface-low">
-          <div className="mb-12">
-            <span className="font-label text-xs tracking-[0.2em] uppercase text-pd-on-surface-var font-bold block mb-2">
-              Capacidades
-            </span>
-            <h2 className="font-headline text-3xl font-bold tracking-tight text-white">
-              ARTEFACTOS DIGITAIS
-            </h2>
+        {/* ── CAPABILITIES ── */}
+        <section id="servicos" className="py-32 px-6 max-w-7xl mx-auto">
+          <div className="text-center mb-20 animate-fade-in-up">
+            <h2 className="text-sm font-bold tracking-[0.3em] text-[#00D1FF] uppercase mb-4">Especialidades</h2>
+            <h3 className="text-4xl md:text-5xl font-bold tracking-tighter">ENGENHARIA DE PRECISÃO</h3>
           </div>
 
-          <div className="space-y-4">
-            <div className="bg-pd-surface p-8 rounded-xl group transition-all duration-500 hover:bg-pd-surface-bright cursor-default">
-              <div className="flex justify-between items-start mb-6">
-                <Icon name="language" className="text-pd-primary" style={{ fontSize: '2.25rem' }} />
-                <span className="text-pd-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Icon name="north_east" />
-                </span>
-              </div>
-              <h3 className="font-headline text-2xl font-bold text-white mb-3">
-                Desenvolvimento Web
-              </h3>
-              <p className="text-pd-on-surface-var leading-relaxed">
-                Plataformas de alta performance, com design editorial, criadas para converter e cativar.
-              </p>
-            </div>
-
-            <div className="bg-pd-surface p-8 rounded-xl group transition-all duration-500 hover:bg-pd-surface-bright border-t border-pd-primary/5 cursor-default">
-              <div className="flex justify-between items-start mb-6">
-                <Icon name="smartphone" className="text-pd-secondary" style={{ fontSize: '2.25rem' }} />
-                <div className="bg-pd-secondary/10 px-3 py-1 rounded-full">
-                  <span className="text-[10px] font-bold text-pd-secondary uppercase tracking-widest">
-                    Em Breve
-                  </span>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { 
+                icon: <Globe className="text-[#00D1FF]" />, 
+                title: 'Web Platforms', 
+                desc: 'Sistemas complexos com design minimalista e performance brutal.' 
+              },
+              { 
+                icon: <Smartphone className="text-[#00D1FF]" />, 
+                title: 'Expansão Mobile', 
+                desc: 'Apps que parecem extensões naturais do hardware.' 
+              },
+              { 
+                icon: <Zap className="text-[#00D1FF]" />, 
+                title: 'Otimização LCP', 
+                desc: 'Carregamento instantâneo para máxima conversão e SEO.' 
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="artifact-card animate-fade-in-up" style={{ animationDelay: `${idx * 100}ms` }}>
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:border-[#00D1FF]/50 transition-all">
+                  {item.icon}
                 </div>
+                <h4 className="text-2xl font-bold mb-4">{item.title}</h4>
+                <p className="text-white/40 leading-relaxed">{item.desc}</p>
               </div>
-              <h3 className="font-headline text-2xl font-bold text-white mb-3">
-                Expansão Mobile
-              </h3>
-              <p className="text-pd-on-surface-var leading-relaxed">
-                Desenvolvendo experiências nativas para mobile que apagam a linha entre software e arte.
-              </p>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* ── PORTFOLIO ── */}
-        <section id="portfolio" className="px-6 py-24">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <span className="font-label text-xs tracking-[0.2em] uppercase text-pd-on-surface-var font-bold block mb-2">
-                Trabalhos Selecionados
-              </span>
-              <h2 className="font-headline text-3xl font-bold tracking-tight text-white">
-                O ARQUIVO
-              </h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            <div className="relative aspect-[4/5] bg-pd-surface overflow-hidden rounded-xl">
-              <img
-                alt="Interface web escura com tipografia moderna"
-                className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700"
-                src="https://images.unsplash.com/photo-1634084462412-b54873c0a56d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-8">
-                <p className="font-label text-[10px] tracking-[0.3em] uppercase text-pd-primary mb-2">
-                  Fintech / 2024
-                </p>
-                <h4 className="font-headline text-2xl font-bold text-white uppercase">
-                  NEON LEDGER
-                </h4>
+        {/* ── BENEFITS GRID ── */}
+        <section className="py-32 px-6 bg-white/[0.02] border-y border-white/5">
+          <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: <ShieldCheck className="text-[#00D1FF]" />, title: 'Segurança Total', desc: 'Arquitetura blindada contra vulnerabilidades.' },
+              { icon: <Code2 className="text-[#7C3AED]" />, title: 'Código Limpo', desc: 'Sustentabilidade e escalabilidade técnica.' },
+              { icon: <Layout className="text-[#00D1FF]" />, title: 'Design Exclusivo', desc: 'Sem templates. Tudo criado do zero.' },
+              { icon: <CheckCircle2 className="text-[#7C3AED]" />, title: 'Entrega Ágil', desc: 'Prazos reais, resultados extraordinários.' }
+            ].map((benefit, idx) => (
+              <div key={idx} className="p-8 rounded-2xl border border-white/5 bg-black/40 hover:bg-black/60 transition-all">
+                <div className="mb-6">{benefit.icon}</div>
+                <h5 className="font-bold text-lg mb-2">{benefit.title}</h5>
+                <p className="text-white/30 text-sm leading-relaxed">{benefit.desc}</p>
               </div>
-            </div>
-
-            <div className="relative aspect-square bg-pd-surface overflow-hidden rounded-xl">
-              <img
-                alt="Experiência digital de marca de luxo"
-                className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700"
-                src="https://images.unsplash.com/photo-1720962158883-b0f2021fb51e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-8">
-                <p className="font-label text-[10px] tracking-[0.3em] uppercase text-pd-secondary mb-2">
-                  E-Commerce / 2024
-                </p>
-                <h4 className="font-headline text-2xl font-bold text-white uppercase">
-                  VELVET VOID
-                </h4>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* ── PACKAGES — NO PRICES ── */}
-        <section id="planos" className="px-6 py-20" style={{ backgroundColor: 'rgba(19,19,19,0.5)' }}>
-          <div className="text-center mb-16">
-            <h2 className="font-headline text-4xl font-bold tracking-tighter text-white mb-4">
-              INVESTIMENTO
-            </h2>
-            <p className="text-pd-on-surface-var font-label text-xs uppercase tracking-widest">
-              Soluções transparentes para marcas modernas
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            {/* Project Pack */}
-            <div className="bg-pd-surface p-8 rounded-xl relative overflow-hidden group hover:bg-pd-surface-bright transition-all duration-500">
-              <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                <Icon name="deployed_code" className="text-pd-primary" style={{ fontSize: '4rem' }} />
+        {/* ── PRICING ── */}
+        <section id="planos" className="py-32 px-6 max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-20">INVESTIMENTO</h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { name: 'Starter', price: 'Sob Consulta', features: ['Landing Page', 'SEO Básico', 'Hospedagem'] },
+              { name: 'Professional', price: 'Destaque', features: ['Site Multi-página', 'Painel Admin', 'Otimização Core Vitals'], premium: true },
+              { name: 'Enterprise', price: 'Custom', features: ['E-commerce', 'App Mobile', 'Suporte 24/7'] }
+            ].map((tier, idx) => (
+              <div key={idx} className={`p-10 rounded-3xl border transition-all ${tier.premium ? 'border-[#00D1FF] bg-[#00D1FF]/5 scale-105' : 'border-white/10 bg-white/5'}`}>
+                <h6 className="text-xl font-bold mb-2">{tier.name}</h6>
+                <div className="text-3xl font-black mb-8 text-[#00D1FF]">{tier.price}</div>
+                <ul className="text-left space-y-4 mb-10">
+                  {tier.features.map((f, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm text-white/50">
+                      <CheckCircle2 size={16} className="text-[#00D1FF]" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <button 
+                  onClick={() => openModal(tier.name)}
+                  className={`w-full py-4 rounded-xl font-bold transition-all ${tier.premium ? 'bg-[#00D1FF] text-black hover:opacity-90' : 'bg-white/10 text-white hover:bg-white/20'}`}
+                >
+                  SELECIONAR
+                </button>
               </div>
-              <h3 className="font-headline text-xl font-bold text-white mb-1 uppercase tracking-widest">
-                Pacote Projeto
-              </h3>
-              <p className="text-pd-on-surface-var text-sm mb-8 font-light">
-                Desenvolvimento e implementação completa do website.
-              </p>
-
-              <ul className="space-y-4 mb-10">
-                {[
-                  'Arquitetura UX/UI Personalizada',
-                  'Otimização Mobile Responsiva',
-                  'Fundação SEO',
-                  'Entrega em Prazo Definido',
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-pd-on-surface-var">
-                    <Icon name="check_circle" className="text-pd-primary" style={{ fontSize: '1.1rem' }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                data-testid="package-projeto-button"
-                onClick={() => openModal('Pacote Projeto')}
-                className="w-full py-4 border border-pd-primary/30 text-pd-primary font-bold uppercase tracking-widest text-xs hover:bg-pd-primary/10 transition-all rounded-md active:scale-[0.99]"
-              >
-                SOLICITAR ORÇAMENTO
-              </button>
-            </div>
-
-            {/* Maintenance */}
-            <div className="bg-pd-surface p-8 rounded-xl relative overflow-hidden group hover:bg-pd-surface-bright transition-all duration-500">
-              <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                <Icon name="verified_user" className="text-pd-secondary" style={{ fontSize: '4rem' }} />
-              </div>
-              <h3 className="font-headline text-xl font-bold text-white mb-1 uppercase tracking-widest">
-                Manutenção
-              </h3>
-              <p className="text-pd-on-surface-var text-sm mb-8 font-light">
-                Mantendo o teu motor digital sempre a funcionar.
-              </p>
-
-              <ul className="space-y-4 mb-10">
-                {[
-                  'Gestão de Hosting na Cloud',
-                  'Atualizações de Segurança',
-                  'Suporte Técnico',
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-pd-on-surface-var">
-                    <Icon name="verified" className="text-pd-secondary" style={{ fontSize: '1.1rem' }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                data-testid="package-manutencao-button"
-                onClick={() => openModal('Manutenção')}
-                className="w-full py-4 border border-pd-secondary/30 text-pd-secondary font-bold uppercase tracking-widest text-xs hover:bg-pd-secondary/10 transition-all rounded-md active:scale-[0.99]"
-              >
-                SOLICITAR ORÇAMENTO
-              </button>
-            </div>
+            ))}
           </div>
         </section>
 
         {/* ── FINAL CTA ── */}
-        <section className="px-6 py-32 text-center relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(129,236,255,0.05) 0%, transparent 70%)' }} />
-          <h2 className="font-headline text-5xl font-bold tracking-tighter text-white mb-8 relative z-10 leading-tight text-glow">
-            PRONTO PARA <br />
-            <span className="text-pd-primary">TRANSCENDER?</span>
-          </h2>
-          <button
-            data-testid="final-cta-button"
-            onClick={() => openModal()}
-            className="relative z-10 bg-gradient-to-r from-pd-primary to-pd-primary-container text-[#004d57] px-12 py-6 rounded-md font-label font-black uppercase tracking-[0.3em] text-sm shadow-[0_0_50px_rgba(0,227,253,0.3)] hover:scale-105 transition-transform active:scale-100"
-          >
-            FALAR CONNOSCO
-          </button>
+        <section className="py-40 px-6 text-center relative overflow-hidden">
+           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#00D1FF]/5 blur-[150px] pointer-events-none" />
+           <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-12 animate-fade-in-up">
+             PRONTO PARA <br />
+             <span className="text-[#00D1FF] italic text-glow-cyan">TRANSCENDER?</span>
+           </h2>
+           <button 
+             onClick={() => openModal()}
+             className="btn-primary py-6 px-16 text-sm uppercase tracking-[0.3em]"
+           >
+             FALAR COM UM ESPECIALISTA
+           </button>
         </section>
       </main>
 
       {/* ── FOOTER ── */}
-      <footer className="w-full py-20 px-8 border-t border-pd-outline-var/10" style={{ backgroundColor: '#000000' }}>
-        <div className="flex flex-col gap-12 max-w-screen-2xl mx-auto">
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-2">
-              <Icon name="architecture" className="text-pd-primary" />
-              <span className="text-lg font-bold text-white font-headline tracking-tighter">
-                P&amp;D AGENCY
-              </span>
-            </div>
-            <p className="text-pd-on-surface-var text-sm max-w-xs font-light">
-              Arquitetando o futuro da presença digital com precisão obsidiana.
-            </p>
+      <footer className="py-20 px-8 border-t border-white/5 bg-black">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+          <div className="max-w-xs">
+             <div className="flex items-center gap-2 mb-6">
+                <Terminal className="text-[#00D1FF]" />
+                <span className="text-xl font-bold tracking-tighter">P&D AGENCY</span>
+             </div>
+             <p className="text-white/30 text-sm leading-relaxed">
+               Arquitetando o futuro digital com precisão e estética de elite.
+             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-20">
             <div className="flex flex-col gap-4">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-pd-primary font-bold">
-                Navegação
-              </span>
-              {[['Serviços', 'servicos'], ['Portfólio', 'portfolio'], ['Planos', 'planos']].map(([label, id]) => (
-                <button
-                  key={id}
-                  onClick={() => scrollTo(id)}
-                  className="text-pd-on-surface-var text-sm hover:text-pd-primary transition-colors text-left"
-                >
-                  {label}
-                </button>
-              ))}
+              <span className="text-[10px] font-bold text-[#00D1FF] uppercase tracking-widest">Navegação</span>
+              <button onClick={() => scrollTo('servicos')} className="text-sm text-white/50 hover:text-white text-left">Serviços</button>
+              <button onClick={() => scrollTo('portfolio')} className="text-sm text-white/50 hover:text-white text-left">Portfólio</button>
+              <button onClick={() => scrollTo('planos')} className="text-sm text-white/50 hover:text-white text-left">Planos</button>
             </div>
             <div className="flex flex-col gap-4">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-pd-secondary font-bold">
-                Social
-              </span>
-              {['Twitter', 'LinkedIn', 'Instagram'].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="text-pd-on-surface-var text-sm hover:text-pd-secondary transition-colors"
-                >
-                  {s}
-                </a>
-              ))}
+              <span className="text-[10px] font-bold text-[#7C3AED] uppercase tracking-widest">Social</span>
+              <a href="#" className="text-sm text-white/50 hover:text-white">Instagram</a>
+              <a href="#" className="text-sm text-white/50 hover:text-white">Twitter</a>
+              <a href="#" className="text-sm text-white/50 hover:text-white">LinkedIn</a>
             </div>
           </div>
+        </div>
 
-          <div className="pt-12 border-t border-pd-outline-var/10">
-            <p className="font-label text-[10px] tracking-widest uppercase text-pd-on-surface-var">
-              &copy; 2024 P&amp;D AGENCY. THE OBSIDIAN ARCHITECT.
-            </p>
-          </div>
+        <div className="max-w-7xl mx-auto pt-12 mt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+           <p className="text-[10px] text-white/20 uppercase tracking-widest">© 2024 P&D AGENCY. ALL RIGHTS RESERVED.</p>
+           <p className="text-[10px] text-white/20 uppercase tracking-widest italic">The Obsidian Architect</p>
         </div>
       </footer>
 
-      <ContactModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        defaultPackage={selectedPackage}
+      <ContactModal 
+        open={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        defaultPackage={selectedPackage} 
       />
     </div>
   );
