@@ -25,21 +25,20 @@
     --ring: 240 4.9% 83.9%;
     --radius: 0.75rem;
     
-    --cyan-accent: #00D1FF;
-    --purple-accent: #7C3AED;
+    --cyan-accent: #00E5FF;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-white/5;
   }
   body {
-    @apply bg-black text-white selection:bg-[#00D1FF]/30;
+    @apply bg-[#050505] text-white selection:bg-[#00E5FF]/30;
     margin: 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', 'Manrope', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
-    background-color: #000000;
+    background-color: #050505;
   }
 }
 
