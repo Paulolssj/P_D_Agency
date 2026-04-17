@@ -105,7 +105,7 @@ export default function LandingPage() {
           </div>
           <button 
             onClick={() => openModal()}
-            className="bg-primary-container text-primary-foreground px-6 py-2.5 rounded-full font-black font-headline text-[11px] tracking-widest hover:brightness-110 active:scale-95 transition-all uppercase"
+            className="bg-primary-container text-black px-6 py-2.5 rounded-full font-black font-headline text-[11px] tracking-widest hover:brightness-110 active:scale-95 transition-all uppercase shadow-[0_0_15px_rgba(129,236,255,0.3)]"
           >
             VAMOS CONSTRUIR
           </button>
@@ -161,9 +161,9 @@ export default function LandingPage() {
             <div className="flex flex-col gap-5 justify-center items-stretch max-w-sm mx-auto">
               <button 
                 onClick={() => openModal()}
-                className="bg-primary-container text-black px-10 py-6 rounded-xl font-headline font-black text-lg hover:shadow-[0_20px_60px_rgba(185,100,50,0.25)] transition-all active:scale-[0.97] uppercase tracking-widest neon-pulse"
+                className="bg-primary-container text-black px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:shadow-[0_10px_50px_rgba(129,236,255,0.5)] transition-all duration-500 active:scale-95 neon-pulse border-none"
               >
-                COMEÇAR
+                COMEÇAR PROJETO
               </button>
               <button className="border border-white/20 text-white px-10 py-6 rounded-xl font-headline font-black text-lg hover:bg-white/[0.03] transition-all active:scale-[0.97] uppercase tracking-widest backdrop-blur-md">
                 VER SERVIÇOS
@@ -253,9 +253,8 @@ export default function LandingPage() {
               <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col">
                 <div className="mb-8">
                   <MaterialIcon name="web_asset" className="text-primary-container text-4xl mb-6" />
-                  <div className="flex flex-col gap-2 mb-4">
+                   <div className="flex flex-col gap-2 mb-4">
                     <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight">PLANO ESSENCIAL</h4>
-                    <span className="bg-[#132a2e] text-primary-container w-fit px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest border border-primary-container/20">MENSALIDADE</span>
                   </div>
                   <div className="flex items-center gap-2 mb-4 text-neutral-500 font-label text-[10px] uppercase tracking-widest">
                     <MaterialIcon name="sync" className="text-sm" /> CONTRATO 12 MESES
@@ -283,7 +282,7 @@ export default function LandingPage() {
 
                 <button 
                   onClick={() => openModal('PLANO ESSENCIAL')}
-                  className="w-full py-4 rounded-xl border border-primary-container/40 text-primary-container font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary-container hover:text-on-primary transition-all active:scale-[0.98]"
+                  className="w-full py-4 rounded-xl border border-primary-container/40 text-primary-container font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary-container hover:text-black transition-all active:scale-[0.98]"
                 >
                   SOLICITAR ORÇAMENTO
                 </button>
@@ -326,7 +325,7 @@ export default function LandingPage() {
 
                 <button 
                   onClick={() => openModal('PLANO COMPLETO')}
-                  className="w-full py-5 rounded-xl bg-primary-container text-primary-foreground font-headline font-black text-xs tracking-[0.2em] uppercase hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all active:scale-[0.98]"
+                  className="w-full py-5 rounded-xl bg-primary-container text-black font-headline font-black text-xs tracking-[0.2em] uppercase hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all active:scale-[0.98]"
                 >
                   SOLICITAR ORÇAMENTO
                 </button>
@@ -334,8 +333,8 @@ export default function LandingPage() {
 
               {/* SUPORTE PREMIUM */}
               <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col">
-                <div className="absolute top-8 right-8 flex flex-col items-end gap-2 text-right">
-                  <span className="bg-primary/20 border border-primary text-primary px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">ADD-ON MENSAL</span>
+                <div className="absolute top-8 right-8">
+                  {/* Tag removida para minimalismo */}
                 </div>
 
                 <div className="mb-8">
@@ -392,9 +391,9 @@ export default function LandingPage() {
             </motion.div>
             <button 
               onClick={() => openModal()}
-              className="group relative inline-flex items-center gap-4 bg-primary-container text-primary-foreground px-12 py-6 rounded-xl font-headline font-black text-sm tracking-[0.25em] uppercase hover:shadow-[0_10px_40px_rgba(185,100,50,0.4)] transition-all duration-500 active:scale-95 neon-pulse"
+              className="group relative inline-flex items-center gap-4 bg-primary-container text-black px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:shadow-[0_10px_40px_rgba(129,236,255,0.5)] transition-all duration-500 active:scale-95 neon-pulse"
             >
-              FALAR CONNOSCO
+              FALAR COM UM ESPECIALISTA
             </button>
           </div>
         </section>
