@@ -158,7 +158,7 @@ export default function LandingPage() {
                 desc: 'Carregamento instantâneo para máxima conversão e SEO.' 
               }
             ].map((item, idx) => (
-              <div key={idx} className="artifact-card animate-fade-in-up" style={{ animationDelay: `${idx * 100}ms` }}>
+              <div key={idx} className="artifact-card group animate-fade-in-up" style={{ animationDelay: `${idx * 100}ms` }}>
                 <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:border-[#00D1FF]/50 transition-all">
                   {item.icon}
                 </div>
