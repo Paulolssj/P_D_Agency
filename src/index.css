@@ -44,31 +44,23 @@
 
 @layer components {
   .glass-nav {
-    @apply sticky top-0 z-50 w-full backdrop-blur-md bg-black/50 border-b border-white/10;
+    @apply sticky top-0 z-50 w-full backdrop-blur-xl bg-black/40 border-b border-white/5;
   }
   
   .neon-glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 209, 255, 0.3);
-  }
-  
-  .neon-glow-purple {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
   }
   
   .text-glow-cyan {
-    text-shadow: 0 0 10px rgba(0, 209, 255, 0.5);
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
   }
 
   .btn-primary {
-    @apply bg-[#00D1FF] text-black font-bold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 active:scale-95 neon-glow-cyan;
-  }
-
-  .btn-secondary {
-    @apply border border-white/20 bg-white/5 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:bg-white/10;
+    @apply bg-[#00E5FF] text-black font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 neon-glow-cyan;
   }
 
   .artifact-card {
-    @apply bg-[#0C0C0C] border border-white/5 p-8 rounded-2xl transition-all duration-500 hover:border-[#00D1FF]/30 hover:bg-[#111111];
+    @apply bg-[#090909]/50 border border-white/[0.03] p-10 rounded-3xl transition-all duration-500 hover:border-[#00E5FF]/20 hover:bg-[#0d0d0d];
   }
 }
 
