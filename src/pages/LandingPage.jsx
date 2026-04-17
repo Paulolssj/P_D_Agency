@@ -69,14 +69,14 @@ export default function LandingPage() {
       <header className="bg-neutral-950/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-outline-variant/20">
         <div className="flex justify-between items-center px-4 py-3 max-w-full mx-auto">
           <div className="flex items-center gap-2">
-            <MaterialIcon name="architecture" className="text-cyan-400 text-xl" />
-            <h1 className="text-lg font-bold tracking-tighter text-cyan-400 uppercase font-headline">NEON ARCHITECT</h1>
+            <MaterialIcon name="architecture" className="text-white text-xl" />
+            <h1 className="text-lg font-black tracking-tighter text-white uppercase font-headline">P&D AGENCY</h1>
           </div>
           <button 
             onClick={() => openModal()}
-            className="bg-primary-container text-on-primary-container px-4 py-1.5 rounded font-bold font-headline text-[10px] tracking-widest hover:brightness-110 transition-all uppercase"
+            className="bg-primary-container text-on-primary px-6 py-2 rounded-xl font-black font-headline text-[10px] tracking-widest hover:brightness-110 transition-all uppercase"
           >
-            GET IN TOUCH
+            VAMOS CONSTRUIR
           </button>
         </div>
       </header>
@@ -84,55 +84,60 @@ export default function LandingPage() {
       <main className="pt-16">
         {/* ── HERO SECTION ── */}
         <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden py-12">
-          <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #5e279c 0%, transparent 70%)' }}></div>
+          <div className="absolute inset-0 z-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(129, 236, 255, 0.15) 0%, transparent 70%)' }}></div>
           <div className="container mx-auto relative z-10 text-center">
-            <motion.p 
+            <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="font-label text-primary-container uppercase tracking-[0.4em] text-[10px] mb-4"
+              className="flex items-center justify-center gap-2 mb-6"
             >
-              P&D AGENCY | OBSIDIAN CYBER
-            </motion.p>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_8px_#81ecff]"></span>
+              <p className="font-label text-on-surface-variant uppercase tracking-[0.4em] text-[10px] font-medium">
+                THE OBSIDIAN ARCHITECT
+              </p>
+            </motion.div>
             <motion.h2 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="font-headline text-4xl md:text-8xl font-bold tracking-tighter leading-tight mb-6 text-on-background uppercase"
+              className="font-headline text-5xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 text-white uppercase"
             >
-              CONSTRUÍMOS INTERFACES <br/> <span className="text-primary-container neon-glow">DO FUTURO.</span>
+              CONSTRUÍMOS <br/> 
+              <span className="italic font-light text-primary-container">INTERFACES</span> <br/>
+              DO FUTURO.
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="font-body text-base md:text-2xl text-on-surface-variant max-w-xl mx-auto mb-8 font-light leading-relaxed"
+              className="font-body text-base md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-12 font-medium leading-relaxed opacity-80"
             >
               Elevando negócios através de desenvolvimento web de alto nível e aplicações digitais de próxima geração.
             </motion.p>
 
-            <div className="max-w-md mx-auto mb-10 border border-outline-variant/30 bg-surface-container-lowest/50 backdrop-blur-sm p-4 grid grid-cols-3 divide-x divide-outline-variant/30 rounded-sm">
-              <div className="px-2 text-center">
-                <p className="font-headline text-xl font-bold text-primary-container">20+</p>
-                <p className="font-label text-[8px] uppercase tracking-tighter text-neutral-500 whitespace-nowrap">Marcas</p>
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 mb-14">
+              <div className="flex items-center gap-2">
+                <span className="font-headline text-2xl font-black text-primary-container">20+</span>
+                <span className="font-label text-[10px] uppercase tracking-widest text-neutral-500">marcas</span>
               </div>
-              <div className="px-2 text-center">
-                <p className="font-headline text-xl font-bold text-primary-container">30%</p>
-                <p className="font-label text-[8px] uppercase tracking-tighter text-neutral-500 whitespace-nowrap">Conversão</p>
+              <div className="flex items-center gap-2">
+                <span className="font-headline text-2xl font-black text-primary-container">+30%</span>
+                <span className="font-label text-[10px] uppercase tracking-widest text-neutral-500">conversão</span>
               </div>
-              <div className="px-2 text-center">
-                <p className="font-headline text-xl font-bold text-primary-container">92%</p>
-                <p className="font-label text-[8px] uppercase tracking-tighter text-neutral-500 whitespace-nowrap">Satisfação</p>
+              <div className="flex items-center gap-2">
+                <span className="font-headline text-2xl font-black text-primary-container">92%</span>
+                <span className="font-label text-[10px] uppercase tracking-widest text-neutral-500">satisfação</span>
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 justify-center items-stretch max-w-xs mx-auto">
+            <div className="flex flex-col gap-4 justify-center items-stretch max-w-sm mx-auto">
               <button 
                 onClick={() => openModal()}
-                className="bg-primary-container text-on-primary-container px-10 py-4 rounded-sm font-headline font-bold text-base hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all"
+                className="bg-primary-container text-on-primary px-10 py-5 rounded-xl font-headline font-black text-base hover:shadow-[0_10px_40px_rgba(129,236,255,0.3)] transition-all active:scale-[0.98] uppercase tracking-widest"
               >
                 COMEÇAR
               </button>
-              <button className="border border-outline-variant text-primary-container px-10 py-4 rounded-sm font-headline font-bold text-base hover:bg-surface-container-high transition-all">
+              <button className="border border-white/10 text-white px-10 py-5 rounded-xl font-headline font-black text-base hover:bg-white/5 transition-all active:scale-[0.98] uppercase tracking-widest backdrop-blur-sm">
                 VER SERVIÇOS
               </button>
             </div>
