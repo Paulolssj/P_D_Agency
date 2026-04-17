@@ -60,6 +60,22 @@ const Counter = ({ value, label, sub }) => {
   );
 };
 
+const BenefitCard = ({ icon, title, desc, delay = 0 }) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay }}
+    className="group bg-[#161616] p-8 rounded-2xl border border-white/5 hover:border-primary/30 transition-all flex flex-col items-start h-full"
+  >
+    <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors">
+      <MaterialIcon name={icon} className="text-primary text-2xl group-hover:drop-shadow-[0_0_8px_hsl(var(--primary))] transition-all" />
+    </div>
+    <h3 className="font-headline text-xl font-bold uppercase text-white mb-3 tracking-tight group-hover:text-primary transition-colors">{title}</h3>
+    <p className="text-neutral-500 font-body text-sm leading-relaxed">{desc}</p>
+  </motion.div>
+);
+
 // ── COMPONENTE PRINCIPAL ──
 
 export default function LandingPage() {
@@ -206,7 +222,7 @@ export default function LandingPage() {
               <h2 className="text-fluid-h3 tracking-tighter text-white uppercase">O QUE GANHA COM P&D</h2>
               <p className="text-neutral-500 font-body text-sm mt-4 max-w-prose mx-auto">Uma presença digital sólida é o activo mais valioso do seu negócio em 2026.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
               {[
                 { icon: 'search', title: 'Maior Visibilidade Online/Local', desc: 'Destaque-se onde os seus clientes procuram — nos motores de busca e nas redes sociais.' },
                 { icon: 'groups', title: 'Mais Alcance e Fluxo de Clientes', desc: 'Conquiste novos mercados e aumente a sua base de clientes com presença digital estratégica.' },
@@ -215,13 +231,13 @@ export default function LandingPage() {
                 { icon: 'star', title: 'Reforço da Marca', desc: 'Construa uma identidade digital forte e memorável que se diferencia da concorrência.' },
                 { icon: 'trending_up', title: 'Maior Envolvimento com o Público', desc: 'Transforme visitantes em defensores da sua marca.' }
               ].map((benefit, idx) => (
-                <div key={idx} className="flex gap-6 items-start">
-                  <MaterialIcon name={benefit.icon} className="text-primary-container text-3xl shrink-0" />
-                  <div>
-                    <h4 className="font-headline text-xl font-bold uppercase text-white mb-2 tracking-tight">{benefit.title}</h4>
-                    <p className="text-neutral-500 font-body text-sm leading-relaxed">{benefit.desc}</p>
-                  </div>
-                </div>
+                <BenefitCard 
+                  key={idx} 
+                  icon={benefit.icon} 
+                  title={benefit.title} 
+                  desc={benefit.desc} 
+                  delay={idx * 0.1}
+                />
               ))}
             </div>
           </div>
