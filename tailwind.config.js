@@ -1,60 +1,77 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-    darkMode: ["class"],
-    content: [
-        "./src/**/*.{js,jsx,ts,tsx}",
-        "./public/index.html"
-    ],
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-                display: ['Inter', 'sans-serif'],
-            },
-            borderRadius: {
-                lg: 'var(--radius)',
-                md: 'calc(var(--radius) - 2px)',
-                sm: 'calc(var(--radius) - 4px)'
-            },
-            colors: {
-                background: '#000000',
-                foreground: '#ffffff',
-                border: 'rgba(255, 255, 255, 0.1)',
-                cyan: {
-                   accent: '#00D1FF',
-                },
-                purple: {
-                   accent: '#7C3AED',
-                },
-                card: {
-                    DEFAULT: '#0C0C0C',
-                    foreground: '#ffffff'
-                },
-                primary: {
-                    DEFAULT: '#00D1FF',
-                    foreground: '#000000'
-                },
-                secondary: {
-                    DEFAULT: '#7C3AED',
-                    foreground: '#ffffff'
-                },
-            },
-            keyframes: {
-                'fade-in-up': {
-                    from: { opacity: '0', transform: 'translateY(20px)' },
-                    to: { opacity: '1', transform: 'translateY(0)' }
-                },
-                'glow-pulse': {
-                    '0%, 100%': { opacity: '1' },
-                    '50%': { opacity: '0.6' }
-                }
-            },
-            animation: {
-                'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-                'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
-            }
-        }
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#edfcff",
+        "secondary-container": "#5e279c",
+        "secondary": "#d9b9ff",
+        "outline-variant": "#3d494b",
+        "on-background": "#e5e2e1",
+        "tertiary-fixed": "#e2e2e2",
+        "on-primary-fixed-variant": "#004f59",
+        "on-tertiary-fixed": "#1a1c1c",
+        "on-primary-container": "#006b78",
+        "secondary-fixed": "#eedbff",
+        "inverse-surface": "#e5e2e1",
+        "surface-bright": "#3a3939",
+        "on-tertiary-container": "#5f6161",
+        "surface-dim": "#131313",
+        "on-secondary-fixed": "#2a0054",
+        "error-container": "#93000a",
+        "surface-container-high": "#2a2a2a",
+        "background": "#131313",
+        "primary-container": "#81ecff",
+        "surface": "#131313",
+        "surface-container-lowest": "#0e0e0e",
+        "on-primary": "#00363d",
+        "on-secondary": "#460184",
+        "surface-container-highest": "#353534",
+        "on-error": "#690005",
+        "primary-fixed": "#9defff",
+        "surface-variant": "#353534",
+        "inverse-primary": "#006875",
+        "error": "#ffb4ab",
+        "inverse-on-surface": "#313030",
+        "primary-fixed-dim": "#69d5e8",
+        "tertiary": "#f9f9f9",
+        "secondary-fixed-dim": "#d9b9ff",
+        "tertiary-container": "#dcdcdc",
+        "on-tertiary-fixed-variant": "#454747",
+        "surface-container": "#201f1f",
+        "on-tertiary": "#2f3131",
+        "on-primary-fixed": "#001f24",
+        "on-surface": "#e5e2e1",
+        "on-error-container": "#ffdad6",
+        "outline": "#879395",
+        "on-secondary-container": "#cca3ff",
+        "on-surface-variant": "#bdc9cb",
+        "on-secondary-fixed-variant": "#5e279c",
+        "surface-tint": "#69d5e8",
+        "tertiary-fixed-dim": "#c6c6c7",
+        "surface-container-low": "#1c1b1b"
+      },
+      borderRadius: {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      fontFamily: {
+        "headline": ["Space Grotesk", "sans-serif"],
+        "body": ["Manrope", "sans-serif"],
+        "label": ["Inter", "sans-serif"]
+      }
     },
-    plugins: [require("tailwindcss-animate")],
-};
-
+  },
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/container-queries"),
+  ],
+}

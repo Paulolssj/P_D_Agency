@@ -3,85 +3,51 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --radius: 0.75rem;
-    
-    --cyan-accent: #00E5FF;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-white/5;
-  }
   body {
-    @apply bg-[#050505] text-white selection:bg-[#00E5FF]/30;
-    margin: 0;
-    font-family: 'Inter', 'Manrope', system-ui, -apple-system, sans-serif;
+    @apply bg-[#131313] text-[#e5e2e1] overflow-x-hidden;
+    font-family: 'Manrope', sans-serif;
     -webkit-font-smoothing: antialiased;
-    background-color: #050505;
+    min-height: 100vh;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
 @layer components {
-  .glass-nav {
-    @apply sticky top-0 z-50 w-full backdrop-blur-xl bg-black/40 border-b border-white/5;
-  }
-  
-  .neon-glow-cyan {
-    box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
-  }
-  
-  .text-glow-cyan {
-    text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+  .neon-glow {
+    text-shadow: 0 0 12px rgba(129, 236, 255, 0.4);
   }
 
-  .btn-primary {
-    @apply bg-[#00E5FF] text-black font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 neon-glow-cyan;
+  .glass-panel {
+    backdrop-filter: blur(20px);
+    background: rgba(14, 14, 14, 0.7);
   }
 
-  .artifact-card {
-    @apply bg-[#090909]/50 border border-white/[0.03] p-10 rounded-3xl transition-all duration-500 hover:border-[#00E5FF]/20 hover:bg-[#0d0d0d];
+  /* Material Symbols Integration */
+  .material-symbols-outlined {
+    font-display: block;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Custom Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@layer utilities {
+  .tracking-extrawide {
+    letter-spacing: 0.4em;
   }
 }
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-

@@ -1,29 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Terminal, 
-  Smartphone, 
-  Globe, 
-  ArrowUpRight, 
-  Zap, 
-  Menu,
-  X
-} from 'lucide-react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import ContactModal from '../components/ContactModal';
 
 // ── COMPONENTES AUXILIARES ──
 
-const NavLink = ({ href, children, onClick }) => (
-  <a 
-    href={href} 
-    onClick={(e) => {
-      e.preventDefault();
-      onClick();
-    }}
-    className="text-sm font-medium text-white/70 hover:text-[#00E5FF] transition-colors cursor-pointer tracking-tight"
-  >
-    {children}
-  </a>
+const MaterialIcon = ({ name, className = "" }) => (
+  <span className={`material-symbols-outlined ${className}`} data-icon={name}>
+    {name}
+  </span>
 );
 
 const Counter = ({ value, label, sub }) => {
@@ -34,7 +18,8 @@ const Counter = ({ value, label, sub }) => {
   useEffect(() => {
     if (isInView) {
       let start = 0;
-      const end = parseInt(value);
+      const endValue = value.replace(/[^0-9]/g, '');
+      const end = parseInt(endValue);
       if (isNaN(end)) return;
       
       const duration = 2000;
@@ -53,15 +38,16 @@ const Counter = ({ value, label, sub }) => {
     }
   }, [isInView, value]);
 
-  const suffix = value.replace(/[0-9]/g, '');
+  const prefix = value.startsWith('+') ? '+' : '';
+  const suffix = value.replace(/[0-9+]/g, '');
 
   return (
-    <div ref={ref} className="p-10 rounded-3xl bg-[#090909]/50 border border-white/[0.03] text-center group hover:border-[#00E5FF]/20 transition-all duration-500">
-      <div className="text-5xl md:text-6xl font-black text-[#00E5FF] mb-4 tracking-tighter drop-shadow-[0_0_15px_rgba(0,229,255,0.3)] group-hover:scale-105 transition-transform">
-        {count}{suffix}
-      </div>
-      <h3 className="text-sm font-bold text-white mb-2 tracking-tight">{label}</h3>
-      <p className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-medium">{sub}</p>
+    <div ref={ref} className="min-w-[280px] snap-center bg-surface-container-low p-6 border-l-2 border-primary-container/20 group hover:border-primary-container transition-all">
+      <MaterialIcon name={label === '20+' ? 'hub' : label === '30%' ? 'trending_up' : label === '92%' ? 'verified_user' : 'speed'} className="text-secondary mb-3 block text-xl" />
+      <p className="font-headline text-2xl font-bold mb-1">
+        {prefix}{count}{suffix}
+      </p>
+      <p className="text-on-surface-variant font-body text-sm leading-snug">{sub}</p>
     </div>
   );
 };
@@ -71,330 +57,316 @@ const Counter = ({ value, label, sub }) => {
 export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState('');
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const openModal = (pkg = '') => {
     setSelectedPackage(pkg);
     setModalOpen(true);
-    setMobileMenuOpen(false);
-  };
-
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = el.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-    setMobileMenuOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-[#00E5FF]/30 font-inter">
-      {/* ── NAVBAR ── */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'backdrop-blur-2xl bg-black/40 border-b border-white/5 py-4' : 'bg-transparent py-8'}`}>
-        <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-            <div className="w-10 h-10 bg-[#00E5FF] rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.3)] group-hover:scale-110 transition-transform">
-              <Terminal size={22} className="text-black" />
-            </div>
-            <span className="text-2xl font-black tracking-tighter uppercase">P&D Agency</span>
+    <div className="selection:bg-primary-container selection:text-on-primary-container font-body leading-normal">
+      {/* ── HEADER ── */}
+      <header className="bg-neutral-950/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-outline-variant/20">
+        <div className="flex justify-between items-center px-4 py-3 max-w-full mx-auto">
+          <div className="flex items-center gap-2">
+            <MaterialIcon name="architecture" className="text-cyan-400 text-xl" />
+            <h1 className="text-lg font-bold tracking-tighter text-cyan-400 uppercase font-headline">NEON ARCHITECT</h1>
           </div>
-
-          <div className="hidden md:flex items-center gap-10">
-            <div className="flex items-center gap-8">
-              <NavLink href="#servicos" onClick={() => scrollTo('servicos')}>SERVIÇOS</NavLink>
-              <NavLink href="#portfolio" onClick={() => scrollTo('portfolio')}>PORTFÓLIO</NavLink>
-              <NavLink href="#planos" onClick={() => scrollTo('planos')}>PLANOS</NavLink>
-            </div>
-            <button 
-              onClick={() => openModal()}
-              className="bg-[#00E5FF] text-black text-[11px] font-black py-3 px-8 rounded-xl uppercase tracking-[0.1em] hover:opacity-90 transition-all shadow-[0_0_25px_rgba(0,229,255,0.2)] active:scale-95"
-            >
-              VAMOS CONSTRUIR
-            </button>
-          </div>
-
-          <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          <button 
+            onClick={() => openModal()}
+            className="bg-primary-container text-on-primary-container px-4 py-1.5 rounded font-bold font-headline text-[10px] tracking-widest hover:brightness-110 transition-all uppercase"
+          >
+            GET IN TOUCH
           </button>
         </div>
+      </header>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden absolute top-full left-0 w-full bg-[#080808] border-b border-white/5 p-8 flex flex-col gap-8 shadow-2xl"
-          >
-             <NavLink href="#servicos" onClick={() => scrollTo('servicos')}>SERVIÇOS</NavLink>
-             <NavLink href="#portfolio" onClick={() => scrollTo('portfolio')}>PORTFÓLIO</NavLink>
-             <NavLink href="#planos" onClick={() => scrollTo('planos')}>PLANOS</NavLink>
-             <button onClick={() => openModal()} className="bg-[#00E5FF] text-black w-full py-5 text-xs font-black uppercase tracking-widest rounded-2xl shadow-lg">
-               VAMOS CONSTRUIR
-             </button>
-          </motion.div>
-        )}
-      </nav>
-
-      <main>
+      <main className="pt-16">
         {/* ── HERO SECTION ── */}
-        <section className="relative h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-          {/* Background Artifacts */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#00E5FF]/[0.03] rounded-full blur-[180px] pointer-events-none" />
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#00E5FF]/[0.02] rounded-full blur-[150px] pointer-events-none" />
-          
-          <div className="relative z-10 max-w-6xl mx-auto text-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden py-12">
+          <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #5e279c 0%, transparent 70%)' }}></div>
+          <div className="container mx-auto relative z-10 text-center">
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/[0.05] bg-white/[0.01] mb-10"
+              className="font-label text-primary-container uppercase tracking-[0.4em] text-[10px] mb-4"
             >
-              <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse shadow-[0_0_10px_#00E5FF]" />
-              <span className="text-[11px] font-bold tracking-[0.5em] uppercase text-white/30">The Obsidian Architect</span>
-            </motion.div>
-
-            <motion.h1 
+              P&D AGENCY | OBSIDIAN CYBER
+            </motion.p>
+            <motion.h2 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-7xl md:text-[140px] font-black tracking-[-0.04em] leading-[0.85] mb-12 uppercase"
+              transition={{ duration: 0.8 }}
+              className="font-headline text-4xl md:text-8xl font-bold tracking-tighter leading-tight mb-6 text-on-background uppercase"
             >
-              CONSTRUÍMOS <br />
-              <span className="text-[#00E5FF] italic drop-shadow-[0_0_30px_rgba(0,229,255,0.4)] tracking-[-0.06em]">INTERFACES</span> <br />
-              DO FUTURO.
-            </motion.h1>
-
+              CONSTRUÍMOS INTERFACES <br/> <span className="text-primary-container neon-glow">DO FUTURO.</span>
+            </motion.h2>
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 1 }}
-              className="max-w-2xl mx-auto text-xl md:text-2xl text-white/30 font-light leading-relaxed tracking-tight"
+              transition={{ delay: 0.4 }}
+              className="font-body text-base md:text-2xl text-on-surface-variant max-w-xl mx-auto mb-8 font-light leading-relaxed"
             >
-              Arquitetura Digital de Elite para Marcas que Exigem Performance Brutal e Estética Obsidian.
+              Elevando negócios através de desenvolvimento web de alto nível e aplicações digitais de próxima geração.
             </motion.p>
-          </div>
 
-          {/* Scroll Indicator */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 cursor-pointer"
-            onClick={() => scrollTo('servicos')}
-          >
-            <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-white/20">Scroll to Explore</span>
-            <div className="w-[1px] h-12 bg-gradient-to-b from-[#00E5FF] to-transparent shadow-[0_0_10px_#00E5FF]" />
-          </motion.div>
+            <div className="max-w-md mx-auto mb-10 border border-outline-variant/30 bg-surface-container-lowest/50 backdrop-blur-sm p-4 grid grid-cols-3 divide-x divide-outline-variant/30 rounded-sm">
+              <div className="px-2 text-center">
+                <p className="font-headline text-xl font-bold text-primary-container">20+</p>
+                <p className="font-label text-[8px] uppercase tracking-tighter text-neutral-500 whitespace-nowrap">Marcas</p>
+              </div>
+              <div className="px-2 text-center">
+                <p className="font-headline text-xl font-bold text-primary-container">30%</p>
+                <p className="font-label text-[8px] uppercase tracking-tighter text-neutral-500 whitespace-nowrap">Conversão</p>
+              </div>
+              <div className="px-2 text-center">
+                <p className="font-headline text-xl font-bold text-primary-container">92%</p>
+                <p className="font-label text-[8px] uppercase tracking-tighter text-neutral-500 whitespace-nowrap">Satisfação</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4 justify-center items-stretch max-w-xs mx-auto">
+              <button 
+                onClick={() => openModal()}
+                className="bg-primary-container text-on-primary-container px-10 py-4 rounded-sm font-headline font-bold text-base hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all"
+              >
+                COMEÇAR
+              </button>
+              <button className="border border-outline-variant text-primary-container px-10 py-4 rounded-sm font-headline font-bold text-base hover:bg-surface-container-high transition-all">
+                VER SERVIÇOS
+              </button>
+            </div>
+          </div>
         </section>
 
         {/* ── NUMBERS SECTION ── */}
-        <section className="py-24 px-8 border-y border-white/[0.03] bg-white/[0.01]">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-20 text-left md:text-center">
-              <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#00E5FF]/60 block mb-6">Prova Social</span>
-              <h2 className="text-5xl font-black tracking-[-0.02em] uppercase">Números que Falam</h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <Counter value="20+" label="Marcas Transformadas" sub="em 2026" />
-              <Counter value="30%" label="Aumento de Conversão" sub="pós 6 meses de lançamento" />
-              <Counter value="92%" label="Clientes Satisfeitos" sub="taxa de satisfação média" />
-              <Counter value="7 dias" label="Prazo de Entrega" sub="Plano Full Sprint" />
+        <section className="py-16 bg-surface-container-lowest border-y border-outline-variant/10">
+          <div className="container mx-auto px-4">
+            <h3 className="font-headline text-sm font-bold mb-8 tracking-[0.2em] text-on-background uppercase text-center md:text-left opacity-60">NÚMEROS QUE FALAM</h3>
+            <div className="flex overflow-x-auto gap-4 hide-scrollbar snap-x snap-mandatory pb-4">
+              <Counter value="20+" label="20+" sub="Marcas líderes no mercado confiam na nossa visão." />
+              <Counter value="30%" label="30%" sub="Aumento médio de conversão para nossos parceiros." />
+              <Counter value="92%" label="92%" sub="Clientes que retornam para novos projetos digitais." />
+              <Counter value="7 DIAS" label="7 DIAS" sub="Prazo de entrega médio para MVPs estruturais." />
             </div>
           </div>
         </section>
 
-        {/* ── ARTEFACTOS DIGITAIS SECTION ── */}
-        <section id="servicos" className="py-32 px-8 max-w-7xl mx-auto">
-          <div className="mb-24 text-left">
-            <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#00E5FF] block mb-6">Capacidades</span>
-            <h2 className="text-5xl md:text-6xl font-black tracking-[-0.02em] uppercase max-w-2xl">Artefactos Digitais de Alta Fidelidade</h2>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-10">
-            {[
-              { 
-                icon: <Globe className="text-[#00E5FF]" size={32} />, 
-                title: 'Desenvolvimento Web', 
-                desc: 'Aplicações robustas concebidas sob a arquitetura Vite + React, garantindo LCP inferior a 1.2s.' 
-              },
-              { 
-                icon: <Smartphone className="text-[#00E5FF]" size={32} />, 
-                title: 'Visual Engineering', 
-                desc: 'Design Interfaces de elite com foco em micro-interações e psicologia de conversão absoluta.' 
-              },
-              { 
-                icon: <Zap className="text-[#00E5FF]" size={32} />, 
-                title: 'Core Optimization', 
-                desc: 'Auditoria e refatoração completa para atingir 100/100 no Google Lighthouse em todos os dispositivos.' 
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="artifact-card group">
-                <div className="w-16 h-16 rounded-2xl bg-white/[0.02] flex items-center justify-center mb-10 border border-white/5 group-hover:bg-[#00E5FF]/10 transition-colors shadow-inner">
-                  {item.icon}
+        {/* ── CAPABILITIES SECTION ── */}
+        <section className="py-20 px-4" id="capabilities">
+          <div className="container mx-auto">
+            <div className="max-w-xl mb-12">
+              <h3 className="font-headline text-4xl font-bold mb-4 tracking-tighter uppercase whitespace-pre-line">
+                ARTEFACTOS <br/>
+                <span className="text-secondary">DIGITAIS</span>
+              </h3>
+              <p className="text-on-surface-variant text-base font-light">Combinamos tecnologia bruta com design editorial para criar ferramentas que não apenas funcionam, mas definem categorias.</p>
+            </div>
+            <div className="space-y-4">
+              <div className="group relative aspect-[16/9] bg-surface-container overflow-hidden rounded-sm border border-outline-variant/10">
+                <img className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700" alt="minimalist web interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYgIoNjqPXm_Z42NGd2DpOAxDNuYaBhHPKDqPzZU2ghau3w8z0pCf88x5HgwI1GFIqYHpcjs9d2WW7hpPf0PRO9if07f_VktWFxkvwL1g7iYLOnDsssq1xjD5YBAGk_qRtFmemCDeaNdpPHARCBB5zw8ScNwFjfr55rl3hrtqigf1-J7bkSnPaMcsK5cPbCGGfGNg9tHVUogiKZrpAcY2RVWrxpF9CoKGngc5Hrn7FwY0S-npk-593qt6h3cLDeCfqgc6suc5Gw-7J"/>
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <h4 className="font-headline text-xl font-bold uppercase">Desenvolvimento Web</h4>
+                  <p className="text-primary-container font-label tracking-widest text-[10px] uppercase">Ecossistemas Escaláveis</p>
                 </div>
-                <h4 className="text-3xl font-black mb-6 tracking-tight">{item.title}</h4>
-                <p className="text-white/40 leading-relaxed text-lg font-light">{item.desc}</p>
               </div>
-            ))}
+              <div className="group relative aspect-[16/9] bg-surface-container overflow-hidden rounded-sm border border-outline-variant/10">
+                <img className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700" alt="mobile application" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0uLPTZmpM_s73a4xABuDEiDI3Tf1KodJVwew7DeAccfTqOqZD7mrCDVLd6HIUqQRW84ikefac9_fAEJaVQQu16rY3SVsM2uAXTdpOyw03g5vLP_SI0b8ZpccxE0vFV2eVC0-pUnYJRwQg3skK1mPxQtShxAsQuCZHSfjKKAHvg52FktpFeBDNtNmrfjokwQav9M8k6YVx39YQh4D_LEf0T6mn6M-Rx7_KUZva7sJiCff6ydPms7ALI3KhK_u2i9rA5z05aUcGb220"/>
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <h4 className="font-headline text-xl font-bold uppercase">Expansão Mobile</h4>
+                  <p className="text-primary-container font-label tracking-widest text-[10px] uppercase">Experiência Nativa</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── BENEFITS SECTION ── */}
+        <section className="py-20 bg-surface-container-low border-y border-outline-variant/10">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h3 className="font-headline text-3xl font-bold mb-4 tracking-tight uppercase">O QUE GANHA COM P&D</h3>
+              <div className="h-0.5 w-16 bg-primary-container mx-auto"></div>
+            </div>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-10">
+              {[
+                { icon: 'visibility', title: 'Visibilidade Online', desc: 'Interfaces otimizadas para visibilidade máxima.' },
+                { icon: 'groups', title: 'Alcance e Fluxo', desc: 'Estratégias que guiam o utilizador organicamente.' },
+                { icon: 'security', title: 'Confiança Reforçada', desc: 'Design de alta fidelidade e valor real.' },
+                { icon: 'loyalty', title: 'Fidelização', desc: 'Experiências fluidas que viram hábito diário.' },
+                { icon: 'token', title: 'Reforço da Marca', desc: 'Consistência que solidifica sua identidade.' },
+                { icon: 'forum', title: 'Maior Envolvimento', desc: 'Interações que incentivam o diálogo ativo.' }
+              ].map((benefit, idx) => (
+                <div key={idx} className="flex flex-col items-start gap-3">
+                  <MaterialIcon name={benefit.icon} className="text-primary-container text-2xl" />
+                  <div>
+                    <h4 className="font-headline text-xs font-bold uppercase tracking-tight mb-1">{benefit.title}</h4>
+                    <p className="text-on-surface-variant font-light text-[11px] leading-tight">{benefit.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ── PORTFOLIO SECTION ── */}
-        <section id="portfolio" className="py-32 px-8 bg-white/[0.01]">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 mb-24 text-left">
-              <div>
-                <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-white/20 block mb-6">Portfólio</span>
-                <h2 className="text-5xl md:text-7xl font-black tracking-[-0.02em] uppercase">O Arquivo</h2>
-              </div>
-              <p className="max-w-md text-xl text-white/30 font-light leading-relaxed">
-                Uma seleção curada dos nossos últimos lançamentos de alta performance.
-              </p>
+        <section className="py-20 bg-background" id="portfolio">
+          <div className="container mx-auto px-4">
+            <div className="flex items-baseline justify-between mb-12">
+              <h3 className="font-headline text-4xl font-extrabold tracking-tighter uppercase">O ARQUIVO</h3>
+              <span className="text-primary-container font-label text-[10px] tracking-widest">PROJECTS_002</span>
             </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="space-y-20">
               {[
-                { title: 'NEON LEDGER', category: 'Operational System Interface' },
-                { title: 'VELVET VOID', category: 'SaaS Platform Analytics' },
-                { title: 'STREAK FINANCE', category: 'Fintech Mobile Experience' },
-                { title: 'LUMEN ARCHIVE', category: 'Digital Asset Management' }
+                { 
+                  case: '01', 
+                  title: 'NEON LEDGER', 
+                  desc: 'Uma plataforma de gestão de ativos criptográficos que prioriza a segurança sem sacrificar a estética brutalista.', 
+                  img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCNbIBe2Qq2y7s7j__gdXydhb69eb3f3GNGX854JEIA3hw9b4gU9r6aIWrjroGqRcyBqw3Fs5c-owNOYdMg3lRu393zc2tpyKZO4OgIGNXHER1B58qf8iQ29Uzw3QsxLZXvhYBy0kp5uk_3y68KezmQmWq2XgevS9NKVwYol3z71sXq_X0DKLCWkw8EEnw8_Iw8fTieFXAnfjawEnp6Asg2_kCeypTPn3XF7X6ODnpDNXK2J3BNjOEFvAnbUB-bu3joMnfheXI37APf' 
+                },
+                { 
+                  case: '02', 
+                  title: 'VELVET VOID', 
+                  desc: 'Experiência imersiva de e-commerce para moda vanguardista, utilizando shaders e micro-interações fluidas.', 
+                  img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBRfbgrTnJ9TDnoUFfxN9UdG_xnnstaRNqJflWnRphzpOW4CHGv-KhBF9ncbvyPSB-I4Q9fAtBfpDBH6pjTaB0prlf_oyzJ088_uWsIqnHL_XjLd73ufB0kT3h4zQZhpVvSwscn30OnSY0bWRCS5IEoKnjxEy_xAC32gpvlcQHacfNu35wxicnNHgaLfyDb7mIP2xelSL20Y9Xz4a8Skb2Cm_q4Ztonpx9QblSZSHiW547HibvzFuO_owQP4UsBO0XRxZWWQx4LTQH' 
+                }
               ].map((project, idx) => (
-                <motion.div 
-                  key={idx} 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="group cursor-pointer"
-                >
-                  <div className="aspect-[16/10] bg-[#080808] rounded-[40px] border border-white/[0.05] overflow-hidden mb-8 group-hover:border-[#00E5FF]/20 transition-all duration-700 relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="w-full h-full flex items-center justify-center">
-                      <ArrowUpRight className="text-white/10 group-hover:text-[#00E5FF] group-hover:scale-150 transition-all duration-700" size={64} />
-                    </div>
+                <div key={idx} className="flex flex-col gap-6">
+                  <div className="overflow-hidden rounded-sm bg-surface-container-high aspect-video border border-outline-variant/10">
+                    <img className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt={project.title} src={project.img}/>
                   </div>
-                  <h5 className="text-2xl font-black mb-2 tracking-tight uppercase">{project.title}</h5>
-                  <p className="text-sm uppercase tracking-[0.3em] text-[#00E5FF] font-bold opacity-60">{project.category}</p>
-                </motion.div>
+                  <div>
+                    <p className="font-label text-secondary text-[10px] mb-2 tracking-widest uppercase">CASE STUDY // {project.case}</p>
+                    <h4 className="font-headline text-2xl font-bold mb-3 uppercase">{project.title}</h4>
+                    <p className="text-on-surface-variant text-sm mb-4 font-light leading-relaxed">{project.desc}</p>
+                    <button className="text-primary-container font-headline font-bold text-sm flex items-center gap-2 group uppercase tracking-widest transition-all">
+                      EXPLORAR <MaterialIcon name="arrow_forward" className="text-sm group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── PRICING SECTION ── */}
-        <section id="planos" className="py-32 px-8 max-w-6xl mx-auto text-center">
-          <div className="mb-24">
-            <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#00E5FF] block mb-6">Investimento</span>
-            <h2 className="text-5xl md:text-6xl font-black tracking-[-0.02em] uppercase">Sprints de Execução</h2>
-          </div>
-          
-          <div className="grid lg:grid-cols-3 gap-8 text-left items-start">
-            {[
-              { name: 'Starter', price: 'Consult', features: ['Landing Page Obsidian', 'Performance Otimizada', 'SEO Técnico Hub', 'Suporte 30 dias'] },
-              { name: 'Elite', price: 'Main', features: ['Arquitetura Multi-App', 'Design Exclusivo Fractal', 'Dashboards Real-time', 'Suporte Prioritário VIP'], premium: true },
-              { name: 'Custom', price: 'Talk', features: ['Consultoria Estratégica', 'Sistemas Customizados', 'Treinamento de Equipa', 'Manutenção Vitalícia'] }
-            ].map((tier, idx) => (
-              <div key={idx} className={`p-12 rounded-[2.5rem] border transition-all duration-500 ${tier.premium ? 'border-[#00E5FF] bg-[#00E5FF]/5 shadow-[0_0_50px_rgba(0,229,255,0.05)] scale-105 z-10' : 'border-white/[0.03] bg-[#080808]'}`}>
-                <h6 className="text-[11px] font-black text-white/30 uppercase mb-6 tracking-[0.4em]">{tier.name}</h6>
-                <div className="text-5xl font-black mb-10 text-white tracking-tighter">{tier.price}</div>
-                <div className="w-full h-[1px] bg-white/[0.05] mb-10" />
-                <ul className="space-y-6 mb-12">
-                  {tier.features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-4 text-sm text-white/40 leading-snug">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] mt-1.5 shadow-[0_0_5px_#00E5FF]" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <button 
-                  onClick={() => openModal(tier.name)}
-                  className={`w-full py-5 rounded-2xl font-black transition-all text-center uppercase text-[11px] tracking-[0.2em] ${tier.premium ? 'bg-[#00E5FF] text-black shadow-[0_0_30px_rgba(0,229,255,0.3)] hover:brightness-110' : 'bg-white/[0.03] text-white hover:bg-white/[0.08]'}`}
-                >
-                  SOLICITAR ACESSO
-                </button>
-              </div>
-            ))}
+        <section className="py-20 bg-surface-container-lowest border-y border-outline-variant/10" id="pricing">
+          <div className="container mx-auto px-4">
+            <h3 className="font-headline text-3xl font-bold mb-10 text-center tracking-tight uppercase">INVESTIMENTO</h3>
+            <div className="flex overflow-x-auto gap-4 hide-scrollbar snap-x snap-mandatory pb-6">
+              {[
+                { 
+                  name: 'PLANO ESSENCIAL', 
+                  price: '€1.2k', 
+                  features: ['UI Design Único', 'Landing Page React', 'Mobile Responsive'],
+                  excluded: ['Backend Customizado'] 
+                },
+                { 
+                  name: 'PLANO COMPLETO', 
+                  price: '€3.5k', 
+                  popular: true,
+                  features: ['Branding Digital', 'Aplicação Multi-página', 'CMS Integrado', 'SEO de Elite']
+                },
+                { 
+                  name: 'SUPORTE PREMIUM', 
+                  price: '€800', 
+                  monthly: true,
+                  features: ['Manutenção Prioritária', 'Atualizações Mensais', 'Análise de Dados', 'Aconselhamento 24/7'] 
+                }
+              ].map((tier, idx) => (
+                <div key={idx} className={`min-w-[85%] snap-center p-8 flex flex-col border rounded-sm transition-all ${tier.popular ? 'bg-surface-container-high border-2 border-primary-container relative' : 'bg-surface border-outline-variant/20'}`}>
+                  {tier.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary px-3 py-1 font-label text-[8px] font-bold uppercase tracking-[0.2em] whitespace-nowrap">MAIS POPULAR</div>
+                  )}
+                  <h4 className="font-headline text-sm font-bold mb-1 tracking-widest uppercase">{tier.name}</h4>
+                  <div className="text-3xl font-bold text-primary-container mb-6 font-headline">
+                    {tier.price}
+                    <span className="text-xs font-label text-neutral-500">/{tier.monthly ? 'mês' : 'projeto'}</span>
+                  </div>
+                  <ul className="text-left space-y-3 mb-8 flex-grow font-light text-xs">
+                    {tier.features.map((f, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <MaterialIcon name="check" className="text-primary-container text-xs" /> {f}
+                      </li>
+                    ))}
+                    {tier.excluded?.map((f, i) => (
+                      <li key={i} className="flex items-center gap-2 text-neutral-600">
+                        <MaterialIcon name="close" className="text-xs" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <button 
+                    onClick={() => openModal(tier.name)}
+                    className={`w-full py-3 font-headline font-bold text-xs tracking-widest uppercase transition-all ${tier.popular ? 'bg-primary-container text-on-primary hover:shadow-[0_0_20px_rgba(129,236,255,0.4)]' : 'border border-outline-variant hover:bg-surface-container'}`}
+                  >
+                    {tier.popular ? 'Reservar Agora' : tier.monthly ? 'Contratar' : 'Selecionar'}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ── FINAL CTA ── */}
-        <section className="py-48 px-8 text-center relative overflow-hidden bg-white/[0.01] border-y border-white/[0.03]">
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#00E5FF]/[0.02] blur-[200px] pointer-events-none" />
-           <motion.h2 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             className="text-6xl md:text-9xl font-black tracking-[-0.05em] mb-16 uppercase leading-tight"
-           >
-             PRONTO PARA <br />
-             <span className="text-[#00E5FF] italic drop-shadow-[0_0_30px_rgba(0,229,255,0.3)]">TRANSCENDER?</span>
-           </motion.h2>
-           <button 
-             onClick={() => openModal()}
-             className="bg-[#00E5FF] text-black py-6 px-20 rounded-2xl text-xs font-black uppercase tracking-[0.5em] hover:scale-105 active:scale-95 transition-all shadow-[0_0_50px_rgba(0,229,255,0.2)]"
-           >
-             FALAR COM UM ESPECIALISTA
-           </button>
+        <section className="py-24 relative overflow-hidden bg-background">
+          <div className="absolute inset-0 z-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
+          <div className="container mx-auto px-4 relative z-10 text-center">
+            <motion.h3 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="font-headline text-5xl font-bold mb-10 tracking-tighter leading-none uppercase"
+            >
+              PRONTO PARA <br/><span className="text-primary-container">TRANSCENDER?</span>
+            </motion.h3>
+            <button 
+              onClick={() => openModal()}
+              className="group relative inline-flex items-center gap-3 bg-transparent border border-primary-container text-primary-container px-8 py-5 rounded-full font-headline font-bold text-xl hover:bg-primary-container hover:text-on-primary transition-all duration-500"
+            >
+              FALAR CONNOSCO
+              <MaterialIcon name="call_made" className="group-hover:rotate-45 transition-transform text-lg" />
+            </button>
+          </div>
         </section>
       </main>
 
       {/* ── FOOTER ── */}
-      <footer className="py-32 px-10 border-t border-white/5 bg-[#050505]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-20 text-left">
-          <div className="max-w-md">
-             <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-8 bg-[#00E5FF] rounded-lg flex items-center justify-center">
-                  <Terminal size={18} className="text-black" />
-                </div>
-                <span className="text-2xl font-black tracking-tighter uppercase">P&D AGENCY</span>
-             </div>
-             <p className="text-white/20 text-lg font-light leading-relaxed mb-8">
-               Arquitetando o futuro digital com precisão radical e estética Obsidian de alta fidelidade.
-             </p>
-             <div className="flex items-center gap-6">
-               <a href="#" className="text-white/20 hover:text-[#00E5FF] transition-colors"><Smartphone size={20} /></a>
-               <a href="#" className="text-white/20 hover:text-[#00E5FF] transition-colors"><Globe size={20} /></a>
-             </div>
+      <footer className="bg-neutral-950 w-full border-t border-neutral-800/20 font-body text-[11px] tracking-wide">
+        <div className="px-6 py-12 max-w-7xl mx-auto space-y-12">
+          <div className="space-y-4">
+            <h2 className="font-headline font-bold text-neutral-100 text-base uppercase">NEON ARCHITECT</h2>
+            <p className="text-neutral-500 font-light leading-relaxed max-w-sm">Arquitetando o futuro digital através de precisão técnica e estética disruptiva.</p>
           </div>
-
-          <div className="grid grid-cols-2 gap-24 lg:gap-32">
-            <div className="flex flex-col gap-6">
-              <span className="text-[10px] font-black text-[#00E5FF] uppercase tracking-[0.4em]">Plataforma</span>
-              <button onClick={() => scrollTo('servicos')} className="text-sm text-white/30 hover:text-white text-left font-medium transition-colors">Serviços</button>
-              <button onClick={() => scrollTo('portfolio')} className="text-sm text-white/30 hover:text-white text-left font-medium transition-colors">Portfólio</button>
-              <button onClick={() => scrollTo('planos')} className="text-sm text-white/30 hover:text-white text-left font-medium transition-colors">Planos</button>
+          <div className="grid grid-cols-2 gap-8">
+            <div>
+              <h4 className="font-headline text-cyan-400 font-bold mb-4 uppercase tracking-widest text-[10px]">SERVIÇOS</h4>
+              <ul className="space-y-2">
+                <li><button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="text-neutral-500 hover:text-cyan-400 transition-colors">Hero</button></li>
+                <li><a className="text-neutral-500 hover:text-cyan-400 transition-colors" href="#capabilities">Capabilities</a></li>
+                <li><a className="text-neutral-500 hover:text-cyan-400 transition-colors" href="#portfolio">Portfolio</a></li>
+              </ul>
             </div>
-            <div className="flex flex-col gap-6">
-              <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.4em]">Presença</span>
-              <a href="#" className="text-sm text-white/30 hover:text-white font-medium transition-colors">Instagram</a>
-              <a href="#" className="text-sm text-white/30 hover:text-white font-medium transition-colors">Twitter / X</a>
-              <a href="#" className="text-sm text-white/30 hover:text-white font-medium transition-colors">LinkedIn</a>
+            <div>
+              <h4 className="font-headline text-cyan-400 font-bold mb-4 uppercase tracking-widest text-[10px]">AGÊNCIA</h4>
+              <ul className="space-y-2">
+                <li><a className="text-neutral-500 hover:text-cyan-400 transition-colors" href="#pricing">Investment</a></li>
+                <li><a className="text-neutral-500 hover:text-cyan-400 transition-colors" href="#">Privacy</a></li>
+                <li><a className="text-neutral-500 hover:text-cyan-400 transition-colors" href="#">Terms</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="space-y-4 pt-4">
+            <h4 className="font-headline text-cyan-400 font-bold mb-2 uppercase tracking-widest text-[10px]">CONTACTO</h4>
+            <p className="text-neutral-500">vortex@obsidian.arch</p>
+            <div className="flex gap-4">
+              <MaterialIcon name="share" className="text-neutral-500 text-lg hover:text-cyan-400 cursor-pointer transition-colors" />
+              <MaterialIcon name="alternate_email" className="text-neutral-500 text-lg hover:text-cyan-400 cursor-pointer transition-colors" />
             </div>
           </div>
         </div>
-
-        <div className="max-w-7xl mx-auto pt-16 mt-20 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-8">
-           <p className="text-[10px] text-white/10 uppercase tracking-[0.5em]">© 2026 P&D AGENCY. ALL ARCHITECTS RESERVED.</p>
-           <div className="flex items-center gap-4 text-[10px] text-white/10 uppercase tracking-[0.5em] font-black">
-             <span>Obsidian Design System v2.0</span>
-             <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
-             <span className="italic">The Obsidian Architect</span>
-           </div>
+        <div className="px-6 py-6 border-t border-neutral-800/20 text-center">
+          <p className="text-neutral-600 text-[9px] uppercase tracking-tighter">© 2024 NEON ARCHITECT AGENCY. ALL RIGHTS RESERVED.</p>
         </div>
       </footer>
 
