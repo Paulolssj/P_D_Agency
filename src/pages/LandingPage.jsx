@@ -105,7 +105,7 @@ export default function LandingPage() {
           </div>
           <button 
             onClick={() => openModal()}
-            className="bg-primary-container text-on-primary px-6 py-2.5 rounded-full font-black font-headline text-[11px] tracking-widest hover:brightness-110 active:scale-95 transition-all uppercase"
+            className="bg-primary-container text-primary-foreground px-6 py-2.5 rounded-full font-black font-headline text-[11px] tracking-widest hover:brightness-110 active:scale-95 transition-all uppercase"
           >
             VAMOS CONSTRUIR
           </button>
@@ -158,13 +158,10 @@ export default function LandingPage() {
               <div className="flex items-center gap-2.5">
                 <span className="font-headline text-2xl font-black text-primary-container">92%</span>
                 <span className="font-label text-[10px] uppercase tracking-[0.2em] text-neutral-500">satisfação</span>
-              </div>
-            </div>
-
             <div className="flex flex-col gap-5 justify-center items-stretch max-w-sm mx-auto">
               <button 
                 onClick={() => openModal()}
-                className="bg-primary-container text-on-primary px-10 py-6 rounded-xl font-headline font-black text-lg hover:shadow-[0_20px_60px_rgba(185,100,50,0.25)] transition-all active:scale-[0.97] uppercase tracking-widest neon-pulse"
+                className="bg-primary-container text-black px-10 py-6 rounded-xl font-headline font-black text-lg hover:shadow-[0_20px_60px_rgba(185,100,50,0.25)] transition-all active:scale-[0.97] uppercase tracking-widest neon-pulse"
               >
                 COMEÇAR
               </button>
@@ -243,45 +240,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="py-24 bg-black" id="portfolio">
-          <div className="container mx-auto px-4">
-            <div className="flex items-baseline justify-between mb-16">
-              <h2 className="text-fluid-h2 text-white uppercase">O ARQUIVO</h2>
-              <span className="text-primary font-label text-[10px] tracking-[0.4em] font-bold">PROJECTS_2026</span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {[
-                { 
-                  case: '01', 
-                  title: 'NEON LEDGER', 
-                  desc: 'Gestão financeira de elite com clareza absoluta e interface minimalista.', 
-                  img: '/portfolio/neon-ledger-minimal.png' 
-                },
-                { 
-                  case: '02', 
-                  title: 'VELVET VOID', 
-                  desc: 'E-commerce de luxo vanguardista, elevando o streetwear a uma experiência imersiva.', 
-                  img: '/portfolio/velvet-void-fashion.png' 
-                }
-              ].map((project, idx) => (
-                <div key={idx} className="group flex flex-col gap-6">
-                  <div className="overflow-hidden rounded-2xl bg-[#0e0e0e] aspect-[16/10] border border-white/5 relative">
-                    <img className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt={project.title} src={project.img}/>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 pointer-events-none"></div>
-                  </div>
-                  <div>
-                    <p className="font-label text-primary text-[10px] mb-2 tracking-[0.3em] uppercase font-bold">CASE STUDY // {project.case}</p>
-                    <h3 className="font-headline text-3xl font-bold mb-3 uppercase text-white">{project.title}</h3>
-                    <p className="text-neutral-500 text-base mb-6 font-medium leading-relaxed max-w-prose">{project.desc}</p>
-                    <button className="text-white font-headline font-bold text-sm flex items-center gap-2 group/btn uppercase tracking-widest transition-all hover:text-primary">
-                      EXPLORAR <MaterialIcon name="arrow_forward" className="text-sm group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         <section className="py-24 bg-[#0a0a0a] border-y border-white/5" id="pricing">
           <div className="container mx-auto px-4">
@@ -368,7 +326,7 @@ export default function LandingPage() {
 
                 <button 
                   onClick={() => openModal('PLANO COMPLETO')}
-                  className="w-full py-5 rounded-xl bg-primary-container text-on-primary font-headline font-black text-xs tracking-[0.2em] uppercase hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all active:scale-[0.98]"
+                  className="w-full py-5 rounded-xl bg-primary-container text-primary-foreground font-headline font-black text-xs tracking-[0.2em] uppercase hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all active:scale-[0.98]"
                 >
                   SOLICITAR ORÇAMENTO
                 </button>
@@ -377,10 +335,7 @@ export default function LandingPage() {
               {/* SUPORTE PREMIUM */}
               <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col">
                 <div className="absolute top-8 right-8 flex flex-col items-end gap-2 text-right">
-                  <span className="bg-primary/10 border border-primary/30 text-primary px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">ADD-ON MENSAL</span>
-                  <div className="flex items-center gap-1.5 text-neutral-400 font-label text-[9px] font-bold uppercase tracking-widest">
-                    <MaterialIcon name="update" className="text-xs" /> MENSAL — OPCIONAL
-                  </div>
+                  <span className="bg-primary/20 border border-primary text-primary px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">ADD-ON MENSAL</span>
                 </div>
 
                 <div className="mb-8">
@@ -437,7 +392,7 @@ export default function LandingPage() {
             </motion.div>
             <button 
               onClick={() => openModal()}
-              className="group relative inline-flex items-center gap-4 bg-primary-container text-on-primary px-12 py-6 rounded-xl font-headline font-black text-sm tracking-[0.25em] uppercase hover:shadow-[0_10px_40px_rgba(185,100,50,0.4)] transition-all duration-500 active:scale-95 neon-pulse"
+              className="group relative inline-flex items-center gap-4 bg-primary-container text-primary-foreground px-12 py-6 rounded-xl font-headline font-black text-sm tracking-[0.25em] uppercase hover:shadow-[0_10px_40px_rgba(185,100,50,0.4)] transition-all duration-500 active:scale-95 neon-pulse"
             >
               FALAR CONNOSCO
             </button>
@@ -465,7 +420,6 @@ export default function LandingPage() {
               <h4 className="font-headline text-primary-container font-black mb-8 uppercase tracking-[0.3em] text-[11px]">NAVEGAÇÃO</h4>
               <ul className="space-y-4">
                 <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#capabilities">Serviços</a></li>
-                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#portfolio">Portfólio</a></li>
                 <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#pricing">Planos</a></li>
               </ul>
             </div>
