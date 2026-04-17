@@ -99,9 +99,9 @@ export default function LandingPage() {
       {/* ── HEADER ── */}
       <header className="bg-black/80 backdrop-blur-2xl fixed top-0 w-full z-50 border-b border-white/5">
         <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 flex items-center justify-center bg-primary text-primary-foreground rounded-sm font-black text-xl">A</div>
-            <span className="text-xl font-black tracking-tighter text-white uppercase font-headline">P&D AGENCY</span>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 flex items-center justify-center bg-primary text-black rounded-sm font-black text-2xl shadow-[0_0_20px_rgba(129,236,255,0.4)]">A</div>
+            <span className="text-2xl font-black tracking-tighter text-white uppercase font-headline">P&D AGENCY</span>
           </div>
           <button 
             onClick={() => openModal()}
@@ -122,8 +122,8 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex items-center justify-center gap-2 mb-6"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_8px_#81ecff]"></span>
-              <p className="font-label text-on-surface-variant uppercase tracking-[0.4em] text-[10px] font-medium">
+              <span className="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_12px_#81ecff]"></span>
+              <p className="font-label text-on-surface-variant uppercase tracking-[0.5em] text-xs font-black">
                 THE OBSIDIAN ARCHITECT
               </p>
             </motion.div>
@@ -161,10 +161,10 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 justify-center items-stretch max-w-sm mx-auto">
+            <div className="flex flex-col gap-6 justify-center items-stretch max-w-sm mx-auto">
               <button 
                 onClick={() => openModal()}
-                className="bg-primary-container text-black px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:shadow-[0_10px_50px_rgba(129,236,255,0.5)] transition-all duration-500 active:scale-95 neon-pulse border-none"
+                className="bg-primary-container text-black px-12 py-7 rounded-xl font-headline font-black text-xs tracking-[0.35em] uppercase hover:shadow-[0_15px_60px_rgba(129,236,255,0.6)] transition-all duration-700 active:scale-95 neon-pulse border-none shadow-[0_0_30px_rgba(129,236,255,0.2)]"
               >
                 COMEÇAR PROJETO
               </button>

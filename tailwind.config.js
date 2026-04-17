@@ -37,9 +37,9 @@ export default {
         "surface-container-lowest": "#0a0a0a",
       },
       fontSize: {
-        "fluid-h1": ["clamp(2.5rem, 8vw, 7.5rem)", { lineHeight: "0.85", letterSpacing: "-0.04em", fontWeight: "900" }],
-        "fluid-h2": ["clamp(2rem, 6vw, 5rem)", { lineHeight: "0.9", letterSpacing: "-0.03em", fontWeight: "900" }],
-        "fluid-h3": ["clamp(1.5rem, 4vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+        "fluid-h1": ["clamp(3.5rem, 12vw, 10rem)", { lineHeight: "0.85", letterSpacing: "-0.04em", fontWeight: "900" }],
+        "fluid-h2": ["clamp(2.5rem, 8vw, 6.5rem)", { lineHeight: "0.9", letterSpacing: "-0.03em", fontWeight: "900" }],
+        "fluid-h3": ["clamp(2rem, 5vw, 4rem)", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
         "fluid-body": ["clamp(0.875rem, 1.5vw, 1.125rem)", { lineHeight: "1.6" }],
       },
       borderRadius: {
