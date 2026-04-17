@@ -84,8 +84,8 @@ export default function LandingPage() {
       <header className="bg-black/80 backdrop-blur-2xl fixed top-0 w-full z-50 border-b border-white/5">
         <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 flex items-center justify-center bg-primary-container text-on-primary rounded-sm font-black text-xl">A</div>
-            <h1 className="text-xl font-black tracking-tighter text-white uppercase font-headline">P&D AGENCY</h1>
+            <div className="w-8 h-8 flex items-center justify-center bg-primary text-primary-foreground rounded-sm font-black text-xl">A</div>
+            <span className="text-xl font-black tracking-tighter text-white uppercase font-headline">P&D AGENCY</span>
           </div>
           <button 
             onClick={() => openModal()}
@@ -111,21 +111,21 @@ export default function LandingPage() {
                 THE OBSIDIAN ARCHITECT
               </p>
             </motion.div>
-            <motion.h2 
+            <motion.h1 
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="font-headline text-5xl md:text-[7.5rem] font-black tracking-tighter leading-[0.85] mb-10 text-white uppercase"
+              className="text-fluid-h1 mb-10 text-white uppercase"
             >
               CONSTRUÍMOS <br/> 
-              <span className="italic font-light text-primary-container">INTERFACES</span> <br/>
+              <span className="italic font-light text-primary">INTERFACES</span> <br/>
               DO FUTURO.
-            </motion.h2>
+            </motion.h1>
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-14 font-medium leading-relaxed opacity-70"
+              className="text-fluid-body text-on-surface-variant max-w-prose mx-auto mb-14 font-medium opacity-70"
             >
               Elevando negócios através de desenvolvimento web de alto nível e aplicações digitais de próxima geração.
             </motion.p>
@@ -163,7 +163,7 @@ export default function LandingPage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">PROVA SOCIAL</p>
-              <h3 className="font-headline text-4xl font-black tracking-tighter text-white uppercase">NÚMEROS QUE FALAM</h3>
+              <h2 className="text-fluid-h2 text-white uppercase">NÚMEROS QUE FALAM</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Counter value="20" label="Marcas Transformadas" sub="em 2026" />
@@ -178,22 +178,22 @@ export default function LandingPage() {
           <div className="container mx-auto">
             <div className="max-w-xl mb-16">
               <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">CAPACIDADES</p>
-              <h3 className="font-headline text-5xl font-black mb-6 tracking-tighter uppercase whitespace-pre-line text-white">
+              <h2 className="text-fluid-h3 uppercase whitespace-pre-line text-white">
                 ARTEFACTOS DIGITAIS
-              </h3>
+              </h2>
             </div>
             <div className="space-y-6">
-              <div className="group bg-[#1a1a1a] p-12 rounded-2xl border border-white/5 hover:border-primary-container/20 transition-all flex flex-col items-start">
-                <MaterialIcon name="public" className="text-primary-container text-4xl mb-8" />
-                <h4 className="font-headline text-3xl font-bold mb-4 uppercase text-white">Desenvolvimento Web</h4>
-                <p className="text-neutral-500 font-body text-lg leading-relaxed max-w-2xl">Plataformas de alta performance, com design editorial, criadas para converter e cativar.</p>
+              <div className="group bg-[#1a1a1a] p-12 rounded-2xl border border-white/5 hover:border-primary/20 transition-all flex flex-col items-start">
+                <MaterialIcon name="public" className="text-primary text-4xl mb-8" />
+                <h3 className="font-headline text-3xl font-bold mb-4 uppercase text-white">Desenvolvimento Web</h3>
+                <p className="text-neutral-500 font-body text-lg leading-relaxed max-w-prose">Plataformas de alta performance, com design editorial, criadas para converter e cativar.</p>
               </div>
               
-              <div className="group bg-[#1a1a1a] p-12 rounded-2xl border border-white/5 hover:border-primary-container/20 transition-all flex flex-col items-start relative">
-                <div className="absolute top-12 right-12 bg-[#2a133d] text-[#d9b9ff] px-4 py-1.5 rounded-full font-label text-[10px] font-bold uppercase tracking-widest">EM BREVE</div>
-                <MaterialIcon name="smartphone" className="text-primary-container text-4xl mb-8" />
-                <h4 className="font-headline text-3xl font-bold mb-4 uppercase text-white">Expansão Mobile</h4>
-                <p className="text-neutral-500 font-body text-lg leading-relaxed max-w-2xl">Desenvolvendo experiências nativas para mobile que apagam a linha entre software e arte.</p>
+              <div className="group bg-[#1a1a1a] p-12 rounded-2xl border border-white/5 hover:border-primary/20 transition-all flex flex-col items-start relative">
+                <div className="absolute top-12 right-12 bg-primary/10 text-primary px-4 py-1.5 rounded-full font-label text-[10px] font-bold uppercase tracking-widest border border-primary/20">EM BREVE</div>
+                <MaterialIcon name="smartphone" className="text-primary text-4xl mb-8" />
+                <h3 className="font-headline text-3xl font-bold mb-4 uppercase text-white">Expansão Mobile</h3>
+                <p className="text-neutral-500 font-body text-lg leading-relaxed max-w-prose">Desenvolvendo experiências nativas para mobile que apagam a linha entre software e arte.</p>
               </div>
             </div>
           </div>
@@ -203,8 +203,8 @@ export default function LandingPage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">BENEFÍCIOS</p>
-              <h3 className="font-headline text-4xl font-black tracking-tighter text-white uppercase">O QUE GANHA COM P&D</h3>
-              <p className="text-neutral-500 font-body text-sm mt-4">Uma presença digital sólida é o activo mais valioso do seu negócio em 2026.</p>
+              <h2 className="text-fluid-h3 tracking-tighter text-white uppercase">O QUE GANHA COM P&D</h2>
+              <p className="text-neutral-500 font-body text-sm mt-4 max-w-prose mx-auto">Uma presença digital sólida é o activo mais valioso do seu negócio em 2026.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 max-w-5xl mx-auto">
               {[
@@ -230,8 +230,8 @@ export default function LandingPage() {
         <section className="py-24 bg-black" id="portfolio">
           <div className="container mx-auto px-4">
             <div className="flex items-baseline justify-between mb-16">
-              <h3 className="font-headline text-5xl font-black tracking-tighter uppercase text-white">O ARQUIVO</h3>
-              <span className="text-primary-container font-label text-[10px] tracking-[0.4em] font-bold">PROJECTS_2026</span>
+              <h2 className="text-fluid-h2 text-white uppercase">O ARQUIVO</h2>
+              <span className="text-primary font-label text-[10px] tracking-[0.4em] font-bold">PROJECTS_2026</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {[
@@ -254,10 +254,10 @@ export default function LandingPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
                   </div>
                   <div>
-                    <p className="font-label text-primary-container text-[10px] mb-2 tracking-[0.3em] uppercase font-bold">CASE STUDY // {project.case}</p>
-                    <h4 className="font-headline text-3xl font-bold mb-3 uppercase text-white">{project.title}</h4>
-                    <p className="text-neutral-500 text-base mb-6 font-medium leading-relaxed">{project.desc}</p>
-                    <button className="text-white font-headline font-bold text-sm flex items-center gap-2 group/btn uppercase tracking-widest transition-all hover:text-primary-container">
+                    <p className="font-label text-primary text-[10px] mb-2 tracking-[0.3em] uppercase font-bold">CASE STUDY // {project.case}</p>
+                    <h3 className="font-headline text-3xl font-bold mb-3 uppercase text-white">{project.title}</h3>
+                    <p className="text-neutral-500 text-base mb-6 font-medium leading-relaxed max-w-prose">{project.desc}</p>
+                    <button className="text-white font-headline font-bold text-sm flex items-center gap-2 group/btn uppercase tracking-widest transition-all hover:text-primary">
                       EXPLORAR <MaterialIcon name="arrow_forward" className="text-sm group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
@@ -271,7 +271,7 @@ export default function LandingPage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">INVESTIMENTO</p>
-              <h3 className="font-headline text-4xl font-black tracking-tighter text-white uppercase">ESCOLHA O SEU PLANO</h3>
+              <h2 className="text-fluid-h2 text-white uppercase">ESCOLHA O SEU PLANO</h2>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -361,18 +361,18 @@ export default function LandingPage() {
               {/* SUPORTE PREMIUM */}
               <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col">
                 <div className="absolute top-8 right-8 flex flex-col items-end gap-2 text-right">
-                  <span className="bg-[#241b3a] border border-[#7c4dff]/30 text-[#b388ff] px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">ADD-ON MENSAL</span>
+                  <span className="bg-primary/10 border border-primary/30 text-primary px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">ADD-ON MENSAL</span>
                   <div className="flex items-center gap-1.5 text-neutral-400 font-label text-[9px] font-bold uppercase tracking-widest">
                     <MaterialIcon name="update" className="text-xs" /> MENSAL — OPCIONAL
                   </div>
                 </div>
 
                 <div className="mb-8">
-                  <div className="w-12 h-12 rounded-full border border-[#7c4dff] flex items-center justify-center mb-6">
-                    <MaterialIcon name="security" className="text-[#b388ff] text-2xl" />
+                  <div className="w-12 h-12 rounded-full border border-primary flex items-center justify-center mb-6">
+                    <MaterialIcon name="security" className="text-primary text-2xl" />
                   </div>
-                  <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-4">SUPORTE PREMIUM</h4>
-                  <p className="text-neutral-500 font-body text-sm leading-relaxed">
+                  <h3 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-4">SUPORTE PREMIUM</h3>
+                  <p className="text-neutral-500 font-body text-sm leading-relaxed max-w-prose">
                     Suporte prioritário, backups regulares, segurança avançada e optimização contínua do seu projecto.
                   </p>
                 </div>
@@ -386,8 +386,8 @@ export default function LandingPage() {
                     'Garantia de 14 dias'
                   ].map((feature, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full border border-[#7c4dff] flex items-center justify-center shrink-0">
-                        <MaterialIcon name="check" className="text-[#b388ff] text-[10px]" />
+                      <div className="w-5 h-5 rounded-full border border-primary flex items-center justify-center shrink-0">
+                        <MaterialIcon name="check" className="text-primary text-[10px]" />
                       </div>
                       <span className="text-neutral-500 font-body text-xs font-medium">{feature}</span>
                     </div>
@@ -396,7 +396,7 @@ export default function LandingPage() {
 
                 <button 
                   onClick={() => openModal('SUPORTE PREMIUM')}
-                  className="w-full py-4 rounded-xl border border-[#7c4dff]/40 text-[#b388ff] font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-[#7c4dff] hover:text-white transition-all active:scale-[0.98]"
+                  className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-black transition-all active:scale-[0.98]"
                 >
                   SOLICITAR ORÇAMENTO
                 </button>
@@ -414,10 +414,10 @@ export default function LandingPage() {
               transition={{ duration: 0.8 }}
               className="mb-12"
             >
-              <h3 className="font-headline text-6xl md:text-8xl font-black mb-4 tracking-tighter leading-[0.85] uppercase text-white">
+              <h2 className="text-fluid-h1 mb-4 text-white uppercase">
                 PRONTO PARA <br/>
-                <span className="text-primary-container drop-shadow-[0_0_30px_rgba(129,236,255,0.5)]">TRANSCENDER?</span>
-              </h3>
+                <span className="text-primary drop-shadow-[0_0_30px_rgba(129,236,255,0.5)]">TRANSCENDER?</span>
+              </h2>
             </motion.div>
             <button 
               onClick={() => openModal()}
@@ -465,9 +465,15 @@ export default function LandingPage() {
           </div>
           
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-neutral-600 text-[10px] uppercase tracking-[0.25em] font-bold">
-              © 2026 P&D AGENCY. THE OBSIDIAN ARCHITECT.
-            </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-neutral-600 text-[10px] uppercase tracking-[0.25em] font-bold">
+                © 2026 P&D AGENCY. THE OBSIDIAN ARCHITECT.
+              </p>
+              <div className="flex gap-4 opacity-30">
+                <span className="text-[8px] text-white font-label tracking-widest uppercase">Deployed on Vercel</span>
+                <span className="text-[8px] text-white font-label tracking-widest uppercase">Built with Next.js Architecture</span>
+              </div>
+            </div>
             <div className="flex gap-8">
               <button 
                 onClick={() => openLegalModal('terms')}
