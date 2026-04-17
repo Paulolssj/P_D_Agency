@@ -164,12 +164,25 @@ export default function LandingPage() {
             </div>
 
             <div className="flex flex-col gap-6 justify-center items-stretch max-w-sm mx-auto">
-              <button 
+              <motion.button 
                 onClick={() => openModal()}
-                className="bg-primary-container text-black px-12 py-7 rounded-xl font-headline font-black text-xs tracking-[0.35em] uppercase hover:shadow-[0_15px_60px_rgba(129,236,255,0.6)] transition-all duration-700 active:scale-95 neon-pulse border-none shadow-[0_0_30px_rgba(129,236,255,0.2)]"
+                initial={{ boxShadow: "0 0 20px rgba(129,236,255,0.1)" }}
+                animate={{ 
+                  boxShadow: [
+                    "0 0 20px rgba(129,236,255,0.1)", 
+                    "0 0 50px rgba(129,236,255,0.4)", 
+                    "0 0 20px rgba(129,236,255,0.1)"
+                  ] 
+                }}
+                transition={{ 
+                  duration: 12, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                className="bg-primary-container text-black px-12 py-7 rounded-xl font-headline font-black text-xs tracking-[0.35em] uppercase hover:shadow-[0_15px_60px_rgba(129,236,255,0.6)] transition-all duration-700 active:scale-95 border-none"
               >
                 COMEÇAR PROJETO
-              </button>
+              </motion.button>
               <button className="border border-white/20 text-white px-10 py-6 rounded-xl font-headline font-black text-lg hover:bg-white/[0.03] transition-all active:scale-[0.97] uppercase tracking-widest backdrop-blur-md">
                 VER SERVIÇOS
               </button>
@@ -394,12 +407,25 @@ export default function LandingPage() {
                 <span className="text-primary drop-shadow-[0_0_30px_rgba(129,236,255,0.5)]">TRANSCENDER?</span>
               </h2>
             </motion.div>
-            <button 
+            <motion.button 
               onClick={() => openModal()}
-              className="group relative inline-flex items-center gap-4 bg-primary-container text-black px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:shadow-[0_10px_40px_rgba(129,236,255,0.5)] transition-all duration-500 active:scale-95 neon-pulse"
+              initial={{ boxShadow: "0 0 20px rgba(129,236,255,0.1)" }}
+              animate={{ 
+                boxShadow: [
+                  "0 0 20px rgba(129,236,255,0.1)", 
+                  "0 0 50px rgba(129,236,255,0.4)", 
+                  "0 0 20px rgba(129,236,255,0.1)"
+                ] 
+              }}
+              transition={{ 
+                duration: 12, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+              className="group relative inline-flex items-center gap-4 bg-primary-container text-black px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:shadow-[0_10px_40px_rgba(129,236,255,0.5)] transition-all duration-500 active:scale-95"
             >
               FALAR COM UM ESPECIALISTA
-            </button>
+            </motion.button>
           </div>
         </section>
       </main>
