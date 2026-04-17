@@ -164,7 +164,7 @@ export default function LandingPage() {
             <div className="flex flex-col gap-5 justify-center items-stretch max-w-sm mx-auto">
               <button 
                 onClick={() => openModal()}
-                className="bg-primary-container text-on-primary px-10 py-6 rounded-xl font-headline font-black text-lg hover:shadow-[0_20px_60px_rgba(129,236,255,0.25)] transition-all active:scale-[0.97] uppercase tracking-widest"
+                className="bg-primary-container text-on-primary px-10 py-6 rounded-xl font-headline font-black text-lg hover:shadow-[0_20px_60px_rgba(185,100,50,0.25)] transition-all active:scale-[0.97] uppercase tracking-widest neon-pulse"
               >
                 COMEÇAR
               </button>
@@ -254,14 +254,14 @@ export default function LandingPage() {
                 { 
                   case: '01', 
                   title: 'NEON LEDGER', 
-                  desc: 'Plataforma de gestão de ativos criptográficos com estética brutalista e precisão técnica.', 
-                  img: '/portfolio/neon-ledger.png' 
+                  desc: 'Gestão financeira de elite com clareza absoluta e interface minimalista.', 
+                  img: '/portfolio/neon-ledger-minimal.png' 
                 },
                 { 
                   case: '02', 
                   title: 'VELVET VOID', 
-                  desc: 'E-commerce imersivo para moda vanguardista com shaders e micro-interações fluidas.', 
-                  img: '/portfolio/velvet-void.png' 
+                  desc: 'E-commerce de luxo vanguardista, elevando o streetwear a uma experiência imersiva.', 
+                  img: '/portfolio/velvet-void-fashion.png' 
                 }
               ].map((project, idx) => (
                 <div key={idx} className="group flex flex-col gap-6">
@@ -437,7 +437,7 @@ export default function LandingPage() {
             </motion.div>
             <button 
               onClick={() => openModal()}
-              className="group relative inline-flex items-center gap-4 bg-primary-container text-on-primary px-12 py-6 rounded-xl font-headline font-black text-sm tracking-[0.25em] uppercase hover:shadow-[0_10px_40px_rgba(129,236,255,0.4)] transition-all duration-500 active:scale-95"
+              className="group relative inline-flex items-center gap-4 bg-primary-container text-on-primary px-12 py-6 rounded-xl font-headline font-black text-sm tracking-[0.25em] uppercase hover:shadow-[0_10px_40px_rgba(185,100,50,0.4)] transition-all duration-500 active:scale-95 neon-pulse"
             >
               FALAR CONNOSCO
             </button>
