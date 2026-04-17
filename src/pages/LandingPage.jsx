@@ -265,45 +265,130 @@ export default function LandingPage() {
               <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">INVESTIMENTO</p>
               <h3 className="font-headline text-4xl font-black tracking-tighter text-white uppercase">ESCOLHA O SEU PLANO</h3>
             </div>
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-[#1a1a1a] p-10 md:p-14 rounded-2xl border border-white/5 relative overflow-hidden">
-                <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
-                  <div className="flex-1">
-                    <MaterialIcon name="web_asset" className="text-primary-container text-4xl mb-6" />
-                    <div className="flex items-center gap-4 mb-4">
-                      <h4 className="font-headline text-3xl font-black text-white uppercase tracking-tight">PLANO ESSENCIAL</h4>
-                      <div className="flex gap-2">
-                        <span className="bg-[#132a2e] text-primary-container px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest border border-primary-container/20">MENSALIDADE</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 mb-6 text-neutral-500 font-label text-[10px] uppercase tracking-widest">
-                      <MaterialIcon name="sync" className="text-sm" /> CONTRATO 12 MESES
-                    </div>
-                    <p className="text-neutral-400 font-body text-base leading-relaxed max-w-xl">
-                      Desenvolvimento completo do website com design moderno e apelativo, suporte de 14 dias e garantia incluída.
-                    </p>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {/* PLANO ESSENCIAL */}
+              <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col">
+                <div className="mb-8">
+                  <MaterialIcon name="web_asset" className="text-primary-container text-4xl mb-6" />
+                  <div className="flex flex-col gap-2 mb-4">
+                    <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight">PLANO ESSENCIAL</h4>
+                    <span className="bg-[#132a2e] text-primary-container w-fit px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest border border-primary-container/20">MENSALIDADE</span>
                   </div>
+                  <div className="flex items-center gap-2 mb-4 text-neutral-500 font-label text-[10px] uppercase tracking-widest">
+                    <MaterialIcon name="sync" className="text-sm" /> CONTRATO 12 MESES
+                  </div>
+                  <p className="text-neutral-400 font-body text-sm leading-relaxed">
+                    Desenvolvimento completo do website com design moderno e apelativo, suporte de 14 dias e garantia incluída.
+                  </p>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 mb-12">
+                
+                <div className="space-y-4 mb-10 flex-grow">
                   {[
                     'Desenvolvimento completo do website',
                     'Design moderno e apelativo',
                     'Suporte inicial de 14 dias',
                     'Garantia de 7 dias'
                   ].map((feature, i) => (
-                    <div key={i} className="flex items-center gap-4">
-                      <div className="w-6 h-6 rounded-full border border-primary-container flex items-center justify-center shrink-0">
-                        <MaterialIcon name="check" className="text-primary-container text-xs" />
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full border border-primary-container/50 flex items-center justify-center shrink-0">
+                        <MaterialIcon name="check" className="text-primary-container text-[10px]" />
                       </div>
-                      <span className="text-neutral-200 font-body text-sm font-medium">{feature}</span>
+                      <span className="text-neutral-400 font-body text-xs font-medium">{feature}</span>
                     </div>
                   ))}
                 </div>
 
                 <button 
                   onClick={() => openModal('PLANO ESSENCIAL')}
-                  className="w-full py-5 rounded-xl border border-primary-container/40 text-primary-container font-headline font-black text-sm tracking-[0.2em] uppercase hover:bg-primary-container hover:text-on-primary transition-all active:scale-[0.98]"
+                  className="w-full py-4 rounded-xl border border-primary-container/40 text-primary-container font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary-container hover:text-on-primary transition-all active:scale-[0.98]"
+                >
+                  SOLICITAR ORÇAMENTO
+                </button>
+              </div>
+
+              {/* PLANO COMPLETO */}
+              <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-primary-container/30 flex flex-col relative scale-[1.02] shadow-[0_20px_50px_rgba(129,236,255,0.1)]">
+                <div className="absolute top-8 right-8 flex flex-col items-end gap-2">
+                  <span className="bg-transparent border border-neutral-700 text-neutral-300 px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">MAIS POPULAR</span>
+                  <div className="flex items-center gap-1.5 text-primary-container font-label text-[9px] font-bold uppercase tracking-widest">
+                    <MaterialIcon name="bolt" className="text-xs" /> PAGAMENTO ÚNICO
+                  </div>
+                </div>
+                
+                <div className="mb-8">
+                  <div className="w-12 h-12 rounded-full border border-primary-container flex items-center justify-center mb-6">
+                    <MaterialIcon name="stars" className="text-primary-container text-2xl" />
+                  </div>
+                  <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-4">PLANO COMPLETO</h4>
+                  <p className="text-neutral-400 font-body text-sm leading-relaxed">
+                    Entrega do website em 7 dias, com design moderno e apelativo, suporte de 14 dias e garantia incluída.
+                  </p>
+                </div>
+
+                <div className="space-y-4 mb-10 flex-grow">
+                  {[
+                    'Entrega do website em 7 dias',
+                    'Design moderno e apelativo',
+                    'Suporte inicial de 14 dias',
+                    'Garantia de 7 dias'
+                  ].map((feature, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full border border-primary-container flex items-center justify-center shrink-0">
+                        <MaterialIcon name="check" className="text-primary-container text-[10px]" />
+                      </div>
+                      <span className="text-neutral-200 font-body text-xs font-semibold">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <button 
+                  onClick={() => openModal('PLANO COMPLETO')}
+                  className="w-full py-5 rounded-xl bg-primary-container text-on-primary font-headline font-black text-xs tracking-[0.2em] uppercase hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all active:scale-[0.98]"
+                >
+                  SOLICITAR ORÇAMENTO
+                </button>
+              </div>
+
+              {/* SUPORTE PREMIUM */}
+              <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col">
+                <div className="absolute top-8 right-8 flex flex-col items-end gap-2 text-right">
+                  <span className="bg-[#241b3a] border border-[#7c4dff]/30 text-[#b388ff] px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">ADD-ON MENSAL</span>
+                  <div className="flex items-center gap-1.5 text-neutral-400 font-label text-[9px] font-bold uppercase tracking-widest">
+                    <MaterialIcon name="update" className="text-xs" /> MENSAL — OPCIONAL
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <div className="w-12 h-12 rounded-full border border-[#7c4dff] flex items-center justify-center mb-6">
+                    <MaterialIcon name="security" className="text-[#b388ff] text-2xl" />
+                  </div>
+                  <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-4">SUPORTE PREMIUM</h4>
+                  <p className="text-neutral-500 font-body text-sm leading-relaxed">
+                    Suporte prioritário, backups regulares, segurança avançada e optimização contínua do seu projecto.
+                  </p>
+                </div>
+
+                <div className="space-y-4 mb-10 flex-grow">
+                  {[
+                    'Suporte de 1 mês (resposta 6h-24h)',
+                    'Backups regulares automáticos',
+                    'Segurança avançada',
+                    'Optimização contínua',
+                    'Garantia de 14 dias'
+                  ].map((feature, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full border border-[#7c4dff] flex items-center justify-center shrink-0">
+                        <MaterialIcon name="check" className="text-[#b388ff] text-[10px]" />
+                      </div>
+                      <span className="text-neutral-500 font-body text-xs font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <button 
+                  onClick={() => openModal('SUPORTE PREMIUM')}
+                  className="w-full py-4 rounded-xl border border-[#7c4dff]/40 text-[#b388ff] font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-[#7c4dff] hover:text-white transition-all active:scale-[0.98]"
                 >
                   SOLICITAR ORÇAMENTO
                 </button>
@@ -312,57 +397,74 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="py-32 relative overflow-hidden bg-black">
-          <div className="absolute inset-0 z-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(129, 236, 255, 0.2) 0%, transparent 70%)' }}></div>
+        <section className="py-40 relative overflow-hidden bg-black flex items-center justify-center">
+          <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(129, 236, 255, 0.15) 0%, transparent 60%)' }}></div>
           <div className="container mx-auto px-4 relative z-10 text-center">
-            <motion.h3 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="font-headline text-5xl md:text-7xl font-black mb-12 tracking-tighter leading-[0.9] uppercase text-white"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="mb-12"
             >
-              PRONTO PARA <br/><span className="text-primary-container italic font-light">TRANSCENDER?</span>
-            </motion.h3>
+              <h3 className="font-headline text-6xl md:text-8xl font-black mb-4 tracking-tighter leading-[0.85] uppercase text-white">
+                PRONTO PARA <br/>
+                <span className="text-primary-container drop-shadow-[0_0_30px_rgba(129,236,255,0.5)]">TRANSCENDER?</span>
+              </h3>
+            </motion.div>
             <button 
               onClick={() => openModal()}
-              className="group relative inline-flex items-center gap-4 bg-primary-container text-on-primary px-10 py-6 rounded-full font-headline font-black text-xl hover:shadow-[0_20px_60px_rgba(129,236,255,0.4)] transition-all duration-500 active:scale-95"
+              className="group relative inline-flex items-center gap-4 bg-primary-container text-on-primary px-12 py-6 rounded-xl font-headline font-black text-sm tracking-[0.25em] uppercase hover:shadow-[0_10px_40px_rgba(129,236,255,0.4)] transition-all duration-500 active:scale-95"
             >
               FALAR CONNOSCO
-              <MaterialIcon name="call_made" className="group-hover:rotate-45 transition-transform text-2xl" />
             </button>
           </div>
         </section>
       </main>
 
       {/* ── FOOTER ── */}
-      <footer className="bg-black w-full border-t border-white/5 font-body text-[11px] tracking-wide">
-        <div className="px-6 py-20 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="space-y-6 md:col-span-2">
-            <h2 className="font-headline font-black text-white text-2xl uppercase tracking-tighter">THE OBSIDIAN ARCHITECT</h2>
-            <p className="text-neutral-500 font-medium leading-relaxed max-w-sm text-sm">Arquitetando o futuro digital através de precisão técnica e estética disruptiva.</p>
-            <div className="flex gap-6">
-              <MaterialIcon name="alternate_email" className="text-neutral-500 text-2xl hover:text-primary-container cursor-pointer transition-colors" />
-              <MaterialIcon name="share" className="text-neutral-500 text-2xl hover:text-primary-container cursor-pointer transition-colors" />
+      <footer className="bg-black w-full pt-32 pb-16 px-6 font-body">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 flex items-center justify-center text-primary-container border-2 border-primary-container/30 rounded-lg">
+                  <MaterialIcon name="architecture" className="text-xl" />
+                </div>
+                <h2 className="font-headline font-black text-white text-3xl uppercase tracking-tighter italic">P&D AGENCY</h2>
+              </div>
+              <p className="text-neutral-500 font-medium leading-relaxed max-w-sm text-lg">
+                Arquitetando o futuro da presença digital com precisão obsidiana.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-headline text-primary-container font-black mb-8 uppercase tracking-[0.3em] text-[11px]">NAVEGAÇÃO</h4>
+              <ul className="space-y-4">
+                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#capabilities">Serviços</a></li>
+                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#portfolio">Portfólio</a></li>
+                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#pricing">Planos</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-headline text-primary-container font-black mb-8 uppercase tracking-[0.3em] text-[11px]">SOCIAL</h4>
+              <ul className="space-y-4">
+                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#">Twitter</a></li>
+                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#">LinkedIn</a></li>
+                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#">Instagram</a></li>
+              </ul>
             </div>
           </div>
-          <div>
-            <h4 className="font-headline text-primary-container font-black mb-6 uppercase tracking-[0.3em] text-[10px]">NAVEGAÇÃO</h4>
-            <ul className="space-y-3">
-              <li><button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="text-neutral-400 hover:text-white transition-colors text-sm font-medium">Início</button></li>
-              <li><a className="text-neutral-400 hover:text-white transition-colors text-sm font-medium" href="#capabilities">Capacidades</a></li>
-              <li><a className="text-neutral-400 hover:text-white transition-colors text-sm font-medium" href="#portfolio">Portfólio</a></li>
-            </ul>
+          
+          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+            <p className="text-neutral-600 text-[10px] uppercase tracking-[0.25em] font-bold">
+              © 2026 P&D AGENCY. THE OBSIDIAN ARCHITECT.
+            </p>
+            <div className="flex gap-8">
+              <a href="#" className="text-neutral-700 hover:text-neutral-400 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors">TERMOS DE USO</a>
+              <a href="#" className="text-neutral-700 hover:text-neutral-400 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors">POLÍTICA DE PRIVACIDADE</a>
+            </div>
           </div>
-          <div>
-            <h4 className="font-headline text-primary-container font-black mb-6 uppercase tracking-[0.3em] text-[10px]">AGÊNCIA</h4>
-            <ul className="space-y-3">
-              <li><a className="text-neutral-400 hover:text-white transition-colors text-sm font-medium" href="#pricing">Investimento</a></li>
-              <li><a className="text-neutral-400 hover:text-white transition-colors text-sm font-medium" href="#">Privacidade</a></li>
-              <li><a className="text-neutral-400 hover:text-white transition-colors text-sm font-medium" href="#">Termos</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="px-6 py-8 border-t border-white/5 text-center">
-          <p className="text-neutral-700 text-[10px] uppercase tracking-[0.3em] font-bold">© 2026 THE OBSIDIAN ARCHITECT. ALL RIGHTS RESERVED.</p>
         </div>
       </footer>
 
