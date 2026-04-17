@@ -255,19 +255,19 @@ export default function LandingPage() {
                   case: '01', 
                   title: 'NEON LEDGER', 
                   desc: 'Plataforma de gestão de ativos criptográficos com estética brutalista e precisão técnica.', 
-                  img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCNbIBe2Qq2y7s7j__gdXydhb69eb3f3GNGX854JEIA3hw9b4gU9r6aIWrjroGqRcyBqw3Fs5c-owNOYdMg3lRu393zc2tpyKZO4OgIGNXHER1B58qf8iQ29Uzw3QsxLZXvhYBy0kp5uk_3y68KezmQmWq2XgevS9NKVwYol3z71sXq_X0DKLCWkw8EEnw8_Iw8fTieFXAnfjawEnp6Asg2_kCeypTPn3XF7X6ODnpDNXK2J3BNjOEFvAnbUB-bu3joMnfheXI37APf' 
+                  img: '/portfolio/neon-ledger.png' 
                 },
                 { 
                   case: '02', 
                   title: 'VELVET VOID', 
                   desc: 'E-commerce imersivo para moda vanguardista com shaders e micro-interações fluidas.', 
-                  img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBRfbgrTnJ9TDnoUFfxN9UdG_xnnstaRNqJflWnRphzpOW4CHGv-KhBF9ncbvyPSB-I4Q9fAtBfpDBH6pjTaB0prlf_oyzJ088_uWsIqnHL_XjLd73ufB0kT3h4zQZhpVvSwscn30OnSY0bWRCS5IEoKnjxEy_xAC32gpvlcQHacfNu35wxicnNHgaLfyDb7mIP2xelSL20Y9Xz4a8Skb2Cm_q4Ztonpx9QblSZSHiW547HibvzFuO_owQP4UsBO0XRxZWWQx4LTQH' 
+                  img: '/portfolio/velvet-void.png' 
                 }
               ].map((project, idx) => (
                 <div key={idx} className="group flex flex-col gap-6">
                   <div className="overflow-hidden rounded-2xl bg-[#0e0e0e] aspect-[16/10] border border-white/5 relative">
-                    <img className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" alt={project.title} src={project.img}/>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                    <img className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt={project.title} src={project.img}/>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 pointer-events-none"></div>
                   </div>
                   <div>
                     <p className="font-label text-primary text-[10px] mb-2 tracking-[0.3em] uppercase font-bold">CASE STUDY // {project.case}</p>
