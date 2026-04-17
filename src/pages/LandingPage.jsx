@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import ContactModal from '../components/ContactModal';
+import LegalModal from '../components/LegalModal';
 
 // ── COMPONENTES AUXILIARES ──
 
@@ -64,10 +65,17 @@ const Counter = ({ value, label, sub }) => {
 export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState('');
+  const [legalModalOpen, setLegalModalOpen] = useState(false);
+  const [activeLegalTab, setActiveLegalTab] = useState('terms');
 
   const openModal = (pkg = '') => {
     setSelectedPackage(pkg);
     setModalOpen(true);
+  };
+
+  const openLegalModal = (tab = 'terms') => {
+    setActiveLegalTab(tab);
+    setLegalModalOpen(true);
   };
 
   return (
@@ -461,8 +469,18 @@ export default function LandingPage() {
               © 2026 P&D AGENCY. THE OBSIDIAN ARCHITECT.
             </p>
             <div className="flex gap-8">
-              <a href="#" className="text-neutral-700 hover:text-neutral-400 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors">TERMOS DE USO</a>
-              <a href="#" className="text-neutral-700 hover:text-neutral-400 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors">POLÍTICA DE PRIVACIDADE</a>
+              <button 
+                onClick={() => openLegalModal('terms')}
+                className="text-neutral-700 hover:text-neutral-400 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+              >
+                TERMOS DE USO
+              </button>
+              <button 
+                onClick={() => openLegalModal('privacy')}
+                className="text-neutral-700 hover:text-neutral-400 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+              >
+                POLÍTICA DE PRIVACIDADE
+              </button>
             </div>
           </div>
         </div>
@@ -472,6 +490,12 @@ export default function LandingPage() {
         open={modalOpen} 
         onClose={() => setModalOpen(false)} 
         defaultPackage={selectedPackage} 
+      />
+
+      <LegalModal 
+        open={legalModalOpen} 
+        onClose={() => setLegalModalOpen(false)} 
+        defaultTab={activeLegalTab} 
       />
     </div>
   );
