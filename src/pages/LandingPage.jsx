@@ -187,7 +187,7 @@ export default function LandingPage() {
               className="max-w-2xl mx-auto text-xl md:text-2xl text-white/30 font-light leading-relaxed tracking-tight"
             >
               Arquitetura Digital de Elite para Marcas que Exigem Performance Brutal e Estética Obsidian.
-            </p>
+            </motion.p>
           </div>
 
           {/* Scroll Indicator */}
@@ -271,8 +271,8 @@ export default function LandingPage() {
 
             <div className="grid md:grid-cols-2 gap-12">
               {[
-                { title: 'AURORA OS', category: 'Operational System Interface' },
-                { title: 'NEBULA DASHBOARD', category: 'SaaS Platform Analytics' },
+                { title: 'NEON LEDGER', category: 'Operational System Interface' },
+                { title: 'VELVET VOID', category: 'SaaS Platform Analytics' },
                 { title: 'STREAK FINANCE', category: 'Fintech Mobile Experience' },
                 { title: 'LUMEN ARCHIVE', category: 'Digital Asset Management' }
               ].map((project, idx) => (
