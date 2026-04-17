@@ -100,8 +100,10 @@ export default function LandingPage() {
       <header className="bg-black/80 backdrop-blur-2xl fixed top-0 w-full z-50 border-b border-white/5">
         <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 flex items-center justify-center bg-primary text-black rounded-sm font-black text-2xl shadow-[0_0_20px_rgba(129,236,255,0.4)]">A</div>
-            <span className="text-2xl font-black tracking-tighter text-white uppercase font-headline">P&D AGENCY</span>
+            <div className="w-12 h-12 flex items-center justify-center text-primary-container border-2 border-primary-container/30 rounded-lg shadow-[0_0_20px_rgba(129,236,255,0.2)]">
+              <MaterialIcon name="architecture" className="text-3xl" />
+            </div>
+            <span className="text-2xl font-black tracking-tighter text-white uppercase font-headline italic">P&D AGENCY</span>
           </div>
           <button 
             onClick={() => openModal()}
@@ -184,7 +186,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Counter value="20" label="Marcas Transformadas" sub="em 2026" />
               <Counter value="30%" label="Aumento de Conversão" sub="pós 6 meses de lançamento" />
-              <Counter value="92" label="Clientes Satisfeitos" sub="taxa de satisfação" />
+              <Counter value="92%" label="Clientes Satisfeitos" sub="taxa de satisfação" />
               <Counter value="7" label="Prazo de Entrega" sub="Plano Completo" />
             </div>
           </div>
