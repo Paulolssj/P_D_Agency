@@ -158,6 +158,9 @@ export default function LandingPage() {
               <div className="flex items-center gap-2.5">
                 <span className="font-headline text-2xl font-black text-primary-container">92%</span>
                 <span className="font-label text-[10px] uppercase tracking-[0.2em] text-neutral-500">satisfação</span>
+              </div>
+            </div>
+
             <div className="flex flex-col gap-5 justify-center items-stretch max-w-sm mx-auto">
               <button 
                 onClick={() => openModal()}
