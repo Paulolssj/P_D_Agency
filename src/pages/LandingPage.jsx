@@ -263,7 +263,7 @@ export default function LandingPage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">INVESTIMENTO</p>
-              <h2 className="text-fluid-h2 text-white uppercase">ESCOLHA O SEU PLANO</h2>
+              <h2 className="text-fluid-h2 text-white uppercase">ESCOLHE O TEU PLANO</h2>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -361,7 +361,7 @@ export default function LandingPage() {
                   </div>
                   <h3 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-4">SUPORTE PREMIUM</h3>
                   <p className="text-neutral-500 font-body text-sm leading-relaxed max-w-prose">
-                    Suporte prioritário, backups regulares, segurança avançada e optimização contínua do seu projecto.
+                    Suporte prioritário, backups regulares, segurança avançada e otimização contínua do teu projeto.
                   </p>
                 </div>
 
@@ -370,7 +370,7 @@ export default function LandingPage() {
                     'Suporte de 1 mês (resposta 6h-24h)',
                     'Backups regulares automáticos',
                     'Segurança avançada',
-                    'Optimização contínua',
+                    'Otimização contínua',
                     'Garantia de 14 dias'
                   ].map((feature, i) => (
                     <div key={i} className="flex items-center gap-3">

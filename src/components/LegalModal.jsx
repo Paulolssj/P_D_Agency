@@ -49,7 +49,7 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                 </TabsList>
                 
                 <p className="text-[10px] font-label text-neutral-700 uppercase tracking-[0.3em] font-bold">
-                  Última actualização: Janeiro 2026
+                  Última atualização: Janeiro 2026
                 </p>
               </div>
             </div>
@@ -74,28 +74,28 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     3. PRAZOS DE ENTREGA
                   </h4>
-                  <p>O Plano Completo inclui entrega garantida em 7 dias úteis após confirmação do pedido e recepção de todos os conteúdos necessários. O Plano Essencial contempla prazos acordados no contrato de 12 meses. A P&D AGENCY não se responsabiliza por atrasos resultantes da falta de fornecimento de materiais por parte do Cliente.</p>
+                  <p>O Plano Completo inclui entrega garantida em 7 dias úteis após confirmação do pedido e receção de todos os conteúdos necessários. O Plano Essencial contempla prazos acordados no contrato de 12 meses. A P&D AGENCY não se responsabiliza por atrasos resultantes da falta de fornecimento de materiais por parte do Cliente.</p>
                 </section>
 
                 <section>
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     4. SUPORTE E GARANTIAS
                   </h4>
-                  <p>Plano Essencial e Plano Completo: suporte inicial de 14 dias após entrega, com garantia de correcções sem custo adicional durante 7 dias. Suporte Premium: suporte de 1 mês com tempo de resposta entre 6 e 24 horas, incluindo garantia alargada de 14 dias. Findo o período de suporte, qualquer intervenção adicional será orçamentada separadamente.</p>
+                  <p>Plano Essencial e Plano Completo: suporte inicial de 14 dias após entrega, com garantia de correções sem custo adicional durante 7 dias. Suporte Premium: suporte de 1 mês com tempo de resposta entre 6 e 24 horas, incluindo garantia alargada de 14 dias. Findo o período de suporte, qualquer intervenção adicional será orçamentada separadamente.</p>
                 </section>
 
                 <section>
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     5. PROPRIEDADE INTELECTUAL DO CÓDIGO
                   </h4>
-                  <p>Todo o código fonte, design e activos digitais desenvolvidos pela P&D AGENCY são propriedade exclusiva da agência até ao pagamento integral acordado. Após liquidação total, os direitos de utilização do produto final são transferidos para o Cliente. A P&D AGENCY reserva o direito de utilizar o trabalho desenvolvido no seu portfólio, salvo acordo de confidencialidade expresso e por escrito.</p>
+                  <p>Todo o código fonte, design e ativos digitais desenvolvidos pela P&D AGENCY são propriedade exclusiva da agência até ao pagamento integral acordado. Após liquidação total, os direitos de utilização do produto final são transferidos para o Cliente. A P&D AGENCY reserva o direito de utilizar o trabalho desenvolvido no seu portfólio, salvo acordo de confidencialidade expresso e por escrito.</p>
                 </section>
 
                 <section>
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     6. RESPONSABILIDADES DE ALOJAMENTO E SUPORTE
                   </h4>
-                  <p>No âmbito do Suporte Premium, a P&D AGENCY garante a gestão do alojamento contratado, incluindo backups regulares e actualizações de segurança. A agência não se responsabiliza por interrupções causadas por terceiros (fornecedores de cloud, ataques externos) fora do seu controlo razoável.</p>
+                  <p>No âmbito do Suporte Premium, a P&D AGENCY garante a gestão do alojamento contratado, incluindo backups regulares e atualizações de segurança. A agência não se responsabiliza por interrupções causadas por terceiros (fornecedores de cloud, ataques externos) fora do seu controlo razoável.</p>
                 </section>
 
                 <section>
@@ -109,7 +109,7 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     8. LIMITAÇÃO DE RESPONSABILIDADE
                   </h4>
-                  <p>A P&D AGENCY não se responsabiliza por perdas indirectas, lucros cessantes ou danos consequentes resultantes do uso ou impossibilidade de uso dos serviços prestados. A responsabilidade total da agência limita-se ao valor pago pelo Cliente no projecto em causa.</p>
+                  <p>A P&D AGENCY não se responsabiliza por perdas indiretas, lucros cessantes ou danos consequentes resultantes do uso ou impossibilidade de uso dos serviços prestados. A responsabilidade total da agência limita-se ao valor pago pelo Cliente no projeto em causa.</p>
                 </section>
 
                 <section>
@@ -127,7 +127,7 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     1. RESPONSÁVEL PELO TRATAMENTO
                   </h4>
-                  <p>P&D AGENCY é responsável pelo tratamento dos dados pessoais recolhidos através deste website e formulários de contacto, em conformidade com o Regulamento Geral sobre a Protecção de Dados (RGPD — Regulamento UE 2016/679) e a legislação nacional aplicável em Portugal (Lei n.º 58/2019, de 8 de Agosto).</p>
+                  <p>P&D AGENCY é responsável pelo tratamento dos dados pessoais recolhidos através deste website e formulários de contacto, em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD — Regulamento UE 2016/679) e a legislação nacional aplicável em Portugal (Lei n.º 58/2019, de 8 de Agosto).</p>
                 </section>
 
                 <section>
@@ -148,7 +148,7 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     4. COOKIES E ANÁLISE DE PERFORMANCE
                   </h4>
-                  <p>Este website utiliza cookies de análise de performance (PostHog) para compreender o comportamento dos utilizadores de forma anónima e agregada. Estes cookies não identificam individualmente os utilizadores. Ao continuar a navegar, o utilizador aceita o uso de cookies de performance. Pode desactivar os cookies nas definições do seu navegador a qualquer momento.</p>
+                  <p>Este website utiliza cookies de análise de performance (PostHog) para compreender o comportamento dos utilizadores de forma anónima e agregada. Estes cookies não identificam individualmente os utilizadores. Ao continuar a navegar, o utilizador aceita o uso de cookies de performance. Pode desativar os cookies nas definições do seu navegador a qualquer momento.</p>
                 </section>
 
                 <section>
@@ -162,7 +162,7 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     6. DIREITOS DOS TITULARES DOS DADOS (RGPD)
                   </h4>
-                  <p>Nos termos do RGPD, o utilizador tem direito a: acesso aos seus dados pessoais, rectificação de dados inexactos, eliminação ("direito ao esquecimento"), portabilidade dos dados, oposição ao tratamento e revogação do consentimento a qualquer momento, sem prejuízo da licitude do tratamento efectuado anteriormente. Para exercer os seus direitos, contacte-nos através do formulário disponível no website.</p>
+                  <p>Nos termos do RGPD, o utilizador tem direito a: acesso aos seus dados pessoais, retificação de dados inexactos, eliminação ("direito ao esquecimento"), portabilidade dos dados, oposição ao tratamento e revogação do consentimento a qualquer momento, sem prejuízo da licitude do tratamento efetuado anteriormente. Para exercer os seus direitos, contacte-nos através do formulário disponível no website.</p>
                 </section>
 
                 <section>
@@ -183,7 +183,7 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     9. CONTACTO E EXERCÍCIO DE DIREITOS
                   </h4>
-                  <p>Para questões relativas à protecção de dados ou para exercer os seus direitos ao abrigo do RGPD, utilize o formulário de contacto disponível neste website. Responderemos no prazo máximo de 30 dias.</p>
+                  <p>Para questões relativas à proteção de dados ou para exercer os seus direitos ao abrigo do RGPD, utilize o formulário de contacto disponível neste website. Responderemos no prazo máximo de 30 dias.</p>
                 </section>
               </div>
             </TabsContent>
