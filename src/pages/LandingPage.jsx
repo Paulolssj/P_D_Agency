@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import ContactModal from '../components/ContactModal';
 import LegalModal from '../components/LegalModal';
+import CustomCursor from '../components/CustomCursor';
 
 // ── COMPONENTES AUXILIARES ──
 
@@ -96,6 +97,8 @@ export default function LandingPage() {
 
   return (
     <div className="selection:bg-primary-container selection:text-on-primary-container font-body leading-normal">
+      <CustomCursor />
+      
       {/* ── HEADER ── */}
       <header className="bg-black/80 backdrop-blur-2xl fixed top-0 w-full z-50 border-b border-white/5">
         <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
@@ -114,128 +117,219 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <main className="pt-16">
-        {/* ── HERO SECTION ── */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden py-12">
-          <div className="absolute inset-0 z-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(129, 236, 255, 0.15) 0%, transparent 70%)' }}></div>
+      <main className="overflow-x-hidden">
+        {/* ── HERO SECTION (REFINED OBSIDIAN) ── */}
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-12 pb-20 overflow-hidden">
+          {/* Dynamic Ambient Elements */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] animate-pulse pointer-events-none"></div>
+          <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/10 rounded-full blur-[80px] pointer-events-none animate-bounce" style={{ animationDuration: '10s' }}></div>
+          
           <div className="container mx-auto relative z-10 text-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-center gap-2 mb-6"
+              className="flex items-center justify-center gap-4 mb-10"
             >
-              <span className="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_12px_#81ecff]"></span>
-              <p className="font-label text-on-surface-variant uppercase tracking-[0.5em] text-xs font-black">
-                THE OBSIDIAN ARCHITECT
+              <div className="h-[1px] w-12 bg-white/10"></div>
+              <p className="font-label text-primary uppercase tracking-[0.6em] text-[10px] font-black italic">
+                P&D AGENCY
               </p>
+              <div className="h-[1px] w-12 bg-white/10"></div>
             </motion.div>
+
             <motion.h1 
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="text-fluid-h1 mb-10 text-white uppercase"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-fluid-h1 mb-12 uppercase leading-[0.85] tracking-tighter"
             >
-              CONSTRUÍMOS <br/> 
-              <span className="italic font-light text-primary">INTERFACES</span> <br/>
-              DO FUTURO.
+              <span className="block font-black text-white bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">Construímos</span>
+              <span className="block text-outline text-white/20 font-black italic drop-shadow-[0_0_40px_rgba(129,236,255,0.15)] my-2">Interfaces</span>
+              <span className="block font-black text-white bg-gradient-to-t from-white to-white/60 bg-clip-text text-transparent">do Futuro</span>
             </motion.h1>
+
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-fluid-body text-on-surface-variant max-w-prose mx-auto mb-14 font-medium opacity-70"
+              transition={{ delay: 0.5, duration: 1.2 }}
+              className="text-fluid-body text-neutral-400 max-w-3xl mx-auto mb-16 font-medium leading-relaxed italic"
             >
-              Elevando negócios através de desenvolvimento web de alto nível e aplicações digitais de próxima geração.
+              Combinamos <span className="text-white font-bold border-b border-primary/30 pb-0.5">engenharia de precisão</span> com <span className="text-white font-bold border-b border-primary/30 pb-0.5">design de elite</span> para transformar a tua presença digital num ativo estratégico de autoridade absoluta.
             </motion.p>
 
-            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 mb-16">
-              <div className="flex items-center gap-2.5">
-                <span className="font-headline text-2xl font-black text-primary-container">20+</span>
-                <span className="font-label text-[10px] uppercase tracking-[0.2em] text-neutral-500">marcas</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <span className="font-headline text-2xl font-black text-primary-container">+30%</span>
-                <span className="font-label text-[10px] uppercase tracking-[0.2em] text-neutral-500">conversão</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <span className="font-headline text-2xl font-black text-primary-container">92%</span>
-                <span className="font-label text-[10px] uppercase tracking-[0.2em] text-neutral-500">satisfação</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-6 justify-center items-stretch max-w-sm mx-auto">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <motion.button 
                 onClick={() => openModal()}
-                initial={{ boxShadow: "0 0 20px rgba(129,236,255,0.1)" }}
-                animate={{ 
-                  boxShadow: [
-                    "0 0 20px rgba(129,236,255,0.1)", 
-                    "0 0 50px rgba(129,236,255,0.4)", 
-                    "0 0 20px rgba(129,236,255,0.1)"
-                  ] 
-                }}
-                transition={{ 
-                  duration: 12, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
-                className="bg-primary-container text-black px-12 py-7 rounded-xl font-headline font-black text-xs tracking-[0.35em] uppercase hover:shadow-[0_15px_60px_rgba(129,236,255,0.6)] transition-all duration-700 active:scale-95 border-none"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative bg-primary text-black px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase shadow-[0_0_50px_rgba(129,236,255,0.3)] transition-all overflow-hidden w-full sm:w-auto"
               >
+                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 skew-x-12"></div>
                 COMEÇAR PROJETO
               </motion.button>
-              <button className="border border-white/20 text-white px-10 py-6 rounded-xl font-headline font-black text-lg hover:bg-white/[0.03] transition-all active:scale-[0.97] uppercase tracking-widest backdrop-blur-md">
-                VER SERVIÇOS
-              </button>
+              <motion.button 
+                onClick={() => document.getElementById('capabilities')?.scrollIntoView({ behavior: 'smooth' })}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative border border-white/10 text-white px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:bg-white/[0.05] hover:border-white/20 transition-all backdrop-blur-sm w-full sm:w-auto overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-primary/5 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-500"></div>
+                <span className="relative z-10">VER SERVIÇOS</span>
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Premium Scroll Indicator */}
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-40">
+            <span className="text-[8px] font-black tracking-[0.4em] text-white uppercase italic">Desliza</span>
+            <div className="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent relative">
+              <motion.div 
+                animate={{ y: [0, 40, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="absolute top-0 left-[-2px] w-[5px] h-[5px] rounded-full bg-primary shadow-[0_0_10px_#81ecff]"
+              />
             </div>
           </div>
         </section>
 
-        <section className="py-24 bg-black border-y border-white/5">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">PROVA SOCIAL</p>
-              <h2 className="text-fluid-h2 text-white uppercase">NÚMEROS QUE FALAM</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Counter value="20" label="Marcas Transformadas" sub="em 2026" />
-              <Counter value="30%" label="Aumento de Conversão" sub="pós 6 meses de lançamento" />
-              <Counter value="92%" label="Clientes Satisfeitos" sub="taxa de satisfação" />
-              <Counter value="7" label="Prazo de Entrega" sub="Plano Completo" />
+
+        {/* ── STATS SECTION (REFINED ARCHITECTURAL) ── */}
+        <section className="py-24 bg-black border-y border-white/5 relative overflow-hidden">
+          <div className="container mx-auto px-8 relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+              {[
+                { val: "20+", lab: "Websites Entregues", tag: "SYSTEM_OK" },
+                { val: "+30%", lab: "Aumento de Conversão", tag: "KPI_OPTIMIZED" },
+                { val: "92%", lab: "Taxa de Satisfação", tag: "USER_TRUST" },
+                { val: "24/7", lab: "Monitorização Ativa", tag: "LIVE_Uptime" }
+              ].map((stat, i) => (
+                <div key={i} className="flex flex-col items-center md:items-start relative group">
+                  {/* Architectural Accents */}
+                  <div className="absolute -top-4 -left-4 w-4 h-4 border-t border-l border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute -bottom-4 -right-4 w-4 h-4 border-b border-r border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  
+                  <span className="text-[8px] font-label text-primary/50 uppercase tracking-[0.5em] mb-4 font-black flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full bg-primary animate-pulse"></span>
+                    {stat.tag}
+                  </span>
+                  
+                  <div className="flex items-baseline gap-2 relative">
+                    <span className="text-6xl font-black text-white font-headline tracking-tighter drop-shadow-[0_0_15px_rgba(129,236,255,0.2)]">
+                      {stat.val}
+                    </span>
+                  </div>
+                  
+                  <p className="text-neutral-500 text-[10px] uppercase font-bold tracking-[0.3em] mt-4 italic flex items-center gap-3">
+                    <span className="w-4 h-[1px] bg-white/10"></span>
+                    {stat.lab}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
+          {/* Subtle Grid Background */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
         </section>
 
-        <section className="py-24 px-4 bg-[#0a0a0a]" id="capabilities">
-          <div className="container mx-auto">
-            <div className="max-w-xl mb-16">
-              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">CAPACIDADES</p>
-              <h2 className="text-fluid-h3 uppercase whitespace-pre-line text-white">
-                ARTEFACTOS DIGITAIS
-              </h2>
-            </div>
-            <div className="space-y-6">
-              <div className="group bg-[#1a1a1a] p-12 rounded-2xl border border-white/5 hover:border-primary/20 transition-all flex flex-col items-start">
-                <MaterialIcon name="public" className="text-primary text-4xl mb-8" />
-                <h3 className="font-headline text-3xl font-bold mb-4 uppercase text-white">Desenvolvimento Web</h3>
-                <p className="text-neutral-500 font-body text-lg leading-relaxed max-w-prose">Plataformas de alta performance, com design editorial, criadas para converter e cativar.</p>
+        {/* ── CAPABILITIES (LIQUID BENTO) ── */}
+        <section id="capabilities" className="py-32 bg-black relative">
+          <div className="container max-w-[1400px] mx-auto px-8">
+            <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+              <div className="max-w-2xl">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  className="flex items-center gap-4 mb-6"
+                >
+                  <span className="text-primary font-black tracking-[0.4em] text-[10px] uppercase italic">Capacidades</span>
+                  <div className="h-[1px] w-12 bg-white/10"></div>
+                </motion.div>
+                <h2 className="text-fluid-h2 text-white">ARQUITETURA DE <br/><span className="text-outline text-white/40">ALTA PERFORMANCE</span></h2>
               </div>
-              
-              <div className="group bg-[#1a1a1a] p-12 rounded-2xl border border-white/5 hover:border-primary/20 transition-all flex flex-col items-start relative">
-                <div className="absolute top-12 right-12 bg-primary/10 text-primary px-4 py-1.5 rounded-full font-label text-[10px] font-bold uppercase tracking-widest border border-primary/20">EM BREVE</div>
-                <MaterialIcon name="smartphone" className="text-primary text-4xl mb-8" />
-                <h3 className="font-headline text-3xl font-bold mb-4 uppercase text-white">Expansão Mobile</h3>
-                <p className="text-neutral-500 font-body text-lg leading-relaxed max-w-prose">Desenvolvendo experiências nativas para mobile que apagam a linha entre software e arte.</p>
-              </div>
+              <p className="text-neutral-500 font-medium italic max-w-xs text-right leading-relaxed">
+                Cada pixel é um cálculo. Cada interação é uma decisão arquitetónica.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:auto-rows-[300px]">
+              <motion.div 
+                whileHover={{ y: -10 }}
+                className="md:col-span-8 md:row-span-2 obsidian-panel rounded-3xl p-8 md:p-12 pb-12 flex flex-col justify-between group overflow-hidden relative min-h-[450px] md:min-h-0"
+              >
+                <div className="absolute top-8 right-8 text-[10px] font-black text-primary/30 tracking-[0.5em] uppercase select-none">MODULE_WEB_ARCH</div>
+                <div className="absolute top-0 right-0 p-8 text-[80px] font-black text-white/[0.02] leading-none select-none">WEB</div>
+                <div className="relative z-10">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary transition-colors duration-500 group-hover:text-black text-primary">
+                    <MaterialIcon name="web" className="text-3xl" />
+                  </div>
+                  <h3 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">Web Architecture<br/>& Engineering</h3>
+                  <p className="text-neutral-500 max-w-sm leading-relaxed font-medium italic">
+                    Desenvolvemos ecossistemas digitais robustos, focados em performance extrema e escalabilidade infinita.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3 relative z-10">
+                  {['React', 'Next.js', 'High-Load', 'Cloud Native'].map(tag => (
+                    <span key={tag} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-neutral-300 hover:bg-primary/10 hover:border-primary/30 transition-all duration-300">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div 
+                whileHover={{ y: -10 }}
+                className="md:col-span-4 md:row-span-2 obsidian-panel rounded-3xl p-10 flex flex-col items-center justify-between text-center group bg-primary/5 border-primary/10 relative overflow-hidden min-h-[400px] md:min-h-0"
+              >
+                <div className="absolute top-4 left-4 w-2 h-2 border-t border-l border-primary/40"></div>
+                <div className="flex flex-col items-center justify-center flex-grow">
+                  <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mb-8 relative">
+                    <div className="absolute inset-0 rounded-full border border-primary/40 animate-ping"></div>
+                    <MaterialIcon name="neurology" className="text-5xl text-primary" />
+                  </div>
+                  <h3 className="text-3xl font-black text-white mb-6 uppercase tracking-tighter">Neural<br/>Interfaces</h3>
+                  <p className="text-neutral-500 leading-relaxed font-medium italic text-sm">
+                    Integramos inteligência artificial para criar experiências adaptativas que antecipam as necessidades do utilizador.
+                  </p>
+                </div>
+                <div className="mt-8 font-label text-[8px] tracking-[0.6em] text-primary/40 uppercase">AI_INTEGRATION_ACTIVE</div>
+              </motion.div>
+
+              <motion.div 
+                whileHover={{ y: -10 }}
+                className="md:col-span-6 obsidian-panel rounded-3xl p-10 flex items-center gap-8 group relative min-h-[250px] md:min-h-0"
+              >
+                <div className="absolute top-4 right-6 text-[8px] font-bold text-white/10 tracking-[0.4em]">v1.0.4</div>
+                <div className="w-20 h-20 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center text-white group-hover:text-primary transition-colors">
+                  <MaterialIcon name="brush" className="text-4xl" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter">Identidade de Marca</h3>
+                  <p className="text-neutral-500 text-sm italic font-medium">Construímos identidades visuais que comunicam autoridade e valor.</p>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                whileHover={{ y: -10 }}
+                className="md:col-span-6 obsidian-panel rounded-3xl p-10 flex items-center gap-8 group relative min-h-[250px] md:min-h-0"
+              >
+                <div className="w-20 h-20 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center text-white group-hover:text-primary transition-colors">
+                  <MaterialIcon name="insights" className="text-4xl" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter">Estratégia Digital</h3>
+                  <p className="text-neutral-500 text-sm italic font-medium">Otimizamos a tua presença online para resultados reais.</p>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
+        {/* ── BENEFITS SECTION ── */}
         <section className="py-24 bg-black border-t border-white/5">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">BENEFÍCIOS</p>
               <h2 className="text-fluid-h3 tracking-tighter text-white uppercase">O QUE GANHA COM P&D</h2>
-              <p className="text-neutral-500 font-body text-sm mt-4 max-w-prose mx-auto">Uma presença digital sólida é o activo mais valioso do seu negócio em 2026.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
               {[
@@ -257,7 +351,6 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-
 
         <section className="py-24 bg-[#0a0a0a] border-y border-white/5" id="pricing">
           <div className="container mx-auto px-4">

@@ -27,9 +27,6 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                 <DialogTitle className="font-headline text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-none">
                   {defaultTab === "terms" ? "TERMOS DE USO" : "POLÍTICA DE PRIVACIDADE"}
                 </DialogTitle>
-                <button onClick={onClose} className="text-neutral-600 hover:text-white transition-all p-1 -mt-2 -mr-2">
-                  <MaterialIcon name="close" className="text-2xl" />
-                </button>
               </div>
 
               <div className="flex flex-col gap-4">
