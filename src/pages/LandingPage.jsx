@@ -51,12 +51,12 @@ const Counter = ({ value, label, sub }) => {
   const suffix = value.replace(/[0-9+]/g, '');
 
   return (
-    <div ref={ref} className="flex-1 min-w-[300px] bg-[#1a1a1a] p-10 rounded-2xl border border-white/5 group hover:border-primary-container/30 transition-all flex flex-col items-center text-center">
-      <p className="font-headline text-6xl font-black mb-4 text-primary-container tracking-tighter">
+    <div ref={ref} className="w-full md:flex-1 bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 group hover:border-primary-container/30 transition-all flex flex-col items-center text-center">
+      <p className="font-headline text-5xl md:text-6xl font-black mb-4 text-primary-container tracking-tighter">
         {count}{suffix}
       </p>
-      <p className="text-white font-headline text-xl font-bold mb-1 uppercase tracking-tight">{label}</p>
-      <p className="text-neutral-500 font-body text-sm leading-relaxed">{sub}</p>
+      <p className="text-white font-headline text-lg md:text-xl font-bold mb-1 uppercase tracking-tight">{label}</p>
+      <p className="text-neutral-500 font-body text-xs md:text-sm leading-relaxed">{sub}</p>
     </div>
   );
 };
@@ -102,11 +102,11 @@ export default function LandingPage() {
       {/* ── HEADER ── */}
       <header className="bg-black/80 backdrop-blur-2xl fixed top-0 w-full z-50 border-b border-white/5">
         <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 flex items-center justify-center text-primary-container border-2 border-primary-container/30 rounded-lg shadow-[0_0_20px_rgba(129,236,255,0.2)]">
-              <MaterialIcon name="architecture" className="text-3xl" />
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-primary-container border-2 border-primary-container/30 rounded-lg shadow-[0_0_20px_rgba(129,236,255,0.2)]">
+              <MaterialIcon name="architecture" className="text-2xl md:text-3xl" />
             </div>
-            <span className="text-2xl font-black tracking-tighter text-white uppercase font-headline italic">P&D AGENCY</span>
+            <span className="text-lg md:text-2xl font-black tracking-tighter text-white uppercase font-headline italic truncate max-w-[120px] sm:max-w-none">P&D AGENCY</span>
           </div>
           <button 
             onClick={() => openModal()}
@@ -234,19 +234,19 @@ export default function LandingPage() {
         {/* ── CAPABILITIES (LIQUID BENTO) ── */}
         <section id="capabilities" className="py-32 bg-black relative">
           <div className="container max-w-[1400px] mx-auto px-8">
-            <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
-              <div className="max-w-2xl">
+            <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 md:mb-20 gap-8">
+              <div className="max-w-2xl text-center lg:text-left">
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  className="flex items-center gap-4 mb-6"
+                  className="flex items-center justify-center lg:justify-start gap-4 mb-6"
                 >
                   <span className="text-primary font-black tracking-[0.4em] text-[10px] uppercase italic">Capacidades</span>
                   <div className="h-[1px] w-12 bg-white/10"></div>
                 </motion.div>
                 <h2 className="text-fluid-h2 text-white">ARQUITETURA DE <br/><span className="text-outline text-white/40">ALTA PERFORMANCE</span></h2>
               </div>
-              <p className="text-neutral-500 font-medium italic max-w-xs text-right leading-relaxed">
+              <p className="text-neutral-500 font-medium italic max-w-xs text-center lg:text-right leading-relaxed">
                 Cada pixel é um cálculo. Cada interação é uma decisão arquitetónica.
               </p>
             </div>
@@ -262,7 +262,7 @@ export default function LandingPage() {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary transition-colors duration-500 group-hover:text-black text-primary">
                     <MaterialIcon name="web" className="text-3xl" />
                   </div>
-                  <h3 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">Web Architecture<br/>& Engineering</h3>
+                  <h3 className="text-3xl sm:text-4xl font-black text-white mb-6 uppercase tracking-tighter">Web Architecture<br/>& Engineering</h3>
                   <p className="text-neutral-500 max-w-sm leading-relaxed font-medium italic">
                     Desenvolvemos ecossistemas digitais robustos, focados em performance extrema e escalabilidade infinita.
                   </p>
@@ -368,7 +368,7 @@ export default function LandingPage() {
                     <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight">PLANO ESSENCIAL</h4>
                   </div>
                   <div className="flex items-center gap-2 mb-4 text-neutral-500 font-label text-[10px] uppercase tracking-widest">
-                    <MaterialIcon name="sync" className="text-sm" /> CONTRATO 12 MESES
+                    <MaterialIcon name="sync" className="text-sm" /> CONTRATO 3 OU 6 MESES
                   </div>
                   <p className="text-neutral-400 font-body text-sm leading-relaxed">
                     Desenvolvimento completo do website com design moderno e apelativo, suporte de 14 dias e garantia incluída.

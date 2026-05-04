@@ -71,7 +71,7 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                   <h4 className="text-white font-headline font-black text-xl mb-5 uppercase tracking-tight">
                     3. PRAZOS DE ENTREGA
                   </h4>
-                  <p>O Plano Completo inclui entrega garantida em 7 dias úteis após confirmação do pedido e receção de todos os conteúdos necessários. O Plano Essencial contempla prazos acordados no contrato de 12 meses. A P&D AGENCY não se responsabiliza por atrasos resultantes da falta de fornecimento de materiais por parte do Cliente.</p>
+                  <p>O Plano Completo inclui entrega garantida em 7 dias úteis após confirmação do pedido e receção de todos os conteúdos necessários. O Plano Essencial contempla prazos acordados no contrato de 3 ou 6 meses. A P&D AGENCY não se responsabiliza por atrasos resultantes da falta de fornecimento de materiais por parte do Cliente.</p>
                 </section>
 
                 <section>
