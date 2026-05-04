@@ -196,12 +196,13 @@ export default function LandingPage() {
         {/* ── STATS SECTION (REFINED ARCHITECTURAL) ── */}
         <section className="py-24 bg-black border-y border-white/5 relative overflow-hidden">
           <div className="container mx-auto px-8 relative z-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12">
               {[
-                { val: "20+", lab: "Websites Entregues", tag: "SYSTEM_OK" },
+                { val: "20+", lab: "Mais de 20 Websites Entregues", tag: "SYSTEM_OK" },
                 { val: "+30%", lab: "Aumento de Conversão", tag: "KPI_OPTIMIZED" },
                 { val: "92%", lab: "Taxa de Satisfação", tag: "USER_TRUST" },
-                { val: "24/7", lab: "Monitorização Ativa", tag: "LIVE_Uptime" }
+                { val: "24/7", lab: "Monitorização Ativa", tag: "LIVE_Uptime" },
+                { val: "100%", lab: "Compromisso Total", tag: "QUALITY_ASSURED" }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center md:items-start relative group">
                   {/* Architectural Accents */}
@@ -214,7 +215,7 @@ export default function LandingPage() {
                   </span>
                   
                   <div className="flex items-baseline gap-2 relative">
-                    <span className="text-6xl font-black text-white font-headline tracking-tighter drop-shadow-[0_0_15px_rgba(129,236,255,0.2)]">
+                    <span className="text-5xl lg:text-6xl font-black text-white font-headline tracking-tighter drop-shadow-[0_0_15px_rgba(129,236,255,0.2)]">
                       {stat.val}
                     </span>
                   </div>
