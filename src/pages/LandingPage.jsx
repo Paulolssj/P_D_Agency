@@ -264,7 +264,7 @@ export default function LandingPage() {
                   </div>
                   <h3 className="text-3xl sm:text-4xl font-black text-white mb-6 uppercase tracking-tighter">Web Architecture<br/>& Engineering</h3>
                   <p className="text-neutral-500 max-w-sm leading-relaxed font-medium italic">
-                    Desenvolvemos ecossistemas digitais robustos, focados em performance extrema e escalabilidade infinita.
+                    Desenvolvemos ecossistemas digitais robustos, focados em performance extrema e escalabilidade infinita.<br/>
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3 relative z-10">
