@@ -352,35 +352,209 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="py-24 bg-[#0a0a0a] border-y border-white/5" id="pricing">
+        {/* ── PORTFOLIO / AMOSTRAS ── */}
+        <section className="py-24 bg-black border-t border-white/5" id="portfolio">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">INVESTIMENTO</p>
-              <h2 className="text-fluid-h2 text-white uppercase">ESCOLHE O TEU PLANO</h2>
+              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">TRABALHOS SELECIONADOS</p>
+              <h2 className="text-fluid-h2 text-white uppercase">O ARQUIVO</h2>
+              <p className="text-neutral-500 text-sm mt-4 max-w-lg mx-auto">Exemplos reais do nosso trabalho — o nosso próprio portfolio e projetos em desenvolvimento para clientes.</p>
             </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {/* PLANO ESSENCIAL */}
-              <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col">
-                <div className="mb-8">
-                  <MaterialIcon name="web_asset" className="text-primary-container text-4xl mb-6" />
-                   <div className="flex flex-col gap-2 mb-4">
-                    <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight">PLANO ESSENCIAL</h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              {[
+                {
+                  label: 'Agência / 2025',
+                  labelColor: 'text-primary',
+                  title: 'P&D AGENCY',
+                  subtitle: 'O nosso próprio portfólio — o site que estás a ver agora.',
+                  img: 'https://images.unsplash.com/photo-1634084462412-b54873c0a56d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
+                  badge: 'Ao Vivo',
+                  badgeClass: 'bg-primary/20 text-primary',
+                  link: '#',
+                },
+                {
+                  label: '',
+                  labelColor: 'text-amber-400',
+                  title: 'TAKOS KING',
+                  subtitle: 'Fast food focado em tacos — em desenvolvimento para Pombal, Guia.',
+                  img: '/assets/takos-king.png',
+                  badge: 'Em Progresso',
+                  badgeClass: 'bg-amber-500/20 text-amber-400',
+                  link: 'https://www.facebook.com/TakosKing.Guia.Pombal/',
+                },
+                {
+                  label: '',
+                  labelColor: 'text-purple-400',
+                  title: 'EDU BRASIL',
+                  subtitle: 'Aplicação web para estudantes brasileiros — dashboard e conteúdos educativos.',
+                  img: '/assets/edu-brasil.png',
+                  badge: 'Em Progresso',
+                  badgeClass: 'bg-purple-500/20 text-purple-400',
+                  link: 'https://mobileapp-taupe.vercel.app/#/login',
+                },
+              ].map((item, i) => (
+                <motion.a
+                  href={item.link}
+                  target={item.link === '#' ? '_self' : '_blank'}
+                  rel="noopener noreferrer"
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -5 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="relative aspect-[4/3] bg-[#111] overflow-hidden rounded-2xl group cursor-pointer block"
+                >
+                  <img
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700 group-hover:scale-110"
+                    src={item.img}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  
+                  {/* Hover indicator */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
+                      <MaterialIcon name="open_in_new" className="text-white text-xl" />
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 mb-4 text-neutral-500 font-label text-[10px] uppercase tracking-widest">
-                    <MaterialIcon name="sync" className="text-sm" /> CONTRATO 3 OU 6 MESES
+
+                  <div className="absolute top-4 right-4">
+                    <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${item.badgeClass}`}>
+                      {item.badge}
+                    </span>
                   </div>
-                  <p className="text-neutral-400 font-body text-sm leading-relaxed">
-                    Desenvolvimento completo do website com design moderno e apelativo, suporte de 14 dias e garantia incluída.
-                  </p>
+                  <div className="absolute bottom-0 left-0 p-6 w-full">
+                    <p className={`font-label text-[10px] tracking-[0.3em] uppercase mb-1 ${item.labelColor}`}>{item.label}</p>
+                    <h4 className="font-headline text-2xl font-black text-white uppercase mb-1 tracking-tighter">{item.title}</h4>
+                    <p className="text-neutral-400 text-sm font-light leading-snug">{item.subtitle}</p>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── PROMOÇÃO LANÇAMENTO ── */}
+        <section className="py-20 bg-black relative overflow-hidden" id="promocao">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="container mx-auto px-4 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative rounded-3xl border border-amber-500/30 p-8 md:p-12 overflow-hidden max-w-5xl mx-auto"
+              style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.07) 0%, rgba(0,0,0,1) 60%)' }}
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-2xl">🔥</span>
+                  <span className="font-label text-[10px] tracking-[0.3em] uppercase text-amber-400 font-black">Oferta de Lançamento — Vagas Limitadas</span>
                 </div>
-                
-                <div className="space-y-4 mb-10 flex-grow">
+                <h2 className="font-headline text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4">
+                  PRIMEIROS <span className="text-amber-400">5 CLIENTES</span>
+                </h2>
+                <p className="text-neutral-400 leading-relaxed mb-6 max-w-xl font-medium">
+                  Para os nossos primeiros 5 clientes, o desenvolvimento completo do website fica disponível por um preço especial de lançamento. O mercado atual cobra tipicamente entre <span className="text-white font-bold">750€ e 1.000€</span> — nós ficamos bem abaixo disso.
+                </p>
+
+                {/* Comparação de preços */}
+                <div className="flex flex-wrap gap-4 mb-8">
+                  <div className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl px-6 py-4">
+                    <span className="text-neutral-500 text-[10px] font-black uppercase tracking-widest mb-1">Mercado Atual</span>
+                    <span className="font-headline text-3xl font-black text-neutral-400 tracking-tighter line-through">750€–1.000€</span>
+                  </div>
+                  <div className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl px-6 py-4">
+                    <span className="text-neutral-500 text-[10px] font-black uppercase tracking-widest mb-1">Nosso Valor Padrão</span>
+                    <span className="font-headline text-3xl font-black text-neutral-300 tracking-tighter">600€–700€</span>
+                  </div>
+                  <div className="flex flex-col items-center bg-amber-500/10 border border-amber-500/30 rounded-xl px-6 py-4">
+                    <span className="text-amber-400/80 text-[10px] font-black uppercase tracking-widest mb-1">Promoção Lançamento</span>
+                    <span className="font-headline text-3xl font-black text-amber-400 tracking-tighter">450€–550€</span>
+                    <span className="text-amber-400/60 text-[9px] font-bold uppercase tracking-widest mt-1">Sugerido: 500€</span>
+                  </div>
+                </div>
+                <ul className="space-y-3 mb-8">
                   {[
                     'Desenvolvimento completo do website',
-                    'Design moderno e apelativo',
-                    'Suporte inicial de 14 dias',
-                    'Garantia de 7 dias'
+                    'Domínio incluído no primeiro ano',
+                    'Hospedagem incluída no primeiro ano',
+                    'Suporte mínimo incluído (obrigatório no primeiro ano)',
+                    'Design personalizado e responsivo',
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-sm text-neutral-300">
+                      <span className="text-amber-400 text-lg leading-none">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 mb-8">
+                  <p className="text-amber-300 text-xs leading-relaxed">
+                    <strong>⚠️ Vagas limitadas:</strong> Esta promoção é válida apenas para os primeiros 5 clientes. Após esse limite, o preço de desenvolvimento regressa ao nosso valor padrão de 600€ a 700€.
+                  </p>
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => openModal('Promoção Lançamento – 500€')}
+                  className="px-10 py-5 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase transition-all"
+                  style={{ background: 'linear-gradient(to right, #f59e0b, #fbbf24)', color: '#1a0a00' }}
+                >
+                  QUERO ESTA VAGA
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── PACOTES DE SUPORTE ── */}
+        <section className="py-24 bg-[#0a0a0a] border-y border-white/5" id="pricing">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-10">
+              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">MANUTENÇÃO CONTÍNUA</p>
+              <h2 className="text-fluid-h2 text-white uppercase">PACOTES DE SUPORTE</h2>
+              <p className="text-neutral-500 text-sm mt-4 max-w-xl mx-auto">Após a entrega do projeto, mantemos o teu website a funcionar com segurança e desempenho.</p>
+            </div>
+
+            {/* Aviso de transparência */}
+            <div className="max-w-5xl mx-auto mb-12 bg-primary/5 border border-primary/20 rounded-2xl p-5 flex gap-4 items-start">
+              <MaterialIcon name="info" className="text-primary mt-0.5 shrink-0" />
+              <div>
+                <p className="text-white font-bold text-sm mb-1">Suporte mínimo obrigatório durante o 1.º ano</p>
+                <p className="text-neutral-400 text-sm leading-relaxed">
+                  O Pacote Básico é obrigatório durante o primeiro ano após a entrega do website — garante domínio, hospedagem e funcionamento técnico. Após os 12 meses, podes cancelar, manter ou fazer upgrade sem qualquer penalização.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {/* PACOTE BÁSICO */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col group hover:border-primary/20 transition-all duration-500"
+              >
+                <div className="mb-8">
+                  <div className="w-12 h-12 rounded-full border border-primary-container/50 flex items-center justify-center mb-6">
+                    <MaterialIcon name="shield" className="text-primary-container text-2xl" />
+                  </div>
+                  <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-2">Pacote Básico</h4>
+                  <div className="flex items-baseline gap-1 mb-4">
+                    <span className="font-headline text-5xl font-black text-primary-container tracking-tighter">10€</span>
+                    <span className="text-neutral-500 text-sm">/mês</span>
+                  </div>
+                  <p className="text-neutral-400 font-body text-sm leading-relaxed">
+                    O essencial para manter o teu website a funcionar em segurança.
+                  </p>
+                </div>
+                <div className="space-y-4 mb-10 flex-grow">
+                  {[
+                    'Domínio incluído',
+                    'Hospedagem incluída',
+                    'Suporte mínimo (resposta em 24 a 72 horas)',
+                    'Backups a cada 2 meses',
                   ].map((feature, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-5 h-5 rounded-full border border-primary-container/50 flex items-center justify-center shrink-0">
@@ -390,40 +564,46 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
-
-                <button 
-                  onClick={() => openModal('PLANO ESSENCIAL')}
+                <button
+                  onClick={() => openModal('Pacote Básico – 10€/mês')}
                   className="w-full py-4 rounded-xl border border-primary-container/40 text-primary-container font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary-container hover:text-black transition-all active:scale-[0.98]"
                 >
-                  SOLICITAR ORÇAMENTO
+                  SELECIONAR BÁSICO
                 </button>
-              </div>
+              </motion.div>
 
-              {/* PLANO COMPLETO */}
-              <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-primary-container/30 flex flex-col relative scale-[1.02] shadow-[0_20px_50px_rgba(129,236,255,0.1)]">
-                <div className="absolute top-8 right-8 flex flex-col items-end gap-2">
-                  <span className="bg-transparent border border-neutral-700 text-neutral-300 px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">MAIS POPULAR</span>
-                  <div className="flex items-center gap-1.5 text-primary-container font-label text-[9px] font-bold uppercase tracking-widest">
-                    <MaterialIcon name="bolt" className="text-xs" /> PAGAMENTO ÚNICO
-                  </div>
+              {/* PACOTE INTERMEDIÁRIO */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-primary-container/30 flex flex-col relative scale-[1.02] shadow-[0_20px_50px_rgba(129,236,255,0.1)]"
+              >
+                <div className="absolute top-8 right-8">
+                  <span className="bg-primary-container/10 border border-primary-container/30 text-primary-container px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">Recomendado</span>
                 </div>
-                
                 <div className="mb-8">
                   <div className="w-12 h-12 rounded-full border border-primary-container flex items-center justify-center mb-6">
-                    <MaterialIcon name="stars" className="text-primary-container text-2xl" />
+                    <MaterialIcon name="verified_user" className="text-primary-container text-2xl" />
                   </div>
-                  <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-4">PLANO COMPLETO</h4>
+                  <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-2">Pacote Intermediário</h4>
+                  <div className="flex items-baseline gap-1 mb-4">
+                    <span className="font-headline text-5xl font-black text-primary-container tracking-tighter">25€</span>
+                    <span className="text-neutral-500 text-sm">/mês</span>
+                  </div>
                   <p className="text-neutral-400 font-body text-sm leading-relaxed">
-                    Entrega do website em 7 dias, com design moderno e apelativo, suporte de 14 dias e garantia incluída.
+                    Tudo do Básico, mais crescimento e visibilidade online.
                   </p>
                 </div>
-
                 <div className="space-y-4 mb-10 flex-grow">
                   {[
-                    'Entrega do website em 7 dias',
-                    'Design moderno e apelativo',
-                    'Suporte inicial de 14 dias',
-                    'Garantia de 7 dias'
+                    'Domínio + Hospedagem incluídos',
+                    'Suporte com resposta em 24 a 72 horas',
+                    'SEO básico (otimização de pesquisa)',
+                    'Até 10 alterações mensais ao website',
+                    'Backups quinzenais (cada 15 dias)',
+                    'Relatório mensal de visitas e desempenho',
                   ].map((feature, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-5 h-5 rounded-full border border-primary-container flex items-center justify-center shrink-0">
@@ -433,58 +613,47 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
-
-                <button 
-                  onClick={() => openModal('PLANO COMPLETO')}
+                <button
+                  onClick={() => openModal('Pacote Intermediário – 25€/mês')}
                   className="w-full py-5 rounded-xl bg-primary-container text-black font-headline font-black text-xs tracking-[0.2em] uppercase hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all active:scale-[0.98]"
                 >
-                  SOLICITAR ORÇAMENTO
+                  SELECIONAR INTERMEDIÁRIO
                 </button>
-              </div>
+              </motion.div>
 
-              {/* SUPORTE PREMIUM */}
-              <div className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col">
-                <div className="absolute top-8 right-8">
-                  {/* Tag removida para minimalismo */}
+              {/* CTA PERSONALIZADO */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-center group hover:border-primary/10 transition-all duration-500"
+              >
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                  <MaterialIcon name="handshake" className="text-primary text-3xl" />
                 </div>
-
-                <div className="mb-8">
-                  <div className="w-12 h-12 rounded-full border border-primary flex items-center justify-center mb-6">
-                    <MaterialIcon name="security" className="text-primary text-2xl" />
-                  </div>
-                  <h3 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-4">SUPORTE PREMIUM</h3>
-                  <p className="text-neutral-500 font-body text-sm leading-relaxed max-w-prose">
-                    Suporte prioritário, backups regulares, segurança avançada e otimização contínua do teu projeto.
-                  </p>
-                </div>
-
-                <div className="space-y-4 mb-10 flex-grow">
-                  {[
-                    'Suporte de 1 mês (resposta 6h-24h)',
-                    'Backups regulares automáticos',
-                    'Segurança avançada',
-                    'Otimização contínua',
-                    'Garantia de 14 dias'
-                  ].map((feature, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full border border-primary flex items-center justify-center shrink-0">
-                        <MaterialIcon name="check" className="text-primary text-[10px]" />
-                      </div>
-                      <span className="text-neutral-500 font-body text-xs font-medium">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <button 
-                  onClick={() => openModal('SUPORTE PREMIUM')}
+                <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-4">Personalizado</h4>
+                <p className="text-neutral-400 font-body text-sm leading-relaxed mb-8">
+                  Tens necessidades específicas? Fala connosco e construímos um plano à medida do teu projeto.
+                </p>
+                <div className="text-neutral-500 text-xs font-label uppercase tracking-widest mb-8 font-black">APÓS 1 ANO — LIVRE DE CANCELAR OU AJUSTAR</div>
+                <button
+                  onClick={() => openModal('Projeto + Suporte (personalizado)')}
                   className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-black transition-all active:scale-[0.98]"
                 >
-                  SOLICITAR ORÇAMENTO
+                  FALAR CONNOSCO
                 </button>
-              </div>
+              </motion.div>
             </div>
+
+            {/* Nota de transparência */}
+            <p className="text-center text-neutral-600 text-xs mt-10 max-w-2xl mx-auto italic">
+              <MaterialIcon name="info" className="align-middle mr-1 text-xs" />
+              Após o primeiro ano, é livre de mudar de pacote, fazer upgrade, downgrade, ou cancelar o suporte — sem penalizações.
+            </p>
           </div>
         </section>
+
 
         <section className="py-40 relative overflow-hidden bg-black flex items-center justify-center">
           <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(129, 236, 255, 0.15) 0%, transparent 60%)' }}></div>
@@ -496,9 +665,12 @@ export default function LandingPage() {
               className="mb-12"
             >
               <h2 className="text-fluid-h1 mb-4 text-white uppercase">
-                PRONTO PARA <br/>
-                <span className="text-primary drop-shadow-[0_0_30px_rgba(129,236,255,0.5)]">TRANSCENDER?</span>
+                TENS INTERESSE?<br/>
+                <span className="text-primary drop-shadow-[0_0_30px_rgba(129,236,255,0.5)]">VAMOS MARCAR UMA REUNIÃO.</span>
               </h2>
+              <p className="text-neutral-400 text-lg font-medium max-w-xl mx-auto mb-6">
+                Responde ao e-mail ou usa o botão abaixo — agendamos uma conversa de 30 minutos, sem compromisso, para perceber o que precisas.
+              </p>
             </motion.div>
             <motion.button 
               onClick={() => openModal()}
@@ -517,7 +689,7 @@ export default function LandingPage() {
               }}
               className="group relative inline-flex items-center gap-4 bg-primary-container text-black px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:shadow-[0_10px_40px_rgba(129,236,255,0.5)] transition-all duration-500 active:scale-95"
             >
-              FALAR COM UM ESPECIALISTA
+              AGENDAR REUNIÃO
             </motion.button>
           </div>
         </section>
@@ -543,6 +715,8 @@ export default function LandingPage() {
               <h4 className="font-headline text-primary-container font-black mb-8 uppercase tracking-[0.3em] text-[11px]">NAVEGAÇÃO</h4>
               <ul className="space-y-4">
                 <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#capabilities">Serviços</a></li>
+                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#portfolio">Portfólio</a></li>
+                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#promocao">Promoção</a></li>
                 <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#pricing">Planos</a></li>
               </ul>
             </div>
