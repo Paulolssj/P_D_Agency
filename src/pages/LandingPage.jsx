@@ -390,7 +390,7 @@ export default function LandingPage() {
                   img: '/assets/edu-brasil.png',
                   badge: 'Em Progresso',
                   badgeClass: 'bg-purple-500/20 text-purple-400',
-                  link: 'https://mobileapp-taupe.vercel.app/#/login',
+                  link: 'https://mobileapp-taupe.vercel.app/',
                 },
               ].map((item, i) => (
                 <motion.a
