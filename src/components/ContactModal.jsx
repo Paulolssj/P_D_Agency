@@ -22,6 +22,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
     name: '',
     email: '',
     package_interest: '',
+    support_plan: '',
     message: '',
   });
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,8 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
     if (open) {
       setFormData((prev) => ({
         ...prev,
-        package_interest: defaultPackage || '',
+        package_interest: defaultPackage || 'Promoção Lançamento (450€ - 550€)',
+        support_plan: 'Pacote Básico (10€/mês)',
       }));
       setSuccess(false);
       setError('');
@@ -48,7 +50,13 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
     setLoading(true);
     setError('');
     try {
-      await axios.post(`${API}/contact`, formData);
+      // Concatenating plans for the backend if it only expects one field, 
+      // or sending separately if the backend supports it.
+      const dataToSubmit = {
+        ...formData,
+        message: `[Interesse: ${formData.package_interest}] [Suporte: ${formData.support_plan}] \n\n${formData.message}`
+      };
+      await axios.post(`${API}/contact`, dataToSubmit);
       setSuccess(true);
       setTimeout(() => {
         onClose();
@@ -63,7 +71,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
-        className="border text-white max-w-md p-8"
+        className="border text-white max-w-md p-8 overflow-y-auto max-h-[90vh]"
         style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(72,72,71,0.3)' }}
       >
         <DialogHeader>
@@ -111,7 +119,6 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="O teu nome"
-                data-testid="contact-name-input"
                 className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none"
                 style={{
                   backgroundColor: '#0e0e0e',
@@ -138,7 +145,6 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="teu@email.com"
-                data-testid="contact-email-input"
                 className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none"
                 style={{
                   backgroundColor: '#0e0e0e',
@@ -149,48 +155,52 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label
-                className="font-bold text-xs uppercase tracking-widest"
-                style={{ color: '#adaaaa' }}
-              >
-                Pacote de Interesse
-              </Label>
-              <Select
-                value={formData.package_interest}
-                onValueChange={(val) =>
-                  setFormData((prev) => ({ ...prev, package_interest: val }))
-                }
-              >
-                <SelectTrigger
-                  data-testid="contact-package-select"
-                  className="text-white h-12"
-                  style={{
-                    backgroundColor: '#0e0e0e',
-                    border: '1px solid rgba(72,72,71,0.4)',
-                  }}
+            <div className="grid grid-cols-1 gap-4">
+              <div className="space-y-2">
+                <Label className="font-bold text-[10px] uppercase tracking-widest" style={{ color: '#adaaaa' }}>
+                  Projeto
+                </Label>
+                <Select
+                  value={formData.package_interest}
+                  onValueChange={(val) =>
+                    setFormData((prev) => ({ ...prev, package_interest: val }))
+                  }
                 >
-                  <SelectValue placeholder="Seleciona um pacote..." />
-                </SelectTrigger>
-                <SelectContent
-                  style={{
-                    backgroundColor: '#1a1a1a',
-                    border: '1px solid rgba(72,72,71,0.4)',
-                  }}
-                >
-                  {['Promoção Lançamento (500€ + Suporte)', 'Pacote Básico – 10€/mês', 'Pacote Intermediário – 25€/mês', 'Projeto + Suporte (personalizado)', 'Outro / Não tenho a certeza'].map(
-                    (opt) => (
-                      <SelectItem
-                        key={opt}
-                        value={opt}
-                        className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer"
-                      >
+                  <SelectTrigger className="text-white h-11 text-xs" style={{ backgroundColor: '#0e0e0e', border: '1px solid rgba(72,72,71,0.4)' }}>
+                    <SelectValue placeholder="Seleciona o projeto..." />
+                  </SelectTrigger>
+                  <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
+                    {['Promoção Lançamento (450€ - 550€)', 'Projeto Personalizado'].map((opt) => (
+                      <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
                         {opt}
                       </SelectItem>
-                    )
-                  )}
-                </SelectContent>
-              </Select>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label className="font-bold text-[10px] uppercase tracking-widest" style={{ color: '#adaaaa' }}>
+                  Plano de Suporte (Obrigatório)
+                </Label>
+                <Select
+                  value={formData.support_plan}
+                  onValueChange={(val) =>
+                    setFormData((prev) => ({ ...prev, support_plan: val }))
+                  }
+                >
+                  <SelectTrigger className="text-white h-11 text-xs border-primary/20" style={{ backgroundColor: '#0e0e0e', border: '1px solid rgba(129,236,255,0.2)' }}>
+                    <SelectValue placeholder="Seleciona o suporte..." />
+                  </SelectTrigger>
+                  <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
+                    {['Pacote Básico (10€/mês)', 'Pacote Intermediário (25€/mês)'].map((opt) => (
+                      <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
+                        {opt}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -205,11 +215,10 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 id="message"
                 name="message"
                 required
-                rows={4}
+                rows={3}
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Fala-nos sobre o teu projeto, objetivos e ideias..."
-                data-testid="contact-message-input"
+                placeholder="Fala-nos sobre o teu projeto..."
                 className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none resize-none"
                 style={{
                   backgroundColor: '#0e0e0e',
@@ -221,7 +230,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
             </div>
 
             {error && (
-              <p className="text-red-400 text-xs" data-testid="contact-error">
+              <p className="text-red-400 text-xs">
                 {error}
               </p>
             )}
@@ -229,7 +238,6 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
             <button
               type="submit"
               disabled={loading}
-              data-testid="contact-submit-button"
               className="w-full py-4 rounded-md font-label font-black uppercase tracking-[0.2em] text-sm transition-all active:scale-[0.99] disabled:opacity-50"
               style={{
                 background: 'linear-gradient(to right, #81ecff, #00e3fd)',
