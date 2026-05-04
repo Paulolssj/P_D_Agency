@@ -475,6 +475,11 @@ export default function LandingPage() {
                     <span className="text-amber-400/60 text-[9px] font-bold uppercase tracking-widest mt-1">Sugerido: 500€</span>
                   </div>
                 </div>
+
+                <div className="flex items-center gap-2 mb-8 text-amber-400/80">
+                  <MaterialIcon name="plus_one" className="text-sm" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Inclui obrigatoriamente um Pacote de Suporte (Básico ou Intermediário)</span>
+                </div>
                 <ul className="space-y-3 mb-8">
                   {[
                     'Desenvolvimento completo do website',

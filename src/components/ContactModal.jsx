@@ -178,7 +178,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                     border: '1px solid rgba(72,72,71,0.4)',
                   }}
                 >
-                  {['Promoção Lançamento – 500€', 'Pacote Básico – 10€/mês', 'Pacote Intermediário – 25€/mês', 'Projeto + Suporte (personalizado)', 'Outro / Não tenho a certeza'].map(
+                  {['Promoção Lançamento (500€ + Suporte)', 'Pacote Básico – 10€/mês', 'Pacote Intermediário – 25€/mês', 'Projeto + Suporte (personalizado)', 'Outro / Não tenho a certeza'].map(
                     (opt) => (
                       <SelectItem
                         key={opt}
