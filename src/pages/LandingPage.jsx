@@ -267,7 +267,7 @@ export default function LandingPage() {
                     Desenvolvemos ecossistemas digitais robustos, focados em performance extrema e escalabilidade infinita.<br/>
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-3 relative z-10">
+                <div className="flex flex-wrap gap-3 relative z-10 mt-12">
                   {['React', 'Next.js', 'High-Load', 'Cloud Native'].map(tag => (
                     <span key={tag} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-neutral-300 hover:bg-primary/10 hover:border-primary/30 transition-all duration-300">
                       {tag}
@@ -291,7 +291,7 @@ export default function LandingPage() {
                     Integramos inteligência artificial para criar experiências adaptativas que antecipam as necessidades do utilizador.
                   </p>
                 </div>
-                <div className="mt-8 font-label text-[8px] tracking-[0.6em] text-primary/40 uppercase">AI_INTEGRATION_ACTIVE</div>
+                <div className="mt-12 font-label text-[8px] tracking-[0.6em] text-primary/40 uppercase">AI_INTEGRATION_ACTIVE</div>
               </motion.div>
 
               <motion.div 
