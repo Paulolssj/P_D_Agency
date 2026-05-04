@@ -180,13 +180,13 @@ export default function LandingPage() {
           </div>
 
           {/* Premium Scroll Indicator */}
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-40">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60 z-30 pointer-events-none">
             <span className="text-[8px] font-black tracking-[0.4em] text-white uppercase italic">Desliza</span>
-            <div className="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent relative">
+            <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent relative">
               <motion.div 
-                animate={{ y: [0, 40, 0] }}
+                animate={{ y: [0, 30, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="absolute top-0 left-[-2px] w-[5px] h-[5px] rounded-full bg-primary shadow-[0_0_10px_#81ecff]"
+                className="absolute top-0 left-[-2px] w-[5px] h-[5px] rounded-full bg-primary shadow-[0_0_15px_#81ecff]"
               />
             </div>
           </div>
