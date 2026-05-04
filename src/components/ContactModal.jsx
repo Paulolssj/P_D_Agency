@@ -193,7 +193,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                     <SelectValue placeholder="Seleciona o suporte..." />
                   </SelectTrigger>
                   <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
-                    {['Pacote Básico (10€/mês)', 'Pacote Intermediário (25€/mês)'].map((opt) => (
+                    {['Pacote Básico (10€/mês)', 'Pacote Plus (25€/mês)'].map((opt) => (
                       <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
                         {opt}
                       </SelectItem>

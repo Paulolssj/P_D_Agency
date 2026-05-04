@@ -478,7 +478,7 @@ export default function LandingPage() {
 
                 <div className="flex items-center gap-2 mb-8 text-amber-400/80">
                   <MaterialIcon name="plus_one" className="text-sm" />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Inclui obrigatoriamente um Pacote de Suporte (Básico ou Intermediário)</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest">Inclui obrigatoriamente um Pacote de Suporte (Básico ou Plus)</span>
                 </div>
                 <ul className="space-y-3 mb-8">
                   {[
@@ -577,7 +577,7 @@ export default function LandingPage() {
                 </button>
               </motion.div>
 
-              {/* PACOTE INTERMEDIÁRIO */}
+              {/* PACOTE PLUS */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -592,7 +592,7 @@ export default function LandingPage() {
                   <div className="w-12 h-12 rounded-full border border-primary-container flex items-center justify-center mb-6">
                     <MaterialIcon name="verified_user" className="text-primary-container text-2xl" />
                   </div>
-                  <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-2">Pacote Intermediário</h4>
+                  <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-2">Pacote Plus</h4>
                   <div className="flex items-baseline gap-1 mb-4">
                     <span className="font-headline text-5xl font-black text-primary-container tracking-tighter">25€</span>
                     <span className="text-neutral-500 text-sm">/mês</span>
@@ -619,10 +619,10 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <button
-                  onClick={() => openModal('Pacote Intermediário – 25€/mês')}
+                  onClick={() => openModal('Pacote Plus (25€/mês)')}
                   className="w-full py-5 rounded-xl bg-primary-container text-black font-headline font-black text-xs tracking-[0.2em] uppercase hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all active:scale-[0.98]"
                 >
-                  SELECIONAR INTERMEDIÁRIO
+                  SELECIONAR PLUS
                 </button>
               </motion.div>
 
