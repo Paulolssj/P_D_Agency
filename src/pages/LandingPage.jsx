@@ -390,6 +390,7 @@ export default function LandingPage() {
                   <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter">Estratégia Digital</h3>
                   <p className="text-neutral-500 text-sm italic font-medium">Otimizamos a tua presença online para resultados reais.</p>
                 </div>
+              </motion.div>
             </motion.div>
           </div>
         </section>
