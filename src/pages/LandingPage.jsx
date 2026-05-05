@@ -51,10 +51,13 @@ const Counter = ({ value, label, sub }) => {
   const suffix = value.replace(/[0-9+]/g, '');
 
   return (
-    <div ref={ref} className="w-full md:flex-1 bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 group hover:border-primary-container/30 transition-all flex flex-col items-center text-center">
-      <p className="font-headline text-5xl md:text-6xl font-black mb-4 text-primary-container tracking-tighter">
+    <div ref={ref} className="w-full md:flex-1 bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 group hover:border-primary-container/30 hover:scale-105 transition-all duration-500 flex flex-col items-center text-center">
+      <motion.p 
+        animate={isInView ? { scale: [1, 1.1, 1], transition: { duration: 0.5, delay: 2 } } : {}}
+        className="font-headline text-5xl md:text-6xl font-black mb-4 text-primary-container tracking-tighter"
+      >
         {count}{suffix}
-      </p>
+      </motion.p>
       <p className="text-white font-headline text-lg md:text-xl font-bold mb-1 uppercase tracking-tight">{label}</p>
       <p className="text-neutral-500 font-body text-xs md:text-sm leading-relaxed">{sub}</p>
     </div>
@@ -138,14 +141,35 @@ export default function LandingPage() {
             </motion.div>
 
             <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
               className="text-fluid-h1 mb-12 uppercase leading-[0.85] tracking-tighter"
             >
-              <span className="block font-black text-white bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">Construímos</span>
-              <span className="block text-outline text-white/20 font-black italic drop-shadow-[0_0_40px_rgba(129,236,255,0.15)] my-2">Interfaces</span>
-              <span className="block font-black text-white bg-gradient-to-t from-white to-white/60 bg-clip-text text-transparent">do Futuro</span>
+              <motion.span 
+                initial={{ opacity: 0, y: 50, rotateX: 45 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="block font-black text-white bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent"
+              >
+                Construímos
+              </motion.span>
+              <motion.span 
+                initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                className="block text-outline text-white/20 font-black italic drop-shadow-[0_0_40px_rgba(129,236,255,0.15)] my-2"
+              >
+                Interfaces
+              </motion.span>
+              <motion.span 
+                initial={{ opacity: 0, y: -50, rotateX: -45 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="block font-black text-white bg-gradient-to-t from-white to-white/60 bg-clip-text text-transparent"
+              >
+                do Futuro
+              </motion.span>
             </motion.h1>
 
             <motion.p 
@@ -165,7 +189,12 @@ export default function LandingPage() {
                 className="group relative bg-primary text-black px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase shadow-[0_0_50px_rgba(129,236,255,0.3)] transition-all overflow-hidden w-full sm:w-auto"
               >
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 skew-x-12"></div>
-                COMEÇAR PROJETO
+                <motion.div 
+                  animate={{ opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute inset-0 bg-primary/20 blur-xl pointer-events-none"
+                />
+                <span className="relative z-10">COMEÇAR PROJETO</span>
               </motion.button>
               <motion.button 
                 onClick={() => document.getElementById('capabilities')?.scrollIntoView({ behavior: 'smooth' })}
@@ -244,16 +273,46 @@ export default function LandingPage() {
                   <span className="text-primary font-black tracking-[0.4em] text-[10px] uppercase italic">Capacidades</span>
                   <div className="h-[1px] w-12 bg-white/10"></div>
                 </motion.div>
-                <h2 className="text-fluid-h2 text-white">ARQUITETURA DE <br/><span className="text-outline text-white/40">ALTA PERFORMANCE</span></h2>
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-fluid-h2 text-white"
+                >
+                  ARQUITETURA DE <br/><span className="text-outline text-white/40">ALTA PERFORMANCE</span>
+                </motion.h2>
               </div>
-              <p className="text-neutral-500 font-medium italic max-w-xs text-center lg:text-right leading-relaxed">
+              <motion.p 
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="text-neutral-500 font-medium italic max-w-xs text-center lg:text-right leading-relaxed"
+              >
                 Cada pixel é um cálculo. Cada interação é uma decisão arquitetónica.
-              </p>
+              </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:auto-rows-[300px]">
+            <motion.div 
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.15
+                  }
+                }
+              }}
+              className="grid grid-cols-1 md:grid-cols-12 gap-6 md:auto-rows-[300px]"
+            >
               <motion.div 
-                whileHover={{ y: -10 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+                }}
+                whileHover={{ y: -10, scale: 1.01 }}
                 className="md:col-span-8 md:row-span-2 obsidian-panel rounded-3xl p-8 md:p-12 pb-12 flex flex-col justify-between group overflow-hidden relative min-h-[450px] md:min-h-0"
               >
                 <div className="absolute top-8 right-8 text-[10px] font-black text-primary/30 tracking-[0.5em] uppercase select-none">MODULE_WEB_ARCH</div>
@@ -277,7 +336,11 @@ export default function LandingPage() {
               </motion.div>
 
               <motion.div 
-                whileHover={{ y: -10 }}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9 },
+                  show: { opacity: 1, scale: 1, transition: { duration: 0.8 } }
+                }}
+                whileHover={{ y: -10, scale: 1.02 }}
                 className="md:col-span-4 md:row-span-2 obsidian-panel rounded-3xl p-10 flex flex-col items-center justify-between text-center group bg-primary/5 border-primary/10 relative overflow-hidden min-h-[400px] md:min-h-0"
               >
                 <div className="absolute top-4 left-4 w-2 h-2 border-t border-l border-primary/40"></div>
@@ -295,7 +358,11 @@ export default function LandingPage() {
               </motion.div>
 
               <motion.div 
-                whileHover={{ y: -10 }}
+                variants={{
+                  hidden: { opacity: 0, x: -30 },
+                  show: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+                }}
+                whileHover={{ y: -10, x: 5 }}
                 className="md:col-span-6 obsidian-panel rounded-3xl p-10 flex items-center gap-8 group relative min-h-[250px] md:min-h-0"
               >
                 <div className="absolute top-4 right-6 text-[8px] font-bold text-white/10 tracking-[0.4em]">v1.0.4</div>
@@ -309,7 +376,11 @@ export default function LandingPage() {
               </motion.div>
 
               <motion.div 
-                whileHover={{ y: -10 }}
+                variants={{
+                  hidden: { opacity: 0, x: 30 },
+                  show: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+                }}
+                whileHover={{ y: -10, x: -5 }}
                 className="md:col-span-6 obsidian-panel rounded-3xl p-10 flex items-center gap-8 group relative min-h-[250px] md:min-h-0"
               >
                 <div className="w-20 h-20 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center text-white group-hover:text-primary transition-colors">
@@ -319,8 +390,7 @@ export default function LandingPage() {
                   <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter">Estratégia Digital</h3>
                   <p className="text-neutral-500 text-sm italic font-medium">Otimizamos a tua presença online para resultados reais.</p>
                 </div>
-              </motion.div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -524,10 +594,11 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {/* PACOTE BÁSICO */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                whileHover={{ y: -12, scale: 1.02, boxShadow: "0 20px 40px rgba(0,0,0,0.4)" }}
                 viewport={{ once: true }}
-                className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col group hover:border-primary/20 transition-all duration-500"
+                className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-white/5 flex flex-col group transition-all duration-500 cursor-default"
               >
                 <div className="mb-8">
                   <div className="w-12 h-12 rounded-full border border-primary-container/50 flex items-center justify-center mb-6">
@@ -566,11 +637,12 @@ export default function LandingPage() {
 
               {/* PACOTE PLUS */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 1.05 }}
+                whileInView={{ opacity: 1, scale: 1.02 }}
+                whileHover={{ y: -15, scale: 1.04, boxShadow: "0 25px 60px rgba(129,236,255,0.15)" }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-primary-container/30 flex flex-col relative scale-[1.02] shadow-[0_20px_50px_rgba(129,236,255,0.1)]"
+                className="bg-[#1a1a1a] p-8 md:p-10 rounded-2xl border border-primary-container/30 flex flex-col relative shadow-[0_20px_50px_rgba(129,236,255,0.1)] transition-all duration-500 cursor-default"
               >
                 <div className="absolute top-8 right-8">
                   <span className="bg-primary-container/10 border border-primary-container/30 text-primary-container px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">Recomendado</span>
