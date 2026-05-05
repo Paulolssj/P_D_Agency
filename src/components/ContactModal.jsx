@@ -33,8 +33,8 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
     if (open) {
       setFormData((prev) => ({
         ...prev,
-        package_interest: defaultPackage || 'Promoção Lançamento (450€ - 550€)',
-        support_plan: 'Pacote Básico (10€/mês)',
+        package_interest: defaultPackage || 'Promoção Lançamento',
+        support_plan: 'Pacote Básico',
       }));
       setSuccess(false);
       setError('');
@@ -170,7 +170,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                     <SelectValue placeholder="Seleciona o projeto..." />
                   </SelectTrigger>
                   <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
-                    {['Promoção Lançamento (450€ - 550€)', 'Projeto Personalizado'].map((opt) => (
+                    {['Promoção Lançamento', 'Projeto Personalizado'].map((opt) => (
                       <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
                         {opt}
                       </SelectItem>
@@ -193,7 +193,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                     <SelectValue placeholder="Seleciona o suporte..." />
                   </SelectTrigger>
                   <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
-                    {['Pacote Básico (10€/mês)', 'Pacote Plus (25€/mês)'].map((opt) => (
+                    {['Pacote Básico', 'Pacote Plus'].map((opt) => (
                       <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
                         {opt}
                       </SelectItem>

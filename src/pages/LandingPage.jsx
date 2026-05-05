@@ -456,24 +456,12 @@ export default function LandingPage() {
                   PRIMEIROS <span className="text-amber-400">5 CLIENTES</span>
                 </h2>
                 <p className="text-neutral-400 leading-relaxed mb-6 max-w-xl font-medium">
-                  Para os nossos primeiros 5 clientes, o desenvolvimento completo do website fica disponível por um preço especial de lançamento. O mercado atual cobra tipicamente entre <span className="text-white font-bold">750€ e 1.000€</span> — nós ficamos bem abaixo disso.
+                  Para os nossos primeiros 5 clientes, o desenvolvimento completo do website fica disponível sob condições especiais de lançamento. O mercado atual cobra tipicamente entre <span className="text-white font-bold">800€ e 1.200€</span> (fora as subscrições) por arquitetura digital de elite — nós estamos a fazer <span className="text-white font-bold">valores significativamente mais baixos</span> para as nossas primeiras parcerias.
                 </p>
 
-                {/* Comparação de preços */}
-                <div className="flex flex-wrap gap-4 mb-8">
-                  <div className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl px-6 py-4">
-                    <span className="text-neutral-500 text-[10px] font-black uppercase tracking-widest mb-1">Mercado Atual</span>
-                    <span className="font-headline text-3xl font-black text-neutral-400 tracking-tighter line-through">750€–1.000€</span>
-                  </div>
-                  <div className="flex flex-col items-center bg-white/5 border border-white/10 rounded-xl px-6 py-4">
-                    <span className="text-neutral-500 text-[10px] font-black uppercase tracking-widest mb-1">Nosso Valor Padrão</span>
-                    <span className="font-headline text-3xl font-black text-neutral-300 tracking-tighter">600€–700€</span>
-                  </div>
-                  <div className="flex flex-col items-center bg-amber-500/10 border border-amber-500/30 rounded-xl px-6 py-4">
-                    <span className="text-amber-400/80 text-[10px] font-black uppercase tracking-widest mb-1">Promoção Lançamento</span>
-                    <span className="font-headline text-3xl font-black text-amber-400 tracking-tighter">450€–550€</span>
-                    <span className="text-amber-400/60 text-[9px] font-bold uppercase tracking-widest mt-1">Sugerido: 500€</span>
-                  </div>
+                <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-8 text-center max-w-sm">
+                  <span className="text-neutral-500 text-[10px] font-black uppercase tracking-widest mb-2 block">Investimento</span>
+                  <span className="font-headline text-2xl font-black text-white tracking-tighter">SOB CONSULTA</span>
                 </div>
 
                 <div className="flex items-center gap-2 mb-8 text-amber-400/80">
@@ -496,13 +484,13 @@ export default function LandingPage() {
                 </ul>
                 <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 mb-8">
                   <p className="text-amber-300 text-xs leading-relaxed">
-                    <strong>⚠️ Vagas limitadas:</strong> Esta promoção é válida apenas para os primeiros 5 clientes. Após esse limite, o preço de desenvolvimento regressa ao nosso valor padrão de 600€ a 700€.
+                    <strong>⚠️ Vagas limitadas:</strong> Esta promoção de valores reduzidos é válida apenas para os primeiros 5 clientes. Após esse limite, o investimento de desenvolvimento regressa aos nossos valores padrão.
                   </p>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => openModal('Promoção Lançamento – 500€')}
+                  onClick={() => openModal('Promoção Lançamento')}
                   className="px-10 py-5 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase transition-all"
                   style={{ background: 'linear-gradient(to right, #f59e0b, #fbbf24)', color: '#1a0a00' }}
                 >
@@ -547,8 +535,7 @@ export default function LandingPage() {
                   </div>
                   <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-2">Pacote Básico</h4>
                   <div className="flex items-baseline gap-1 mb-4">
-                    <span className="font-headline text-5xl font-black text-primary-container tracking-tighter">10€</span>
-                    <span className="text-neutral-500 text-sm">/mês</span>
+                    <span className="font-headline text-3xl font-black text-primary-container tracking-tighter">Sob Consulta</span>
                   </div>
                   <p className="text-neutral-400 font-body text-sm leading-relaxed">
                     O essencial para manter o teu website a funcionar em segurança.
@@ -570,7 +557,7 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <button
-                  onClick={() => openModal('Pacote Básico – 10€/mês')}
+                  onClick={() => openModal('Pacote Básico')}
                   className="w-full py-4 rounded-xl border border-primary-container/40 text-primary-container font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary-container hover:text-black transition-all active:scale-[0.98]"
                 >
                   SELECIONAR BÁSICO
@@ -594,8 +581,7 @@ export default function LandingPage() {
                   </div>
                   <h4 className="font-headline text-2xl font-black text-white uppercase tracking-tight mb-2">Pacote Plus</h4>
                   <div className="flex items-baseline gap-1 mb-4">
-                    <span className="font-headline text-5xl font-black text-primary-container tracking-tighter">25€</span>
-                    <span className="text-neutral-500 text-sm">/mês</span>
+                    <span className="font-headline text-3xl font-black text-primary-container tracking-tighter">Sob Consulta</span>
                   </div>
                   <p className="text-neutral-400 font-body text-sm leading-relaxed">
                     Tudo do Básico, mais crescimento e visibilidade online.
@@ -619,7 +605,7 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <button
-                  onClick={() => openModal('Pacote Plus (25€/mês)')}
+                  onClick={() => openModal('Pacote Plus')}
                   className="w-full py-5 rounded-xl bg-primary-container text-black font-headline font-black text-xs tracking-[0.2em] uppercase hover:shadow-[0_0_30px_rgba(129,236,255,0.4)] transition-all active:scale-[0.98]"
                 >
                   SELECIONAR PLUS
