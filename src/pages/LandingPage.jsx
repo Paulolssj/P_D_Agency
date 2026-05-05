@@ -787,9 +787,16 @@ export default function LandingPage() {
             <div>
               <h4 className="font-headline text-primary-container font-black mb-8 uppercase tracking-[0.3em] text-[11px]">SOCIAL</h4>
               <ul className="space-y-4">
-                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#">Twitter</a></li>
-                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#">LinkedIn</a></li>
-                <li><a className="text-neutral-400 hover:text-white transition-colors text-base font-medium" href="#">Instagram</a></li>
+                <li>
+                  <a 
+                    className="text-neutral-400 hover:text-white transition-colors text-base font-medium flex items-center gap-2" 
+                    href="https://www.instagram.com/p.d_agency/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    Instagram
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
