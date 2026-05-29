@@ -123,7 +123,7 @@ export default function LandingPage() {
 
       <main className="overflow-x-hidden">
         {/* ── HERO SECTION ── */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-28 pb-52 md:pt-24 md:pb-24 overflow-hidden bg-white">
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-28 pb-52 md:pt-24 md:pb-36 overflow-hidden bg-white">
           {/* Dynamic Ambient Elements */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[120px] animate-pulse pointer-events-none"></div>
           <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/[0.04] rounded-full blur-[80px] pointer-events-none animate-bounce" style={{ animationDuration: '10s' }}></div>
@@ -204,7 +204,7 @@ export default function LandingPage() {
           </div>
 
           {/* Premium Scroll Indicator */}
-          <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60 z-30 pointer-events-none">
+          <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60 z-30 pointer-events-none">
             <span className="text-[8px] font-black tracking-[0.4em] text-neutral-800 uppercase italic">Desliza</span>
             <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent relative">
               <motion.div 
