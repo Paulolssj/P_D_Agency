@@ -6,14 +6,14 @@
 }
 
 .glass-header {
-    background: rgba(14, 14, 14, 0.75);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(72, 72, 71, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .text-glow {
-    text-shadow: 0 0 40px rgba(129, 236, 255, 0.25);
+    text-shadow: 0 0 40px rgba(37, 99, 235, 0.15);
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }

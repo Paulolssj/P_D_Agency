@@ -4,28 +4,28 @@
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
-    --foreground: 20 5% 90%;
+    --background: 40 30% 98%; /* Warm white/beige base #FDFBF7 */
+    --foreground: 222.2 47.4% 11.2%; /* Slate black #0F172A */
     
-    --primary: 185 100% 50%;
-    --primary-foreground: 185 100% 5%;
+    --primary: 221.2 83.2% 53.3%; /* Cobalt Blue #2563EB */
+    --primary-foreground: 210 40% 98%;
     
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 40 20% 94%; /* Warm Beige #FAF7F0 */
+    --secondary-foreground: 222.2 47.4% 11.2%;
     
-    --accent: 185 100% 50%;
-    --accent-foreground: 185 100% 5%;
+    --accent: 221.2 83.2% 53.3%;
+    --accent-foreground: 210 40% 98%;
     
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 210 40% 96.1%; /* Soft grey #F1F5F9 */
+    --muted-foreground: 215.4 16.3% 46.9%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 185 100% 50%;
+    --border: 40 15% 90%; /* Warm grey border */
+    --input: 40 15% 90%;
+    --ring: 221.2 83.2% 53.3%;
   }
 
   body {
-    @apply bg-black text-on-surface antialiased;
+    @apply bg-background text-on-surface antialiased;
     font-family: 'Manrope', sans-serif;
     min-height: 100vh;
     letter-spacing: -0.01em;
@@ -53,7 +53,7 @@
     width: 200%;
     height: 200%;
     background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-    opacity: 0.05;
+    opacity: 0.02;
     pointer-events: none;
     z-index: 9999;
     animation: grain 8s steps(10) infinite;
@@ -85,7 +85,6 @@
     z-index: 9999;
     transform: translate(-50%, -50%);
     transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
-    mix-blend-mode: difference;
   }
 
   .cursor-outline {
@@ -95,7 +94,7 @@
     left: 0;
     width: 40px;
     height: 40px;
-    border: 1px solid hsla(185, 100%, 50%, 0.3);
+    border: 1px solid hsla(221, 83%, 53%, 0.3);
     border-radius: 50%;
     z-index: 9998;
     transform: translate(-50%, -50%);
@@ -105,19 +104,19 @@
 
 @layer components {
   .neon-glow {
-    text-shadow: 0 0 15px hsla(185, 100%, 50%, 0.5);
+    text-shadow: 0 0 15px hsla(221, 83%, 53%, 0.2);
   }
 
   .obsidian-panel {
-    background: linear-gradient(145deg, #111111, #0a0a0a);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    box-shadow: 20px 20px 60px #080808, -20px -20px 60px #121212;
+    background: linear-gradient(145deg, #ffffff, #faf7f0);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 10px 10px 30px #f0ece2, -10px -10px 30px #ffffff;
   }
 
   .glass-panel {
     backdrop-filter: blur(20px);
-    background: rgba(14, 14, 14, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   /* Material Symbols Integration */
@@ -142,7 +141,7 @@
     letter-spacing: 0.4em;
   }
   .text-outline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    -webkit-text-stroke: 1px rgba(15, 23, 42, 0.15);
     color: transparent;
   }
 }
