@@ -204,7 +204,7 @@ export default function LandingPage() {
           </div>
 
           {/* Premium Scroll Indicator */}
-          <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60 z-30 pointer-events-none">
+          <div className="absolute bottom-1 md:bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60 z-30 pointer-events-none">
             <span className="text-[8px] font-black tracking-[0.4em] text-neutral-800 uppercase italic">Desliza</span>
             <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent relative">
               <motion.div 
