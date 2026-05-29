@@ -123,7 +123,7 @@ export default function LandingPage() {
 
       <main className="overflow-x-hidden">
         {/* ── HERO SECTION ── */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-36 md:pb-24 overflow-hidden bg-white">
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-28 pb-52 md:pt-24 md:pb-24 overflow-hidden bg-white">
           {/* Dynamic Ambient Elements */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[120px] animate-pulse pointer-events-none"></div>
           <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/[0.04] rounded-full blur-[80px] pointer-events-none animate-bounce" style={{ animationDuration: '10s' }}></div>
