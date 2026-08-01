@@ -4,6 +4,182 @@ import ContactModal from '../components/ContactModal';
 import LegalModal from '../components/LegalModal';
 import CustomCursor from '../components/CustomCursor';
 
+// ── DICIONÁRIO BILINGUE (DEFAULT PT) ──
+const translations = {
+  pt: {
+    nav: {
+      home: "Início",
+      approach: "Abordagem",
+      services: "Serviços",
+      portfolio: "Portfólio",
+      testimonials: "Testemunhos"
+    },
+    cta: "VAMOS CONSTRUIR",
+    preloader: "CUSTOM DIGITAL AGENCY",
+    hero: {
+      badge: "WELCOME TO P&D AGENCY",
+      headline1: "CUSTOM",
+      headline2: "DIGITAL & COMMUNICATION",
+      headline3: "AGENCY",
+      copyBold: "A sua marca é única e merece uma comunicação totalmente feita à medida.",
+      copySub: "Na P&D Agency, tratamos o seu projeto com a diferenciação de que ele precisa.",
+      copyPartner: "Somos a sua agência de tecnologia e marketing, somos um parceiro de negócio.",
+      btnPrimary: "START YOUR PROJECT",
+      btnSecondary: "SABER MAIS"
+    },
+    about: {
+      tag: "SOBRE A P&D AGENCY",
+      title1: "CUSTOM DIGITAL",
+      title2: "AGENCY",
+      p1_num: "01",
+      p1_title: "UMA ABORDAGEM PERSONALIZADA",
+      p1_desc: "Somos uma agência boutique full-service, o que significa que temos a competência para desenvolver o seu projeto de comunicação e tecnologia, desde a conceção estratégica até à aplicação prática, de uma forma relevante para o seu setor de atividade. Estamos consigo ao longo de todo o caminho!",
+      p2_num: "02",
+      p2_title: "DESENVOLVIMENTO & MARKETING SEM LIMITES",
+      p2_desc: "O digital é uma atividade de frequência e consistência. Por essa razão, a nossa consultoria e engenharia não têm qualquer tipo de limitações quanto ao número de atualizações ou funcionalidades a desenvolver. Vamos definir objetivos e fazer tudo o que for preciso para os atingir.",
+      p3_num: "03",
+      p3_title: "UM PARCEIRO DE NEGÓCIO",
+      p3_desc: "Mais do que uma agência digital, somos um parceiro de negócio que o vai ajudar a olhar de forma estratégica para a tecnologia e colocar o poder da comunicação e desenvolvimento ao serviço do seu negócio.",
+      p4_num: "04",
+      p4_title: "UMA EQUIPA DEDICADA",
+      p4_desc: "O seu projeto é extremamente importante para nós, pelo que terá à sua disposição uma equipa multidisciplinar constituída por Engenheiro de Software, Designer UX/UI, Account Manager e Diretor Criativo.",
+      quote: '"Criamos estratégias 100% customizadas e implementamos o que for preciso para atingir os objetivos, sem limites de plataformas. Trabalhamos o seu projeto como um todo."'
+    },
+    services: {
+      tag: "SOLUÇÕES 360º",
+      title1: "O QUE",
+      title2: "FAZEMOS",
+      desc: "Na P&D Agency, oferecemos uma gama completa de serviços de tecnologia, desenvolvimento web e identidade digital. Com estratégias inovadoras e personalizadas, ajudamos a sua marca a destacar-se no mercado.",
+      card1_title: "ENGENHARIA WEB & APLICAÇÕES",
+      card1_desc: "Trabalhamos o desenvolvimento web através de soluções 360º all-inclusive que eliminam o esforço técnico e trazem resultados duradouros.",
+      card2_title: "IDENTIDADE DE MARCA & BRANDING",
+      card2_desc: "Criamos identidades visuais de autoridade que posicionam a sua empresa como líder indiscutível no seu mercado.",
+      btnMore: "SABER MAIS"
+    },
+    stats: {
+      s1_val: "5+", s1_lab: "Anos de Experiência em Engenharia",
+      s2_val: "100%", s2_lab: "Satisfação Garantida",
+      s3_val: "2-7 Dias", s3_lab: "Tempo de Entrega Típico",
+      s4_val: "24/7", s4_lab: "Monitorização Ativa"
+    },
+    portfolio: {
+      tag: "TRABALHOS SELECIONADOS",
+      title: "O ARQUIVO",
+      sub: "Exemplos reais do nosso trabalho — websites ao vivo e em desenvolvimento para clientes e projetos próprios.",
+      live: "Ao Vivo",
+      progress: "Em Progresso"
+    },
+    testimonials: {
+      tag: "AVALIAÇÕES & TESTEMUNHOS",
+      title: "O QUE DIZEM OS NOSSOS CLIENTES"
+    },
+    brands: {
+      tag: "CONFIANÇA & PARCERIA",
+      title: "MARCAS QUE CONFIAM EM NÓS"
+    },
+    ctaMeeting: {
+      title1: "TENS INTERESSE?",
+      title2: "VAMOS MARCAR UMA REUNIÃO.",
+      sub: "Agendamos uma conversa de 30 minutos, sem compromisso, para perceber o que a tua empresa necessita.",
+      btn: "AGENDAR REUNIÃO"
+    },
+    footer: {
+      sub: "Custom Digital & Communication Agency. Arquitetando o futuro da presença digital.",
+      navTitle: "NAVEGAÇÃO",
+      socialTitle: "SOCIAL",
+      rights: "© 2026 P&D AGENCY. CUSTOM DIGITAL AGENCY. ALL RIGHTS RESERVED.",
+      terms: "TERMOS DE USO",
+      privacy: "POLÍTICA DE PRIVACIDADE"
+    }
+  },
+  en: {
+    nav: {
+      home: "Home",
+      approach: "Approach",
+      services: "Services",
+      portfolio: "Portfolio",
+      testimonials: "Testimonials"
+    },
+    cta: "LET'S BUILD",
+    preloader: "CUSTOM DIGITAL AGENCY",
+    hero: {
+      badge: "WELCOME TO P&D AGENCY",
+      headline1: "CUSTOM",
+      headline2: "DIGITAL & COMMUNICATION",
+      headline3: "AGENCY",
+      copyBold: "Your brand is unique and deserves fully tailored digital communication.",
+      copySub: "At P&D Agency, we treat your project with the differentiation and engineering excellence it demands.",
+      copyPartner: "We are your technology and marketing team — your long-term business partner.",
+      btnPrimary: "START YOUR PROJECT",
+      btnSecondary: "LEARN MORE"
+    },
+    about: {
+      tag: "ABOUT P&D AGENCY",
+      title1: "CUSTOM DIGITAL",
+      title2: "AGENCY",
+      p1_num: "01",
+      p1_title: "A TAILORED APPROACH",
+      p1_desc: "We are a full-service boutique agency, bringing the expertise to develop your communication and tech project from strategic concept to execution. We stand by you every step of the way!",
+      p2_num: "02",
+      p2_title: "UNLIMITED DEVELOPMENT & MARKETING",
+      p2_desc: "Digital success demands consistency. Our engineering and consulting have zero limits on updates or feature rollouts. We set bold targets and do whatever it takes to achieve them.",
+      p3_num: "03",
+      p3_title: "A BUSINESS PARTNER",
+      p3_desc: "More than a digital agency, we are a strategic business partner dedicated to placing software engineering and high-end design at the service of your revenue growth.",
+      p4_num: "04",
+      p4_title: "A DEDICATED TEAM",
+      p4_desc: "Your project is our top priority. You will work directly with a multidisciplinary team of Senior Software Engineers, UX/UI Designers, Account Managers, and Creative Directors.",
+      quote: '"We craft 100% custom strategies and execute whatever is needed to hit your targets across any platform. We build your project as a unified ecosystem."'
+    },
+    services: {
+      tag: "360º SOLUTIONS",
+      title1: "WHAT WE",
+      title2: "DO",
+      desc: "At P&D Agency, we provide a full suite of software engineering, web development, and digital identity services. With cutting-edge strategies, we elevate your brand to dominate your market.",
+      card1_title: "WEB ARCHITECTURE & APPS",
+      card1_desc: "We engineer 360º all-inclusive web platforms that eliminate technical overhead and deliver lasting high performance.",
+      card2_title: "BRAND IDENTITY & BRANDING",
+      card2_desc: "We design authoritative brand identities and UI/UX systems that position your business as the undisputed industry leader.",
+      btnMore: "LEARN MORE"
+    },
+    stats: {
+      s1_val: "5+", s1_lab: "Years of Engineering Expertise",
+      s2_val: "100%", s2_lab: "Guaranteed Client Satisfaction",
+      s3_val: "2-7 Days", s3_lab: "Typical Project Turnaround",
+      s4_val: "24/7", s4_lab: "Active System Monitoring"
+    },
+    portfolio: {
+      tag: "SELECTED WORKS",
+      title: "THE ARCHIVE",
+      sub: "Real-world portfolio examples — live and active web platforms engineered for our clients.",
+      live: "Live",
+      progress: "In Progress"
+    },
+    testimonials: {
+      tag: "REVIEWS & TESTIMONIALS",
+      title: "WHAT OUR CLIENTS SAY"
+    },
+    brands: {
+      tag: "TRUST & PARTNERSHIPS",
+      title: "BRANDS THAT TRUST US"
+    },
+    ctaMeeting: {
+      title1: "INTERESTED?",
+      title2: "LET'S BOOK A MEETING.",
+      sub: "Schedule a no-commitment 30-minute strategic consultation to discuss your business goals.",
+      btn: "BOOK A MEETING"
+    },
+    footer: {
+      sub: "Custom Digital & Communication Agency. Architecting the future of web presence.",
+      navTitle: "NAVIGATION",
+      socialTitle: "SOCIAL",
+      rights: "© 2026 P&D AGENCY. CUSTOM DIGITAL AGENCY. ALL RIGHTS RESERVED.",
+      terms: "TERMS OF USE",
+      privacy: "PRIVACY POLICY"
+    }
+  }
+};
+
 // ── COMPONENTES AUXILIARES ──
 
 const MaterialIcon = ({ name, className = "" }) => (
@@ -12,54 +188,7 @@ const MaterialIcon = ({ name, className = "" }) => (
   </span>
 );
 
-const Counter = ({ value, label, sub, darkMode }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
-  
-  useEffect(() => {
-    if (isInView) {
-      let start = 0;
-      const endValue = value.replace(/[^0-9]/g, '');
-      const end = parseInt(endValue);
-      if (isNaN(end)) return;
-      
-      const duration = 2000;
-      const increment = end / (duration / 16);
-      
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(start));
-        }
-      }, 16);
-      return () => clearInterval(timer);
-    }
-  }, [isInView, value]);
-
-  const prefix = value.startsWith('+') ? '+' : '';
-  const suffix = value.replace(/[0-9+]/g, '');
-
-  return (
-    <div ref={ref} className={`w-full md:flex-1 p-8 md:p-10 rounded-2xl border group hover:border-primary/50 hover:scale-105 transition-all duration-500 flex flex-col items-center text-center ${
-      darkMode ? 'bg-neutral-900/60 border-neutral-800' : 'bg-white border-neutral-200/80 shadow-sm'
-    }`}>
-      <motion.p 
-        animate={isInView ? { scale: [1, 1.1, 1], transition: { duration: 0.5, delay: 2 } } : {}}
-        className="font-headline text-5xl md:text-6xl font-black mb-4 text-primary tracking-tighter"
-      >
-        {count}{suffix}
-      </motion.p>
-      <p className={`font-headline text-lg md:text-xl font-bold mb-1 uppercase tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>{label}</p>
-      <p className={`font-body text-xs md:text-sm leading-relaxed ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>{sub}</p>
-    </div>
-  );
-};
-
-// ── COMPONENTE PRINCIPAL (COM MODO CLARO/ESCURO & MARQUEE CONTINUO) ──
+// ── COMPONENTE PRINCIPAL (COM MODO CLARO/ESCURO & LINGUAGEM PT/EN) ──
 
 export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -68,6 +197,9 @@ export default function LandingPage() {
   const [activeLegalTab, setActiveLegalTab] = useState('terms');
   const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
+  const [lang, setLang] = useState('pt'); // Default: PT
+
+  const t = translations[lang];
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 900);
@@ -75,6 +207,7 @@ export default function LandingPage() {
   }, []);
 
   const toggleTheme = () => setDarkMode(!darkMode);
+  const toggleLanguage = () => setLang(lang === 'pt' ? 'en' : 'pt');
 
   const openModal = (pkg = '') => {
     setSelectedPackage(pkg);
@@ -112,11 +245,11 @@ export default function LandingPage() {
             </div>
             <span className={`text-2xl font-headline font-black tracking-tighter uppercase italic ${darkMode ? 'text-white' : 'text-neutral-900'}`}>P&D AGENCY</span>
           </div>
-          <span className="mt-4 text-[10px] font-label uppercase tracking-[0.5em] text-neutral-500 font-bold">CUSTOM DIGITAL AGENCY</span>
+          <span className="mt-4 text-[10px] font-label uppercase tracking-[0.5em] text-neutral-500 font-bold">{t.preloader}</span>
         </div>
       )}
 
-      {/* ── HEADER COM ALTERNÂNCIA DE TEMA ── */}
+      {/* ── HEADER COM IDIOMA (PT / EN) E TEMA (CLARO / ESCURO) ── */}
       <header className={`fixed top-0 w-full z-50 border-b backdrop-blur-2xl transition-colors duration-500 ${
         darkMode ? 'bg-[#050A13]/90 border-neutral-800/80' : 'bg-[#FDFBF7]/90 border-neutral-200/80'
       }`}>
@@ -133,18 +266,31 @@ export default function LandingPage() {
           <nav className={`hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-[0.2em] ${
             darkMode ? 'text-neutral-300' : 'text-neutral-700'
           }`}>
-            <a href="#welcome" className="hover:text-primary transition-colors">Início</a>
-            <a href="#custom-agency" className="hover:text-primary transition-colors">Abordagem</a>
-            <a href="#o-que-fazemos" className="hover:text-primary transition-colors">Serviços</a>
-            <a href="#portfolio" className="hover:text-primary transition-colors">Portfólio</a>
-            <a href="#testemunhos" className="hover:text-primary transition-colors">Testemunhos</a>
+            <a href="#welcome" className="hover:text-primary transition-colors">{t.nav.home}</a>
+            <a href="#custom-agency" className="hover:text-primary transition-colors">{t.nav.approach}</a>
+            <a href="#o-que-fazemos" className="hover:text-primary transition-colors">{t.nav.services}</a>
+            <a href="#portfolio" className="hover:text-primary transition-colors">{t.nav.portfolio}</a>
+            <a href="#testemunhos" className="hover:text-primary transition-colors">{t.nav.testimonials}</a>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
+            {/* SELETOR DE IDIOMA (PT / EN) */}
+            <button
+              onClick={toggleLanguage}
+              title="Mudar Idioma / Change Language"
+              className={`px-3 py-1.5 rounded-full border font-headline font-black text-[11px] tracking-wider transition-all flex items-center gap-1.5 ${
+                darkMode ? 'bg-neutral-900 border-neutral-700 text-white hover:border-primary' : 'bg-neutral-100 border-neutral-300 text-neutral-900 hover:border-primary'
+              }`}
+            >
+              <span className={lang === 'pt' ? 'text-primary font-bold' : 'opacity-40'}>PT</span>
+              <span className="opacity-30">|</span>
+              <span className={lang === 'en' ? 'text-primary font-bold' : 'opacity-40'}>EN</span>
+            </button>
+
             {/* BOTÃO MODO CLARO / ESCURO */}
             <button
               onClick={toggleTheme}
-              title={darkMode ? "Mudar para Modo Claro" : "Mudar para Modo Escuro"}
+              title={darkMode ? "Modo Claro" : "Modo Escuro"}
               className={`p-2.5 rounded-full border transition-all flex items-center justify-center ${
                 darkMode ? 'bg-neutral-900 border-neutral-700 text-amber-400 hover:bg-neutral-800' : 'bg-neutral-100 border-neutral-300 text-neutral-800 hover:bg-neutral-200'
               }`}
@@ -154,9 +300,9 @@ export default function LandingPage() {
 
             <button 
               onClick={() => openModal()}
-              className="bg-primary text-white px-7 py-3 rounded-full font-black font-headline text-[11px] tracking-widest hover:bg-primary/90 active:scale-95 transition-all uppercase shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+              className="bg-primary text-white px-5 md:px-7 py-3 rounded-full font-black font-headline text-[11px] tracking-widest hover:bg-primary/90 active:scale-95 transition-all uppercase shadow-[0_0_20px_rgba(37,99,235,0.4)]"
             >
-              VAMOS CONSTRUIR
+              {t.cta}
             </button>
           </div>
         </div>
@@ -179,7 +325,7 @@ export default function LandingPage() {
             >
               <div className="h-[1px] w-12 bg-neutral-400/40"></div>
               <p className="font-label text-primary uppercase tracking-[0.5em] text-[11px] font-black italic">
-                WELCOME TO P&D AGENCY
+                {t.hero.badge}
               </p>
               <div className="h-[1px] w-12 bg-neutral-400/40"></div>
             </motion.div>
@@ -192,9 +338,9 @@ export default function LandingPage() {
                 darkMode ? 'text-white' : 'text-neutral-900'
               }`}
             >
-              CUSTOM <br />
-              <span className="text-primary italic">DIGITAL & COMMUNICATION</span> <br />
-              AGENCY
+              {t.hero.headline1} <br />
+              <span className="text-primary italic">{t.hero.headline2}</span> <br />
+              {t.hero.headline3}
             </motion.h1>
 
             <motion.div
@@ -206,11 +352,11 @@ export default function LandingPage() {
               }`}
             >
               <p className="mb-4">
-                <strong>A sua marca é única e merece uma comunicação totalmente feita à medida.</strong>
+                <strong>{t.hero.copyBold}</strong>
               </p>
               <p className="text-sm md:text-lg">
-                Na P&D Agency, tratamos o seu projeto com a diferenciação de que ele precisa. <br className="hidden md:block" />
-                <strong className={darkMode ? 'text-white' : 'text-neutral-900'}>Somos a sua agência de tecnologia e marketing, somos um parceiro de negócio.</strong>
+                {t.hero.copySub} <br className="hidden md:block" />
+                <strong className={darkMode ? 'text-white' : 'text-neutral-900'}>{t.hero.copyPartner}</strong>
               </p>
             </motion.div>
 
@@ -224,7 +370,7 @@ export default function LandingPage() {
                 onClick={() => openModal()}
                 className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] active:scale-95"
               >
-                START YOUR PROJECT
+                {t.hero.btnPrimary}
               </button>
               <a 
                 href="#custom-agency"
@@ -232,11 +378,11 @@ export default function LandingPage() {
                   darkMode ? 'border-neutral-700 text-white hover:bg-white/10' : 'border-neutral-300 text-neutral-900 hover:bg-black/5'
                 }`}
               >
-                SABER MAIS
+                {t.hero.btnSecondary}
               </a>
             </motion.div>
 
-            {/* MARQUEE TICKER DOS CLIENTES HOVER HERO */}
+            {/* MARQUEE TICKER DOS CLIENTES HERO */}
             <div className={`w-full overflow-hidden border-y py-5 rounded-2xl ${
               darkMode ? 'border-neutral-800 bg-neutral-900/40' : 'border-neutral-200 bg-neutral-100/60'
             }`}>
@@ -265,37 +411,21 @@ export default function LandingPage() {
         }`} id="custom-agency">
           <div className="container max-w-7xl mx-auto px-6">
             <div className="mb-16">
-              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">SOBRE A P&D AGENCY</p>
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">{t.about.tag}</p>
               <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter ${
                 darkMode ? 'text-white' : 'text-neutral-900'
               }`}>
-                CUSTOM DIGITAL <br />
-                <span className="text-primary italic">AGENCY</span>
+                {t.about.title1} <br />
+                <span className="text-primary italic">{t.about.title2}</span>
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
               {[
-                {
-                  num: "01",
-                  title: "UMA ABORDAGEM PERSONALIZADA",
-                  desc: "Somos uma agência boutique full-service, o que significa que temos a competência para desenvolver o seu projeto de comunicação e tecnologia, desde a conceção estratégica até à aplicação prática, de uma forma relevante para o seu setor de atividade. Estamos consigo ao longo de todo o caminho!"
-                },
-                {
-                  num: "02",
-                  title: "DESENVOLVIMENTO & MARKETING SEM LIMITES",
-                  desc: "O digital é uma atividade de frequência e consistência. Por essa razão, a nossa consultoria e engenharia não têm qualquer tipo de limitações quanto ao número de atualizações ou funcionalidades a desenvolver. Vamos definir objetivos e fazer tudo o que for preciso para os atingir."
-                },
-                {
-                  num: "03",
-                  title: "UM PARCEIRO DE NEGÓCIO",
-                  desc: "Mais do que uma agência digital, somos um parceiro de negócio que o vai ajudar a olhar de forma estratégica para a tecnologia e colocar o poder da comunicação e desenvolvimento ao serviço do seu negócio."
-                },
-                {
-                  num: "04",
-                  title: "UMA EQUIPA DEDICADA",
-                  desc: "O seu projeto é extremamente importante para nós, pelo que terá à sua disposição uma equipa multidisciplinar constituída por Engenheiro de Software, Designer UX/UI, Account Manager e Diretor Criativo."
-                }
+                { num: t.about.p1_num, title: t.about.p1_title, desc: t.about.p1_desc },
+                { num: t.about.p2_num, title: t.about.p2_title, desc: t.about.p2_desc },
+                { num: t.about.p3_num, title: t.about.p3_title, desc: t.about.p3_desc },
+                { num: t.about.p4_num, title: t.about.p4_title, desc: t.about.p4_desc }
               ].map((pillar, i) => (
                 <motion.div
                   key={i}
@@ -327,7 +457,7 @@ export default function LandingPage() {
               darkMode ? 'bg-primary/10 border-primary/30 text-white' : 'bg-primary/5 border-primary/20 text-neutral-900'
             }`}>
               <p className="text-lg md:text-2xl font-headline font-bold leading-relaxed tracking-tight">
-                "Criamos estratégias 100% customizadas e implementamos o que for preciso para atingir os objetivos, sem limites de plataformas. Trabalhamos o seu projeto como um todo."
+                {t.about.quote}
               </p>
             </div>
           </div>
@@ -339,16 +469,16 @@ export default function LandingPage() {
         }`} id="o-que-fazemos">
           <div className="container max-w-7xl mx-auto px-6">
             <div className="max-w-3xl mb-16">
-              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">SOLUÇÕES 360º</p>
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">{t.services.tag}</p>
               <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 ${
                 darkMode ? 'text-white' : 'text-neutral-900'
               }`}>
-                O QUE <span className="text-primary italic">FAZEMOS</span>
+                {t.services.title1} <span className="text-primary italic">{t.services.title2}</span>
               </h2>
               <p className={`text-base md:text-lg font-light leading-relaxed ${
                 darkMode ? 'text-neutral-400' : 'text-neutral-600'
               }`}>
-                Na P&D Agency, oferecemos uma gama completa de serviços de tecnologia, desenvolvimento web e identidade digital. Com estratégias inovadoras e personalizadas, ajudamos a sua marca a destacar-se no mercado.
+                {t.services.desc}
               </p>
             </div>
 
@@ -363,9 +493,9 @@ export default function LandingPage() {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors">
                     <MaterialIcon name="web" className="text-3xl" />
                   </div>
-                  <h3 className={`font-headline text-3xl font-black uppercase mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>ENGENHARIA WEB & APLICAÇÕES</h3>
+                  <h3 className={`font-headline text-3xl font-black uppercase mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>{t.services.card1_title}</h3>
                   <p className={`text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
-                    Trabalhamos o desenvolvimento web através de soluções 360º all-inclusive que eliminam o esforço técnico e trazem resultados duradouros.
+                    {t.services.card1_desc}
                   </p>
                   <ul className={`space-y-3 text-xs uppercase tracking-wider font-bold mb-8 ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>
                     <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Web Architecture & React/Next.js</li>
@@ -373,8 +503,8 @@ export default function LandingPage() {
                     <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> SEO Avançado & Core Web Vitals</li>
                   </ul>
                 </div>
-                <button onClick={() => openModal('Engenharia Web')} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
-                  SABER MAIS
+                <button onClick={() => openModal(t.services.card1_title)} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                  {t.services.btnMore}
                 </button>
               </motion.div>
 
@@ -388,9 +518,9 @@ export default function LandingPage() {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors">
                     <MaterialIcon name="brush" className="text-3xl" />
                   </div>
-                  <h3 className={`font-headline text-3xl font-black uppercase mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>IDENTIDADE DE MARCA & BRANDING</h3>
+                  <h3 className={`font-headline text-3xl font-black uppercase mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>{t.services.card2_title}</h3>
                   <p className={`text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
-                    Criamos identidades visuais de autoridade que posicionam a sua empresa como líder indiscutível no seu mercado.
+                    {t.services.card2_desc}
                   </p>
                   <ul className={`space-y-3 text-xs uppercase tracking-wider font-bold mb-8 ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>
                     <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Design de Marca & UI/UX Design</li>
@@ -398,8 +528,8 @@ export default function LandingPage() {
                     <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Anúncios Pagos & Performance</li>
                   </ul>
                 </div>
-                <button onClick={() => openModal('Identidade de Marca')} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
-                  SABER MAIS
+                <button onClick={() => openModal(t.services.card2_title)} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                  {t.services.btnMore}
                 </button>
               </motion.div>
             </div>
@@ -413,10 +543,10 @@ export default function LandingPage() {
           <div className="container mx-auto px-8 relative z-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {[
-                { val: "5+", lab: "Anos de Experiência em Engenharia" },
-                { val: "100%", lab: "Satisfação Garantida" },
-                { val: "2-7 Dias", lab: "Tempo de Entrega Típico" },
-                { val: "24/7", lab: "Monitorização Ativa" }
+                { val: t.stats.s1_val, lab: t.stats.s1_lab },
+                { val: t.stats.s2_val, lab: t.stats.s2_lab },
+                { val: t.stats.s3_val, lab: t.stats.s3_lab },
+                { val: t.stats.s4_val, lab: t.stats.s4_lab }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center text-center w-full relative group">
                   <span className={`text-5xl md:text-6xl font-black font-headline tracking-tighter ${
@@ -439,11 +569,11 @@ export default function LandingPage() {
         }`} id="portfolio">
           <div className="container max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
-              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">TRABALHOS SELECIONADOS</p>
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">{t.portfolio.tag}</p>
               <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter ${
                 darkMode ? 'text-white' : 'text-neutral-900'
-              }`}>O ARQUIVO</h2>
-              <p className={`text-sm mt-4 max-w-lg mx-auto ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>Exemplos reais do nosso trabalho — websites ao vivo e em desenvolvimento para clientes e projetos próprios.</p>
+              }`}>{t.portfolio.title}</h2>
+              <p className={`text-sm mt-4 max-w-lg mx-auto ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>{t.portfolio.sub}</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -452,9 +582,9 @@ export default function LandingPage() {
                   label: 'Stand & Oficina / 2026',
                   labelColor: 'text-primary',
                   title: 'AGOSTINHO BIKES',
-                  subtitle: 'Stand e oficina de bicicletas — catálogo digital, serviços e presença web.',
+                  subtitle: lang === 'pt' ? 'Stand e oficina de bicicletas — catálogo digital, serviços e presença web.' : 'Bicycle showroom & repair shop — digital catalog, services & web presence.',
                   img: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
-                  badge: 'Ao Vivo',
+                  badge: t.portfolio.live,
                   badgeClass: 'bg-primary text-white',
                   link: 'https://agostinho-bikes.vercel.app/',
                 },
@@ -462,9 +592,9 @@ export default function LandingPage() {
                   label: 'Portfólio / 2026',
                   labelColor: 'text-primary',
                   title: 'MARIA JOÃO',
-                  subtitle: 'Portfólio pessoal e showcase criativo de apresentação profissional.',
+                  subtitle: lang === 'pt' ? 'Portfólio pessoal e showcase criativo de apresentação profissional.' : 'Personal portfolio and creative showcase for professional presentation.',
                   img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
-                  badge: 'Ao Vivo',
+                  badge: t.portfolio.live,
                   badgeClass: 'bg-primary text-white',
                   link: 'https://maria-joao-portfolio.vercel.app/',
                 },
@@ -472,9 +602,9 @@ export default function LandingPage() {
                   label: 'Barbearia Premium / 2026',
                   labelColor: 'text-primary',
                   title: 'VAULT NUMBER ONE',
-                  subtitle: 'Plataforma digital para barbearia de elite — menu de serviços e marca.',
+                  subtitle: lang === 'pt' ? 'Plataforma digital para barbearia de elite — menu de serviços e marca.' : 'Digital platform for elite barbershop — service menu & brand presence.',
                   img: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
-                  badge: 'Ao Vivo',
+                  badge: t.portfolio.live,
                   badgeClass: 'bg-primary text-white',
                   link: 'https://vault-number-one-barbershop.vercel.app/',
                 },
@@ -482,9 +612,9 @@ export default function LandingPage() {
                   label: 'Restauração / 2025',
                   labelColor: 'text-amber-500',
                   title: 'TAKOS KING',
-                  subtitle: 'Fast food focado em tacos — em desenvolvimento para Pombal, Guia.',
+                  subtitle: lang === 'pt' ? 'Fast food focado em tacos — em desenvolvimento para Pombal, Guia.' : 'Taco-focused fast food chain — under development in Pombal, Guia.',
                   img: '/assets/takos-king.png',
-                  badge: 'Em Progresso',
+                  badge: t.portfolio.progress,
                   badgeClass: 'bg-amber-500 text-black font-bold',
                   link: 'https://www.facebook.com/TakosKing.Guia.Pombal/',
                 },
@@ -492,9 +622,9 @@ export default function LandingPage() {
                   label: 'Agência / 2025',
                   labelColor: 'text-primary',
                   title: 'P&D AGENCY',
-                  subtitle: 'O nosso próprio portfólio — o site que estás a ver agora.',
+                  subtitle: lang === 'pt' ? 'O nosso próprio portfólio — o site que estás a ver agora.' : 'Our own agency platform — the website you are viewing right now.',
                   img: 'https://images.unsplash.com/photo-1634084462412-b54873c0a56d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
-                  badge: 'Ao Vivo',
+                  badge: t.portfolio.live,
                   badgeClass: 'bg-primary text-white',
                   link: '#',
                 },
@@ -502,9 +632,9 @@ export default function LandingPage() {
                   label: 'Plataforma Web / 2025',
                   labelColor: 'text-primary',
                   title: 'EDU BRASIL',
-                  subtitle: 'Aplicação web para estudantes brasileiros — dashboard e conteúdos educativos.',
+                  subtitle: lang === 'pt' ? 'Aplicação web para estudantes brasileiros — dashboard e conteúdos educativos.' : 'Web application for Brazilian students — dashboard & learning content.',
                   img: '/assets/edu-brasil.png',
-                  badge: 'Ao Vivo',
+                  badge: t.portfolio.live,
                   badgeClass: 'bg-primary text-white',
                   link: 'https://mobileapp-taupe.vercel.app/',
                 },
@@ -552,28 +682,34 @@ export default function LandingPage() {
         }`} id="testemunhos">
           <div className="container max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
-              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">AVALIAÇÕES & TESTEMUNHOS</p>
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">{t.testimonials.tag}</p>
               <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter ${
                 darkMode ? 'text-white' : 'text-neutral-900'
-              }`}>O QUE DIZEM OS NOSSOS CLIENTES</h2>
+              }`}>{t.testimonials.title}</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
-                  quote: "Trabalhamos com a P&D Agency e a verdade é que não podíamos estar mais satisfeitos. Souberam ler a nossa visão desde o primeiro instante, têm uma equipa muito dedicada e apresentam um serviço super personalizado.",
+                  quote: lang === 'pt' 
+                    ? "Trabalhamos com a P&D Agency e a verdade é que não podíamos estar mais satisfeitos. Souberam ler a nossa visão desde o primeiro instante, têm uma equipa muito dedicada e apresentam um serviço super personalizado."
+                    : "Working with P&D Agency exceeded all expectations. They captured our brand vision instantly, delivered dedicated support, and provided truly personalized engineering.",
                   author: "Ana Dominguez",
                   role: "Owner & Founder",
                   brand: "Ana Dominguez Ceramics"
                 },
                 {
-                  quote: "A parceria tem sido uma excelente experiência. Começando pelo profissionalismo, dedicação e rápida resposta a todas as solicitações no desenvolvimento do nosso website e catálogo digital.",
+                  quote: lang === 'pt'
+                    ? "A parceria tem sido uma excelente experiência. Começando pelo profissionalismo, dedicação e rápida resposta a todas as solicitações no desenvolvimento do nosso website e catálogo digital."
+                    : "Our partnership has been an outstanding experience. Their professionalism, rapid response times, and execution on our digital catalog website were second to none.",
                   author: "Equipa Agostinho Bikes",
                   role: "Gestão & Stand",
                   brand: "Agostinho Bikes"
                 },
                 {
-                  quote: "Contactámos a P&D Agency para a criação da nossa marca e website. Fiquei muito feliz com todos os resultados: imagem da marca, site e presença digital – cada elemento em perfeita sintonia.",
+                  quote: lang === 'pt'
+                    ? "Contactámos a P&D Agency para a criação da nossa marca e website. Fiquei muito feliz com todos os resultados: imagem da marca, site e presença digital – cada elemento em perfeita sintonia."
+                    : "We hired P&D Agency for our brand identity and web platform. The results speak for themselves — brand image, website, and digital presence in complete harmony.",
                   author: "Gestão Vault",
                   role: "Fundadores",
                   brand: "Vault Number One Barbershop"
@@ -609,16 +745,16 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── MARCAS QUE CONFIAM EM NÓS (TICKER CONTINUO QUE ANDA PELA TELA NA HORIZONTAL) ── */}
+        {/* ── MARCAS QUE CONFIAM EM NÓS (TICKER CONTINUO QUE ANDA PELA TELA) ── */}
         <section className={`py-20 border-b overflow-hidden transition-colors duration-500 ${
           darkMode ? 'bg-[#03060C] border-neutral-800/80' : 'bg-neutral-200/60 border-neutral-300'
         }`}>
           <div className="text-center mb-10">
-            <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">CONFIANÇA & PARCERIA</p>
+            <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">{t.brands.tag}</p>
             <h3 className={`font-headline text-3xl md:text-4xl font-black uppercase tracking-tighter ${
               darkMode ? 'text-white' : 'text-neutral-900'
             }`}>
-              MARCAS QUE CONFIAM EM NÓS
+              {t.brands.title}
             </h3>
           </div>
 
@@ -661,19 +797,19 @@ export default function LandingPage() {
             <h2 className={`font-headline text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tighter mb-6 ${
               darkMode ? 'text-white' : 'text-neutral-900'
             }`}>
-              TENS INTERESSE?<br />
-              <span className="text-primary italic">VAMOS MARCAR UMA REUNIÃO.</span>
+              {t.ctaMeeting.title1}<br />
+              <span className="text-primary italic">{t.ctaMeeting.title2}</span>
             </h2>
             <p className={`text-lg font-light max-w-xl mx-auto mb-10 leading-relaxed ${
               darkMode ? 'text-neutral-400' : 'text-neutral-600'
             }`}>
-              Agendamos uma conversa de 30 minutos, sem compromisso, para perceber o que a tua empresa necessita.
+              {t.ctaMeeting.sub}
             </p>
             <button 
               onClick={() => openModal()}
               className="bg-primary text-white px-12 py-6 rounded-full font-headline font-black text-xs tracking-[0.3em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-95"
             >
-              AGENDAR REUNIÃO
+              {t.ctaMeeting.btn}
             </button>
           </div>
         </section>
@@ -697,23 +833,23 @@ export default function LandingPage() {
               <p className={`font-light leading-relaxed max-w-sm text-base ${
                 darkMode ? 'text-neutral-400' : 'text-neutral-600'
               }`}>
-                Custom Digital & Communication Agency. Arquitetando o futuro da presença digital.
+                {t.footer.sub}
               </p>
             </div>
             
             <div>
-              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">NAVEGAÇÃO</h4>
+              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">{t.footer.navTitle}</h4>
               <ul className={`space-y-3 text-sm font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
-                <li><a className="hover:text-primary transition-colors" href="#welcome">Início</a></li>
-                <li><a className="hover:text-primary transition-colors" href="#custom-agency">Abordagem</a></li>
-                <li><a className="hover:text-primary transition-colors" href="#o-que-fazemos">Serviços</a></li>
-                <li><a className="hover:text-primary transition-colors" href="#portfolio">Portfólio</a></li>
-                <li><a className="hover:text-primary transition-colors" href="#testemunhos">Testemunhos</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#welcome">{t.nav.home}</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#custom-agency">{t.nav.approach}</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#o-que-fazemos">{t.nav.services}</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#portfolio">{t.nav.portfolio}</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#testemunhos">{t.nav.testimonials}</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">SOCIAL</h4>
+              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">{t.footer.socialTitle}</h4>
               <ul className={`space-y-3 text-sm font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
                 <li>
                   <a 
@@ -733,20 +869,20 @@ export default function LandingPage() {
             darkMode ? 'border-neutral-800/80' : 'border-neutral-300'
           }`}>
             <p className="text-neutral-500 text-[10px] uppercase tracking-[0.25em] font-bold">
-              © 2026 P&D AGENCY. CUSTOM DIGITAL AGENCY. ALL RIGHTS RESERVED.
+              {t.footer.rights}
             </p>
             <div className="flex gap-8">
               <button 
                 onClick={() => openLegalModal('terms')}
                 className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
               >
-                TERMOS DE USO
+                {t.footer.terms}
               </button>
               <button 
                 onClick={() => openLegalModal('privacy')}
                 className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
               >
-                POLÍTICA DE PRIVACIDADE
+                {t.footer.privacy}
               </button>
             </div>
           </div>
@@ -767,5 +903,6 @@ export default function LandingPage() {
     </div>
   );
 }
+
 
 
