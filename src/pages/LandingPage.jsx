@@ -417,10 +417,50 @@ export default function LandingPage() {
             <div className="text-center mb-16">
               <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">TRABALHOS SELECIONADOS</p>
               <h2 className="text-fluid-h2 text-neutral-900 uppercase">O ARQUIVO</h2>
-              <p className="text-neutral-500 text-sm mt-4 max-w-lg mx-auto">Exemplos reais do nosso trabalho — o nosso próprio portfolio e projetos em desenvolvimento para clientes.</p>
+              <p className="text-neutral-500 text-sm mt-4 max-w-lg mx-auto">Exemplos reais do nosso trabalho — websites ao vivo e em desenvolvimento para clientes e projetos próprios.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
               {[
+                {
+                  label: 'Stand & Oficina / 2026',
+                  labelColor: 'text-primary',
+                  title: 'AGOSTINHO BIKES',
+                  subtitle: 'Stand e oficina de bicicletas — catálogo digital, serviços e presença web.',
+                  img: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
+                  badge: 'Ao Vivo',
+                  badgeClass: 'bg-primary/20 text-primary',
+                  link: 'https://agostinho-bikes.vercel.app/',
+                },
+                {
+                  label: 'Portfólio / 2026',
+                  labelColor: 'text-primary',
+                  title: 'MARIA JOÃO',
+                  subtitle: 'Portfólio pessoal e showcase criativo de apresentação profissional.',
+                  img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
+                  badge: 'Ao Vivo',
+                  badgeClass: 'bg-primary/20 text-primary',
+                  link: 'https://maria-joao-portfolio.vercel.app/',
+                },
+                {
+                  label: 'Barbearia Premium / 2026',
+                  labelColor: 'text-primary',
+                  title: 'VAULT NUMBER ONE',
+                  subtitle: 'Plataforma digital para barbearia de elite — menu de serviços e marca.',
+                  img: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
+                  badge: 'Ao Vivo',
+                  badgeClass: 'bg-primary/20 text-primary',
+                  link: 'https://vault-number-one-barbershop.vercel.app/',
+                },
+                {
+                  label: 'Restauração / 2025',
+                  labelColor: 'text-amber-600',
+                  title: 'TAKOS KING',
+                  subtitle: 'Fast food focado em tacos — em desenvolvimento para Pombal, Guia.',
+                  img: '/assets/takos-king.png',
+                  badge: 'Em Progresso',
+                  badgeClass: 'bg-amber-500/20 text-amber-600',
+                  link: 'https://www.facebook.com/TakosKing.Guia.Pombal/',
+                },
                 {
                   label: 'Agência / 2025',
                   labelColor: 'text-primary',
@@ -432,22 +472,12 @@ export default function LandingPage() {
                   link: '#',
                 },
                 {
-                  label: '',
-                  labelColor: 'text-amber-600',
-                  title: 'TAKOS KING',
-                  subtitle: 'Fast food focado em tacos — em desenvolvimento para Pombal, Guia.',
-                  img: '/assets/takos-king.png',
-                  badge: 'Em Progresso',
-                  badgeClass: 'bg-amber-500/20 text-amber-600',
-                  link: 'https://www.facebook.com/TakosKing.Guia.Pombal/',
-                },
-                {
-                  label: '',
+                  label: 'Plataforma Web / 2025',
                   labelColor: 'text-primary',
                   title: 'EDU BRASIL',
                   subtitle: 'Aplicação web para estudantes brasileiros — dashboard e conteúdos educativos.',
                   img: '/assets/edu-brasil.png',
-                  badge: 'Em Progresso',
+                  badge: 'Ao Vivo',
                   badgeClass: 'bg-primary/20 text-primary',
                   link: 'https://mobileapp-taupe.vercel.app/',
                 },
@@ -730,6 +760,81 @@ export default function LandingPage() {
             >
               AGENDAR REUNIÃO
             </motion.button>
+          </div>
+        </section>
+
+        {/* ── MARCAS QUE CONFIAM EM NÓS ── */}
+        <section className="py-20 bg-neutral-50 border-t border-neutral-200/60 relative overflow-hidden">
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">
+                PARCERIAS & CONFIANÇA
+              </p>
+              <h3 className="font-headline text-2xl md:text-3xl font-black text-neutral-950 uppercase tracking-tighter mb-12">
+                MARCAS QUE CONFIAM EM NÓS
+              </h3>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-6xl mx-auto"
+            >
+              {[
+                {
+                  name: 'TACOS KING',
+                  category: 'Fast Food • Guia, Pombal',
+                  icon: 'fastfood',
+                  link: 'https://www.facebook.com/TakosKing.Guia.Pombal/'
+                },
+                {
+                  name: 'AGOSTINHO BIKES',
+                  category: 'Stand & Oficina de Bicicletas',
+                  icon: 'pedal_bike',
+                  link: 'https://agostinho-bikes.vercel.app/'
+                },
+                {
+                  name: 'ROOTS 199',
+                  category: 'Conceito & Marca',
+                  icon: 'forest',
+                  link: '#'
+                },
+                {
+                  name: 'VAULT NUMBER ONE',
+                  category: 'Barbearia Premium',
+                  icon: 'content_cut',
+                  link: 'https://vault-number-one-barbershop.vercel.app/'
+                }
+              ].map((brand, i) => (
+                <motion.a
+                  key={brand.name}
+                  href={brand.link}
+                  target={brand.link === '#' ? '_self' : '_blank'}
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  className="bg-white border border-neutral-200/80 hover:border-primary/40 rounded-2xl p-6 md:px-8 md:py-6 flex items-center gap-4 transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_25px_rgba(37,99,235,0.06)] group min-w-[240px] flex-1 max-w-[280px]"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-neutral-50 border border-neutral-100 group-hover:border-primary/20 group-hover:bg-primary/5 flex items-center justify-center shrink-0 transition-colors">
+                    <MaterialIcon name={brand.icon} className="text-neutral-700 group-hover:text-primary text-2xl transition-colors" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-headline font-black text-neutral-900 group-hover:text-primary text-base uppercase tracking-tight transition-colors">
+                      {brand.name}
+                    </h4>
+                    <p className="text-neutral-400 text-[11px] font-medium tracking-wide italic">
+                      {brand.category}
+                    </p>
+                  </div>
+                </motion.a>
+              ))}
+            </motion.div>
           </div>
         </section>
       </main>
