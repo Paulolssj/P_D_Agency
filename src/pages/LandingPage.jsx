@@ -224,7 +224,6 @@ export default function LandingPage() {
     { name: 'AGOSTINHO BIKES', category: 'Stand & Oficina de Bicicletas', logo: '/assets/agostinho-bikes.png', link: 'https://agostinho-bikes.vercel.app/' },
     { name: 'ROOTS 199', category: 'Conceito & Marca', logo: '/assets/roots-199.png', link: '#' },
     { name: 'HELIPLANTA', category: 'Produção Hortícola & Viveiros', logo: '/assets/heliplanta.png', link: 'https://heliplanta-beryl.vercel.app/' },
-    { name: 'MARIA JOÃO', category: 'Portfolio Criativo', icon: 'brush', link: 'https://maria-joao-portfolio.vercel.app/' },
     { name: 'EDU BRASIL', category: 'Plataforma Educacional', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
   ];
 
