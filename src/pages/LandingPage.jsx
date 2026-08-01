@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-// label placeholder aria-label
 import ContactModal from '../components/ContactModal';
 import LegalModal from '../components/LegalModal';
 import CustomCursor from '../components/CustomCursor';
@@ -12,13 +11,6 @@ const MaterialIcon = ({ name, className = "" }) => (
     {name}
   </span>
 );
-
-/**
- * SEO metadata for auditors:
- * <title>THE OBSIDIAN ARCHITECT | P&D Agency</title>
- * <meta name="description" content="P&D Agency - Construímos interfaces do futuro." />
- * <meta property="og:title" content="P&D Agency" />
- */
 
 const Counter = ({ value, label, sub }) => {
   const ref = useRef(null);
@@ -52,15 +44,15 @@ const Counter = ({ value, label, sub }) => {
   const suffix = value.replace(/[0-9+]/g, '');
 
   return (
-    <div ref={ref} className="w-full md:flex-1 bg-white p-8 md:p-10 rounded-2xl border border-neutral-200/60 group hover:border-primary/30 hover:scale-105 transition-all duration-500 flex flex-col items-center text-center">
+    <div ref={ref} className="w-full md:flex-1 bg-neutral-900/60 p-8 md:p-10 rounded-2xl border border-neutral-800 group hover:border-primary/50 hover:scale-105 transition-all duration-500 flex flex-col items-center text-center">
       <motion.p 
         animate={isInView ? { scale: [1, 1.1, 1], transition: { duration: 0.5, delay: 2 } } : {}}
         className="font-headline text-5xl md:text-6xl font-black mb-4 text-primary tracking-tighter"
       >
         {count}{suffix}
       </motion.p>
-      <p className="text-neutral-900 font-headline text-lg md:text-xl font-bold mb-1 uppercase tracking-tight">{label}</p>
-      <p className="text-neutral-500 font-body text-xs md:text-sm leading-relaxed">{sub}</p>
+      <p className="text-white font-headline text-lg md:text-xl font-bold mb-1 uppercase tracking-tight">{label}</p>
+      <p className="text-neutral-400 font-body text-xs md:text-sm leading-relaxed">{sub}</p>
     </div>
   );
 };
@@ -71,23 +63,29 @@ const BenefitCard = ({ icon, title, desc, delay = 0 }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.6, delay }}
-    className="group bg-white p-8 rounded-2xl border border-neutral-100 hover:border-primary/35 transition-all flex flex-col items-start h-full shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)]"
+    className="group bg-neutral-900/80 p-8 rounded-2xl border border-neutral-800 hover:border-primary/40 transition-all flex flex-col items-start h-full shadow-lg hover:shadow-primary/10"
   >
-    <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors">
-      <MaterialIcon name={icon} className="text-primary text-2xl group-hover:drop-shadow-[0_0_4px_rgba(22,163,74,0.2)] transition-all" />
+    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+      <MaterialIcon name={icon} className="text-primary group-hover:text-white text-2xl transition-colors" />
     </div>
-    <h3 className="font-headline text-xl font-bold uppercase text-neutral-900 mb-3 tracking-tight group-hover:text-primary transition-colors">{title}</h3>
-    <p className="text-neutral-500 font-body text-sm leading-relaxed">{desc}</p>
+    <h3 className="font-headline text-xl font-bold uppercase text-white mb-3 tracking-tight group-hover:text-primary transition-colors">{title}</h3>
+    <p className="text-neutral-400 font-body text-sm leading-relaxed">{desc}</p>
   </motion.div>
 );
 
-// ── COMPONENTE PRINCIPAL ──
+// ── COMPONENTE PRINCIPAL (ESTILO THEAGENCY.PT) ──
 
 export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState('');
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [activeLegalTab, setActiveLegalTab] = useState('terms');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 900);
+    return () => clearTimeout(timer);
+  }, []);
 
   const openModal = (pkg = '') => {
     setSelectedPackage(pkg);
@@ -100,22 +98,36 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="selection:bg-primary/10 selection:text-primary font-body leading-normal text-neutral-900 bg-white">
+    <div className="selection:bg-primary selection:text-white font-body leading-normal text-white bg-[#050A13]">
       <CustomCursor />
       
+      {/* ── PRELOADER (INSPIRADO EM THEAGENCY.PT) ── */}
+      {loading && (
+        <div className="fixed inset-0 z-[100] bg-[#050A13] flex flex-col items-center justify-center transition-opacity duration-700">
+          <div className="flex items-center gap-3 animate-pulse">
+            <div className="w-12 h-12 rounded-xl bg-primary/20 border border-primary flex items-center justify-center text-primary">
+              <MaterialIcon name="architecture" className="text-3xl" />
+            </div>
+            <span className="text-2xl font-headline font-black tracking-tighter text-white uppercase italic">P&D AGENCY</span>
+          </div>
+          <span className="mt-4 text-[10px] font-label uppercase tracking-[0.5em] text-neutral-500 font-bold">CUSTOM DIGITAL AGENCY</span>
+        </div>
+      )}
+
       {/* ── HEADER ── */}
-      <header className="bg-white/80 backdrop-blur-2xl fixed top-0 w-full z-50 border-b border-neutral-100/60">
+      <header className="bg-[#050A13]/90 backdrop-blur-2xl fixed top-0 w-full z-50 border-b border-neutral-800/80">
         <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 md:gap-4">
-            <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-primary border-2 border-primary/20 rounded-lg shadow-[0_0_15px_rgba(37,99,235,0.05)] bg-primary/5">
+          <div className="flex items-center gap-3 md:gap-4 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-primary border border-primary/30 rounded-xl shadow-[0_0_20px_rgba(37,99,235,0.2)] bg-primary/10">
               <MaterialIcon name="architecture" className="text-2xl md:text-3xl" />
             </div>
-            <span className="text-lg md:text-2xl font-black tracking-tighter text-neutral-900 uppercase font-headline italic truncate max-w-[120px] sm:max-w-none">P&D AGENCY</span>
+            <span className="text-lg md:text-2xl font-black tracking-tighter text-white uppercase font-headline italic truncate max-w-[140px] sm:max-w-none">P&D AGENCY</span>
           </div>
 
-          <nav className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-neutral-600">
-            <a href="#capabilities" className="hover:text-primary transition-colors">Capacidades</a>
-            <a href="#abordagem" className="hover:text-primary transition-colors">Abordagem</a>
+          <nav className="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-[0.2em] text-neutral-300">
+            <a href="#welcome" className="hover:text-primary transition-colors">Início</a>
+            <a href="#custom-agency" className="hover:text-primary transition-colors">Abordagem</a>
+            <a href="#o-que-fazemos" className="hover:text-primary transition-colors">Serviços</a>
             <a href="#portfolio" className="hover:text-primary transition-colors">Portfólio</a>
             <a href="#testemunhos" className="hover:text-primary transition-colors">Testemunhos</a>
             <a href="#pricing" className="hover:text-primary transition-colors">Planos</a>
@@ -123,125 +135,224 @@ export default function LandingPage() {
 
           <button 
             onClick={() => openModal()}
-            className="bg-neutral-950 text-white px-6 py-2.5 rounded-full font-black font-headline text-[11px] tracking-widest hover:bg-neutral-900 active:scale-95 transition-all uppercase shadow-sm"
+            className="bg-primary text-white px-7 py-3 rounded-full font-black font-headline text-[11px] tracking-widest hover:bg-primary/90 active:scale-95 transition-all uppercase shadow-[0_0_20px_rgba(37,99,235,0.4)]"
           >
             VAMOS CONSTRUIR
           </button>
         </div>
       </header>
 
-      <main className="overflow-x-hidden">
-        {/* ── HERO SECTION ── */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-28 pb-32 md:pt-28 md:pb-36 overflow-hidden bg-white">
-          {/* Dynamic Ambient Elements */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[120px] animate-pulse pointer-events-none"></div>
-          <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/[0.04] rounded-full blur-[80px] pointer-events-none animate-bounce" style={{ animationDuration: '10s' }}></div>
-          
-          <div className="container mx-auto relative z-10 text-center">
+      <main className="overflow-x-hidden pt-20">
+        {/* ── HERO SECTION (STYLE THEAGENCY.PT) ── */}
+        <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-4 pt-16 pb-24 overflow-hidden bg-[#050A13]" id="welcome">
+          {/* Ambient Glows */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"></div>
+          <div className="absolute top-1/4 right-1/4 w-60 h-60 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+          <div className="container max-w-6xl mx-auto relative z-10 text-center">
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-center gap-4 mb-8"
+              transition={{ duration: 0.6 }}
+              className="flex items-center justify-center gap-4 mb-6"
             >
-              <div className="h-[1px] w-12 bg-neutral-200"></div>
-              <p className="font-label text-primary uppercase tracking-[0.6em] text-[10px] font-black italic">
-                CUSTOM DIGITAL & COMMUNICATION AGENCY
+              <div className="h-[1px] w-12 bg-neutral-700"></div>
+              <p className="font-label text-primary uppercase tracking-[0.5em] text-[11px] font-black italic">
+                WELCOME TO P&D AGENCY
               </p>
-              <div className="h-[1px] w-12 bg-neutral-200"></div>
+              <div className="h-[1px] w-12 bg-neutral-700"></div>
             </motion.div>
 
             <motion.h1 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              className="text-fluid-h1 mb-10 uppercase leading-[1.05] tracking-tighter"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="font-headline text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.95] tracking-tighter mb-8 text-white"
             >
-              <motion.span 
-                initial={{ opacity: 0, y: 50, rotateX: 45 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="block font-black text-neutral-950 bg-gradient-to-b from-neutral-950 to-neutral-800 bg-clip-text text-transparent"
-              >
-                Construímos
-              </motion.span>
-              <motion.span 
-                initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-                className="block text-primary font-black italic my-2"
-              >
-                Interfaces & Marcas
-              </motion.span>
-              <motion.span 
-                initial={{ opacity: 0, y: -50, rotateX: -45 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="block font-black text-neutral-950 bg-gradient-to-t from-neutral-950 to-neutral-800 bg-clip-text text-transparent"
-              >
-                do Futuro
-              </motion.span>
+              CUSTOM <br />
+              <span className="text-primary italic">DIGITAL & COMMUNICATION</span> <br />
+              AGENCY
             </motion.h1>
 
-            <motion.p 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 1.2 }}
-              className="text-fluid-body text-neutral-500 max-w-3xl mx-auto mb-12 font-medium leading-relaxed italic"
+              transition={{ delay: 0.4, duration: 1 }}
+              className="max-w-3xl mx-auto mb-12 text-neutral-300 text-base md:text-xl font-light leading-relaxed italic"
             >
-              A sua marca é única e merece uma presença totalmente feita à medida. Na <span className="text-neutral-900 font-bold border-b border-primary/45 pb-0.5">P&D Agency</span>, tratamos o seu projeto com a <span className="text-neutral-900 font-bold border-b border-primary/45 pb-0.5">diferenciação, engenharia e estratégia</span> de que necessita — somos a sua equipa de tecnologia e um parceiro de negócio de alta confiança.
-            </motion.p>
+              <p className="mb-4">
+                <strong>A sua marca é única e merece uma comunicação totalmente feita à medida.</strong>
+              </p>
+              <p className="text-neutral-400 text-sm md:text-lg">
+                Na P&D Agency, tratamos o seu projeto com a diferenciação de que ele precisa. <br className="hidden md:block" />
+                <strong className="text-white">Somos a sua agência de tecnologia e marketing, somos um parceiro de negócio.</strong>
+              </p>
+            </motion.div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-              <motion.button 
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16"
+            >
+              <button 
                 onClick={() => openModal()}
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="group relative bg-neutral-950 text-white px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:bg-neutral-900 transition-all overflow-hidden w-full sm:w-auto shadow-md hover:shadow-lg"
+                className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] active:scale-95"
               >
-                <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 skew-x-12"></div>
-                <span className="relative z-10">COMEÇAR PROJETO</span>
-              </motion.button>
-              <motion.button 
-                onClick={() => document.getElementById('capabilities')?.scrollIntoView({ behavior: 'smooth' })}
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="group relative border border-neutral-200 text-neutral-800 px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:bg-neutral-50 transition-all backdrop-blur-sm w-full sm:w-auto overflow-hidden"
+                START YOUR PROJECT
+              </button>
+              <a 
+                href="#custom-agency"
+                className="w-full sm:w-auto border border-neutral-700 text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase hover:bg-white/10 transition-all backdrop-blur-sm"
               >
-                <span className="relative z-10">VER CAPACIDADES</span>
-              </motion.button>
-            </div>
+                SAIR SABER MAIS
+              </a>
+            </motion.div>
 
-            {/* Continuous Brand Marquee Ticker */}
-            <div className="w-full overflow-hidden border-y border-neutral-100/80 py-4 bg-neutral-50/50 backdrop-blur-sm rounded-2xl">
-              <div className="flex items-center gap-12 animate-marquee whitespace-nowrap justify-around opacity-75 text-[11px] font-headline font-black uppercase tracking-widest text-neutral-500">
-                <span className="flex items-center gap-2"><MaterialIcon name="pedal_bike" className="text-primary text-base" /> AGOSTINHO BIKES</span>
-                <span className="text-neutral-300">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="fastfood" className="text-amber-600 text-base" /> TAKOS KING</span>
-                <span className="text-neutral-300">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="content_cut" className="text-primary text-base" /> VAULT NUMBER ONE</span>
-                <span className="text-neutral-300">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="forest" className="text-primary text-base" /> ROOTS 199</span>
-                <span className="text-neutral-300">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="brush" className="text-primary text-base" /> MARIA JOÃO</span>
+            {/* MARQUEE TICKER DOS CLIENTES */}
+            <div className="w-full overflow-hidden border-y border-neutral-800/80 py-5 bg-neutral-900/40 backdrop-blur-md rounded-2xl">
+              <div className="flex items-center gap-12 whitespace-nowrap justify-around opacity-85 text-[11px] font-headline font-black uppercase tracking-[0.25em] text-neutral-300">
+                <span className="flex items-center gap-2"><MaterialIcon name="pedal_bike" className="text-primary" /> AGOSTINHO BIKES</span>
+                <span className="text-neutral-700">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="fastfood" className="text-amber-500" /> TAKOS KING</span>
+                <span className="text-neutral-700">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="content_cut" className="text-primary" /> VAULT NUMBER ONE</span>
+                <span className="text-neutral-700">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="forest" className="text-primary" /> ROOTS 199</span>
+                <span className="text-neutral-700">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="brush" className="text-primary" /> MARIA JOÃO</span>
+                <span className="text-neutral-700">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="school" className="text-primary" /> EDU BRASIL</span>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Premium Scroll Indicator */}
-          <div className="absolute bottom-1 md:bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60 z-30 pointer-events-none">
-            <span className="text-[8px] font-black tracking-[0.4em] text-neutral-800 uppercase italic">Desliza</span>
-            <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent relative">
+        {/* ── SECTION: CUSTOM DIGITAL AGENCY (GRID DE 4 PILARES IGUAL A THEAGENCY.PT) ── */}
+        <section className="py-28 bg-[#070D1A] border-y border-neutral-800/60 relative" id="custom-agency">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">SOBRE A P&D AGENCY</p>
+              <h2 className="font-headline text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
+                CUSTOM DIGITAL <br />
+                <span className="text-primary italic">AGENCY</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              {[
+                {
+                  num: "01",
+                  title: "UMA ABORDAGEM PERSONALIZADA",
+                  desc: "Somos uma agência boutique full-service, o que significa que temos a competência para desenvolver o seu projeto de comunicação e tecnologia, desde a conceção estratégica até à aplicação prática, de uma forma relevante para o seu setor de atividade. Estamos consigo ao longo de todo o caminho!"
+                },
+                {
+                  num: "02",
+                  title: "DESENVOLVIMENTO & MARKETING SEM LIMITES",
+                  desc: "O digital é uma atividade de frequência e consistência. Por essa razão, a nossa consultoria e engenharia não têm qualquer tipo de limitações quanto ao número de atualizações ou funcionalidades a desenvolver. Vamos definir objetivos e fazer tudo o que for preciso para os atingir."
+                },
+                {
+                  num: "03",
+                  title: "UM PARCEIRO DE NEGÓCIO",
+                  desc: "Mais do que uma agência digital, somos um parceiro de negócio que o vai ajudar a olhar de forma estratégica para a tecnologia e colocar o poder da comunicação e desenvolvimento ao serviço do seu negócio."
+                },
+                {
+                  num: "04",
+                  title: "UMA EQUIPA DEDICADA",
+                  desc: "O seu projeto é extremamente importante para nós, pelo que terá à sua disposição uma equipa multidisciplinar constituída por Engenheiro de Software, Designer UX/UI, Account Manager e Diretor Criativo."
+                }
+              ].map((pillar, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-neutral-900/90 border border-neutral-800 p-8 md:p-10 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all duration-500 shadow-xl group"
+                >
+                  <div>
+                    <span className="font-headline text-4xl font-black text-primary/40 group-hover:text-primary transition-colors block mb-6">{pillar.num}</span>
+                    <h3 className="font-headline text-2xl font-black text-white uppercase mb-4 tracking-tight group-hover:text-primary transition-colors">{pillar.title}</h3>
+                    <p className="text-neutral-300 text-sm md:text-base leading-relaxed font-body font-normal">{pillar.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Banner Destaque */}
+            <div className="bg-primary/10 border border-primary/30 rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto">
+              <p className="text-white text-lg md:text-2xl font-headline font-bold leading-relaxed tracking-tight">
+                "Criamos estratégias 100% customizadas e implementamos o que for preciso para atingir os objetivos, sem limites de plataformas. Trabalhamos o seu projeto como um todo."
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION: O QUE FAZEMOS (SERVICES 360º) ── */}
+        <section className="py-28 bg-[#050A13] border-b border-neutral-800/60" id="o-que-fazemos">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="max-w-3xl mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">SOLUÇÕES 360º</p>
+              <h2 className="font-headline text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-6">
+                O QUE <span className="text-primary italic">FAZEMOS</span>
+              </h2>
+              <p className="text-neutral-400 text-base md:text-lg font-light leading-relaxed">
+                Na P&D Agency, oferecemos uma gama completa de serviços de tecnologia, desenvolvimento web e identidade digital. Com estratégias inovadoras e personalizadas, ajudamos a sua marca a destacar-se no mercado.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <motion.div 
-                animate={{ y: [0, 30, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute top-0 left-[-2px] w-[5px] h-[5px] rounded-full bg-primary shadow-[0_0_8px_rgba(37,99,235,0.6)]"
-              />
+                whileHover={{ y: -6 }}
+                className="bg-neutral-900/80 border border-neutral-800 rounded-3xl p-8 md:p-10 flex flex-col justify-between group hover:border-primary/40 transition-all"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors">
+                    <MaterialIcon name="web" className="text-3xl" />
+                  </div>
+                  <h3 className="font-headline text-3xl font-black text-white uppercase mb-4 tracking-tight">ENGENHARIA WEB & APLICAÇÕES</h3>
+                  <p className="text-neutral-400 text-sm leading-relaxed mb-6 font-medium">
+                    Trabalhamos o desenvolvimento web através de soluções 360º all-inclusive que eliminam o esforço técnico e trazem resultados duradouros.
+                  </p>
+                  <ul className="space-y-3 text-xs uppercase tracking-wider text-neutral-300 font-bold mb-8">
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Web Architecture & React/Next.js</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> High Load & Cloud Optimization</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> SEO Avançado & Core Web Vitals</li>
+                  </ul>
+                </div>
+                <button onClick={() => openModal('Engenharia Web')} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                  SABER MAIS
+                </button>
+              </motion.div>
+
+              <motion.div 
+                whileHover={{ y: -6 }}
+                className="bg-neutral-900/80 border border-neutral-800 rounded-3xl p-8 md:p-10 flex flex-col justify-between group hover:border-primary/40 transition-all"
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors">
+                    <MaterialIcon name="brush" className="text-3xl" />
+                  </div>
+                  <h3 className="font-headline text-3xl font-black text-white uppercase mb-4 tracking-tight">IDENTIDADE DE MARCA & BRANDING</h3>
+                  <p className="text-neutral-400 text-sm leading-relaxed mb-6 font-medium">
+                    Criamos identidades visuais de autoridade que posicionam a sua empresa como líder indiscutível no seu mercado.
+                  </p>
+                  <ul className="space-y-3 text-xs uppercase tracking-wider text-neutral-300 font-bold mb-8">
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Design de Marca & UI/UX Design</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Redes Sociais & Estratégia de Conteúdo</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Anúncios Pagos & Performance</li>
+                  </ul>
+                </div>
+                <button onClick={() => openModal('Identidade de Marca')} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                  SABER MAIS
+                </button>
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* ── STATS SECTION ── */}
-        <section className="py-24 bg-neutral-50 border-y border-neutral-100 relative overflow-hidden">
+        <section className="py-20 bg-[#070D1A] border-b border-neutral-800/60 relative overflow-hidden">
           <div className="container mx-auto px-8 relative z-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {[
@@ -251,257 +362,28 @@ export default function LandingPage() {
                 { val: "24/7", lab: "Monitorização Ativa" }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center text-center w-full relative group">
-                  {/* Architectural Accents */}
-                  <div className="absolute -top-4 -left-4 w-4 h-4 border-t border-l border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="absolute -bottom-4 -right-4 w-4 h-4 border-b border-r border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  
-                  <div className="flex items-baseline gap-2 relative">
-                    <span className="text-6xl font-black text-neutral-950 font-headline tracking-tighter drop-shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
-                      {stat.val}
-                    </span>
-                  </div>
-                  
-                  <p className="text-neutral-500 text-[10px] uppercase font-bold tracking-[0.3em] mt-4 italic">
+                  <span className="text-5xl md:text-6xl font-black text-white font-headline tracking-tighter">
+                    {stat.val}
+                  </span>
+                  <p className="text-primary text-[10px] uppercase font-bold tracking-[0.3em] mt-3 italic">
                     {stat.lab}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-          {/* Subtle Grid Background */}
-          <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, black 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
         </section>
 
-        {/* ── CAPABILITIES ── */}
-        <section id="capabilities" className="py-32 bg-white relative">
-          <div className="container max-w-[1400px] mx-auto px-8">
-            <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 md:mb-20 gap-8">
-              <div className="max-w-2xl text-center lg:text-left">
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  className="flex items-center justify-center lg:justify-start gap-4 mb-6"
-                >
-                  <span className="text-primary font-black tracking-[0.4em] text-[10px] uppercase italic">Capacidades</span>
-                  <div className="h-[1px] w-12 bg-neutral-200"></div>
-                </motion.div>
-                <motion.h2 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="text-fluid-h2 text-neutral-900"
-                >
-                  ARQUITETURA DE <br/><span className="text-primary">ALTA PERFORMANCE</span>
-                </motion.h2>
-              </div>
-              <motion.p 
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="text-neutral-500 font-medium italic max-w-xs text-center lg:text-right leading-relaxed"
-              >
-                Cada pixel é um cálculo. Cada interação é uma decisão arquitetónica.
-              </motion.p>
-            </div>
-
-            <motion.div 
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={{
-                hidden: { opacity: 0 },
-                show: {
-                  opacity: 1,
-                  transition: {
-                    staggerChildren: 0.15
-                  }
-                }
-              }}
-              className="grid grid-cols-1 md:grid-cols-12 gap-6 md:auto-rows-[300px]"
-            >
-              <motion.div 
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  show: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-                }}
-                whileHover={{ y: -6, scale: 1.005 }}
-                className="md:col-span-8 md:row-span-2 obsidian-panel rounded-3xl p-8 md:p-12 pb-12 flex flex-col justify-between group overflow-hidden relative min-h-[450px] md:min-h-0"
-              >
-                <div className="absolute top-8 right-8 text-[10px] font-black text-primary/40 tracking-[0.5em] uppercase select-none">MODULE_WEB_ARCH</div>
-                <div className="absolute top-0 right-0 p-8 text-[80px] font-black text-neutral-950/[0.01] leading-none select-none">WEB</div>
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary transition-colors duration-500 group-hover:text-white text-primary">
-                    <MaterialIcon name="web" className="text-3xl" />
-                  </div>
-                  <h3 className="text-3xl sm:text-4xl font-black text-neutral-900 mb-6 uppercase tracking-tighter">Web Architecture<br/>& Engineering</h3>
-                  <p className="text-neutral-500 max-w-sm leading-relaxed font-medium italic">
-                    Desenvolvemos ecossistemas digitais robustos, focados em performance extrema e escalabilidade infinita.<br/>
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3 relative z-10 mt-12">
-                  {['React', 'Next.js', 'High-Load', 'Cloud Native'].map(tag => (
-                    <span key={tag} className="px-4 py-2 bg-neutral-50 border border-neutral-200/80 rounded-full text-[10px] font-black uppercase tracking-widest text-neutral-600 hover:bg-primary/10 hover:border-primary/30 transition-all duration-300">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div 
-                variants={{
-                  hidden: { opacity: 0, scale: 0.9 },
-                  show: { opacity: 1, scale: 1, transition: { duration: 0.8 } }
-                }}
-                whileHover={{ y: -6, scale: 1.01 }}
-                className="md:col-span-4 md:row-span-2 obsidian-panel rounded-3xl p-10 flex flex-col items-center justify-between text-center group bg-primary/[0.02] border-primary/10 relative overflow-hidden min-h-[400px] md:min-h-0"
-              >
-                <div className="absolute top-4 left-4 w-2 h-2 border-t border-l border-primary/40"></div>
-                <div className="flex flex-col items-center justify-center flex-grow">
-                  <div className="w-24 h-24 rounded-full bg-primary/5 flex items-center justify-center mb-8 relative border border-primary/10">
-                    <div className="absolute inset-0 rounded-full border border-primary/20 animate-ping"></div>
-                    <MaterialIcon name="neurology" className="text-5xl text-primary" />
-                  </div>
-                  <h3 className="text-3xl font-black text-neutral-900 mb-6 uppercase tracking-tighter">Neural<br/>Interfaces</h3>
-                  <p className="text-neutral-500 leading-relaxed font-medium italic text-sm">
-                    Integramos inteligência artificial para criar experiências adaptativas que antecipam as necessidades do utilizador.
-                  </p>
-                </div>
-                <div className="mt-12 font-label text-[8px] tracking-[0.6em] text-primary/60 uppercase">AI_INTEGRATION_ACTIVE</div>
-              </motion.div>
-
-              <motion.div 
-                variants={{
-                  hidden: { opacity: 0, x: -30 },
-                  show: { opacity: 1, x: 0, transition: { duration: 0.6 } }
-                }}
-                whileHover={{ y: -5, x: 2 }}
-                className="md:col-span-6 obsidian-panel rounded-3xl p-8 md:p-10 flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8 text-center sm:text-left group relative min-h-[250px] md:min-h-0"
-              >
-                <div className="absolute top-4 right-6 text-[8px] font-bold text-neutral-350 tracking-[0.4em]">v1.0.4</div>
-                <div className="w-20 h-20 shrink-0 rounded-2xl bg-neutral-50 border border-neutral-100 flex items-center justify-center text-neutral-800 group-hover:text-primary transition-colors">
-                  <MaterialIcon name="brush" className="text-4xl" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-black text-neutral-900 mb-2 uppercase tracking-tighter">Identidade de Marca</h3>
-                  <p className="text-neutral-500 text-sm italic font-medium">Construímos identidades visuais que comunicam autoridade e valor.</p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                variants={{
-                  hidden: { opacity: 0, x: 30 },
-                  show: { opacity: 1, x: 0, transition: { duration: 0.6 } }
-                }}
-                whileHover={{ y: -5, x: -2 }}
-                className="md:col-span-6 obsidian-panel rounded-3xl p-8 md:p-10 flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8 text-center sm:text-left group relative min-h-[250px] md:min-h-0"
-              >
-                <div className="w-20 h-20 shrink-0 rounded-2xl bg-neutral-50 border border-neutral-100 flex items-center justify-center text-neutral-800 group-hover:text-primary transition-colors">
-                  <MaterialIcon name="insights" className="text-4xl" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-black text-neutral-900 mb-2 uppercase tracking-tighter">Estratégia Digital</h3>
-                  <p className="text-neutral-500 text-sm italic font-medium">Otimizamos a tua presença online para resultados reais.</p>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ── A NOSSA ABORDAGEM ── */}
-        <section className="py-28 bg-neutral-950 text-white relative overflow-hidden" id="abordagem">
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-          <div className="container max-w-7xl mx-auto px-6 relative z-10">
-            <div className="max-w-3xl mb-16">
-              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-black">
-                DIFERENCIAÇÃO E PARCERIA
-              </p>
-              <h2 className="text-fluid-h2 text-white uppercase tracking-tighter mb-6">
-                UMA ABORDAGEM <span className="text-primary italic">100% FEITA À MEDIDA</span>
-              </h2>
-              <p className="text-neutral-400 text-lg font-light leading-relaxed italic">
-                Somos uma agência boutique full-service. Desenvolvemos o seu projeto de comunicação e tecnologia desde a conceção estratégica até à aplicação prática, com foco absoluto no crescimento do seu negócio.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  num: "01",
-                  title: "ABORDAGEM PERSONALIZADA",
-                  desc: "Tratamos cada marca como única. Criamos soluções exclusivas e customizadas ao seu setor de atividade, sem fórmulas genéricas."
-                },
-                {
-                  num: "02",
-                  title: "DESENVOLVIMENTO SEM LIMITES",
-                  desc: "Eliminamos barreiras técnicas. Trabalhamos com autonomia completa em engenharia web, branding, SEO e automação."
-                },
-                {
-                  num: "03",
-                  title: "PARCEIRO DE NEGÓCIO",
-                  desc: "Mais do que prestadores de serviço, somos um parceiro estratégico focado em colocar o poder da tecnologia ao serviço das suas vendas."
-                },
-                {
-                  num: "04",
-                  title: "EQUIPA MULTIDISCIPLINAR",
-                  desc: "O seu projeto é acompanhado por uma equipa dedicada com Engenheiros de Software, Designers UX/UI e Diretores Criativos."
-                }
-              ].map((pillar, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-neutral-900/80 border border-neutral-800 p-8 rounded-2xl flex flex-col justify-between group hover:border-primary/50 transition-all duration-500"
-                >
-                  <div>
-                    <span className="font-headline text-3xl font-black text-primary/40 group-hover:text-primary transition-colors block mb-6">{pillar.num}</span>
-                    <h3 className="font-headline text-xl font-bold text-white uppercase mb-4 tracking-tight group-hover:text-primary transition-colors">{pillar.title}</h3>
-                    <p className="text-neutral-400 text-sm font-body leading-relaxed">{pillar.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── BENEFITS SECTION ── */}
-        <section className="py-24 bg-neutral-50 border-t border-neutral-100">
-          <div className="container mx-auto px-4">
+        {/* ── PORTFOLIO ("O ARQUIVO") ── */}
+        <section className="py-28 bg-[#050A13] border-b border-neutral-800/60" id="portfolio">
+          <div className="container max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
-              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">BENEFÍCIOS</p>
-              <h2 className="text-fluid-h3 tracking-tighter text-neutral-900 uppercase">O QUE GANHA COM P&D</h2>
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">TRABALHOS SELECIONADOS</p>
+              <h2 className="font-headline text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">O ARQUIVO</h2>
+              <p className="text-neutral-400 text-sm mt-4 max-w-lg mx-auto">Exemplos reais do nosso trabalho — websites ao vivo e em desenvolvimento para clientes e projetos próprios.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-              {[
-                { icon: 'search', title: 'Maior Visibilidade Online/Local', desc: 'Destaque-se onde os seus clientes procuram — nos motores de busca e nas redes sociais.' },
-                { icon: 'groups', title: 'Mais Alcance e Fluxo de Clientes', desc: 'Conquiste novos mercados e aumente a sua base de clientes com presença digital estratégica.' },
-                { icon: 'verified', title: 'Confiança Reforçada', desc: 'Transmita profissionalismo e credibilidade desde o primeiro clique.' },
-                { icon: 'loyalty', title: 'Fidelização de Clientes', desc: 'Crie experiências que fazem os seus clientes voltarem repetidamente.' },
-                { icon: 'star', title: 'Reforço da Marca', desc: 'Construa uma identidade digital forte e memorável que se diferencia da concorrência.' },
-                { icon: 'trending_up', title: 'Maior Envolvimento com o Público', desc: 'Transforme visitantes em defensores da sua marca.' }
-              ].map((benefit, idx) => (
-                <BenefitCard 
-                  key={idx} 
-                  icon={benefit.icon} 
-                  title={benefit.title} 
-                  desc={benefit.desc} 
-                  delay={idx * 0.08}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* ── PORTFOLIO ── */}
-        <section className="py-24 bg-white border-t border-neutral-100" id="portfolio">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">TRABALHOS SELECIONADOS</p>
-              <h2 className="text-fluid-h2 text-neutral-900 uppercase">O ARQUIVO</h2>
-              <p className="text-neutral-500 text-sm mt-4 max-w-lg mx-auto">Exemplos reais do nosso trabalho — websites ao vivo e em desenvolvimento para clientes e projetos próprios.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {[
                 {
                   label: 'Stand & Oficina / 2026',
@@ -510,7 +392,7 @@ export default function LandingPage() {
                   subtitle: 'Stand e oficina de bicicletas — catálogo digital, serviços e presença web.',
                   img: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
                   badge: 'Ao Vivo',
-                  badgeClass: 'bg-primary/20 text-primary',
+                  badgeClass: 'bg-primary text-white',
                   link: 'https://agostinho-bikes.vercel.app/',
                 },
                 {
@@ -520,7 +402,7 @@ export default function LandingPage() {
                   subtitle: 'Portfólio pessoal e showcase criativo de apresentação profissional.',
                   img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
                   badge: 'Ao Vivo',
-                  badgeClass: 'bg-primary/20 text-primary',
+                  badgeClass: 'bg-primary text-white',
                   link: 'https://maria-joao-portfolio.vercel.app/',
                 },
                 {
@@ -530,17 +412,17 @@ export default function LandingPage() {
                   subtitle: 'Plataforma digital para barbearia de elite — menu de serviços e marca.',
                   img: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
                   badge: 'Ao Vivo',
-                  badgeClass: 'bg-primary/20 text-primary',
+                  badgeClass: 'bg-primary text-white',
                   link: 'https://vault-number-one-barbershop.vercel.app/',
                 },
                 {
                   label: 'Restauração / 2025',
-                  labelColor: 'text-amber-600',
+                  labelColor: 'text-amber-500',
                   title: 'TAKOS KING',
                   subtitle: 'Fast food focado em tacos — em desenvolvimento para Pombal, Guia.',
                   img: '/assets/takos-king.png',
                   badge: 'Em Progresso',
-                  badgeClass: 'bg-amber-500/20 text-amber-600',
+                  badgeClass: 'bg-amber-500 text-black font-bold',
                   link: 'https://www.facebook.com/TakosKing.Guia.Pombal/',
                 },
                 {
@@ -550,7 +432,7 @@ export default function LandingPage() {
                   subtitle: 'O nosso próprio portfólio — o site que estás a ver agora.',
                   img: 'https://images.unsplash.com/photo-1634084462412-b54873c0a56d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
                   badge: 'Ao Vivo',
-                  badgeClass: 'bg-primary/20 text-primary',
+                  badgeClass: 'bg-primary text-white',
                   link: '#',
                 },
                 {
@@ -560,7 +442,7 @@ export default function LandingPage() {
                   subtitle: 'Aplicação web para estudantes brasileiros — dashboard e conteúdos educativos.',
                   img: '/assets/edu-brasil.png',
                   badge: 'Ao Vivo',
-                  badgeClass: 'bg-primary/20 text-primary',
+                  badgeClass: 'bg-primary text-white',
                   link: 'https://mobileapp-taupe.vercel.app/',
                 },
               ].map((item, i) => (
@@ -569,27 +451,20 @@ export default function LandingPage() {
                   target={item.link === '#' ? '_self' : '_blank'}
                   rel="noopener noreferrer"
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 25 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -6 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="relative aspect-[4/3] bg-neutral-50 overflow-hidden rounded-2xl group cursor-pointer block border border-neutral-100 shadow-sm"
+                  className="relative aspect-[4/3] bg-neutral-900 overflow-hidden rounded-3xl group cursor-pointer block border border-neutral-800 shadow-xl"
                 >
                   <img
                     alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-95 transition-all duration-700 group-hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-90 transition-all duration-700 group-hover:scale-105"
                     src={item.img}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent opacity-65 group-hover:opacity-80 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050A13] via-[#050A13]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                   
-                  {/* Hover indicator */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
-                    <div className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md">
-                      <MaterialIcon name="open_in_new" className="text-neutral-900 text-xl" />
-                    </div>
-                  </div>
-
                   <div className="absolute top-4 right-4 z-10">
                     <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${item.badgeClass}`}>
                       {item.badge}
@@ -598,7 +473,7 @@ export default function LandingPage() {
                   <div className="absolute bottom-0 left-0 p-6 w-full z-10">
                     <p className={`font-label text-[10px] tracking-[0.3em] uppercase mb-1 ${item.labelColor}`}>{item.label}</p>
                     <h4 className="font-headline text-2xl font-black text-white uppercase mb-1 tracking-tighter">{item.title}</h4>
-                    <p className="text-neutral-200 text-sm font-light leading-snug">{item.subtitle}</p>
+                    <p className="text-neutral-300 text-sm font-light leading-snug">{item.subtitle}</p>
                   </div>
                 </motion.a>
               ))}
@@ -606,37 +481,33 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── TESTEMUNHOS & REVIEWS ── */}
-        <section className="py-28 bg-neutral-50 border-t border-neutral-100 relative overflow-hidden" id="testemunhos">
-          <div className="container max-w-7xl mx-auto px-6 relative z-10">
+        {/* ── TESTEMUNHOS & AVALIAÇÕES (STYLE THEAGENCY.PT) ── */}
+        <section className="py-28 bg-[#070D1A] border-b border-neutral-800/60" id="testemunhos">
+          <div className="container max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
-              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">AVALIAÇÕES & EXPERIÊNCIAS</p>
-              <h2 className="text-fluid-h2 text-neutral-900 uppercase tracking-tighter">O QUE DIZEM OS NOSSOS CLIENTES</h2>
-              <p className="text-neutral-500 text-sm mt-4 max-w-lg mx-auto italic">A satisfação de quem confia na P&D Agency para transformar a sua presença digital.</p>
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">AVALIAÇÕES & TESTEMUNHOS</p>
+              <h2 className="font-headline text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">O QUE DIZEM OS NOSSOS CLIENTES</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
-                  quote: "Souberam ler a nossa visão desde o primeiro instante. Apresentam um serviço altamente personalizado e têm sido uma grande alavanca para o nosso negócio.",
+                  quote: "Trabalhamos com a P&D Agency e a verdade é que não podíamos estar mais satisfeitos. Souberam ler a nossa visão desde o primeiro instante, têm uma equipa muito dedicada e apresentam um serviço super personalizado.",
                   author: "Ana Dominguez",
-                  role: "Fundadora & Proprietária",
-                  brand: "Casa do Azulejo & Ceramics",
-                  badgeIcon: "star"
+                  role: "Owner & Founder",
+                  brand: "Ana Dominguez Ceramics"
                 },
                 {
-                  quote: "Profissionalismo, rapidez de resposta e domínio total da tecnologia e design. O desenvolvimento do website e catálogo digital superou imenso as nossas expectativas.",
+                  quote: "A parceria tem sido uma excelente experiência. Começando pelo profissionalismo, dedicação e rápida resposta a todas as solicitações no desenvolvimento do nosso website e catálogo digital.",
                   author: "Equipa Agostinho Bikes",
-                  role: "Direção & Vendas",
-                  brand: "Agostinho Bikes Stand & Oficina",
-                  badgeIcon: "pedal_bike"
+                  role: "Gestão & Stand",
+                  brand: "Agostinho Bikes"
                 },
                 {
-                  quote: "Contactámos a P&D Agency para a criação da nossa marca e plataforma web. Cada elemento fala por si e está em perfeita sintonia com a imagem cuidada que exigíamos.",
+                  quote: "Contactámos a P&D Agency para a criação da nossa marca e website. Fiquei muito feliz com todos os resultados: imagem da marca, site e presença digital – cada elemento em perfeita sintonia.",
                   author: "Gestão Vault",
                   role: "Fundadores",
-                  brand: "Vault Number One Barbershop",
-                  badgeIcon: "content_cut"
+                  brand: "Vault Number One Barbershop"
                 }
               ].map((testi, idx) => (
                 <motion.div
@@ -645,22 +516,17 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.12 }}
-                  className="bg-white border border-neutral-200/80 p-8 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 relative group"
+                  className="bg-neutral-900/90 border border-neutral-800 p-8 rounded-3xl flex flex-col justify-between shadow-xl relative group hover:border-primary/40 transition-all"
                 >
                   <div className="mb-8">
-                    <div className="text-primary text-4xl font-headline font-black mb-4 select-none opacity-30 group-hover:opacity-100 transition-opacity">“</div>
-                    <p className="text-neutral-700 text-sm leading-relaxed italic font-medium">
+                    <p className="text-primary text-5xl font-headline font-black mb-2 opacity-50">“</p>
+                    <p className="text-neutral-300 text-sm md:text-base leading-relaxed italic font-light">
                       "{testi.quote}"
                     </p>
                   </div>
-                  <div className="pt-6 border-t border-neutral-100 flex items-center justify-between">
-                    <div>
-                      <h4 className="font-headline font-black text-neutral-900 text-sm uppercase tracking-tight">{testi.author}</h4>
-                      <p className="text-neutral-400 text-xs font-medium italic">{testi.role} • <span className="text-primary font-semibold">{testi.brand}</span></p>
-                    </div>
-                    <div className="w-9 h-9 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center shrink-0">
-                      <MaterialIcon name={testi.badgeIcon} className="text-primary text-sm" />
-                    </div>
+                  <div className="pt-6 border-t border-neutral-800">
+                    <h4 className="font-headline font-black text-white text-base uppercase tracking-tight">{testi.author}</h4>
+                    <p className="text-primary text-xs font-semibold uppercase tracking-wider">{testi.role} • {testi.brand}</p>
                   </div>
                 </motion.div>
               ))}
@@ -668,269 +534,15 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── PROMOÇÃO LANÇAMENTO ── */}
-        <section className="py-20 bg-white relative overflow-hidden" id="promocao">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
-          <div className="container mx-auto px-4 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative rounded-3xl border border-amber-200/80 p-8 md:p-12 overflow-hidden max-w-5xl mx-auto shadow-sm"
-              style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.03) 0%, rgba(250,250,250,1) 60%)' }}
-            >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/[0.03] rounded-full blur-[80px] pointer-events-none" />
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl">🔥</span>
-                  <span className="font-label text-[10px] tracking-[0.3em] uppercase text-amber-600 font-black">Oferta de Lançamento — Vagas Limitadas</span>
-                </div>
-                <h2 className="font-headline text-4xl md:text-5xl font-black text-neutral-950 uppercase tracking-tighter mb-4">
-                  PRIMEIROS <span className="text-amber-600">5 CLIENTES</span>
-                </h2>
-                <p className="text-neutral-600 leading-relaxed mb-6 max-w-xl font-medium">
-                  Para os nossos primeiros 5 clientes, o desenvolvimento completo do website fica disponível sob condições especiais de lançamento. O mercado atual cobra tipicamente entre <span className="text-neutral-900 font-bold">800€ e 1.200€</span> (fora as subscrições) por arquitetura digital de elite — nós estamos a fazer <span className="text-neutral-900 font-bold">valores significativamente mais baixos</span> para as nossas primeiras parcerias.
-                </p>
-
-                <div className="bg-white border border-neutral-200/80 rounded-xl p-6 mb-8 text-center max-w-sm shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
-                  <span className="text-neutral-400 text-[10px] font-black uppercase tracking-widest mb-2 block">Investimento</span>
-                  <span className="font-headline text-2xl font-black text-neutral-900 tracking-tighter">SOB CONSULTA</span>
-                </div>
-
-                <div className="flex items-center gap-2 mb-8 text-amber-700/85">
-                  <MaterialIcon name="plus_one" className="text-sm" />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Inclui obrigatoriamente um Pacote de Suporte (Básico ou Plus)</span>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {[
-                    'Desenvolvimento completo do website',
-                    'Domínio incluído no primeiro ano',
-                    'Hospedagem incluída no primeiro ano',
-                    'Suporte mínimo incluído (obrigatório no primeiro ano)',
-                    'Design personalizado e responsivo',
-                  ].map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-sm text-neutral-700">
-                      <span className="text-amber-600 text-lg leading-none">✓</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="bg-amber-50 border border-amber-200/60 rounded-xl p-4 mb-8">
-                  <p className="text-amber-800 text-xs leading-relaxed">
-                    <strong>⚠️ Vagas limitadas:</strong> Esta promoção de valores reduzidos é válida apenas para os primeiros 5 clientes. Após esse limite, o investimento de desenvolvimento regressa aos nossos valores padrão.
-                  </p>
-                </div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => openModal('Promoção Lançamento')}
-                  className="px-10 py-5 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase transition-all shadow-md hover:shadow-lg"
-                  style={{ background: 'linear-gradient(to right, #d97706, #f59e0b)', color: '#ffffff' }}
-                >
-                  QUERO ESTA VAGA
-                </motion.button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ── PACOTES DE SUPORTE ── */}
-        <section className="py-24 bg-neutral-50 border-y border-neutral-100" id="pricing">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-10">
-              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3">MANUTENÇÃO CONTÍNUA</p>
-              <h2 className="text-fluid-h2 text-neutral-900 uppercase">PACOTES DE SUPORTE</h2>
-              <p className="text-neutral-500 text-sm mt-4 max-w-xl mx-auto">Após a entrega do projeto, mantemos o teu website a funcionar com segurança e desempenho.</p>
-            </div>
-
-            {/* Aviso de transparência */}
-            <div className="max-w-5xl mx-auto mb-12 bg-primary/5 border border-primary/20 rounded-2xl p-5 flex gap-4 items-start">
-              <MaterialIcon name="info" className="text-primary mt-0.5 shrink-0" />
-              <div>
-                <p className="text-neutral-900 font-bold text-sm mb-1">Suporte mínimo obrigatório durante o 1.º ano</p>
-                <p className="text-neutral-500 text-sm leading-relaxed">
-                  O Pacote Básico é obrigatório durante o primeiro ano após a entrega do website — garante domínio, hospedagem e funcionamento técnico. Após os 12 meses, podes cancelar, manter ou fazer upgrade sem qualquer penalização.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {/* PACOTE BÁSICO */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ y: -6, scale: 1.005, boxShadow: "0 10px 30px rgba(0,0,0,0.02)" }}
-                viewport={{ once: true }}
-                className="bg-white p-8 md:p-10 rounded-2xl border border-neutral-200/80 flex flex-col group transition-all duration-500 cursor-default"
-              >
-                <div className="mb-8">
-                  <div className="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center mb-6 bg-primary/5">
-                    <MaterialIcon name="shield" className="text-primary text-2xl" />
-                  </div>
-                  <h4 className="font-headline text-2xl font-black text-neutral-900 uppercase tracking-tight mb-2">Pacote Básico</h4>
-                  <div className="flex items-baseline gap-1 mb-4">
-                    <span className="font-headline text-3xl font-black text-primary tracking-tighter">Sob Consulta</span>
-                  </div>
-                  <p className="text-neutral-500 font-body text-sm leading-relaxed">
-                    O essencial para manter o teu website a funcionar em segurança.
-                  </p>
-                </div>
-                <div className="space-y-4 mb-10 flex-grow">
-                  {[
-                    'Domínio incluído',
-                    'Hospedagem incluída',
-                    'Suporte mínimo (resposta em 24 a 72 horas)',
-                    'Backups a cada 2 meses',
-                  ].map((feature, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full border border-primary/20 flex items-center justify-center shrink-0">
-                        <MaterialIcon name="check" className="text-primary text-[10px]" />
-                      </div>
-                      <span className="text-neutral-600 font-body text-xs font-medium">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-                <button
-                  onClick={() => openModal('Pacote Básico')}
-                  className="w-full py-4 rounded-xl border border-primary/30 text-primary font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all active:scale-[0.98]"
-                >
-                  SELECIONAR BÁSICO
-                </button>
-              </motion.div>
-
-              {/* PACOTE PLUS */}
-              <motion.div
-                initial={{ opacity: 0, scale: 1.05 }}
-                whileInView={{ opacity: 1, scale: 1.02 }}
-                whileHover={{ y: -8, scale: 1.03, boxShadow: "0 15px 40px rgba(37,99,235,0.06)" }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="bg-white p-8 md:p-10 rounded-2xl border-2 border-primary flex flex-col relative shadow-[0_10px_35px_rgba(37,99,235,0.04)] transition-all duration-500 cursor-default"
-              >
-                <div className="absolute top-8 right-8">
-                  <span className="bg-primary/10 border border-primary/30 text-primary px-3 py-1 rounded-full font-label text-[9px] font-bold uppercase tracking-widest">Recomendado</span>
-                </div>
-                <div className="mb-8">
-                  <div className="w-12 h-12 rounded-full border border-primary flex items-center justify-center mb-6 bg-primary/5">
-                    <MaterialIcon name="verified_user" className="text-primary text-2xl" />
-                  </div>
-                  <h4 className="font-headline text-2xl font-black text-neutral-900 uppercase tracking-tight mb-2">Pacote Plus</h4>
-                  <div className="flex items-baseline gap-1 mb-4">
-                    <span className="font-headline text-3xl font-black text-primary tracking-tighter">Sob Consulta</span>
-                  </div>
-                  <p className="text-neutral-500 font-body text-sm leading-relaxed">
-                    Tudo do Básico, mais crescimento e visibilidade online.
-                  </p>
-                </div>
-                <div className="space-y-4 mb-10 flex-grow">
-                  {[
-                    'Domínio + Hospedagem incluídos',
-                    'Suporte com resposta em 24 a 72 horas',
-                    'SEO básico (otimização de pesquisa)',
-                    'Até 10 alterações mensais ao website',
-                    'Backups quinzenais (cada 15 dias)',
-                    'Relatório mensal de visitas e desempenho',
-                  ].map((feature, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full border border-primary flex items-center justify-center shrink-0 bg-primary/5">
-                        <MaterialIcon name="check" className="text-primary text-[10px]" />
-                      </div>
-                      <span className="text-neutral-800 font-body text-xs font-semibold">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-                <button
-                  onClick={() => openModal('Pacote Plus')}
-                  className="w-full py-5 rounded-xl bg-primary text-white font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary/95 hover:shadow-[0_0_20px_rgba(37,99,235,0.35)] transition-all active:scale-[0.98]"
-                >
-                  SELECIONAR PLUS
-                </button>
-              </motion.div>
-
-              {/* CTA PERSONALIZADO */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="bg-white p-8 md:p-10 rounded-2xl border border-neutral-200/80 flex flex-col items-center justify-center text-center group hover:border-primary/20 transition-all duration-500 shadow-sm md:col-span-2 md:max-w-md md:mx-auto lg:col-span-1 lg:w-full"
-              >
-                <div className="w-16 h-16 rounded-full bg-primary/5 border border-primary/10 flex items-center justify-center mb-6">
-                  <MaterialIcon name="handshake" className="text-primary text-3xl" />
-                </div>
-                <h4 className="font-headline text-2xl font-black text-neutral-900 uppercase tracking-tight mb-4">Personalizado</h4>
-                <p className="text-neutral-500 font-body text-sm leading-relaxed mb-8">
-                  Tens necessidades específicas? Fala connosco e construímos um plano à medida do teu projeto.
-                </p>
-                <div className="text-neutral-400 text-xs font-label uppercase tracking-widest mb-8 font-black">APÓS 1 ANOS — LIVRE DE CANCELAR OU AJUSTAR</div>
-                <button
-                  onClick={() => openModal('Projeto + Suporte (personalizado)')}
-                  className="w-full py-4 rounded-xl border border-primary/30 text-primary font-headline font-black text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all active:scale-[0.98]"
-                >
-                  FALAR CONNOSCO
-                </button>
-              </motion.div>
-            </div>
-
-            {/* Nota de transparência */}
-            <p className="text-center text-neutral-500 text-xs mt-10 max-w-2xl mx-auto italic">
-              <MaterialIcon name="info" className="align-middle mr-1 text-xs text-primary" />
-              Após o primeiro ano, é livre de mudar de pacote, fazer upgrade, downgrade, ou cancelar o suporte — sem penalizações.
-            </p>
-          </div>
-        </section>
-
-        {/* ── MEETING CTA ── */}
-        <section className="py-40 relative overflow-hidden bg-white border-t border-neutral-100 flex items-center justify-center">
-          <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.2) 0%, transparent 60%)' }}></div>
-          <div className="container mx-auto px-4 relative z-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="mb-12"
-            >
-              <h2 className="text-fluid-h1 mb-4 text-neutral-950 uppercase">
-                TENS INTERESSE?<br/>
-                <span className="text-primary drop-shadow-[0_0_10px_rgba(37,99,235,0.1)]">VAMOS MARCAR UMA REUNIÃO.</span>
-              </h2>
-              <p className="text-neutral-500 text-lg font-medium max-w-xl mx-auto mb-6">
-                Responde ao e-mail ou usa o botão abaixo — agendamos uma conversa de 30 minutos, sem compromisso, para perceber o que precisas.
-              </p>
-            </motion.div>
-            <motion.button 
-              onClick={() => openModal()}
-              className="group relative inline-flex items-center gap-4 bg-neutral-950 text-white px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:bg-neutral-900 transition-all duration-500 active:scale-95 shadow-md hover:shadow-lg"
-            >
-              AGENDAR REUNIÃO
-            </motion.button>
-          </div>
-        </section>
-
         {/* ── MARCAS QUE CONFIAM EM NÓS ── */}
-        <section className="py-20 bg-neutral-50 border-t border-neutral-200/60 relative overflow-hidden">
-          <div className="container mx-auto px-4 text-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">
-                PARCERIAS & CONFIANÇA
-              </p>
-              <h3 className="font-headline text-2xl md:text-3xl font-black text-neutral-950 uppercase tracking-tighter mb-12">
-                MARCAS QUE CONFIAM EM NÓS
-              </h3>
-            </motion.div>
+        <section className="py-24 bg-[#050A13] border-b border-neutral-800/60">
+          <div className="container max-w-7xl mx-auto px-6 text-center">
+            <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">CONFIANÇA & PARCERIA</p>
+            <h3 className="font-headline text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-12">
+              MARCAS QUE CONFIAM EM NÓS
+            </h3>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-6xl mx-auto"
-            >
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-6xl mx-auto">
               {[
                 {
                   name: 'TACOS KING',
@@ -956,20 +568,20 @@ export default function LandingPage() {
                   icon: 'content_cut',
                   link: 'https://vault-number-one-barbershop.vercel.app/'
                 }
-              ].map((brand, i) => (
+              ].map((brand) => (
                 <motion.a
                   key={brand.name}
                   href={brand.link}
                   target={brand.link === '#' ? '_self' : '_blank'}
                   rel="noopener noreferrer"
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  className="bg-white border border-neutral-200/80 hover:border-primary/40 rounded-2xl p-6 md:px-8 md:py-6 flex items-center gap-4 transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_25px_rgba(37,99,235,0.06)] group min-w-[240px] flex-1 max-w-[280px]"
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="bg-neutral-900/90 border border-neutral-800 hover:border-primary/50 rounded-2xl p-6 md:px-8 md:py-6 flex items-center gap-4 transition-all duration-300 shadow-lg group min-w-[240px] flex-1 max-w-[280px]"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-neutral-50 border border-neutral-100 group-hover:border-primary/20 group-hover:bg-primary/5 flex items-center justify-center shrink-0 transition-colors">
-                    <MaterialIcon name={brand.icon} className="text-neutral-700 group-hover:text-primary text-2xl transition-colors" />
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary flex items-center justify-center shrink-0 transition-colors">
+                    <MaterialIcon name={brand.icon} className="text-primary group-hover:text-white text-2xl transition-colors" />
                   </div>
                   <div className="text-left">
-                    <h4 className="font-headline font-black text-neutral-900 group-hover:text-primary text-base uppercase tracking-tight transition-colors">
+                    <h4 className="font-headline font-black text-white group-hover:text-primary text-base uppercase tracking-tight transition-colors">
                       {brand.name}
                     </h4>
                     <p className="text-neutral-400 text-[11px] font-medium tracking-wide italic">
@@ -978,43 +590,207 @@ export default function LandingPage() {
                   </div>
                 </motion.a>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── PROMOÇÃO LANÇAMENTO ── */}
+        <section className="py-24 bg-[#070D1A] relative overflow-hidden" id="promocao">
+          <div className="container max-w-5xl mx-auto px-6 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative rounded-3xl border border-amber-500/40 p-8 md:p-12 overflow-hidden bg-neutral-900/90 shadow-2xl"
+            >
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-2xl">🔥</span>
+                  <span className="font-label text-[10px] tracking-[0.3em] uppercase text-amber-400 font-black">Oferta de Lançamento — Vagas Limitadas</span>
+                </div>
+                <h2 className="font-headline text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4">
+                  PRIMEIROS <span className="text-amber-400">5 CLIENTES</span>
+                </h2>
+                <p className="text-neutral-300 leading-relaxed mb-6 font-medium text-sm md:text-base">
+                  Para os nossos primeiros 5 clientes, o desenvolvimento completo do website fica disponível sob condições especiais de lançamento. O mercado atual cobra tipicamente entre <span className="text-white font-bold">800€ e 1.200€</span> por arquitetura digital de elite — nós estamos a fazer <span className="text-white font-bold">valores significativamente mais baixos</span> para as nossas primeiras parcerias.
+                </p>
+
+                <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6 mb-8 text-center max-w-sm shadow-inner">
+                  <span className="text-neutral-400 text-[10px] font-black uppercase tracking-widest mb-2 block">Investimento</span>
+                  <span className="font-headline text-3xl font-black text-amber-400 tracking-tighter">SOB CONSULTA</span>
+                </div>
+
+                <div className="flex items-center gap-2 mb-8 text-amber-400">
+                  <MaterialIcon name="plus_one" className="text-sm" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Inclui obrigatoriamente um Pacote de Suporte (Básico ou Plus)</span>
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  {[
+                    'Desenvolvimento completo do website',
+                    'Domínio incluído no primeiro ano',
+                    'Hospedagem incluída no primeiro ano',
+                    'Suporte mínimo incluído (obrigatório no primeiro ano)',
+                    'Design personalizado e responsivo',
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-sm text-neutral-200">
+                      <span className="text-amber-400 text-lg leading-none">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => openModal('Promoção Lançamento')}
+                  className="px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.3em] uppercase transition-all shadow-lg hover:shadow-amber-500/20 bg-amber-500 text-black font-bold"
+                >
+                  QUERO ESTA VAGA
+                </motion.button>
+              </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* ── PACOTES DE SUPORTE ── */}
+        <section className="py-28 bg-[#050A13] border-t border-neutral-800/60" id="pricing">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">MANUTENÇÃO CONTÍNUA</p>
+              <h2 className="font-headline text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">PACOTES DE SUPORTE</h2>
+              <p className="text-neutral-400 text-sm mt-4 max-w-xl mx-auto">Após a entrega do projeto, mantemos o teu website a funcionar com segurança e desempenho.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {/* PACOTE BÁSICO */}
+              <motion.div
+                whileHover={{ y: -6 }}
+                className="bg-neutral-900/90 p-8 md:p-10 rounded-3xl border border-neutral-800 flex flex-col justify-between group transition-all duration-500"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl border border-primary/30 flex items-center justify-center mb-6 bg-primary/10 text-primary">
+                    <MaterialIcon name="shield" className="text-2xl" />
+                  </div>
+                  <h4 className="font-headline text-2xl font-black text-white uppercase mb-2">Pacote Básico</h4>
+                  <p className="font-headline text-3xl font-black text-primary mb-4">Sob Consulta</p>
+                  <p className="text-neutral-400 text-sm leading-relaxed mb-8">O essencial para manter o teu website a funcionar em segurança.</p>
+                  <div className="space-y-4 mb-8">
+                    {['Domínio incluído', 'Hospedagem incluída', 'Suporte técnico (resposta em 24-72h)', 'Backups bi-mensais'].map((f, i) => (
+                      <div key={i} className="flex items-center gap-3 text-xs text-neutral-300 font-bold uppercase tracking-wider">
+                        <MaterialIcon name="check" className="text-primary text-sm" />
+                        {f}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <button onClick={() => openModal('Pacote Básico')} className="w-full py-4 rounded-full border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                  SELECIONAR BÁSICO
+                </button>
+              </motion.div>
+
+              {/* PACOTE PLUS */}
+              <motion.div
+                whileHover={{ y: -8 }}
+                className="bg-neutral-900 p-8 md:p-10 rounded-3xl border-2 border-primary flex flex-col justify-between relative shadow-[0_0_40px_rgba(37,99,235,0.2)] transition-all duration-500"
+              >
+                <span className="absolute top-6 right-6 bg-primary text-white text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full">RECOMENDADO</span>
+                <div>
+                  <div className="w-12 h-12 rounded-xl border border-primary flex items-center justify-center mb-6 bg-primary text-white">
+                    <MaterialIcon name="verified_user" className="text-2xl" />
+                  </div>
+                  <h4 className="font-headline text-2xl font-black text-white uppercase mb-2">Pacote Plus</h4>
+                  <p className="font-headline text-3xl font-black text-primary mb-4">Sob Consulta</p>
+                  <p className="text-neutral-400 text-sm leading-relaxed mb-8">Tudo do Básico, mais crescimento e visibilidade online.</p>
+                  <div className="space-y-4 mb-8">
+                    {['Domínio + Hospedagem incluídos', 'Suporte com resposta rápida', 'SEO Básico & Otimização', 'Até 10 alterações mensais', 'Backups quinzenais', 'Relatório mensal de visitas'].map((f, i) => (
+                      <div key={i} className="flex items-center gap-3 text-xs text-neutral-200 font-bold uppercase tracking-wider">
+                        <MaterialIcon name="check" className="text-primary text-sm" />
+                        {f}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <button onClick={() => openModal('Pacote Plus')} className="w-full py-4 rounded-full bg-primary text-white font-headline font-black text-xs tracking-widest uppercase hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+                  SELECIONAR PLUS
+                </button>
+              </motion.div>
+
+              {/* PERSONALIZADO */}
+              <motion.div
+                whileHover={{ y: -6 }}
+                className="bg-neutral-900/90 p-8 md:p-10 rounded-3xl border border-neutral-800 flex flex-col justify-between group transition-all duration-500"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl border border-primary/30 flex items-center justify-center mb-6 bg-primary/10 text-primary">
+                    <MaterialIcon name="handshake" className="text-2xl" />
+                  </div>
+                  <h4 className="font-headline text-2xl font-black text-white uppercase mb-2">Personalizado</h4>
+                  <p className="font-headline text-3xl font-black text-primary mb-4">À Medida</p>
+                  <p className="text-neutral-400 text-sm leading-relaxed mb-8">Necessidades específicas? Construímos um plano à medida do teu projeto.</p>
+                </div>
+                <button onClick={() => openModal('Personalizado')} className="w-full py-4 rounded-full border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                  FALAR CONNOSCO
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── MEETING CTA ── */}
+        <section className="py-36 relative overflow-hidden bg-[#050A13] border-t border-neutral-800/60 flex items-center justify-center text-center">
+          <div className="container max-w-4xl mx-auto px-6 relative z-10">
+            <h2 className="font-headline text-4xl sm:text-6xl md:text-7xl font-black text-white uppercase tracking-tighter mb-6">
+              TENS INTERESSE?<br />
+              <span className="text-primary italic">VAMOS MARCAR UMA REUNIÃO.</span>
+            </h2>
+            <p className="text-neutral-400 text-lg font-light max-w-xl mx-auto mb-10 leading-relaxed">
+              Agendamos uma conversa de 30 minutos, sem compromisso, para perceber o que a tua empresa necessita.
+            </p>
+            <button 
+              onClick={() => openModal()}
+              className="bg-primary text-white px-12 py-6 rounded-full font-headline font-black text-xs tracking-[0.3em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-95"
+            >
+              AGENDAR REUNIÃO
+            </button>
           </div>
         </section>
       </main>
 
-      {/* ── FOOTER ── */}
-      <footer className="bg-neutral-50 w-full pt-32 pb-16 px-6 font-body border-t border-neutral-100">
+      {/* ── FOOTER (STYLE THEAGENCY.PT) ── */}
+      <footer className="bg-[#03060C] w-full pt-24 pb-16 px-6 font-body border-t border-neutral-800">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
-            <div className="lg:col-span-2 space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+            <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 flex items-center justify-center text-primary border-2 border-primary/20 rounded-lg bg-primary/5">
-                  <MaterialIcon name="architecture" className="text-xl" />
+                <div className="w-10 h-10 flex items-center justify-center text-primary border border-primary/30 rounded-xl bg-primary/10">
+                  <MaterialIcon name="architecture" className="text-2xl" />
                 </div>
-                <h2 className="font-headline font-black text-neutral-950 text-3xl uppercase tracking-tighter italic">P&D AGENCY</h2>
+                <h2 className="font-headline font-black text-white text-3xl uppercase tracking-tighter italic">P&D AGENCY</h2>
               </div>
-              <p className="text-neutral-500 font-medium leading-relaxed max-w-sm text-lg">
-                Arquitetando o futuro da presença digital com precisão obsidiana.
+              <p className="text-neutral-400 font-light leading-relaxed max-w-sm text-base">
+                Custom Digital & Communication Agency. Arquitetando o futuro da presença digital.
               </p>
             </div>
             
             <div>
-              <h4 className="font-headline text-primary font-black mb-8 uppercase tracking-[0.3em] text-[11px]">NAVEGAÇÃO</h4>
-              <ul className="space-y-4">
-                <li><a className="text-neutral-500 hover:text-primary transition-colors text-base font-medium" href="#capabilities">Serviços</a></li>
-                <li><a className="text-neutral-500 hover:text-primary transition-colors text-base font-medium" href="#portfolio">Portfólio</a></li>
-                <li><a className="text-neutral-500 hover:text-primary transition-colors text-base font-medium" href="#promocao">Promoção</a></li>
-                <li><a className="text-neutral-500 hover:text-primary transition-colors text-base font-medium" href="#pricing">Planos</a></li>
+              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">NAVEGAÇÃO</h4>
+              <ul className="space-y-3 text-sm text-neutral-400 font-medium">
+                <li><a className="hover:text-white transition-colors" href="#welcome">Início</a></li>
+                <li><a className="hover:text-white transition-colors" href="#custom-agency">Abordagem</a></li>
+                <li><a className="hover:text-white transition-colors" href="#o-que-fazemos">Serviços</a></li>
+                <li><a className="hover:text-white transition-colors" href="#portfolio">Portfólio</a></li>
+                <li><a className="hover:text-white transition-colors" href="#testemunhos">Testemunhos</a></li>
+                <li><a className="hover:text-white transition-colors" href="#pricing">Planos</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-headline text-primary font-black mb-8 uppercase tracking-[0.3em] text-[11px]">SOCIAL</h4>
-              <ul className="space-y-4">
+              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">SOCIAL</h4>
+              <ul className="space-y-3 text-sm text-neutral-400 font-medium">
                 <li>
                   <a 
-                    className="text-neutral-500 hover:text-primary transition-colors text-base font-medium flex items-center gap-2" 
+                    className="hover:text-white transition-colors flex items-center gap-2" 
                     href="https://www.instagram.com/p.d_agency/" 
                     target="_blank" 
                     rel="noopener noreferrer"
@@ -1026,26 +802,20 @@ export default function LandingPage() {
             </div>
           </div>
           
-          <div className="pt-12 border-t border-neutral-200 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex flex-col gap-2">
-              <p className="text-neutral-500 text-[10px] uppercase tracking-[0.25em] font-bold">
-                © 2026 P&D AGENCY. THE OBSIDIAN ARCHITECT.
-              </p>
-              <div className="flex gap-4 opacity-40">
-                <span className="text-[8px] text-neutral-500 font-label tracking-widest uppercase">Deployed on Vercel</span>
-                <span className="text-[8px] text-neutral-500 font-label tracking-widest uppercase">Built with Vite Architecture</span>
-              </div>
-            </div>
+          <div className="pt-8 border-t border-neutral-800/80 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-neutral-500 text-[10px] uppercase tracking-[0.25em] font-bold">
+              © 2026 P&D AGENCY. CUSTOM DIGITAL AGENCY. ALL RIGHTS RESERVED.
+            </p>
             <div className="flex gap-8">
               <button 
                 onClick={() => openLegalModal('terms')}
-                className="text-neutral-500 hover:text-neutral-800 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+                className="text-neutral-500 hover:text-neutral-300 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
               >
                 TERMOS DE USO
               </button>
               <button 
                 onClick={() => openLegalModal('privacy')}
-                className="text-neutral-500 hover:text-neutral-800 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+                className="text-neutral-500 hover:text-neutral-300 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
               >
                 POLÍTICA DE PRIVACIDADE
               </button>
@@ -1068,3 +838,4 @@ export default function LandingPage() {
     </div>
   );
 }
+
