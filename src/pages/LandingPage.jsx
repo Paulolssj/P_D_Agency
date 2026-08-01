@@ -382,23 +382,31 @@ export default function LandingPage() {
               </a>
             </motion.div>
 
-            {/* MARQUEE TICKER DOS CLIENTES HERO */}
-            <div className={`w-full overflow-hidden border-y py-5 rounded-2xl ${
-              darkMode ? 'border-neutral-800 bg-neutral-900/40' : 'border-neutral-200 bg-neutral-100/60'
+            {/* MARQUEE TICKER DOS CLIENTES HERO (ANIMADO CONTINUO SEM FUNDO) */}
+            <div className={`w-full overflow-hidden border-y py-4 rounded-2xl ${
+              darkMode ? 'border-neutral-800/80 bg-neutral-900/40' : 'border-neutral-200/80 bg-neutral-100/60'
             }`}>
-              <div className={`flex items-center gap-10 whitespace-nowrap justify-around opacity-90 text-[11px] font-headline font-black uppercase tracking-[0.2em] ${
-                darkMode ? 'text-neutral-300' : 'text-neutral-700'
-              }`}>
-                {brands.map((b, i) => (
+              <motion.div 
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ repeat: Infinity, ease: "linear", duration: 18 }}
+                className={`flex items-center gap-10 whitespace-nowrap w-max opacity-90 text-[11px] font-headline font-black uppercase tracking-[0.2em] ${
+                  darkMode ? 'text-neutral-300' : 'text-neutral-700'
+                }`}
+              >
+                {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
                   <React.Fragment key={i}>
                     <span className="flex items-center gap-3">
-                      <img src={b.logo} alt={b.name} className="w-6 h-6 object-contain rounded-md bg-white/10 p-0.5" />
-                      {b.name}
+                      {b.logo ? (
+                        <img src={b.logo} alt={b.name} className="h-6 w-auto object-contain max-w-[80px]" />
+                      ) : (
+                        <MaterialIcon name={b.icon} className="text-primary text-base" />
+                      )}
+                      <span>{b.name}</span>
                     </span>
-                    {i < brands.length - 1 && <span className="opacity-30">•</span>}
+                    <span className="opacity-30">•</span>
                   </React.Fragment>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
