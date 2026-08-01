@@ -220,12 +220,12 @@ export default function LandingPage() {
   };
 
   const brands = [
-    { name: 'TAKOS KING', category: 'Fast Food • Guia, Pombal', icon: 'fastfood', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
-    { name: 'AGOSTINHO BIKES', category: 'Stand & Oficina de Bicicletas', icon: 'pedal_bike', logo: '/assets/agostinho-bikes-fav.ico', link: 'https://agostinho-bikes.vercel.app/' },
-    { name: 'ROOTS 199', category: 'Conceito & Marca', icon: 'forest', logo: '/assets/roots-199.png', link: '#' },
-    { name: 'VAULT NUMBER ONE', category: 'Barbearia Premium', icon: 'content_cut', logo: '/assets/vault-fav.ico', link: 'https://vault-number-one-barbershop.vercel.app/' },
-    { name: 'MARIA JOÃO', category: 'Portfolio Criativo', icon: 'brush', logo: '/assets/maria-joao-fav.ico', link: 'https://maria-joao-portfolio.vercel.app/' },
-    { name: 'EDU BRASIL', category: 'Plataforma Educacional', icon: 'school', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
+    { name: 'TAKOS KING', category: 'Fast Food • Guia, Pombal', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
+    { name: 'AGOSTINHO BIKES', category: 'Stand & Oficina de Bicicletas', logo: '/assets/agostinho-bikes.png', link: 'https://agostinho-bikes.vercel.app/' },
+    { name: 'ROOTS 199', category: 'Conceito & Marca', logo: '/assets/roots-199.png', link: '#' },
+    { name: 'VAULT NUMBER ONE', category: 'Barbearia Premium', logo: '/assets/vault.png', link: 'https://vault-number-one-barbershop.vercel.app/' },
+    { name: 'MARIA JOÃO', category: 'Portfolio Criativo', icon: 'brush', link: 'https://maria-joao-portfolio.vercel.app/' },
+    { name: 'EDU BRASIL', category: 'Plataforma Educacional', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
   ];
 
   return (
@@ -743,11 +743,11 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── MARCAS QUE CONFIAM EM NÓS (TICKER CONTINUO QUE ANDA PELA TELA) ── */}
+        {/* ── MARCAS QUE CONFIAM EM NÓS (ESTILO THEAGENCY.PT — LOGOS DIRETOS SEM FUNDO) ── */}
         <section className={`py-20 border-b overflow-hidden transition-colors duration-500 ${
-          darkMode ? 'bg-[#03060C] border-neutral-800/80' : 'bg-neutral-200/60 border-neutral-300'
+          darkMode ? 'bg-[#03060C] border-neutral-800/80' : 'bg-neutral-100/80 border-neutral-300'
         }`}>
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">{t.brands.tag}</p>
             <h3 className={`font-headline text-3xl md:text-4xl font-black uppercase tracking-tighter ${
               darkMode ? 'text-white' : 'text-neutral-900'
@@ -756,11 +756,11 @@ export default function LandingPage() {
             </h3>
           </div>
 
-          <div className="relative w-full overflow-hidden flex items-center">
+          <div className="relative w-full overflow-hidden flex items-center py-4">
             <motion.div 
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
-              className="flex items-center gap-8 whitespace-nowrap w-max"
+              transition={{ repeat: Infinity, ease: "linear", duration: 22 }}
+              className="flex items-center gap-14 md:gap-20 whitespace-nowrap w-max"
             >
               {[...brands, ...brands, ...brands, ...brands].map((brand, i) => (
                 <a
@@ -768,18 +768,22 @@ export default function LandingPage() {
                   href={brand.link}
                   target={brand.link === '#' ? '_self' : '_blank'}
                   rel="noopener noreferrer"
-                  className={`flex items-center gap-4 px-8 py-5 rounded-2xl border transition-all ${
-                    darkMode 
-                      ? 'bg-neutral-900/90 border-neutral-800 text-white hover:border-primary/50' 
-                      : 'bg-white border-neutral-200/90 text-neutral-900 hover:border-primary/50 shadow-sm'
-                  }`}
+                  className="flex items-center gap-4 group opacity-85 hover:opacity-100 transition-opacity cursor-pointer"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-primary/20 flex items-center justify-center shrink-0 p-1.5 overflow-hidden">
-                    <img src={brand.logo} alt={brand.name} className="w-full h-full object-contain" />
-                  </div>
+                  {brand.logo ? (
+                    <img 
+                      src={brand.logo} 
+                      alt={brand.name} 
+                      className="h-10 md:h-12 w-auto object-contain max-w-[140px] transition-transform duration-300 group-hover:scale-105" 
+                    />
+                  ) : (
+                    <MaterialIcon name={brand.icon} className="text-primary text-3xl" />
+                  )}
                   <div className="text-left">
-                    <h4 className="font-headline font-black text-sm uppercase tracking-tight">{brand.name}</h4>
-                    <p className={`text-[11px] font-medium italic ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>{brand.category}</p>
+                    <h4 className={`font-headline font-black text-sm uppercase tracking-tight group-hover:text-primary transition-colors ${
+                      darkMode ? 'text-white' : 'text-neutral-900'
+                    }`}>{brand.name}</h4>
+                    <p className={`text-[10px] font-medium italic ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>{brand.category}</p>
                   </div>
                 </a>
               ))}
