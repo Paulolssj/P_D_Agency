@@ -17,7 +17,7 @@ import axios from 'axios';
 
 const API = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
-export default function ContactModal({ open, onClose, defaultPackage }) {
+export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt' }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,13 +33,13 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
     if (open) {
       setFormData((prev) => ({
         ...prev,
-        package_interest: defaultPackage || 'Promoção Lançamento',
-        support_plan: 'Pacote Básico',
+        package_interest: defaultPackage || (lang === 'pt' ? 'Projeto Personalizado' : 'Custom Project'),
+        support_plan: lang === 'pt' ? 'Suporte Básico' : 'Basic Support',
       }));
       setSuccess(false);
       setError('');
     }
-  }, [open, defaultPackage]);
+  }, [open, defaultPackage, lang]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -50,11 +50,9 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
     setLoading(true);
     setError('');
     try {
-      // Concatenating plans for the backend if it only expects one field, 
-      // or sending separately if the backend supports it.
       const dataToSubmit = {
         ...formData,
-        message: `[Interesse: ${formData.package_interest}] [Suporte: ${formData.support_plan}] \n\n${formData.message}`
+        message: `[Interesse: ${formData.package_interest}] \n\n${formData.message}`
       };
       await axios.post(`${API}/contact`, dataToSubmit);
       setSuccess(true);
@@ -62,11 +60,13 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
         onClose();
       }, 2800);
     } catch (err) {
-      setError('Erro ao enviar. Por favor tenta novamente.');
+      setError(lang === 'pt' ? 'Erro ao enviar. Por favor tenta novamente.' : 'Error sending message. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+
+  const isPt = lang === 'pt';
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -76,10 +76,10 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
       >
         <DialogHeader>
           <DialogTitle className="font-headline text-2xl font-bold text-white uppercase tracking-tight">
-            SOLICITAR ORÇAMENTO
+            {isPt ? 'SOLICITAR ORÇAMENTO' : 'REQUEST A QUOTE'}
           </DialogTitle>
           <p className="text-sm font-light mt-1" style={{ color: '#adaaaa' }}>
-            Conta-nos sobre o teu projeto.
+            {isPt ? 'Conta-nos sobre o teu projeto.' : 'Tell us about your project idea.'}
           </p>
         </DialogHeader>
 
@@ -92,10 +92,10 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
               check_circle
             </span>
             <p className="text-white font-headline text-xl font-bold mt-4">
-              MENSAGEM ENVIADA!
+              {isPt ? 'MENSAGEM ENVIADA!' : 'MESSAGE SENT!'}
             </p>
             <p className="text-sm mt-2" style={{ color: '#adaaaa' }}>
-              Entraremos em contacto em breve.
+              {isPt ? 'Entraremos em contacto em breve.' : 'We will get back to you shortly.'}
             </p>
           </div>
         ) : (
@@ -110,7 +110,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 className="font-bold text-xs uppercase tracking-widest"
                 style={{ color: '#adaaaa' }}
               >
-                Nome
+                {isPt ? 'Nome' : 'Name'}
               </Label>
               <input
                 id="name"
@@ -118,7 +118,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="O teu nome"
+                placeholder={isPt ? 'O teu nome' : 'Your full name'}
                 className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none"
                 style={{
                   backgroundColor: '#0e0e0e',
@@ -144,7 +144,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="teu@email.com"
+                placeholder={isPt ? 'teu@email.com' : 'your@email.com'}
                 className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none"
                 style={{
                   backgroundColor: '#0e0e0e',
@@ -155,52 +155,30 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-4">
-              <div className="space-y-2">
-                <Label className="font-bold text-[10px] uppercase tracking-widest" style={{ color: '#adaaaa' }}>
-                  Projeto
-                </Label>
-                <Select
-                  value={formData.package_interest}
-                  onValueChange={(val) =>
-                    setFormData((prev) => ({ ...prev, package_interest: val }))
-                  }
-                >
-                  <SelectTrigger className="text-white h-11 text-xs" style={{ backgroundColor: '#0e0e0e', border: '1px solid rgba(72,72,71,0.4)' }}>
-                    <SelectValue placeholder="Seleciona o projeto..." />
-                  </SelectTrigger>
-                  <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
-                    {['Promoção Lançamento', 'Projeto Personalizado'].map((opt) => (
-                      <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
-                        {opt}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label className="font-bold text-[10px] uppercase tracking-widest" style={{ color: '#adaaaa' }}>
-                  Plano de Suporte (Obrigatório)
-                </Label>
-                <Select
-                  value={formData.support_plan}
-                  onValueChange={(val) =>
-                    setFormData((prev) => ({ ...prev, support_plan: val }))
-                  }
-                >
-                  <SelectTrigger className="text-white h-11 text-xs border-primary/20" style={{ backgroundColor: '#0e0e0e', border: '1px solid rgba(129,236,255,0.2)' }}>
-                    <SelectValue placeholder="Seleciona o suporte..." />
-                  </SelectTrigger>
-                  <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
-                    {['Pacote Básico', 'Pacote Plus'].map((opt) => (
-                      <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
-                        {opt}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-2">
+              <Label className="font-bold text-[10px] uppercase tracking-widest" style={{ color: '#adaaaa' }}>
+                {isPt ? 'Projeto / Serviço' : 'Project / Service'}
+              </Label>
+              <Select
+                value={formData.package_interest}
+                onValueChange={(val) =>
+                  setFormData((prev) => ({ ...prev, package_interest: val }))
+                }
+              >
+                <SelectTrigger className="text-white h-11 text-xs" style={{ backgroundColor: '#0e0e0e', border: '1px solid rgba(72,72,71,0.4)' }}>
+                  <SelectValue placeholder={isPt ? 'Seleciona o projeto...' : 'Select project type...'} />
+                </SelectTrigger>
+                <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
+                  {(isPt 
+                    ? ['Desenvolvimento Web', 'Engenharia de Software', 'Branding & UI/UX', 'Consultoria Digital']
+                    : ['Web Development', 'Software Engineering', 'Branding & UI/UX', 'Digital Consulting']
+                  ).map((opt) => (
+                    <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
+                      {opt}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="space-y-2">
@@ -209,7 +187,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 className="font-bold text-xs uppercase tracking-widest"
                 style={{ color: '#adaaaa' }}
               >
-                Mensagem
+                {isPt ? 'Mensagem' : 'Message'}
               </Label>
               <textarea
                 id="message"
@@ -218,7 +196,7 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 rows={3}
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Fala-nos sobre o teu projeto..."
+                placeholder={isPt ? 'Fala-nos sobre o teu projeto...' : 'Tell us about your project details...'}
                 className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none resize-none"
                 style={{
                   backgroundColor: '#0e0e0e',
@@ -244,7 +222,9 @@ export default function ContactModal({ open, onClose, defaultPackage }) {
                 color: '#004d57',
               }}
             >
-              {loading ? 'A ENVIAR...' : 'ENVIAR MENSAGEM'}
+              {loading 
+                ? (isPt ? 'A ENVIAR...' : 'SENDING...') 
+                : (isPt ? 'ENVIAR MENSAGEM' : 'SEND MESSAGE')}
             </button>
           </form>
         )}

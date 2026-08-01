@@ -17,14 +17,14 @@ const translations = {
     cta: "VAMOS CONSTRUIR",
     preloader: "CUSTOM DIGITAL AGENCY",
     hero: {
-      badge: "WELCOME TO P&D AGENCY",
+      badge: "BEM-VINDO À P&D AGENCY",
       headline1: "CUSTOM",
       headline2: "DIGITAL & COMMUNICATION",
       headline3: "AGENCY",
       copyBold: "A sua marca é única e merece uma comunicação totalmente feita à medida.",
       copySub: "Na P&D Agency, tratamos o seu projeto com a diferenciação de que ele precisa.",
       copyPartner: "Somos a sua agência de tecnologia e marketing, somos um parceiro de negócio.",
-      btnPrimary: "START YOUR PROJECT",
+      btnPrimary: "INICIAR O SEU PROJETO",
       btnSecondary: "SABER MAIS"
     },
     about: {
@@ -52,8 +52,14 @@ const translations = {
       desc: "Na P&D Agency, oferecemos uma gama completa de serviços de tecnologia, desenvolvimento web e identidade digital. Com estratégias inovadoras e personalizadas, ajudamos a sua marca a destacar-se no mercado.",
       card1_title: "ENGENHARIA WEB & APLICAÇÕES",
       card1_desc: "Trabalhamos o desenvolvimento web através de soluções 360º all-inclusive que eliminam o esforço técnico e trazem resultados duradouros.",
+      card1_li1: "Arquitetura Web & React/Next.js",
+      card1_li2: "Alta Carga & Otimização Cloud",
+      card1_li3: "SEO Avançado & Core Web Vitals",
       card2_title: "IDENTIDADE DE MARCA & BRANDING",
       card2_desc: "Criamos identidades visuais de autoridade que posicionam a sua empresa como líder indiscutível no seu mercado.",
+      card2_li1: "Design de Marca & Sistemas UI/UX",
+      card2_li2: "Redes Sociais & Estratégia de Conteúdo",
+      card2_li3: "Campanhas de Desempenho & Anúncios",
       btnMore: "SABER MAIS"
     },
     stats: {
@@ -138,8 +144,14 @@ const translations = {
       desc: "At P&D Agency, we provide a full suite of software engineering, web development, and digital identity services. With cutting-edge strategies, we elevate your brand to dominate your market.",
       card1_title: "WEB ARCHITECTURE & APPS",
       card1_desc: "We engineer 360º all-inclusive web platforms that eliminate technical overhead and deliver lasting high performance.",
+      card1_li1: "Web Architecture & React/Next.js",
+      card1_li2: "High Load & Cloud Optimization",
+      card1_li3: "Advanced SEO & Core Web Vitals",
       card2_title: "BRAND IDENTITY & BRANDING",
       card2_desc: "We design authoritative brand identities and UI/UX systems that position your business as the undisputed industry leader.",
+      card2_li1: "Brand Design & UI/UX Systems",
+      card2_li2: "Social Media & Content Strategy",
+      card2_li3: "Performance Marketing & Ads",
       btnMore: "LEARN MORE"
     },
     stats: {
@@ -220,11 +232,11 @@ export default function LandingPage() {
   };
 
   const brands = [
-    { name: 'TAKOS KING', category: 'Fast Food • Guia, Pombal', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
-    { name: 'AGOSTINHO BIKES', category: 'Stand & Oficina de Bicicletas', logo: '/assets/agostinho-bikes.png', link: 'https://agostinho-bikes.vercel.app/' },
-    { name: 'ROOTS 199', category: 'Conceito & Marca', logo: '/assets/roots-199.png', link: '#' },
-    { name: 'HELIPLANTA', category: 'Produção Hortícola & Viveiros', logo: '/assets/heliplanta.png', link: 'https://heliplanta-beryl.vercel.app/' },
-    { name: 'EDU BRASIL', category: 'Plataforma Educacional', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
+    { name: 'TAKOS KING', category: lang === 'pt' ? 'Fast Food • Guia, Pombal' : 'Fast Food • Guia, Pombal', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
+    { name: 'AGOSTINHO BIKES', category: lang === 'pt' ? 'Stand & Oficina de Bicicletas' : 'Bicycle Showroom & Workshop', logo: '/assets/agostinho-bikes.png', link: 'https://agostinho-bikes.vercel.app/' },
+    { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Conceito & Marca • Guia' : 'Concept & Brand • Guia', logo: '/assets/roots-199.png', link: '#' },
+    { name: 'HELIPLANTA', category: lang === 'pt' ? 'Produção Hortícola & Viveiros' : 'Horticultural & Nursery Production', logo: '/assets/heliplanta.png', link: 'https://heliplanta-beryl.vercel.app/' },
+    { name: 'EDU BRASIL', category: lang === 'pt' ? 'Plataforma Educacional' : 'Educational Platform', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
   ];
 
   return (
@@ -503,9 +515,9 @@ export default function LandingPage() {
                     {t.services.card1_desc}
                   </p>
                   <ul className={`space-y-3 text-xs uppercase tracking-wider font-bold mb-8 ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>
-                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Web Architecture & React/Next.js</li>
-                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> High Load & Cloud Optimization</li>
-                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> SEO Avançado & Core Web Vitals</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card1_li1}</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card1_li2}</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card1_li3}</li>
                   </ul>
                 </div>
                 <button onClick={() => openModal(t.services.card1_title)} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
@@ -528,9 +540,9 @@ export default function LandingPage() {
                     {t.services.card2_desc}
                   </p>
                   <ul className={`space-y-3 text-xs uppercase tracking-wider font-bold mb-8 ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>
-                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Design de Marca & UI/UX Design</li>
-                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Redes Sociais & Estratégia de Conteúdo</li>
-                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> Anúncios Pagos & Performance</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card2_li1}</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card2_li2}</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card2_li3}</li>
                   </ul>
                 </div>
                 <button onClick={() => openModal(t.services.card2_title)} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
@@ -902,6 +914,7 @@ export default function LandingPage() {
         open={modalOpen} 
         onClose={() => setModalOpen(false)} 
         defaultPackage={selectedPackage} 
+        lang={lang}
       />
 
       <LegalModal 
