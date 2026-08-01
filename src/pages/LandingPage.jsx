@@ -223,7 +223,7 @@ export default function LandingPage() {
     { name: 'TAKOS KING', category: 'Fast Food • Guia, Pombal', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
     { name: 'AGOSTINHO BIKES', category: 'Stand & Oficina de Bicicletas', logo: '/assets/agostinho-bikes.png', link: 'https://agostinho-bikes.vercel.app/' },
     { name: 'ROOTS 199', category: 'Conceito & Marca', logo: '/assets/roots-199.png', link: '#' },
-    { name: 'VAULT NUMBER ONE', category: 'Barbearia Premium', logo: '/assets/vault.png', link: 'https://vault-number-one-barbershop.vercel.app/' },
+    { name: 'HELIPLANTA', category: 'Produção Hortícola & Viveiros', logo: '/assets/heliplanta.png', link: 'https://heliplanta-beryl.vercel.app/' },
     { name: 'MARIA JOÃO', category: 'Portfolio Criativo', icon: 'brush', link: 'https://maria-joao-portfolio.vercel.app/' },
     { name: 'EDU BRASIL', category: 'Plataforma Educacional', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
   ];
@@ -597,14 +597,14 @@ export default function LandingPage() {
                   link: 'https://maria-joao-portfolio.vercel.app/',
                 },
                 {
-                  label: 'Barbearia Premium / 2026',
-                  labelColor: 'text-primary',
-                  title: 'VAULT NUMBER ONE',
-                  subtitle: lang === 'pt' ? 'Plataforma digital para barbearia de elite — menu de serviços e marca.' : 'Digital platform for elite barbershop — service menu & brand presence.',
-                  img: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
+                  label: lang === 'pt' ? 'Agronegócio & Viveiros / 2026' : 'Agribusiness & Nurseries / 2026',
+                  labelColor: 'text-emerald-500',
+                  title: 'HELIPLANTA',
+                  subtitle: lang === 'pt' ? 'Plataforma digital para viveiros hortícolas e ornamentais na Mata Mourisca — catálogo e serviços.' : 'Digital platform for horticultural and ornamental nurseries in Mata Mourisca — catalog & services.',
+                  img: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
                   badge: t.portfolio.live,
-                  badgeClass: 'bg-primary text-white',
-                  link: 'https://vault-number-one-barbershop.vercel.app/',
+                  badgeClass: 'bg-emerald-600 text-white',
+                  link: 'https://heliplanta-beryl.vercel.app/',
                 },
                 {
                   label: 'Restauração / 2025',
@@ -708,9 +708,9 @@ export default function LandingPage() {
                   quote: lang === 'pt'
                     ? "Contactámos a P&D Agency para a criação da nossa marca e website. Fiquei muito feliz com todos os resultados: imagem da marca, site e presença digital – cada elemento em perfeita sintonia."
                     : "We hired P&D Agency for our brand identity and web platform. The results speak for themselves — brand image, website, and digital presence in complete harmony.",
-                  author: "Gestão Vault",
-                  role: "Fundadores",
-                  brand: "Vault Number One Barbershop"
+                  author: "Equipa Heliplanta",
+                  role: "Direção & Vendas",
+                  brand: "Heliplanta Viveiros"
                 }
               ].map((testi, idx) => (
                 <motion.div
