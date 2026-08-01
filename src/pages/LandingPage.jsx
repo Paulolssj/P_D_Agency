@@ -220,12 +220,12 @@ export default function LandingPage() {
   };
 
   const brands = [
-    { name: 'TACOS KING', category: 'Fast Food • Guia, Pombal', icon: 'fastfood', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
-    { name: 'AGOSTINHO BIKES', category: 'Stand & Oficina de Bicicletas', icon: 'pedal_bike', link: 'https://agostinho-bikes.vercel.app/' },
-    { name: 'ROOTS 199', category: 'Conceito & Marca', icon: 'forest', link: '#' },
-    { name: 'VAULT NUMBER ONE', category: 'Barbearia Premium', icon: 'content_cut', link: 'https://vault-number-one-barbershop.vercel.app/' },
-    { name: 'MARIA JOÃO', category: 'Portfolio Criativo', icon: 'brush', link: 'https://maria-joao-portfolio.vercel.app/' },
-    { name: 'EDU BRASIL', category: 'Plataforma Educacional', icon: 'school', link: 'https://mobileapp-taupe.vercel.app/' }
+    { name: 'TAKOS KING', category: 'Fast Food • Guia, Pombal', icon: 'fastfood', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
+    { name: 'AGOSTINHO BIKES', category: 'Stand & Oficina de Bicicletas', icon: 'pedal_bike', logo: '/assets/agostinho-bikes-fav.ico', link: 'https://agostinho-bikes.vercel.app/' },
+    { name: 'ROOTS 199', category: 'Conceito & Marca', icon: 'forest', logo: '/assets/roots-199.png', link: '#' },
+    { name: 'VAULT NUMBER ONE', category: 'Barbearia Premium', icon: 'content_cut', logo: '/assets/vault-fav.ico', link: 'https://vault-number-one-barbershop.vercel.app/' },
+    { name: 'MARIA JOÃO', category: 'Portfolio Criativo', icon: 'brush', logo: '/assets/maria-joao-fav.ico', link: 'https://maria-joao-portfolio.vercel.app/' },
+    { name: 'EDU BRASIL', category: 'Plataforma Educacional', icon: 'school', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
   ];
 
   return (
@@ -386,20 +386,18 @@ export default function LandingPage() {
             <div className={`w-full overflow-hidden border-y py-5 rounded-2xl ${
               darkMode ? 'border-neutral-800 bg-neutral-900/40' : 'border-neutral-200 bg-neutral-100/60'
             }`}>
-              <div className={`flex items-center gap-12 whitespace-nowrap justify-around opacity-85 text-[11px] font-headline font-black uppercase tracking-[0.25em] ${
+              <div className={`flex items-center gap-10 whitespace-nowrap justify-around opacity-90 text-[11px] font-headline font-black uppercase tracking-[0.2em] ${
                 darkMode ? 'text-neutral-300' : 'text-neutral-700'
               }`}>
-                <span className="flex items-center gap-2"><MaterialIcon name="pedal_bike" className="text-primary" /> AGOSTINHO BIKES</span>
-                <span className="opacity-30">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="fastfood" className="text-amber-500" /> TAKOS KING</span>
-                <span className="opacity-30">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="content_cut" className="text-primary" /> VAULT NUMBER ONE</span>
-                <span className="opacity-30">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="forest" className="text-primary" /> ROOTS 199</span>
-                <span className="opacity-30">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="brush" className="text-primary" /> MARIA JOÃO</span>
-                <span className="opacity-30">•</span>
-                <span className="flex items-center gap-2"><MaterialIcon name="school" className="text-primary" /> EDU BRASIL</span>
+                {brands.map((b, i) => (
+                  <React.Fragment key={i}>
+                    <span className="flex items-center gap-3">
+                      <img src={b.logo} alt={b.name} className="w-6 h-6 object-contain rounded-md bg-white/10 p-0.5" />
+                      {b.name}
+                    </span>
+                    {i < brands.length - 1 && <span className="opacity-30">•</span>}
+                  </React.Fragment>
+                ))}
               </div>
             </div>
           </div>
@@ -776,8 +774,8 @@ export default function LandingPage() {
                       : 'bg-white border-neutral-200/90 text-neutral-900 hover:border-primary/50 shadow-sm'
                   }`}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                    <MaterialIcon name={brand.icon} className="text-primary text-2xl" />
+                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-primary/20 flex items-center justify-center shrink-0 p-1.5 overflow-hidden">
+                    <img src={brand.logo} alt={brand.name} className="w-full h-full object-contain" />
                   </div>
                   <div className="text-left">
                     <h4 className="font-headline font-black text-sm uppercase tracking-tight">{brand.name}</h4>
