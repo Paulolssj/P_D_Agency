@@ -112,6 +112,15 @@ export default function LandingPage() {
             </div>
             <span className="text-lg md:text-2xl font-black tracking-tighter text-neutral-900 uppercase font-headline italic truncate max-w-[120px] sm:max-w-none">P&D AGENCY</span>
           </div>
+
+          <nav className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-neutral-600">
+            <a href="#capabilities" className="hover:text-primary transition-colors">Capacidades</a>
+            <a href="#abordagem" className="hover:text-primary transition-colors">Abordagem</a>
+            <a href="#portfolio" className="hover:text-primary transition-colors">Portfólio</a>
+            <a href="#testemunhos" className="hover:text-primary transition-colors">Testemunhos</a>
+            <a href="#pricing" className="hover:text-primary transition-colors">Planos</a>
+          </nav>
+
           <button 
             onClick={() => openModal()}
             className="bg-neutral-950 text-white px-6 py-2.5 rounded-full font-black font-headline text-[11px] tracking-widest hover:bg-neutral-900 active:scale-95 transition-all uppercase shadow-sm"
@@ -123,7 +132,7 @@ export default function LandingPage() {
 
       <main className="overflow-x-hidden">
         {/* ── HERO SECTION ── */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-28 pb-36 md:pt-24 md:pb-36 overflow-hidden bg-white">
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-28 pb-32 md:pt-28 md:pb-36 overflow-hidden bg-white">
           {/* Dynamic Ambient Elements */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[120px] animate-pulse pointer-events-none"></div>
           <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/[0.04] rounded-full blur-[80px] pointer-events-none animate-bounce" style={{ animationDuration: '10s' }}></div>
@@ -132,11 +141,11 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-center gap-4 mb-10"
+              className="flex items-center justify-center gap-4 mb-8"
             >
               <div className="h-[1px] w-12 bg-neutral-200"></div>
               <p className="font-label text-primary uppercase tracking-[0.6em] text-[10px] font-black italic">
-                P&D AGENCY
+                CUSTOM DIGITAL & COMMUNICATION AGENCY
               </p>
               <div className="h-[1px] w-12 bg-neutral-200"></div>
             </motion.div>
@@ -145,7 +154,7 @@ export default function LandingPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
-              className="text-fluid-h1 mb-12 uppercase leading-[1.05] tracking-tighter"
+              className="text-fluid-h1 mb-10 uppercase leading-[1.05] tracking-tighter"
             >
               <motion.span 
                 initial={{ opacity: 0, y: 50, rotateX: 45 }}
@@ -161,7 +170,7 @@ export default function LandingPage() {
                 transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
                 className="block text-primary font-black italic my-2"
               >
-                Interfaces
+                Interfaces & Marcas
               </motion.span>
               <motion.span 
                 initial={{ opacity: 0, y: -50, rotateX: -45 }}
@@ -177,12 +186,12 @@ export default function LandingPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 1.2 }}
-              className="text-fluid-body text-neutral-500 max-w-3xl mx-auto mb-16 font-medium leading-relaxed italic"
+              className="text-fluid-body text-neutral-500 max-w-3xl mx-auto mb-12 font-medium leading-relaxed italic"
             >
-              Combinamos <span className="text-neutral-900 font-bold border-b border-primary/45 pb-0.5">engenharia de precisão</span> com <span className="text-neutral-900 font-bold border-b border-primary/45 pb-0.5">design de elite</span> para transformar a tua presença digital num ativo estratégico de autoridade absoluta.
+              A sua marca é única e merece uma presença totalmente feita à medida. Na <span className="text-neutral-900 font-bold border-b border-primary/45 pb-0.5">P&D Agency</span>, tratamos o seu projeto com a <span className="text-neutral-900 font-bold border-b border-primary/45 pb-0.5">diferenciação, engenharia e estratégia</span> de que necessita — somos a sua equipa de tecnologia e um parceiro de negócio de alta confiança.
             </motion.p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
               <motion.button 
                 onClick={() => openModal()}
                 whileHover={{ scale: 1.03, y: -2 }}
@@ -198,8 +207,23 @@ export default function LandingPage() {
                 whileTap={{ scale: 0.97 }}
                 className="group relative border border-neutral-200 text-neutral-800 px-12 py-6 rounded-xl font-headline font-black text-xs tracking-[0.3em] uppercase hover:bg-neutral-50 transition-all backdrop-blur-sm w-full sm:w-auto overflow-hidden"
               >
-                <span className="relative z-10">VER SERVIÇOS</span>
+                <span className="relative z-10">VER CAPACIDADES</span>
               </motion.button>
+            </div>
+
+            {/* Continuous Brand Marquee Ticker */}
+            <div className="w-full overflow-hidden border-y border-neutral-100/80 py-4 bg-neutral-50/50 backdrop-blur-sm rounded-2xl">
+              <div className="flex items-center gap-12 animate-marquee whitespace-nowrap justify-around opacity-75 text-[11px] font-headline font-black uppercase tracking-widest text-neutral-500">
+                <span className="flex items-center gap-2"><MaterialIcon name="pedal_bike" className="text-primary text-base" /> AGOSTINHO BIKES</span>
+                <span className="text-neutral-300">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="fastfood" className="text-amber-600 text-base" /> TAKOS KING</span>
+                <span className="text-neutral-300">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="content_cut" className="text-primary text-base" /> VAULT NUMBER ONE</span>
+                <span className="text-neutral-300">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="forest" className="text-primary text-base" /> ROOTS 199</span>
+                <span className="text-neutral-300">•</span>
+                <span className="flex items-center gap-2"><MaterialIcon name="brush" className="text-primary text-base" /> MARIA JOÃO</span>
+              </div>
             </div>
           </div>
 
@@ -383,6 +407,64 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* ── A NOSSA ABORDAGEM ── */}
+        <section className="py-28 bg-neutral-950 text-white relative overflow-hidden" id="abordagem">
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+          <div className="container max-w-7xl mx-auto px-6 relative z-10">
+            <div className="max-w-3xl mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-black">
+                DIFERENCIAÇÃO E PARCERIA
+              </p>
+              <h2 className="text-fluid-h2 text-white uppercase tracking-tighter mb-6">
+                UMA ABORDAGEM <span className="text-primary italic">100% FEITA À MEDIDA</span>
+              </h2>
+              <p className="text-neutral-400 text-lg font-light leading-relaxed italic">
+                Somos uma agência boutique full-service. Desenvolvemos o seu projeto de comunicação e tecnologia desde a conceção estratégica até à aplicação prática, com foco absoluto no crescimento do seu negócio.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  num: "01",
+                  title: "ABORDAGEM PERSONALIZADA",
+                  desc: "Tratamos cada marca como única. Criamos soluções exclusivas e customizadas ao seu setor de atividade, sem fórmulas genéricas."
+                },
+                {
+                  num: "02",
+                  title: "DESENVOLVIMENTO SEM LIMITES",
+                  desc: "Eliminamos barreiras técnicas. Trabalhamos com autonomia completa em engenharia web, branding, SEO e automação."
+                },
+                {
+                  num: "03",
+                  title: "PARCEIRO DE NEGÓCIO",
+                  desc: "Mais do que prestadores de serviço, somos um parceiro estratégico focado em colocar o poder da tecnologia ao serviço das suas vendas."
+                },
+                {
+                  num: "04",
+                  title: "EQUIPA MULTIDISCIPLINAR",
+                  desc: "O seu projeto é acompanhado por uma equipa dedicada com Engenheiros de Software, Designers UX/UI e Diretores Criativos."
+                }
+              ].map((pillar, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-neutral-900/80 border border-neutral-800 p-8 rounded-2xl flex flex-col justify-between group hover:border-primary/50 transition-all duration-500"
+                >
+                  <div>
+                    <span className="font-headline text-3xl font-black text-primary/40 group-hover:text-primary transition-colors block mb-6">{pillar.num}</span>
+                    <h3 className="font-headline text-xl font-bold text-white uppercase mb-4 tracking-tight group-hover:text-primary transition-colors">{pillar.title}</h3>
+                    <p className="text-neutral-400 text-sm font-body leading-relaxed">{pillar.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── BENEFITS SECTION ── */}
         <section className="py-24 bg-neutral-50 border-t border-neutral-100">
           <div className="container mx-auto px-4">
@@ -519,6 +601,68 @@ export default function LandingPage() {
                     <p className="text-neutral-200 text-sm font-light leading-snug">{item.subtitle}</p>
                   </div>
                 </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── TESTEMUNHOS & REVIEWS ── */}
+        <section className="py-28 bg-neutral-50 border-t border-neutral-100 relative overflow-hidden" id="testemunhos">
+          <div className="container max-w-7xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <p className="font-label text-neutral-500 uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">AVALIAÇÕES & EXPERIÊNCIAS</p>
+              <h2 className="text-fluid-h2 text-neutral-900 uppercase tracking-tighter">O QUE DIZEM OS NOSSOS CLIENTES</h2>
+              <p className="text-neutral-500 text-sm mt-4 max-w-lg mx-auto italic">A satisfação de quem confia na P&D Agency para transformar a sua presença digital.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {[
+                {
+                  quote: "Souberam ler a nossa visão desde o primeiro instante. Apresentam um serviço altamente personalizado e têm sido uma grande alavanca para o nosso negócio.",
+                  author: "Ana Dominguez",
+                  role: "Fundadora & Proprietária",
+                  brand: "Casa do Azulejo & Ceramics",
+                  badgeIcon: "star"
+                },
+                {
+                  quote: "Profissionalismo, rapidez de resposta e domínio total da tecnologia e design. O desenvolvimento do website e catálogo digital superou imenso as nossas expectativas.",
+                  author: "Equipa Agostinho Bikes",
+                  role: "Direção & Vendas",
+                  brand: "Agostinho Bikes Stand & Oficina",
+                  badgeIcon: "pedal_bike"
+                },
+                {
+                  quote: "Contactámos a P&D Agency para a criação da nossa marca e plataforma web. Cada elemento fala por si e está em perfeita sintonia com a imagem cuidada que exigíamos.",
+                  author: "Gestão Vault",
+                  role: "Fundadores",
+                  brand: "Vault Number One Barbershop",
+                  badgeIcon: "content_cut"
+                }
+              ].map((testi, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.12 }}
+                  className="bg-white border border-neutral-200/80 p-8 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 relative group"
+                >
+                  <div className="mb-8">
+                    <div className="text-primary text-4xl font-headline font-black mb-4 select-none opacity-30 group-hover:opacity-100 transition-opacity">“</div>
+                    <p className="text-neutral-700 text-sm leading-relaxed italic font-medium">
+                      "{testi.quote}"
+                    </p>
+                  </div>
+                  <div className="pt-6 border-t border-neutral-100 flex items-center justify-between">
+                    <div>
+                      <h4 className="font-headline font-black text-neutral-900 text-sm uppercase tracking-tight">{testi.author}</h4>
+                      <p className="text-neutral-400 text-xs font-medium italic">{testi.role} • <span className="text-primary font-semibold">{testi.brand}</span></p>
+                    </div>
+                    <div className="w-9 h-9 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center shrink-0">
+                      <MaterialIcon name={testi.badgeIcon} className="text-primary text-sm" />
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
