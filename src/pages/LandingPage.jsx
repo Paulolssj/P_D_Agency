@@ -15,12 +15,12 @@ const translations = {
       testimonials: "Testemunhos"
     },
     cta: "VAMOS CONSTRUIR",
-    preloader: "CUSTOM DIGITAL AGENCY",
+    preloader: "AGÊNCIA DIGITAL & COMUNICAÇÃO",
     hero: {
       badge: "BEM-VINDO À P&D AGENCY",
-      headline1: "CUSTOM",
-      headline2: "DIGITAL & COMMUNICATION",
-      headline3: "AGENCY",
+      headline1: "AGÊNCIA DIGITAL",
+      headline2: "E COMUNICAÇÃO",
+      headline3: "PERSONALIZADA",
       copyBold: "A sua marca é única e merece uma comunicação totalmente feita à medida.",
       copySub: "Na P&D Agency, tratamos o seu projeto com a diferenciação de que ele precisa.",
       copyPartner: "Somos a sua agência de tecnologia e marketing, somos um parceiro de negócio.",
@@ -29,8 +29,8 @@ const translations = {
     },
     about: {
       tag: "SOBRE A P&D AGENCY",
-      title1: "CUSTOM DIGITAL",
-      title2: "AGENCY",
+      title1: "AGÊNCIA DIGITAL",
+      title2: "PERSONALIZADA",
       p1_num: "01",
       p1_title: "UMA ABORDAGEM PERSONALIZADA",
       p1_desc: "Somos uma agência boutique full-service, o que significa que temos a competência para desenvolver o seu projeto de comunicação e tecnologia, desde a conceção estratégica até à aplicação prática, de uma forma relevante para o seu setor de atividade. Estamos consigo ao longo de todo o caminho!",
@@ -84,16 +84,16 @@ const translations = {
       title: "MARCAS QUE CONFIAM EM NÓS"
     },
     ctaMeeting: {
-      title1: "TENS INTERESSE?",
+      title1: "TEM INTERESSE?",
       title2: "VAMOS MARCAR UMA REUNIÃO.",
-      sub: "Agendamos uma conversa de 30 minutos, sem compromisso, para perceber o que a tua empresa necessita.",
+      sub: "Agendamos uma conversa de 30 minutos, sem compromisso, para perceber o que a sua empresa necessita.",
       btn: "AGENDAR REUNIÃO"
     },
     footer: {
-      sub: "Custom Digital & Communication Agency. Arquitetando o futuro da presença digital.",
+      sub: "Agência Digital & Comunicação Personalizada. Arquitetando o futuro da presença digital.",
       navTitle: "NAVEGAÇÃO",
-      socialTitle: "SOCIAL",
-      rights: "© 2026 P&D AGENCY. CUSTOM DIGITAL AGENCY. ALL RIGHTS RESERVED.",
+      socialTitle: "REDES SOCIAIS",
+      rights: "© 2026 P&D AGENCY. TODOS OS DIREITOS RESERVADOS.",
       terms: "TERMOS DE USO",
       privacy: "POLÍTICA DE PRIVACIDADE"
     }
