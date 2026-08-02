@@ -228,6 +228,178 @@ const FlagEN = ({ className = "w-4 h-3" }) => (
   </svg>
 );
 
+function ContactInlineForm({ lang = 'pt', darkMode = false }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: lang === 'pt' ? 'Desenvolvimento Web & Apps' : 'Web & App Development',
+    location: '',
+    message: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const isPt = lang === 'pt';
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await axios.post('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
+        nome: formData.name,
+        email: formData.email,
+        assunto_servico: formData.subject,
+        localizacao: formData.location || 'Não especificada',
+        mensagem: formData.message,
+        _subject: `[P&D AGENCY] Novo Pedido de Proposta de ${formData.name}`,
+        _template: 'table',
+        _captcha: 'false'
+      });
+      setSuccess(true);
+    } catch (err) {
+      window.location.href = `mailto:pd.agency.digital01@gmail.com?subject=${encodeURIComponent(`[P&D AGENCY] Proposta de ${formData.name}`)}&body=${encodeURIComponent(`Nome: ${formData.name}\nEmail: ${formData.email}\nServiço: ${formData.subject}\nLocalização: ${formData.location}\n\nMensagem:\n${formData.message}`)}`;
+      setSuccess(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (success) {
+    return (
+      <div className="py-12 text-center" data-testid="inline-contact-success">
+        <span className="material-symbols-outlined text-emerald-500 text-5xl mb-3">check_circle</span>
+        <h4 className={`font-headline text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+          {isPt ? 'PROPOSTA ENVIADA COM SUCESSO!' : 'PROPOSAL SENT SUCCESSFULLY!'}
+        </h4>
+        <p className={`text-sm ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+          {isPt ? 'Recebemos a tua mensagem e responderemos para o teu email muito em breve.' : 'We received your message and will respond to your email very soon.'}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6" data-testid="inline-contact-form">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+            {isPt ? 'O TEU NOME *' : 'YOUR NAME *'}
+          </label>
+          <input
+            type="text"
+            required
+            placeholder="ex: Ana Maria"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border ${
+              darkMode 
+                ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+                : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+            }`}
+          />
+        </div>
+
+        <div>
+          <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+            {isPt ? 'O TEU EMAIL *' : 'YOUR EMAIL *'}
+          </label>
+          <input
+            type="email"
+            required
+            placeholder="ex: ana@email.com"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border ${
+              darkMode 
+                ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+                : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+            }`}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+            {isPt ? 'MOTIVO DE CONTACTO / ASSUNTO' : 'SUBJECT / REASON'}
+          </label>
+          <select
+            value={formData.subject}
+            onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+            className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border cursor-pointer ${
+              darkMode 
+                ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+                : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+            }`}
+          >
+            {isPt ? (
+              <>
+                <option value="Desenvolvimento Web & Apps">Desenvolvimento Web & Apps</option>
+                <option value="Branding & Identidade Visual">Branding & Identidade Visual</option>
+                <option value="Consultoria Digital & Marketing">Consultoria Digital & Marketing</option>
+                <option value="Manutenção & Suporte">Manutenção & Suporte</option>
+                <option value="Outro assunto">Outro assunto</option>
+              </>
+            ) : (
+              <>
+                <option value="Web & App Development">Web & App Development</option>
+                <option value="Branding & Visual Identity">Branding & Visual Identity</option>
+                <option value="Digital Consulting & Marketing">Digital Consulting & Marketing</option>
+                <option value="Maintenance & Support">Maintenance & Support</option>
+                <option value="Other">Other</option>
+              </>
+            )}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+            {isPt ? 'LOCALIZAÇÃO' : 'LOCATION'}
+          </label>
+          <input
+            type="text"
+            placeholder={isPt ? "ex: Lisboa, Porto, Leiria..." : "ex: London, Lisbon, NY..."}
+            value={formData.location}
+            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+            className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border ${
+              darkMode 
+                ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+                : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+            }`}
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+          {isPt ? 'DESCRIÇÃO DA IDEIA OU MENSAGEM *' : 'MESSAGE OR IDEA DESCRIPTION *'}
+        </label>
+        <textarea
+          required
+          rows={4}
+          placeholder={isPt ? "Conta-nos a tua ideia de website, aplicação ou comunicação..." : "Tell us about your website, app, or communication idea..."}
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border resize-none ${
+            darkMode 
+              ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+              : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+          }`}
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="bg-neutral-900 text-white hover:bg-primary px-8 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg cursor-pointer disabled:opacity-50"
+      >
+        <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar Ideia' : 'Send Idea')}</span>
+        <span className="material-symbols-outlined text-base">send</span>
+      </button>
+    </form>
+  );
+}
+
 // ── COMPONENTE PRINCIPAL (COM MODO CLARO/ESCURO & LINGUAGEM PT/EN) ──
 
 export default function LandingPage() {
@@ -886,6 +1058,108 @@ export default function LandingPage() {
                 </a>
               ))}
             </motion.div>
+          </div>
+        </section>
+
+        {/* ── SECÇÃO DE CONTACTO NO FIM DA PÁGINA (DESIGN MARIA JOÃO) ── */}
+        <section className={`py-28 border-b transition-colors duration-500 ${
+          darkMode ? 'bg-[#050A13] border-neutral-800' : 'bg-[#FDFBF7] border-neutral-200'
+        }`} id="contacto">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">
+                {lang === 'pt' ? 'CONTACTO' : 'CONTACT US'}
+              </p>
+              <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter ${
+                darkMode ? 'text-white' : 'text-neutral-900'
+              }`}>
+                {lang === 'pt' ? 'FALAR COM A ' : 'TALK TO THE '}
+                <span className="text-primary italic underline decoration-primary decoration-4 underline-offset-8">
+                  {lang === 'pt' ? 'AGÊNCIA' : 'AGENCY'}
+                </span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto">
+              {/* LADO ESQUERDO: CARTÕES DE CONTACTO */}
+              <div className="lg:col-span-5 flex flex-col gap-5">
+                {/* CARTÃO EMAIL */}
+                <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                }`}>
+                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
+                    <MaterialIcon name="mail" className="text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">EMAIL</p>
+                    <a href="mailto:pd.agency.digital01@gmail.com" className={`font-headline font-bold text-sm hover:text-primary transition-colors ${
+                      darkMode ? 'text-white' : 'text-neutral-900'
+                    }`}>
+                      pd.agency.digital01@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                {/* CARTÃO INSTAGRAM */}
+                <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                }`}>
+                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
+                    <MaterialIcon name="share" className="text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">INSTAGRAM</p>
+                    <a href="https://www.instagram.com/p.d_agency/" target="_blank" rel="noopener noreferrer" className={`font-headline font-bold text-sm hover:text-primary transition-colors ${
+                      darkMode ? 'text-white' : 'text-neutral-900'
+                    }`}>
+                      @p.d_agency
+                    </a>
+                  </div>
+                </div>
+
+                {/* CARTÃO LOCALIZAÇÃO */}
+                <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                }`}>
+                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
+                    <MaterialIcon name="location_on" className="text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">LOCALIZAÇÃO</p>
+                    <p className={`font-headline font-bold text-sm ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+                      Leiria / Pombal • Portugal
+                    </p>
+                  </div>
+                </div>
+
+                {/* CARTÃO PROPOSTAS & COLABORAÇÕES */}
+                <div className={`p-8 rounded-3xl border transition-all ${
+                  darkMode ? 'bg-neutral-900/50 border-neutral-800' : 'bg-neutral-100/70 border-neutral-200'
+                }`}>
+                  <h4 className={`font-headline font-bold text-lg mb-2 ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+                    {lang === 'pt' ? 'Propostas & Colaborações' : 'Proposals & Collaborations'}
+                  </h4>
+                  <p className={`text-xs leading-relaxed ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                    {lang === 'pt' 
+                      ? 'Se tens uma ideia para um projeto de desenvolvimento web, aplicação, branding ou consultoria digital, entra em contacto diretamente connosco.'
+                      : 'If you have an idea for a web development, app, branding, or digital consulting project, reach out directly to us.'}
+                  </p>
+                </div>
+              </div>
+
+              {/* LADO DIREITO: FORMULÁRIO DE CONTACTO DA PÁGINA */}
+              <div className="lg:col-span-7">
+                <div className={`p-8 md:p-10 rounded-3xl border shadow-2xl ${
+                  darkMode ? 'bg-neutral-900 border-neutral-800' : 'bg-white border-neutral-200'
+                }`}>
+                  <h3 className={`font-headline text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+                    {lang === 'pt' ? 'Envia a tua proposta' : 'Send your proposal'}
+                  </h3>
+
+                  <ContactInlineForm lang={lang} darkMode={darkMode} />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

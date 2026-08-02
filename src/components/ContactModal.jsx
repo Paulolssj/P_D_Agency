@@ -91,14 +91,19 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
-        className="border text-white max-w-md p-8 overflow-y-auto max-h-[90vh]"
-        style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(72,72,71,0.3)' }}
+        className={`border text-white max-w-xl p-8 overflow-y-auto max-h-[90vh] rounded-3xl ${
+          'bg-neutral-900 border-neutral-800'
+        }`}
+        style={{ borderRadius: '1.5rem' }}
       >
-        <DialogHeader>
-          <DialogTitle className="font-headline text-2xl font-bold text-white uppercase tracking-tight">
+        <DialogHeader className="mb-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">
+            {isPt ? 'CONTACTO' : 'CONTACT'}
+          </p>
+          <DialogTitle className="font-headline text-3xl font-black text-white uppercase tracking-tight">
             {isPt ? 'SOLICITAR ORÇAMENTO' : 'REQUEST A QUOTE'}
           </DialogTitle>
-          <p className="text-sm font-light mt-1" style={{ color: '#adaaaa' }}>
+          <p className="text-xs font-light text-neutral-400 mt-1">
             {isPt ? 'Conta-nos sobre o teu projeto ou envia direto para' : 'Tell us about your project or email us directly at'}{' '}
             <a href="mailto:pd.agency.digital01@gmail.com" className="text-primary font-bold hover:underline">
               pd.agency.digital01@gmail.com
@@ -107,110 +112,101 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
         </DialogHeader>
 
         {success ? (
-          <div className="text-center py-8" data-testid="contact-success">
-            <span
-              className="material-symbols-outlined"
-              style={{ color: '#81ecff', fontSize: '3rem' }}
-            >
+          <div className="text-center py-10" data-testid="contact-success">
+            <span className="material-symbols-outlined text-emerald-400 text-5xl mb-3">
               check_circle
             </span>
-            <p className="text-white font-headline text-xl font-bold mt-4">
-              {isPt ? 'MENSAGEM ENVIADA!' : 'MESSAGE SENT!'}
+            <p className="text-white font-headline text-2xl font-bold">
+              {isPt ? 'PROPOSTA ENVIADA!' : 'PROPOSAL SENT!'}
             </p>
-            <p className="text-sm mt-2" style={{ color: '#adaaaa' }}>
-              {isPt ? 'Entraremos em contacto em breve.' : 'We will get back to you shortly.'}
+            <p className="text-xs text-neutral-400 mt-2">
+              {isPt ? 'Entraremos em contacto muito em breve.' : 'We will get back to you shortly.'}
             </p>
           </div>
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="space-y-5 mt-4"
+            className="space-y-5"
             data-testid="contact-form"
           >
-            <div className="space-y-2">
-              <Label
-                htmlFor="name"
-                className="font-bold text-xs uppercase tracking-widest"
-                style={{ color: '#adaaaa' }}
-              >
-                {isPt ? 'Nome' : 'Name'}
-              </Label>
-              <input
-                id="name"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                placeholder={isPt ? 'O teu nome' : 'Your full name'}
-                className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none"
-                style={{
-                  backgroundColor: '#0e0e0e',
-                  border: '1px solid rgba(72,72,71,0.4)',
-                }}
-                onFocus={(e) => (e.target.style.borderColor = 'rgba(129,236,255,0.5)')}
-                onBlur={(e) => (e.target.style.borderColor = 'rgba(72,72,71,0.4)')}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="name" className="font-black text-[11px] uppercase tracking-wider text-neutral-400">
+                  {isPt ? 'O TEU NOME *' : 'YOUR NAME *'}
+                </Label>
+                <input
+                  id="name"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="ex: Ana Maria"
+                  className="w-full rounded-2xl px-4 py-3 text-sm text-white bg-neutral-950 border border-neutral-800 transition-all outline-none focus:border-primary"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="email" className="font-black text-[11px] uppercase tracking-wider text-neutral-400">
+                  {isPt ? 'O TEU EMAIL *' : 'YOUR EMAIL *'}
+                </Label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="ex: ana@email.com"
+                  className="w-full rounded-2xl px-4 py-3 text-sm text-white bg-neutral-950 border border-neutral-800 transition-all outline-none focus:border-primary"
+                />
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <Label
-                htmlFor="email"
-                className="font-bold text-xs uppercase tracking-widest"
-                style={{ color: '#adaaaa' }}
-              >
-                Email
-              </Label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                placeholder={isPt ? 'teu@email.com' : 'your@email.com'}
-                className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none"
-                style={{
-                  backgroundColor: '#0e0e0e',
-                  border: '1px solid rgba(72,72,71,0.4)',
-                }}
-                onFocus={(e) => (e.target.style.borderColor = 'rgba(129,236,255,0.5)')}
-                onBlur={(e) => (e.target.style.borderColor = 'rgba(72,72,71,0.4)')}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label className="font-black text-[11px] uppercase tracking-wider text-neutral-400">
+                  {isPt ? 'MOTIVO DE CONTACTO / ASSUNTO' : 'SUBJECT / REASON'}
+                </Label>
+                <Select
+                  value={formData.package_interest}
+                  onValueChange={(val) =>
+                    setFormData((prev) => ({ ...prev, package_interest: val }))
+                  }
+                >
+                  <SelectTrigger className="text-white h-11 text-xs rounded-2xl bg-neutral-950 border border-neutral-800 focus:border-primary">
+                    <SelectValue placeholder={isPt ? 'Seleciona o assunto...' : 'Select subject...'} />
+                  </SelectTrigger>
+                  <SelectContent className="bg-neutral-900 border border-neutral-800">
+                    {(isPt 
+                      ? ['Desenvolvimento Web & Apps', 'Branding & Identidade Visual', 'Consultoria Digital & Marketing', 'Manutenção & Suporte']
+                      : ['Web & App Development', 'Branding & Visual Identity', 'Digital Consulting & Marketing', 'Maintenance & Support']
+                    ).map((opt) => (
+                      <SelectItem key={opt} value={opt} className="text-white focus:bg-primary/20 focus:text-primary cursor-pointer text-xs">
+                        {opt}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-1.5">
+                <Label className="font-black text-[11px] uppercase tracking-wider text-neutral-400">
+                  {isPt ? 'LOCALIZAÇÃO' : 'LOCATION'}
+                </Label>
+                <input
+                  id="support_plan"
+                  name="support_plan"
+                  value={formData.support_plan}
+                  onChange={handleChange}
+                  placeholder={isPt ? "ex: Lisboa, Porto, Leiria..." : "ex: London, Lisbon, NY..."}
+                  className="w-full rounded-2xl px-4 py-3 text-sm text-white bg-neutral-950 border border-neutral-800 transition-all outline-none focus:border-primary"
+                />
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <Label className="font-bold text-[10px] uppercase tracking-widest" style={{ color: '#adaaaa' }}>
-                {isPt ? 'Projeto / Serviço' : 'Project / Service'}
-              </Label>
-              <Select
-                value={formData.package_interest}
-                onValueChange={(val) =>
-                  setFormData((prev) => ({ ...prev, package_interest: val }))
-                }
-              >
-                <SelectTrigger className="text-white h-11 text-xs" style={{ backgroundColor: '#0e0e0e', border: '1px solid rgba(72,72,71,0.4)' }}>
-                  <SelectValue placeholder={isPt ? 'Seleciona o projeto...' : 'Select project type...'} />
-                </SelectTrigger>
-                <SelectContent style={{ backgroundColor: '#1a1a1a', border: '1px solid rgba(72,72,71,0.4)' }}>
-                  {(isPt 
-                    ? ['Desenvolvimento Web', 'Engenharia de Software', 'Branding & UI/UX', 'Consultoria Digital']
-                    : ['Web Development', 'Software Engineering', 'Branding & UI/UX', 'Digital Consulting']
-                  ).map((opt) => (
-                    <SelectItem key={opt} value={opt} className="text-white focus:bg-[#81ecff]/10 focus:text-[#81ecff] cursor-pointer text-xs">
-                      {opt}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label
-                htmlFor="message"
-                className="font-bold text-xs uppercase tracking-widest"
-                style={{ color: '#adaaaa' }}
-              >
-                {isPt ? 'Mensagem' : 'Message'}
+            <div className="space-y-1.5">
+              <Label htmlFor="message" className="font-black text-[11px] uppercase tracking-wider text-neutral-400">
+                {isPt ? 'DESCRIÇÃO DA IDEIA OU MENSAGEM *' : 'MESSAGE OR IDEA DESCRIPTION *'}
               </Label>
               <textarea
                 id="message"
@@ -219,14 +215,8 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
                 rows={3}
                 value={formData.message}
                 onChange={handleChange}
-                placeholder={isPt ? 'Fala-nos sobre o teu projeto...' : 'Tell us about your project details...'}
-                className="w-full rounded-md px-4 py-3 text-sm text-white transition-all outline-none resize-none"
-                style={{
-                  backgroundColor: '#0e0e0e',
-                  border: '1px solid rgba(72,72,71,0.4)',
-                }}
-                onFocus={(e) => (e.target.style.borderColor = 'rgba(129,236,255,0.5)')}
-                onBlur={(e) => (e.target.style.borderColor = 'rgba(72,72,71,0.4)')}
+                placeholder={isPt ? 'Conta-nos a tua ideia de projeto...' : 'Tell us about your project details...'}
+                className="w-full rounded-2xl px-4 py-3 text-sm text-white bg-neutral-950 border border-neutral-800 transition-all outline-none resize-none focus:border-primary"
               />
             </div>
 
@@ -239,15 +229,10 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 rounded-md font-label font-black uppercase tracking-[0.2em] text-sm transition-all active:scale-[0.99] disabled:opacity-50"
-              style={{
-                background: 'linear-gradient(to right, #81ecff, #00e3fd)',
-                color: '#004d57',
-              }}
+              className="bg-neutral-900 text-white hover:bg-primary px-8 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg cursor-pointer disabled:opacity-50 border border-neutral-700"
             >
-              {loading 
-                ? (isPt ? 'A ENVIAR...' : 'SENDING...') 
-                : (isPt ? 'ENVIAR MENSAGEM' : 'SEND MESSAGE')}
+              <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar Ideia' : 'Send Idea')}</span>
+              <span className="material-symbols-outlined text-base">send</span>
             </button>
           </form>
         )}
