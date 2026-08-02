@@ -596,61 +596,66 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {[
                 {
-                  label: 'Stand & Oficina / 2026',
+                  label: lang === 'pt' ? 'Stand & Oficina / 2026' : 'Showroom & Workshop / 2026',
                   labelColor: 'text-primary',
                   title: 'AGOSTINHO BIKES',
                   subtitle: lang === 'pt' ? 'Stand e oficina de bicicletas — catálogo digital, serviços e presença web.' : 'Bicycle showroom & repair shop — digital catalog, services & web presence.',
-                  img: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
+                  img: 'https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&w=1200&q=85',
+                  logo: '/assets/agostinho-bikes.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-primary text-white',
                   link: 'https://agostinho-bikes.vercel.app/',
                 },
                 {
-                  label: 'Portfólio / 2026',
+                  label: lang === 'pt' ? 'Portfólio / 2026' : 'Portfolio / 2026',
                   labelColor: 'text-primary',
                   title: 'MARIA JOÃO',
                   subtitle: lang === 'pt' ? 'Portfólio pessoal e showcase criativo de apresentação profissional.' : 'Personal portfolio and creative showcase for professional presentation.',
-                  img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
+                  img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=85',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-primary text-white',
                   link: 'https://maria-joao-portfolio.vercel.app/',
                 },
                 {
                   label: lang === 'pt' ? 'Agronegócio & Viveiros / 2026' : 'Agribusiness & Nurseries / 2026',
-                  labelColor: 'text-emerald-500',
+                  labelColor: 'text-emerald-400',
                   title: 'HELIPLANTA',
                   subtitle: lang === 'pt' ? 'Plataforma digital para viveiros hortícolas e ornamentais na Mata Mourisca — catálogo e serviços.' : 'Digital platform for horticultural and ornamental nurseries in Mata Mourisca — catalog & services.',
-                  img: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
+                  img: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85',
+                  logo: '/assets/heliplanta.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-emerald-600 text-white',
                   link: 'https://heliplanta-beryl.vercel.app/',
                 },
                 {
-                  label: 'Restauração / 2025',
-                  labelColor: 'text-amber-500',
+                  label: lang === 'pt' ? 'Restauração / 2025' : 'Restoration & Fast Food / 2025',
+                  labelColor: 'text-amber-400',
                   title: 'TAKOS KING',
                   subtitle: lang === 'pt' ? 'Fast food focado em tacos — em desenvolvimento para Pombal, Guia.' : 'Taco-focused fast food chain — under development in Pombal, Guia.',
-                  img: '/assets/takos-king.png',
+                  img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1200&q=85',
+                  logo: '/assets/takos-king.png',
                   badge: t.portfolio.progress,
                   badgeClass: 'bg-amber-500 text-black font-bold',
                   link: 'https://www.facebook.com/TakosKing.Guia.Pombal/',
                 },
                 {
-                  label: 'Agência / 2025',
-                  labelColor: 'text-primary',
-                  title: 'P&D AGENCY',
-                  subtitle: lang === 'pt' ? 'O nosso próprio portfólio — o site que estás a ver agora.' : 'Our own agency platform — the website you are viewing right now.',
-                  img: 'https://images.unsplash.com/photo-1634084462412-b54873c0a56d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800',
-                  badge: t.portfolio.live,
-                  badgeClass: 'bg-primary text-white',
+                  label: lang === 'pt' ? 'Conceito & Marca / 2025' : 'Concept & Brand / 2025',
+                  labelColor: 'text-amber-400',
+                  title: 'ROUTE 109 GUIA',
+                  subtitle: lang === 'pt' ? 'Identidade de marca e conceito de comunicação para Route 109 Guia.' : 'Brand identity and communication concept for Route 109 Guia.',
+                  img: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85',
+                  logo: '/assets/roots-199.png',
+                  badge: t.portfolio.progress,
+                  badgeClass: 'bg-amber-500 text-black font-bold',
                   link: '#',
                 },
                 {
-                  label: 'Plataforma Web / 2025',
+                  label: lang === 'pt' ? 'Plataforma Web / 2025' : 'Web Platform / 2025',
                   labelColor: 'text-primary',
                   title: 'EDU BRASIL',
                   subtitle: lang === 'pt' ? 'Aplicação web para estudantes brasileiros — dashboard e conteúdos educativos.' : 'Web application for Brazilian students — dashboard & learning content.',
-                  img: '/assets/edu-brasil.png',
+                  img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85',
+                  logo: '/assets/edu-brasil.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-primary text-white',
                   link: 'https://mobileapp-taupe.vercel.app/',
@@ -663,29 +668,36 @@ export default function LandingPage() {
                   key={i}
                   initial={{ opacity: 0, y: 25 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -6 }}
+                  whileHover={{ y: -8 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className={`relative aspect-[4/3] overflow-hidden rounded-3xl group cursor-pointer block border shadow-xl ${
-                    darkMode ? 'bg-neutral-900 border-neutral-800' : 'bg-white border-neutral-200'
+                  className={`relative aspect-[4/3] overflow-hidden rounded-3xl group cursor-pointer block border shadow-2xl transition-all duration-500 ${
+                    darkMode ? 'bg-neutral-900 border-neutral-800 hover:border-primary/50 hover:shadow-primary/20' : 'bg-white border-neutral-200 hover:border-primary/50 hover:shadow-primary/10'
                   }`}
                 >
                   <img
                     alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-75 grayscale group-hover:grayscale-0 group-hover:opacity-95 transition-all duration-700 group-hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
                     src={item.img}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050A13] via-[#050A13]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050A13] via-[#050A13]/60 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
                   
+                  {item.logo && (
+                    <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 p-1.5 flex items-center justify-center">
+                      <img src={item.logo} alt={item.title} className="w-full h-full object-contain" />
+                    </div>
+                  )}
+
                   <div className="absolute top-4 right-4 z-10">
-                    <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${item.badgeClass}`}>
+                    <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md ${item.badgeClass}`}>
                       {item.badge}
                     </span>
                   </div>
+                  
                   <div className="absolute bottom-0 left-0 p-6 w-full z-10">
-                    <p className={`font-label text-[10px] tracking-[0.3em] uppercase mb-1 ${item.labelColor}`}>{item.label}</p>
-                    <h4 className="font-headline text-2xl font-black text-white uppercase mb-1 tracking-tighter">{item.title}</h4>
-                    <p className="text-neutral-200 text-sm font-light leading-snug">{item.subtitle}</p>
+                    <p className={`font-label text-[10px] tracking-[0.3em] uppercase mb-1 font-bold ${item.labelColor}`}>{item.label}</p>
+                    <h4 className="font-headline text-2xl font-black text-white uppercase mb-1 tracking-tighter group-hover:text-primary transition-colors">{item.title}</h4>
+                    <p className="text-neutral-300 text-xs md:text-sm font-light leading-relaxed line-clamp-2">{item.subtitle}</p>
                   </div>
                 </motion.a>
               ))}
