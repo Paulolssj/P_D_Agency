@@ -921,6 +921,7 @@ export default function LandingPage() {
         open={legalModalOpen} 
         onClose={() => setLegalModalOpen(false)} 
         defaultTab={activeLegalTab} 
+        lang={lang}
       />
     </div>
   );

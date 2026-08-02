@@ -13,7 +13,8 @@ const MaterialIcon = ({ name, className = '' }) => (
   </span>
 );
 
-export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
+export default function LegalModal({ open, onClose, defaultTab = "terms", lang = "pt" }) {
+  const isPt = lang === 'pt';
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent 
@@ -25,7 +26,9 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
             <div className="flex flex-col gap-6 mb-12">
               <div className="flex justify-between items-start">
                 <DialogTitle className="font-headline text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-none">
-                  {defaultTab === "terms" ? "TERMOS DE USO" : "POLÍTICA DE PRIVACIDADE"}
+                  {defaultTab === "terms" 
+                    ? (isPt ? "TERMOS DE USO" : "TERMS OF USE") 
+                    : (isPt ? "POLÍTICA DE PRIVACIDADE" : "PRIVACY POLICY")}
                 </DialogTitle>
               </div>
 
@@ -35,18 +38,18 @@ export default function LegalModal({ open, onClose, defaultTab = "terms" }) {
                     value="terms" 
                     className="px-8 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all data-[state=active]:bg-[#1a2e31] data-[state=active]:text-primary-container data-[state=active]:border border-transparent data-[state=active]:border-primary-container/20 text-neutral-500 hover:text-neutral-300"
                   >
-                    TERMOS DE USO
+                    {isPt ? "TERMOS DE USO" : "TERMS OF USE"}
                   </TabsTrigger>
                   <TabsTrigger 
                     value="privacy" 
                     className="px-8 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all data-[state=active]:bg-[#1a2e31] data-[state=active]:text-primary-container data-[state=active]:border border-transparent data-[state=active]:border-primary-container/20 text-neutral-500 hover:text-neutral-300"
                   >
-                    PRIVACIDADE
+                    {isPt ? "PRIVACIDADE" : "PRIVACY POLICY"}
                   </TabsTrigger>
                 </TabsList>
                 
                 <p className="text-[10px] font-label text-neutral-700 uppercase tracking-[0.3em] font-bold">
-                  Última atualização: Janeiro 2026
+                  {isPt ? "Última atualização: Janeiro 2026" : "Last updated: January 2026"}
                 </p>
               </div>
             </div>
