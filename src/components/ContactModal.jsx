@@ -50,17 +50,37 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
     setLoading(true);
     setError('');
     try {
-      const dataToSubmit = {
-        ...formData,
-        message: `[Interesse: ${formData.package_interest}] \n\n${formData.message}`
-      };
-      await axios.post(`${API}/contact`, dataToSubmit);
+      try {
+        await axios.post(`${API}/contact`, {
+          ...formData,
+          message: `[Interesse: ${formData.package_interest}] \n\n${formData.message}`
+        });
+      } catch (err) {
+        // Backend fallback
+      }
+
+      // Envia email direto para pd.agency.digital01@gmail.com
+      await axios.post('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
+        nome: formData.name,
+        email: formData.email,
+        servico_interesse: formData.package_interest,
+        plano_suporte: formData.support_plan,
+        mensagem: formData.message,
+        _subject: `[P&D AGENCY] Novo Pedido de Orçamento - ${formData.name}`,
+        _template: 'table',
+        _captcha: 'false'
+      });
+
       setSuccess(true);
       setTimeout(() => {
         onClose();
       }, 2800);
     } catch (err) {
-      setError(lang === 'pt' ? 'Erro ao enviar. Por favor tenta novamente.' : 'Error sending message. Please try again.');
+      window.location.href = `mailto:pd.agency.digital01@gmail.com?subject=${encodeURIComponent(`[P&D AGENCY] Pedido de Orçamento - ${formData.name}`)}&body=${encodeURIComponent(`Nome: ${formData.name}\nEmail: ${formData.email}\nServiço: ${formData.package_interest}\n\nMensagem:\n${formData.message}`)}`;
+      setSuccess(true);
+      setTimeout(() => {
+        onClose();
+      }, 2800);
     } finally {
       setLoading(false);
     }
@@ -79,7 +99,10 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
             {isPt ? 'SOLICITAR ORÇAMENTO' : 'REQUEST A QUOTE'}
           </DialogTitle>
           <p className="text-sm font-light mt-1" style={{ color: '#adaaaa' }}>
-            {isPt ? 'Conta-nos sobre o teu projeto.' : 'Tell us about your project idea.'}
+            {isPt ? 'Conta-nos sobre o teu projeto ou envia direto para' : 'Tell us about your project or email us directly at'}{' '}
+            <a href="mailto:pd.agency.digital01@gmail.com" className="text-primary font-bold hover:underline">
+              pd.agency.digital01@gmail.com
+            </a>
           </p>
         </DialogHeader>
 

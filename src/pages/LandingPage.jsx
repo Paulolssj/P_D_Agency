@@ -949,8 +949,17 @@ export default function LandingPage() {
             </div>
             
             <div>
-              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">{t.footer.socialTitle}</h4>
+              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">{lang === 'pt' ? 'CONTACTO' : 'CONTACT'}</h4>
               <ul className={`space-y-3 text-sm font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                <li>
+                  <a 
+                    className="hover:text-primary transition-colors flex items-center gap-2 font-bold" 
+                    href="mailto:pd.agency.digital01@gmail.com" 
+                  >
+                    <MaterialIcon name="mail" className="text-primary text-base" />
+                    <span className="truncate">pd.agency.digital01@gmail.com</span>
+                  </a>
+                </li>
                 <li>
                   <a 
                     className="hover:text-primary transition-colors flex items-center gap-2" 
@@ -958,7 +967,8 @@ export default function LandingPage() {
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
-                    Instagram
+                    <MaterialIcon name="share" className="text-primary text-base" />
+                    <span>Instagram</span>
                   </a>
                 </li>
               </ul>
