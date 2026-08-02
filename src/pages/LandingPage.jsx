@@ -208,8 +208,9 @@ export default function LandingPage() {
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [activeLegalTab, setActiveLegalTab] = useState('terms');
   const [loading, setLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false); // Default: Light Mode (Branco)
   const [lang, setLang] = useState('pt'); // Default: PT
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
   const t = translations[lang];
 
@@ -285,18 +286,49 @@ export default function LandingPage() {
           </nav>
 
           <div className="flex items-center gap-3 md:gap-4">
-            {/* SELETOR DE IDIOMA (PT / EN) */}
-            <button
-              onClick={toggleLanguage}
-              title="Mudar Idioma / Change Language"
-              className={`px-3 py-1.5 rounded-full border font-headline font-black text-[11px] tracking-wider transition-all flex items-center gap-1.5 ${
-                darkMode ? 'bg-neutral-900 border-neutral-700 text-white hover:border-primary' : 'bg-neutral-100 border-neutral-300 text-neutral-900 hover:border-primary'
-              }`}
-            >
-              <span className={lang === 'pt' ? 'text-primary font-bold' : 'opacity-40'}>PT</span>
-              <span className="opacity-30">|</span>
-              <span className={lang === 'en' ? 'text-primary font-bold' : 'opacity-40'}>EN</span>
-            </button>
+            {/* SELETOR DE IDIOMA (DROPDOWN / SELECT) */}
+            <div className="relative">
+              <button
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                className={`px-3 py-1.5 rounded-full border font-headline font-bold text-[11px] tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                  darkMode 
+                    ? 'bg-neutral-900 border-neutral-700 text-white hover:border-primary' 
+                    : 'bg-neutral-100 border-neutral-300 text-neutral-900 hover:border-primary shadow-sm'
+                }`}
+              >
+                <span>{lang === 'pt' ? '🇵🇹 PT' : '🇬🇧 EN'}</span>
+                <MaterialIcon name="expand_more" className={`text-base transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {langDropdownOpen && (
+                <div 
+                  className={`absolute right-0 mt-2 w-36 rounded-2xl border shadow-2xl py-2 z-50 transition-all ${
+                    darkMode 
+                      ? 'bg-neutral-900 border-neutral-800 text-white' 
+                      : 'bg-white border-neutral-200 text-neutral-900'
+                  }`}
+                >
+                  <button
+                    onClick={() => { setLang('pt'); setLangDropdownOpen(false); }}
+                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2 hover:bg-primary/10 transition-colors cursor-pointer ${
+                      lang === 'pt' ? 'text-primary font-black bg-primary/10' : ''
+                    }`}
+                  >
+                    <span>🇵🇹</span>
+                    <span>Português</span>
+                  </button>
+                  <button
+                    onClick={() => { setLang('en'); setLangDropdownOpen(false); }}
+                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2 hover:bg-primary/10 transition-colors cursor-pointer ${
+                      lang === 'en' ? 'text-primary font-black bg-primary/10' : ''
+                    }`}
+                  >
+                    <span>🇬🇧</span>
+                    <span>English</span>
+                  </button>
+                </div>
+              )}
+            </div>
 
             {/* BOTÃO MODO CLARO / ESCURO */}
             <button
