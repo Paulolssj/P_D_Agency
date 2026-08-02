@@ -81,7 +81,7 @@ const translations = {
     },
     brands: {
       tag: "CONFIANÇA & PARCERIA",
-      title: "MARCAS QUE CONFIAM EM NÓS"
+      title: "EMPRESAS COM QUEM JÁ TRABALHAMOS"
     },
     ctaMeeting: {
       title1: "TEM INTERESSE?",
@@ -173,7 +173,7 @@ const translations = {
     },
     brands: {
       tag: "TRUST & PARTNERSHIPS",
-      title: "BRANDS THAT TRUST US"
+      title: "COMPANIES WE HAVE WORKED WITH"
     },
     ctaMeeting: {
       title1: "INTERESTED?",
@@ -394,6 +394,11 @@ export default function LandingPage() {
             </motion.div>
 
             {/* MARQUEE TICKER DOS CLIENTES HERO (ANIMADO CONTINUO SEM FUNDO) */}
+            <div className="mb-3 text-center">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] font-black">
+                {lang === 'pt' ? 'EMPRESAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES WE HAVE WORKED WITH'}
+              </p>
+            </div>
             <div className={`w-full overflow-hidden border-y py-4 rounded-2xl ${
               darkMode ? 'border-neutral-800/80 bg-neutral-900/40' : 'border-neutral-200/80 bg-neutral-100/60'
             }`}>
