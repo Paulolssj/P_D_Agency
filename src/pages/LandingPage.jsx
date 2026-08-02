@@ -297,8 +297,13 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
     location: '',
     message: ''
   });
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('enviado=true')) {
+      setSuccess(true);
+    }
+  }, []);
 
   const isPt = lang === 'pt';
 
@@ -316,28 +321,6 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
     'Other'
   ];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await axios.post('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
-        nome: formData.name,
-        email: formData.email,
-        assunto_servico: formData.subject,
-        localizacao: formData.location || 'Não especificada',
-        mensagem: formData.message,
-        _subject: `[P&D AGENCY] Novo Pedido de Proposta de ${formData.name}`,
-        _template: 'table',
-        _captcha: 'false'
-      });
-    } catch (err) {
-      console.log('Submission attempt finished', err);
-    } finally {
-      setSuccess(true);
-      setLoading(false);
-    }
-  };
-
   if (success) {
     return (
       <div className="py-12 text-center space-y-4" data-testid="inline-contact-success">
@@ -350,19 +333,34 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
             ? 'Recebemos a tua mensagem e responderemos para o teu email muito em breve.' 
             : 'We received your message and will respond to your email very soon.'}
         </p>
-        <a 
-          href={`mailto:pd.agency.digital01@gmail.com?subject=${encodeURIComponent(`[P&D AGENCY] Proposta de ${formData.name}`)}&body=${encodeURIComponent(`Nome: ${formData.name}\nEmail: ${formData.email}\nServiço: ${formData.subject}\nLocalização: ${formData.location}\n\nMensagem:\n${formData.message}`)}`}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white text-xs font-bold font-headline uppercase tracking-widest hover:bg-blue-600 transition-all shadow-md mt-2"
+        <button
+          type="button"
+          onClick={() => {
+            if (typeof window !== 'undefined') {
+              window.history.replaceState({}, document.title, window.location.pathname);
+            }
+            setSuccess(false);
+          }}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-900 text-white text-xs font-bold font-headline uppercase tracking-widest hover:bg-primary transition-all shadow-md mt-2 cursor-pointer"
         >
-          <MaterialIcon name="mail" className="text-base" />
-          <span>{isPt ? 'Abrir Correio Direto' : 'Open Direct Mail'}</span>
-        </a>
+          <span>{isPt ? 'Enviar Outra Mensagem' : 'Send Another Message'}</span>
+        </button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" data-testid="inline-contact-form">
+    <form 
+      action="https://formsubmit.co/pd.agency.digital01@gmail.com" 
+      method="POST"
+      className="space-y-6" 
+      data-testid="inline-contact-form"
+    >
+      <input type="hidden" name="_next" value="https://p-d-agency.vercel.app/?enviado=true#contacto" />
+      <input type="hidden" name="_subject" value="[P&D AGENCY] Novo Pedido de Proposta" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
@@ -370,6 +368,7 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
           </label>
           <input
             type="text"
+            name="Nome"
             required
             placeholder="ex: Ana Maria"
             value={formData.name}
@@ -388,6 +387,7 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
           </label>
           <input
             type="email"
+            name="Email"
             required
             placeholder="ex: ana@email.com"
             value={formData.email}
@@ -406,6 +406,7 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
           <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
             {isPt ? 'MOTIVO DE CONTACTO / ASSUNTO' : 'SUBJECT / REASON'}
           </label>
+          <input type="hidden" name="Assunto" value={formData.subject} />
           <CustomSelectDropdown
             value={formData.subject}
             onChange={(val) => setFormData({ ...formData, subject: val })}
@@ -420,6 +421,7 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
           </label>
           <input
             type="text"
+            name="Localização"
             placeholder={isPt ? "ex: Lisboa, Porto, Leiria..." : "ex: London, Lisbon, NY..."}
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
@@ -437,6 +439,7 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
           {isPt ? 'DESCRIÇÃO DA IDEIA OU MENSAGEM *' : 'MESSAGE OR IDEA DESCRIPTION *'}
         </label>
         <textarea
+          name="Mensagem"
           required
           rows={4}
           placeholder={isPt ? "Conta-nos a tua ideia de website, aplicação ou comunicação..." : "Tell us about your website, app, or communication idea..."}
@@ -452,10 +455,9 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
 
       <button
         type="submit"
-        disabled={loading}
-        className="bg-neutral-900 text-white hover:bg-primary px-8 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg cursor-pointer disabled:opacity-50"
+        className="bg-neutral-900 text-white hover:bg-primary px-8 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg cursor-pointer"
       >
-        <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar Ideia' : 'Send Idea')}</span>
+        <span>{isPt ? 'Enviar Ideia' : 'Send Idea'}</span>
         <span className="material-symbols-outlined text-base">send</span>
       </button>
     </form>
@@ -605,12 +607,12 @@ export default function LandingPage() {
               <MaterialIcon name={darkMode ? "light_mode" : "dark_mode"} className="text-xl" />
             </button>
 
-            <button 
-              onClick={() => openModal()}
-              className="bg-primary text-white px-5 md:px-7 py-3 rounded-full font-black font-headline text-[11px] tracking-widest hover:bg-primary/90 active:scale-95 transition-all uppercase shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+            <a 
+              href="#contacto"
+              className="bg-primary text-white px-5 md:px-7 py-3 rounded-full font-black font-headline text-[11px] tracking-widest hover:bg-primary/90 active:scale-95 transition-all uppercase shadow-[0_0_20px_rgba(37,99,235,0.4)] inline-block"
             >
               {t.cta}
-            </button>
+            </a>
           </div>
         </div>
       </header>
@@ -673,12 +675,12 @@ export default function LandingPage() {
               transition={{ delay: 0.6 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16"
             >
-              <button 
-                onClick={() => openModal()}
-                className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] active:scale-95"
+              <a 
+                href="#contacto"
+                className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] active:scale-95 inline-block text-center"
               >
                 {t.hero.btnPrimary}
-              </button>
+              </a>
               <a 
                 href="#custom-agency"
                 className={`w-full sm:w-auto border px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase transition-all backdrop-blur-sm ${
@@ -1225,30 +1227,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── MEETING CTA ── */}
-        <section className={`py-36 relative overflow-hidden flex items-center justify-center text-center transition-colors duration-500 ${
-          darkMode ? 'bg-[#050A13]' : 'bg-[#FDFBF7]'
-        }`}>
-          <div className="container max-w-4xl mx-auto px-6 relative z-10">
-            <h2 className={`font-headline text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tighter mb-6 ${
-              darkMode ? 'text-white' : 'text-neutral-900'
-            }`}>
-              {t.ctaMeeting.title1}<br />
-              <span className="text-primary italic">{t.ctaMeeting.title2}</span>
-            </h2>
-            <p className={`text-lg font-light max-w-xl mx-auto mb-10 leading-relaxed ${
-              darkMode ? 'text-neutral-400' : 'text-neutral-600'
-            }`}>
-              {t.ctaMeeting.sub}
-            </p>
-            <button 
-              onClick={() => openModal()}
-              className="bg-primary text-white px-12 py-6 rounded-full font-headline font-black text-xs tracking-[0.3em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-95"
-            >
-              {t.ctaMeeting.btn}
-            </button>
-          </div>
-        </section>
+
       </main>
 
       {/* ── FOOTER ── */}
