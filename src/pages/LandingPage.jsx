@@ -200,6 +200,34 @@ const MaterialIcon = ({ name, className = "" }) => (
   </span>
 );
 
+const FlagPT = ({ className = "w-4 h-3" }) => (
+  <svg className={`${className} inline-block rounded-[2px] overflow-hidden shrink-0 shadow-xs`} viewBox="0 0 640 480">
+    <path fill="#ff0000" d="M0 0h640v480H0z"/>
+    <path fill="#006600" d="M0 0h256v480H0z"/>
+    <g transform="translate(256 240) scale(1.1)">
+      <circle r="70" fill="#ffcc00" stroke="#000" strokeWidth="4"/>
+      <path fill="#ffffff" stroke="#000" strokeWidth="3" d="M-35-45h70v60a35 35 0 0 1-70 0z"/>
+      <path fill="#ff0000" d="M-28-38h56v48a28 28 0 0 1-56 0z"/>
+      <path fill="#ffffff" d="M-18-26h36v36a18 18 0 0 1-36 0z"/>
+      <circle cx="0" cy="-8" r="3.5" fill="#00247d"/>
+      <circle cx="-9" cy="-8" r="3.5" fill="#00247d"/>
+      <circle cx="9" cy="-8" r="3.5" fill="#00247d"/>
+      <circle cx="0" cy="-17" r="3.5" fill="#00247d"/>
+      <circle cx="0" cy="1" r="3.5" fill="#00247d"/>
+    </g>
+  </svg>
+);
+
+const FlagEN = ({ className = "w-4 h-3" }) => (
+  <svg className={`${className} inline-block rounded-[2px] overflow-hidden shrink-0 shadow-xs`} viewBox="0 0 640 480">
+    <path fill="#00247d" d="M0 0h640v480H0z"/>
+    <path fill="#fff" d="m0 0 640 480M640 0 0 480" stroke="#fff" strokeWidth="60"/>
+    <path fill="#cf142b" d="m0 0 640 480M640 0 0 480" stroke="#cf142b" strokeWidth="40"/>
+    <path fill="#fff" d="M260 0h120v480H260zM0 180h640v120H0z"/>
+    <path fill="#cf142b" d="M280 0h80v480H280zM0 200h640v80H0z"/>
+  </svg>
+);
+
 // ── COMPONENTE PRINCIPAL (COM MODO CLARO/ESCURO & LINGUAGEM PT/EN) ──
 
 export default function LandingPage() {
@@ -290,13 +318,15 @@ export default function LandingPage() {
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className={`px-3 py-1.5 rounded-full border font-headline font-bold text-[11px] tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                className={`px-3 py-1.5 rounded-full border font-headline font-bold text-[11px] tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
                   darkMode 
                     ? 'bg-neutral-900 border-neutral-700 text-white hover:border-primary' 
                     : 'bg-neutral-100 border-neutral-300 text-neutral-900 hover:border-primary shadow-sm'
                 }`}
               >
-                <span>{lang === 'pt' ? '🇵🇹 PT' : '🇬🇧 EN'}</span>
+                <span className="flex items-center gap-1.5">
+                  {lang === 'pt' ? <><FlagPT className="w-4 h-3" /> PT</> : <><FlagEN className="w-4 h-3" /> EN</>}
+                </span>
                 <MaterialIcon name="expand_more" className={`text-base transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -310,20 +340,20 @@ export default function LandingPage() {
                 >
                   <button
                     onClick={() => { setLang('pt'); setLangDropdownOpen(false); }}
-                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2 hover:bg-primary/10 transition-colors cursor-pointer ${
+                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2.5 hover:bg-primary/10 transition-colors cursor-pointer ${
                       lang === 'pt' ? 'text-primary font-black bg-primary/10' : ''
                     }`}
                   >
-                    <span>🇵🇹</span>
+                    <FlagPT className="w-4 h-3" />
                     <span>Português</span>
                   </button>
                   <button
                     onClick={() => { setLang('en'); setLangDropdownOpen(false); }}
-                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2 hover:bg-primary/10 transition-colors cursor-pointer ${
+                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2.5 hover:bg-primary/10 transition-colors cursor-pointer ${
                       lang === 'en' ? 'text-primary font-black bg-primary/10' : ''
                     }`}
                   >
-                    <span>🇬🇧</span>
+                    <FlagEN className="w-4 h-3" />
                     <span>English</span>
                   </button>
                 </div>
