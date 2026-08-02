@@ -28,6 +28,7 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [showChoiceModal, setShowChoiceModal] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -38,6 +39,7 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
       }));
       setSuccess(false);
       setError('');
+      setShowChoiceModal(false);
     }
   }, [open, defaultPackage, lang]);
 
@@ -45,14 +47,20 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleEmailSubmit = async (e) => {
+  const handleInitialSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
-      setError(isPt ? 'Por favor, preenche todos os campos obrigatórios (*).' : 'Please fill in all required fields (*).');
+      setError(lang === 'pt' ? 'Por favor, preenche todos os campos obrigatórios (*).' : 'Please fill in all required fields (*).');
       return;
     }
+    setError('');
+    setShowChoiceModal(true);
+  };
+
+  const handleSendEmail = async () => {
     setLoading(true);
     setError('');
+    setShowChoiceModal(false);
     try {
       try {
         await axios.post(`${API}/contact`, {
@@ -89,14 +97,8 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
     }
   };
 
-  const handleWhatsAppSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.message) {
-      setError(isPt ? 'Por favor, indica o teu nome e a mensagem.' : 'Please enter your name and message.');
-      return;
-    }
-    setError('');
-
+  const handleSendWhatsApp = () => {
+    setShowChoiceModal(false);
     const text = `*Novo Contacto / Orçamento - P&D Agency*\n\n` +
       `*Nome:* ${formData.name}\n` +
       `*Email:* ${formData.email || 'Não informado'}\n` +
@@ -150,7 +152,7 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
           </div>
         ) : (
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleInitialSubmit}
             className="space-y-5"
             data-testid="contact-form"
           >
@@ -246,31 +248,92 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
             </div>
 
             {error && (
-              <p className="text-red-400 text-xs">
+              <p className="text-red-400 text-xs font-bold">
                 {error}
               </p>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <button
-                type="button"
-                onClick={handleEmailSubmit}
-                disabled={loading}
-                className="flex-1 bg-neutral-900 hover:bg-neutral-800 text-white px-5 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer border border-neutral-700 disabled:opacity-50"
-              >
-                <span className="material-symbols-outlined text-base">mail</span>
-                <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar por Email' : 'Send via Email')}</span>
-              </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-neutral-900 text-white hover:bg-primary px-8 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer disabled:opacity-50 border border-neutral-700 w-full"
+            >
+              <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar Proposta' : 'Submit Proposal')}</span>
+              <span className="material-symbols-outlined text-base">send</span>
+            </button>
 
-              <button
-                type="button"
-                onClick={handleWhatsAppSubmit}
-                className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer border border-emerald-500 shadow-emerald-900/20"
-              >
-                <span className="material-symbols-outlined text-base">chat</span>
-                <span>{isPt ? 'Enviar via WhatsApp' : 'Send via WhatsApp'}</span>
-              </button>
-            </div>
+            {/* POPUP MODAL DENTRO DO CONTACT MODAL PARA SELEÇÃO DE CANAL */}
+            {showChoiceModal && (
+              <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn text-white">
+                <div className="relative w-full max-w-md rounded-3xl p-6 sm:p-8 bg-neutral-900 border border-neutral-800 shadow-2xl transition-all">
+                  <button
+                    type="button"
+                    onClick={() => setShowChoiceModal(false)}
+                    className="absolute top-5 right-5 p-2 rounded-full hover:bg-neutral-800 transition-colors cursor-pointer text-neutral-400 hover:text-white"
+                  >
+                    <span className="material-symbols-outlined text-xl">close</span>
+                  </button>
+
+                  <div className="text-center mb-6">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3">
+                      <span className="material-symbols-outlined text-2xl">send</span>
+                    </div>
+                    <h3 className="font-headline font-black text-xl uppercase tracking-tight">
+                      {isPt ? 'Como preferes enviar?' : 'How would you like to send?'}
+                    </h3>
+                    <p className="text-xs text-neutral-400 mt-1.5 leading-relaxed">
+                      {isPt 
+                        ? 'Escolhe o canal preferido para a nossa equipa receber o teu pedido:' 
+                        : 'Choose your preferred channel for our team to receive your request:'}
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <button
+                      type="button"
+                      onClick={handleSendEmail}
+                      className="w-full p-4 rounded-2xl border border-neutral-800 bg-neutral-950/80 hover:border-primary hover:bg-neutral-950 text-left flex items-center gap-4 transition-all cursor-pointer group"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-neutral-900 flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform border border-neutral-700">
+                        <span className="material-symbols-outlined text-lg">mail</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-headline font-bold text-xs uppercase tracking-wider">
+                          {isPt ? 'Enviar por Email' : 'Send via Email'}
+                        </h4>
+                        <p className="text-[11px] text-neutral-400 mt-0.5">
+                          {isPt ? 'Directo para pd.agency.digital01@gmail.com' : 'Directly to our email inbox'}
+                        </p>
+                      </div>
+                      <span className="material-symbols-outlined text-sm text-neutral-400 group-hover:text-primary transition-colors">
+                        arrow_forward
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleSendWhatsApp}
+                      className="w-full p-4 rounded-2xl border border-neutral-800 bg-neutral-950/80 hover:border-emerald-500 hover:bg-neutral-950 text-left flex items-center gap-4 transition-all cursor-pointer group"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform">
+                        <span className="material-symbols-outlined text-lg">chat</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-headline font-bold text-xs uppercase tracking-wider text-emerald-500">
+                          {isPt ? 'Enviar via WhatsApp' : 'Send via WhatsApp'}
+                        </h4>
+                        <p className="text-[11px] text-neutral-400 mt-0.5">
+                          {isPt ? 'Abre conversa direta com texto pronto' : 'Open direct chat with ready text'}
+                        </p>
+                      </div>
+                      <span className="material-symbols-outlined text-sm text-neutral-400 group-hover:text-emerald-500 transition-colors">
+                        arrow_forward
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </form>
         )}
       </DialogContent>
