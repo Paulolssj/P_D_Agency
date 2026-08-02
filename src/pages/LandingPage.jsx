@@ -64,8 +64,8 @@ const translations = {
     },
     stats: {
       s1_val: "5+", s1_lab: "Anos de Experiência em Engenharia",
-      s2_val: "100%", s2_lab: "Satisfação Garantida",
-      s3_val: "2-7 Dias", s3_lab: "Tempo de Entrega Típico",
+      s2_val: "4+", s2_lab: "Mais de 4 Projetos Entregues",
+      s3_val: "4-21 Dias", s3_lab: "Tempo de Entrega Típico",
       s4_val: "24/7", s4_lab: "Monitorização Ativa"
     },
     portfolio: {
@@ -156,8 +156,8 @@ const translations = {
     },
     stats: {
       s1_val: "5+", s1_lab: "Years of Engineering Expertise",
-      s2_val: "100%", s2_lab: "Guaranteed Client Satisfaction",
-      s3_val: "2-7 Days", s3_lab: "Typical Project Turnaround",
+      s2_val: "4+", s2_lab: "More than 4 Projects Delivered",
+      s3_val: "4-21 Days", s3_lab: "Typical Project Turnaround",
       s4_val: "24/7", s4_lab: "Active System Monitoring"
     },
     portfolio: {
