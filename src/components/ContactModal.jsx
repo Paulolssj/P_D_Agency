@@ -91,10 +91,9 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
-        className={`border text-white max-w-xl p-8 overflow-y-auto max-h-[90vh] rounded-3xl ${
+        className={`border text-white max-w-xl p-5 sm:p-8 overflow-y-auto max-h-[90vh] rounded-2xl sm:rounded-3xl ${
           'bg-neutral-900 border-neutral-800'
         }`}
-        style={{ borderRadius: '1.5rem' }}
       >
         <DialogHeader className="mb-4">
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">

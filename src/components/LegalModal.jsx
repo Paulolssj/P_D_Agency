@@ -21,11 +21,11 @@ export default function LegalModal({ open, onClose, defaultTab = "terms", lang =
         className="max-w-3xl max-h-[90vh] overflow-hidden flex flex-col p-0 border-none bg-[#121212] shadow-2xl"
         style={{ borderRadius: '1.5rem' }}
       >
-        <div className="flex flex-col h-full bg-[#111111] p-8 md:p-14 overflow-y-auto hide-scrollbar">
+        <div className="flex flex-col h-full bg-[#111111] p-5 sm:p-8 md:p-14 overflow-y-auto hide-scrollbar">
           <Tabs defaultValue={defaultTab} className="w-full">
             <div className="flex flex-col gap-6 mb-12">
               <div className="flex justify-between items-start">
-                <DialogTitle className="font-headline text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-none">
+                <DialogTitle className="font-headline text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-none">
                   {defaultTab === "terms" 
                     ? (isPt ? "TERMOS DE USO" : "TERMS OF USE") 
                     : (isPt ? "POLÍTICA DE PRIVACIDADE" : "PRIVACY POLICY")}
@@ -33,16 +33,16 @@ export default function LegalModal({ open, onClose, defaultTab = "terms", lang =
               </div>
 
               <div className="flex flex-col gap-4">
-                <TabsList className="bg-black/40 border border-white/5 p-1 rounded-xl w-fit">
+                <TabsList className="bg-black/40 border border-white/5 p-1 rounded-xl w-full sm:w-fit flex">
                   <TabsTrigger 
                     value="terms" 
-                    className="px-8 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all data-[state=active]:bg-[#1a2e31] data-[state=active]:text-primary-container data-[state=active]:border border-transparent data-[state=active]:border-primary-container/20 text-neutral-500 hover:text-neutral-300"
+                    className="flex-1 sm:flex-none px-4 sm:px-8 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all data-[state=active]:bg-[#1a2e31] data-[state=active]:text-primary-container data-[state=active]:border border-transparent data-[state=active]:border-primary-container/20 text-neutral-500 hover:text-neutral-300"
                   >
                     {isPt ? "TERMOS DE USO" : "TERMS OF USE"}
                   </TabsTrigger>
                   <TabsTrigger 
                     value="privacy" 
-                    className="px-8 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all data-[state=active]:bg-[#1a2e31] data-[state=active]:text-primary-container data-[state=active]:border border-transparent data-[state=active]:border-primary-container/20 text-neutral-500 hover:text-neutral-300"
+                    className="flex-1 sm:flex-none px-4 sm:px-8 py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all data-[state=active]:bg-[#1a2e31] data-[state=active]:text-primary-container data-[state=active]:border border-transparent data-[state=active]:border-primary-container/20 text-neutral-500 hover:text-neutral-300"
                   >
                     {isPt ? "PRIVACIDADE" : "PRIVACY POLICY"}
                   </TabsTrigger>

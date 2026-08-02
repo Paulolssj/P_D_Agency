@@ -475,6 +475,7 @@ export default function LandingPage() {
   const [darkMode, setDarkMode] = useState(false); // Default: Light Mode (Branco)
   const [lang, setLang] = useState('pt'); // Default: PT
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const t = translations[lang];
 
@@ -505,7 +506,7 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className={`selection:bg-primary selection:text-white font-body leading-normal transition-colors duration-500 ${
+    <div className={`selection:bg-primary selection:text-white font-body leading-normal transition-colors duration-500 overflow-x-hidden ${
       darkMode ? 'text-white bg-[#050A13]' : 'text-neutral-900 bg-[#FDFBF7]'
     }`}>
       <CustomCursor />
@@ -527,10 +528,10 @@ export default function LandingPage() {
       <header className={`fixed top-0 w-full z-50 border-b backdrop-blur-2xl transition-colors duration-500 ${
         darkMode ? 'bg-[#050A13]/90 border-neutral-800/80' : 'bg-[#FDFBF7]/90 border-neutral-200/80'
       }`}>
-        <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+        <div className="flex justify-between items-center px-4 sm:px-6 py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-3 md:gap-4 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <img src="/assets/pd-agency-logo.png" alt="P&D Agency" className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-xl shadow-md border border-neutral-800 bg-black p-1" />
-            <span className={`text-lg md:text-2xl font-black tracking-tighter uppercase font-headline italic truncate max-w-[140px] sm:max-w-none ${
+            <img src="/assets/pd-agency-logo.png" alt="P&D Agency" className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-xl shadow-md border border-neutral-800 bg-black p-1" />
+            <span className={`text-base sm:text-xl md:text-2xl font-black tracking-tighter uppercase font-headline italic truncate max-w-[130px] sm:max-w-none ${
               darkMode ? 'text-white' : 'text-neutral-900'
             }`}>P&D AGENCY</span>
           </div>
@@ -545,19 +546,19 @@ export default function LandingPage() {
             <a href="#testemunhos" className="hover:text-primary transition-colors">{t.nav.testimonials}</a>
           </nav>
 
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
             {/* SELETOR DE IDIOMA (DROPDOWN / SELECT) */}
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className={`px-3 py-1.5 rounded-full border font-headline font-bold text-[11px] tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
+                className={`px-2.5 sm:px-3 py-1.5 rounded-full border font-headline font-bold text-[10px] sm:text-[11px] tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
                   darkMode 
                     ? 'bg-neutral-900 border-neutral-700 text-white hover:border-primary' 
                     : 'bg-neutral-100 border-neutral-300 text-neutral-900 hover:border-primary shadow-sm'
                 }`}
               >
-                <span className="flex items-center gap-1.5">
-                  {lang === 'pt' ? <><FlagPT className="w-4 h-3" /> PT</> : <><FlagEN className="w-4 h-3" /> EN</>}
+                <span className="flex items-center gap-1">
+                  {lang === 'pt' ? <><FlagPT className="w-3.5 h-2.5 sm:w-4 sm:h-3" /> PT</> : <><FlagEN className="w-3.5 h-2.5 sm:w-4 sm:h-3" /> EN</>}
                 </span>
                 <MaterialIcon name="expand_more" className={`text-base transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -596,21 +597,55 @@ export default function LandingPage() {
             <button
               onClick={toggleTheme}
               title={darkMode ? "Modo Claro" : "Modo Escuro"}
-              className={`p-2.5 rounded-full border transition-all flex items-center justify-center ${
+              className={`p-2 sm:p-2.5 rounded-full border transition-all flex items-center justify-center ${
                 darkMode ? 'bg-neutral-900 border-neutral-700 text-amber-400 hover:bg-neutral-800' : 'bg-neutral-100 border-neutral-300 text-neutral-800 hover:bg-neutral-200'
               }`}
             >
-              <MaterialIcon name={darkMode ? "light_mode" : "dark_mode"} className="text-xl" />
+              <MaterialIcon name={darkMode ? "light_mode" : "dark_mode"} className="text-lg sm:text-xl" />
+            </button>
+
+            {/* HAMBURGER MENU BUTTON (MOBILE / TABLET) */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`p-2 sm:p-2.5 rounded-full border transition-all flex lg:hidden items-center justify-center cursor-pointer ${
+                darkMode ? 'bg-neutral-900 border-neutral-700 text-white' : 'bg-neutral-100 border-neutral-300 text-neutral-900'
+              }`}
+            >
+              <MaterialIcon name={mobileMenuOpen ? "close" : "menu"} className="text-lg sm:text-xl" />
             </button>
 
             <a 
               href="#contacto"
-              className="bg-primary text-white px-5 md:px-7 py-3 rounded-full font-black font-headline text-[11px] tracking-widest hover:bg-primary/90 active:scale-95 transition-all uppercase shadow-[0_0_20px_rgba(37,99,235,0.4)] inline-block"
+              className="hidden sm:inline-block bg-primary text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-black font-headline text-[10px] sm:text-[11px] tracking-widest hover:bg-primary/90 active:scale-95 transition-all uppercase shadow-[0_0_20px_rgba(37,99,235,0.4)]"
             >
               {t.cta}
             </a>
           </div>
         </div>
+
+        {/* ── MOBILE / TABLET MENU DRAWER ── */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            className={`w-full border-b backdrop-blur-3xl p-6 lg:hidden shadow-2xl transition-all ${
+              darkMode ? 'bg-[#050A13]/95 border-neutral-800 text-white' : 'bg-[#FDFBF7]/95 border-neutral-200 text-neutral-900'
+            }`}
+          >
+            <nav className="flex flex-col gap-4 text-xs sm:text-sm font-bold uppercase tracking-[0.2em]">
+              <a href="#welcome" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.home}</a>
+              <a href="#custom-agency" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.approach}</a>
+              <a href="#o-que-fazemos" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.services}</a>
+              <a href="#portfolio" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.portfolio}</a>
+              <a href="#testemunhos" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.testimonials}</a>
+              <a href="#contacto" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-2 text-primary font-black flex items-center justify-between border-t border-neutral-500/20 pt-4">
+                <span>{lang === 'pt' ? 'FALAR COM A AGÊNCIA' : 'TALK TO THE AGENCY'}</span>
+                <MaterialIcon name="arrow_forward" className="text-base" />
+              </a>
+            </nav>
+          </motion.div>
+        )}
       </header>
 
       <main className="overflow-x-hidden pt-20">
