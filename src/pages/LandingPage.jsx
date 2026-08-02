@@ -228,6 +228,67 @@ const FlagEN = ({ className = "w-4 h-3" }) => (
   </svg>
 );
 
+function CustomSelectDropdown({ value, onChange, options, darkMode }) {
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative w-full" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={`w-full px-4 py-3.5 rounded-2xl text-sm font-medium outline-none transition-all border flex items-center justify-between cursor-pointer ${
+          darkMode 
+            ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+            : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+        }`}
+      >
+        <span className="truncate">{value}</span>
+        <MaterialIcon name="expand_more" className={`text-base transition-transform duration-300 shrink-0 ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <div 
+          className={`absolute left-0 top-full mt-2 w-full rounded-2xl border shadow-2xl py-2 z-50 transition-all ${
+            darkMode 
+              ? 'bg-neutral-900 border-neutral-800 text-white' 
+              : 'bg-white border-neutral-200 text-neutral-900'
+          }`}
+        >
+          {options.map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => {
+                onChange(opt);
+                setOpen(false);
+              }}
+              className={`w-full px-4 py-2.5 text-left text-xs font-bold font-headline transition-colors flex items-center justify-between cursor-pointer ${
+                value === opt 
+                  ? 'text-primary bg-primary/10 font-black' 
+                  : darkMode ? 'hover:bg-white/5' : 'hover:bg-neutral-100'
+              }`}
+            >
+              <span>{opt}</span>
+              {value === opt && <MaterialIcon name="check" className="text-sm text-primary" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ContactInlineForm({ lang = 'pt', darkMode = false }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -240,6 +301,20 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
   const [success, setSuccess] = useState(false);
 
   const isPt = lang === 'pt';
+
+  const subjectOptions = isPt ? [
+    'Desenvolvimento Web & Apps',
+    'Branding & Identidade Visual',
+    'Consultoria Digital & Marketing',
+    'Manutenção & Suporte',
+    'Outro assunto'
+  ] : [
+    'Web & App Development',
+    'Branding & Visual Identity',
+    'Digital Consulting & Marketing',
+    'Maintenance & Support',
+    'Other'
+  ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -255,25 +330,33 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
         _template: 'table',
         _captcha: 'false'
       });
-      setSuccess(true);
     } catch (err) {
-      window.location.href = `mailto:pd.agency.digital01@gmail.com?subject=${encodeURIComponent(`[P&D AGENCY] Proposta de ${formData.name}`)}&body=${encodeURIComponent(`Nome: ${formData.name}\nEmail: ${formData.email}\nServiço: ${formData.subject}\nLocalização: ${formData.location}\n\nMensagem:\n${formData.message}`)}`;
-      setSuccess(true);
+      console.log('Submission attempt finished', err);
     } finally {
+      setSuccess(true);
       setLoading(false);
     }
   };
 
   if (success) {
     return (
-      <div className="py-12 text-center" data-testid="inline-contact-success">
-        <span className="material-symbols-outlined text-emerald-500 text-5xl mb-3">check_circle</span>
-        <h4 className={`font-headline text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+      <div className="py-12 text-center space-y-4" data-testid="inline-contact-success">
+        <span className="material-symbols-outlined text-emerald-500 text-5xl">check_circle</span>
+        <h4 className={`font-headline text-2xl font-bold ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
           {isPt ? 'PROPOSTA ENVIADA COM SUCESSO!' : 'PROPOSAL SENT SUCCESSFULLY!'}
         </h4>
-        <p className={`text-sm ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
-          {isPt ? 'Recebemos a tua mensagem e responderemos para o teu email muito em breve.' : 'We received your message and will respond to your email very soon.'}
+        <p className={`text-sm max-w-md mx-auto ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+          {isPt 
+            ? 'Recebemos a tua mensagem e responderemos para o teu email muito em breve.' 
+            : 'We received your message and will respond to your email very soon.'}
         </p>
+        <a 
+          href={`mailto:pd.agency.digital01@gmail.com?subject=${encodeURIComponent(`[P&D AGENCY] Proposta de ${formData.name}`)}&body=${encodeURIComponent(`Nome: ${formData.name}\nEmail: ${formData.email}\nServiço: ${formData.subject}\nLocalização: ${formData.location}\n\nMensagem:\n${formData.message}`)}`}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white text-xs font-bold font-headline uppercase tracking-widest hover:bg-blue-600 transition-all shadow-md mt-2"
+        >
+          <MaterialIcon name="mail" className="text-base" />
+          <span>{isPt ? 'Abrir Correio Direto' : 'Open Direct Mail'}</span>
+        </a>
       </div>
     );
   }
@@ -323,33 +406,12 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
           <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
             {isPt ? 'MOTIVO DE CONTACTO / ASSUNTO' : 'SUBJECT / REASON'}
           </label>
-          <select
+          <CustomSelectDropdown
             value={formData.subject}
-            onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-            className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border cursor-pointer ${
-              darkMode 
-                ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
-                : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
-            }`}
-          >
-            {isPt ? (
-              <>
-                <option value="Desenvolvimento Web & Apps">Desenvolvimento Web & Apps</option>
-                <option value="Branding & Identidade Visual">Branding & Identidade Visual</option>
-                <option value="Consultoria Digital & Marketing">Consultoria Digital & Marketing</option>
-                <option value="Manutenção & Suporte">Manutenção & Suporte</option>
-                <option value="Outro assunto">Outro assunto</option>
-              </>
-            ) : (
-              <>
-                <option value="Web & App Development">Web & App Development</option>
-                <option value="Branding & Visual Identity">Branding & Visual Identity</option>
-                <option value="Digital Consulting & Marketing">Digital Consulting & Marketing</option>
-                <option value="Maintenance & Support">Maintenance & Support</option>
-                <option value="Other">Other</option>
-              </>
-            )}
-          </select>
+            onChange={(val) => setFormData({ ...formData, subject: val })}
+            options={subjectOptions}
+            darkMode={darkMode}
+          />
         </div>
 
         <div>
