@@ -45,8 +45,12 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setError(isPt ? 'Por favor, preenche todos os campos obrigatórios (*).' : 'Please fill in all required fields (*).');
+      return;
+    }
     setLoading(true);
     setError('');
     try {
@@ -59,7 +63,6 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
         // Backend fallback
       }
 
-      // Envia email direto para pd.agency.digital01@gmail.com
       await axios.post('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
         nome: formData.name,
         email: formData.email,
@@ -84,6 +87,29 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleWhatsAppSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.message) {
+      setError(isPt ? 'Por favor, indica o teu nome e a mensagem.' : 'Please enter your name and message.');
+      return;
+    }
+    setError('');
+
+    const text = `*Novo Contacto / Orçamento - P&D Agency*\n\n` +
+      `*Nome:* ${formData.name}\n` +
+      `*Email:* ${formData.email || 'Não informado'}\n` +
+      `*Serviço:* ${formData.package_interest}\n` +
+      `*Localização:* ${formData.support_plan || 'Não informada'}\n\n` +
+      `*Mensagem:*\n${formData.message}`;
+
+    const url = `https://wa.me/351910446884?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    setSuccess(true);
+    setTimeout(() => {
+      onClose();
+    }, 2800);
   };
 
   const isPt = lang === 'pt';
@@ -225,14 +251,26 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
               </p>
             )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-neutral-900 text-white hover:bg-primary px-8 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg cursor-pointer disabled:opacity-50 border border-neutral-700"
-            >
-              <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar Ideia' : 'Send Idea')}</span>
-              <span className="material-symbols-outlined text-base">send</span>
-            </button>
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button
+                type="button"
+                onClick={handleEmailSubmit}
+                disabled={loading}
+                className="flex-1 bg-neutral-900 hover:bg-neutral-800 text-white px-5 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer border border-neutral-700 disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-base">mail</span>
+                <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar por Email' : 'Send via Email')}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleWhatsAppSubmit}
+                className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer border border-emerald-500 shadow-emerald-900/20"
+              >
+                <span className="material-symbols-outlined text-base">chat</span>
+                <span>{isPt ? 'Enviar via WhatsApp' : 'Send via WhatsApp'}</span>
+              </button>
+            </div>
           </form>
         )}
       </DialogContent>

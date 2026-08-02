@@ -297,7 +297,9 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
     location: '',
     message: ''
   });
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.search.includes('enviado=true')) {
@@ -321,6 +323,62 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
     'Other'
   ];
 
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setError(isPt ? 'Por favor, preenche todos os campos obrigatórios (*).' : 'Please fill in all required fields (*).');
+      return;
+    }
+    setLoading(true);
+    setError('');
+
+    try {
+      await fetch('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Nome: formData.name,
+          Email: formData.email,
+          Assunto: formData.subject,
+          Localização: formData.location || 'Não informada',
+          Mensagem: formData.message,
+          _subject: `[P&D AGENCY] Novo Pedido de Proposta - ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+      setSuccess(true);
+    } catch (err) {
+      window.location.href = `mailto:pd.agency.digital01@gmail.com?subject=${encodeURIComponent(`[P&D AGENCY] Pedido de Proposta - ${formData.name}`)}&body=${encodeURIComponent(`Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nLocalização: ${formData.location}\n\nMensagem:\n${formData.message}`)}`;
+      setSuccess(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleWhatsAppSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.message) {
+      setError(isPt ? 'Por favor, indica pelo menos o teu nome e a mensagem.' : 'Please enter at least your name and message.');
+      return;
+    }
+    setError('');
+
+    const text = `*Novo Contacto - P&D Agency*\n\n` +
+      `*Nome:* ${formData.name}\n` +
+      `*Email:* ${formData.email || 'Não informado'}\n` +
+      `*Assunto:* ${formData.subject}\n` +
+      `*Localização:* ${formData.location || 'Não informada'}\n\n` +
+      `*Mensagem:*\n${formData.message}`;
+
+    const url = `https://wa.me/351910446884?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    setSuccess(true);
+  };
+
   if (success) {
     return (
       <div className="py-12 text-center space-y-4" data-testid="inline-contact-success">
@@ -330,8 +388,8 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
         </h4>
         <p className={`text-sm max-w-md mx-auto ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
           {isPt 
-            ? 'Recebemos a tua mensagem e responderemos para o teu email muito em breve.' 
-            : 'We received your message and will respond to your email very soon.'}
+            ? 'Recebemos a tua mensagem e responderemos muito em breve.' 
+            : 'We received your message and will respond very soon.'}
         </p>
         <button
           type="button"
@@ -350,17 +408,7 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
   }
 
   return (
-    <form 
-      action="https://formsubmit.co/pd.agency.digital01@gmail.com" 
-      method="POST"
-      className="space-y-6" 
-      data-testid="inline-contact-form"
-    >
-      <input type="hidden" name="_next" value="https://p-d-agency.vercel.app/?enviado=true#contacto" />
-      <input type="hidden" name="_subject" value="[P&D AGENCY] Novo Pedido de Proposta" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_template" value="table" />
-
+    <div className="space-y-6" data-testid="inline-contact-form">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
@@ -406,7 +454,6 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
           <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
             {isPt ? 'MOTIVO DE CONTACTO / ASSUNTO' : 'SUBJECT / REASON'}
           </label>
-          <input type="hidden" name="Assunto" value={formData.subject} />
           <CustomSelectDropdown
             value={formData.subject}
             onChange={(val) => setFormData({ ...formData, subject: val })}
@@ -453,14 +500,33 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
         />
       </div>
 
-      <button
-        type="submit"
-        className="bg-neutral-900 text-white hover:bg-primary px-8 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg cursor-pointer"
-      >
-        <span>{isPt ? 'Enviar Ideia' : 'Send Idea'}</span>
-        <span className="material-symbols-outlined text-base">send</span>
-      </button>
-    </form>
+      {error && (
+        <p className="text-red-400 text-xs">
+          {error}
+        </p>
+      )}
+
+      <div className="flex flex-col sm:flex-row gap-4 pt-2">
+        <button
+          type="button"
+          onClick={handleEmailSubmit}
+          disabled={loading}
+          className="flex-1 bg-neutral-900 hover:bg-neutral-800 text-white px-6 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer border border-neutral-700 disabled:opacity-50"
+        >
+          <span className="material-symbols-outlined text-base">mail</span>
+          <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar por Email' : 'Send via Email')}</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleWhatsAppSubmit}
+          className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer border border-emerald-500 shadow-emerald-900/20"
+        >
+          <span className="material-symbols-outlined text-base">chat</span>
+          <span>{isPt ? 'Enviar via WhatsApp' : 'Send via WhatsApp'}</span>
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -1191,6 +1257,28 @@ export default function LandingPage() {
                       darkMode ? 'text-white' : 'text-neutral-900'
                     }`}>
                       pd.agency.digital01@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                {/* CARTÃO WHATSAPP */}
+                <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                }`}>
+                  <div className="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center text-white shrink-0">
+                    <MaterialIcon name="chat" className="text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">WHATSAPP</p>
+                    <a 
+                      href="https://wa.me/351910446884" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className={`font-headline font-bold text-sm hover:text-emerald-500 transition-colors ${
+                        darkMode ? 'text-white' : 'text-neutral-900'
+                      }`}
+                    >
+                      +351 910 446 884
                     </a>
                   </div>
                 </div>
