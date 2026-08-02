@@ -516,9 +516,7 @@ export default function LandingPage() {
           darkMode ? 'bg-[#050A13]' : 'bg-[#FDFBF7]'
         }`}>
           <div className="flex items-center gap-3 animate-pulse">
-            <div className="w-12 h-12 rounded-xl bg-primary/20 border border-primary flex items-center justify-center text-primary">
-              <MaterialIcon name="architecture" className="text-3xl" />
-            </div>
+            <img src="/assets/pd-agency-logo.png" alt="P&D Agency" className="w-12 h-12 object-contain rounded-xl shadow-lg border border-neutral-800 bg-black p-1" />
             <span className={`text-2xl font-headline font-black tracking-tighter uppercase italic ${darkMode ? 'text-white' : 'text-neutral-900'}`}>P&D AGENCY</span>
           </div>
           <span className="mt-4 text-[10px] font-label uppercase tracking-[0.5em] text-neutral-500 font-bold">{t.preloader}</span>
@@ -531,9 +529,7 @@ export default function LandingPage() {
       }`}>
         <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
           <div className="flex items-center gap-3 md:gap-4 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-primary border border-primary/30 rounded-xl shadow-[0_0_20px_rgba(37,99,235,0.2)] bg-primary/10">
-              <MaterialIcon name="architecture" className="text-2xl md:text-3xl" />
-            </div>
+            <img src="/assets/pd-agency-logo.png" alt="P&D Agency" className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-xl shadow-md border border-neutral-800 bg-black p-1" />
             <span className={`text-lg md:text-2xl font-black tracking-tighter uppercase font-headline italic truncate max-w-[140px] sm:max-w-none ${
               darkMode ? 'text-white' : 'text-neutral-900'
             }`}>P&D AGENCY</span>
@@ -1238,9 +1234,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
             <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 flex items-center justify-center text-primary border border-primary/30 rounded-xl bg-primary/10">
-                  <MaterialIcon name="architecture" className="text-2xl" />
-                </div>
+                <img src="/assets/pd-agency-logo.png" alt="P&D Agency" className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-xl border border-neutral-800 bg-black p-1 shadow-lg" />
                 <h2 className={`font-headline font-black text-3xl uppercase tracking-tighter italic ${
                   darkMode ? 'text-white' : 'text-neutral-900'
                 }`}>P&D AGENCY</h2>
