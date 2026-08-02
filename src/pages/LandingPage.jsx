@@ -713,7 +713,7 @@ export default function LandingPage() {
                 {t.hero.btnPrimary}
               </a>
               <a 
-                href="#custom-agency"
+                href="#contacto"
                 className={`w-full sm:w-auto border px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase transition-all backdrop-blur-sm ${
                   darkMode ? 'border-neutral-700 text-white hover:bg-white/10' : 'border-neutral-300 text-neutral-900 hover:bg-black/5'
                 }`}
@@ -854,9 +854,9 @@ export default function LandingPage() {
                     <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card1_li3}</li>
                   </ul>
                 </div>
-                <button onClick={() => openModal(t.services.card1_title)} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                <a href="#contacto" className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all text-center inline-block">
                   {t.services.btnMore}
-                </button>
+                </a>
               </motion.div>
 
               <motion.div 
@@ -879,9 +879,9 @@ export default function LandingPage() {
                     <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card2_li3}</li>
                   </ul>
                 </div>
-                <button onClick={() => openModal(t.services.card2_title)} className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                <a href="#contacto" className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all text-center inline-block">
                   {t.services.btnMore}
-                </button>
+                </a>
               </motion.div>
             </div>
           </div>
