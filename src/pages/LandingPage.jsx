@@ -340,22 +340,22 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
     setShowChoiceModal(false);
 
     try {
+      const dataToSend = new FormData();
+      dataToSend.append('Nome', formData.name);
+      dataToSend.append('Email', formData.email);
+      dataToSend.append('Assunto', formData.subject);
+      dataToSend.append('Localização', formData.location || 'Não informada');
+      dataToSend.append('Mensagem', formData.message);
+      dataToSend.append('_subject', `[P&D AGENCY] Novo Pedido de Proposta - ${formData.name}`);
+      dataToSend.append('_template', 'table');
+      dataToSend.append('_captcha', 'false');
+
       await fetch('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          Nome: formData.name,
-          Email: formData.email,
-          Assunto: formData.subject,
-          Localização: formData.location || 'Não informada',
-          Mensagem: formData.message,
-          _subject: `[P&D AGENCY] Novo Pedido de Proposta - ${formData.name}`,
-          _template: 'table',
-          _captcha: 'false'
-        })
+        body: dataToSend
       });
       setSuccess(true);
     } catch (err) {

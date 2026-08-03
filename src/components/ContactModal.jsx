@@ -71,15 +71,22 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
         // Backend fallback
       }
 
-      await axios.post('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
-        nome: formData.name,
-        email: formData.email,
-        servico_interesse: formData.package_interest,
-        plano_suporte: formData.support_plan,
-        mensagem: formData.message,
-        _subject: `[P&D AGENCY] Novo Pedido de Orçamento - ${formData.name}`,
-        _template: 'table',
-        _captcha: 'false'
+      const dataToSend = new FormData();
+      dataToSend.append('Nome', formData.name);
+      dataToSend.append('Email', formData.email);
+      dataToSend.append('Assunto', formData.package_interest);
+      dataToSend.append('Localização', formData.support_plan || 'Não informada');
+      dataToSend.append('Mensagem', formData.message);
+      dataToSend.append('_subject', `[P&D AGENCY] Novo Pedido de Orçamento - ${formData.name}`);
+      dataToSend.append('_template', 'table');
+      dataToSend.append('_captcha', 'false');
+
+      await fetch('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: dataToSend
       });
 
       setSuccess(true);
