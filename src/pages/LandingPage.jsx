@@ -375,7 +375,7 @@ function ContactInlineForm({ lang = 'pt', darkMode = false }) {
       `*Localização:* ${formData.location || 'Não informada'}\n\n` +
       `*Mensagem:*\n${formData.message}`;
 
-    const url = `https://wa.me/351910446884?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/3519262568423?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
     setSuccess(true);
   };
@@ -1344,14 +1344,14 @@ export default function LandingPage() {
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">WHATSAPP</p>
                     <a 
-                      href="https://wa.me/351910446884" 
+                      href="https://wa.me/3519262568423" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className={`font-headline font-bold text-sm hover:text-emerald-500 transition-colors ${
                         darkMode ? 'text-white' : 'text-neutral-900'
                       }`}
                     >
-                      +351 910 446 884
+                      +351 926 256 8423
                     </a>
                   </div>
                 </div>

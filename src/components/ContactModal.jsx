@@ -106,7 +106,7 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
       `*Localização:* ${formData.support_plan || 'Não informada'}\n\n` +
       `*Mensagem:*\n${formData.message}`;
 
-    const url = `https://wa.me/351910446884?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/3519262568423?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
     setSuccess(true);
     setTimeout(() => {
