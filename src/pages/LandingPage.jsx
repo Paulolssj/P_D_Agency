@@ -892,7 +892,7 @@ export default function LandingPage() {
                     </span>
                   </div>
                   <div>
-                    <span className="block text-2xl font-black font-headline text-primary">4-21 Dias</span>
+                    <span className="block text-2xl font-black font-headline text-primary">3-21 Dias</span>
                     <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
                       {lang === 'pt' ? 'Prazo de Entrega Ágil' : 'Agile Delivery'}
                     </span>
