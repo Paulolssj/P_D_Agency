@@ -1,1011 +1,1539 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  ArrowUpRight, 
-  Code2, 
-  Layers, 
-  Zap, 
-  ShieldCheck, 
-  Globe, 
-  CheckCircle2, 
-  Mail, 
-  MessageSquare, 
-  Phone, 
-  ChevronRight, 
-  Star, 
-  Terminal, 
-  ExternalLink,
-  Laptop,
-  Compass,
-  Cpu,
-  Flame,
-  Award
-} from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import ContactModal from '../components/ContactModal';
+import LegalModal from '../components/LegalModal';
+import CustomCursor from '../components/CustomCursor';
 
-import SpotlightCard from '../components/SpotlightCard';
-import AgencyCalculator from '../components/AgencyCalculator';
-
-// ── BILINGUAL DICTIONARY (DEFAULT PT) ──
-const content = {
+// ── DICIONÁRIO BILINGUE (DEFAULT PT) ──
+const translations = {
   pt: {
     nav: {
-      solutions: "Soluções",
-      portfolio: "O Arquivo",
-      process: "Metodologia",
-      estimator: "Simulador",
-      testimonials: "Testemunhos",
-      contact: "Contacto",
-      cta: "INICIAR PROJETO"
+      home: "Início",
+      approach: "Abordagem",
+      services: "Serviços",
+      portfolio: "Portfólio",
+      testimonials: "Testemunhos"
     },
+    cta: "VAMOS CONSTRUIR",
+    preloader: "AGÊNCIA DIGITAL & COMUNICAÇÃO",
     hero: {
-      statusBadge: "DISPONÍVEL PARA NOVOS PROJETOS • Q3/Q4 2026",
-      titlePre: "ENGENHARIA DE SOFTWARE",
-      titleAccent: "E DESIGN DIGITAL",
-      titlePost: "DE ELITE",
-      subtitle: "Arquitetamos websites de alta performance, plataformas à medida e identidades de marca que transformam negócios em líderes de mercado indiscutíveis.",
-      btnEstimate: "ESTIMAR PROJETO",
-      btnPortfolio: "EXPLORAR O ARQUIVO",
-      metrics: [
-        { label: "Anos de Engenharia", value: "5+" },
-        { label: "Score Core Web Vitals", value: "100/100" },
-        { label: "Tempo Médio de Entrega", value: "7-21 Dias" },
-        { label: "Código 100% Proprietário", value: "Sem Templates" }
-      ],
-      tickerTitle: "CLIENTES & MARCAS QUE CONFIOU NA P&D AGENCY"
+      badge: "BEM-VINDO À P&D AGENCY",
+      headline1: "AGÊNCIA DIGITAL",
+      headline2: "E COMUNICAÇÃO",
+      headline3: "PERSONALIZADA",
+      copyBold: "A sua marca é única e merece uma comunicação totalmente feita à medida.",
+      copySub: "Na P&D Agency, tratamos o seu projeto com a diferenciação de que ele precisa.",
+      copyPartner: "Somos a sua agência de tecnologia e marketing, somos um parceiro de negócio.",
+      btnPrimary: "INICIAR O SEU PROJETO",
+      btnSecondary: "SABER MAIS"
     },
-    solutions: {
-      tag: "CAPACIDADES & SERVIÇOS",
-      title: "SOLUÇÕES DIGITAIS 360º",
-      sub: "Eliminamos a complexidade técnica e entregamos ecossistemas digitais robustos, pensados para gerar autoridade e vendas.",
-      cards: [
-        {
-          icon: Code2,
-          tag: "Core Engineering",
-          title: "Desenvolvimento Web & React / Next.js",
-          desc: "Websites e plataformas com tempo de carregamento abaixo de 1 segundo, código limpo, arquitetura modular e pontuação máxima em motores de busca.",
-          bullets: ["Single Page Applications ultrarrápidas", "Arquitetura Cloud & Serverless", "Otimização SEO Técnica 100/100"]
-        },
-        {
-          icon: Layers,
-          tag: "Bespoke Branding",
-          title: "Sistemas UI/UX & Identidade de Marca",
-          desc: "Criamos identidades visuais memoráveis e interfaces sofisticadas que posicionam a sua marca no topo do seu setor.",
-          bullets: ["Design Systems escaláveis e elegantes", "Prototipagem interativa e física de micro-interações", "Brand Guidelines e ativos digitais completos"]
-        },
-        {
-          icon: Zap,
-          tag: "High Conversion",
-          title: "E-Commerce & Catálogos Interativos",
-          desc: "Experiências de compra e catálogo pensadas ao detalhe para converter visitantes em clientes fiéis.",
-          bullets: ["Integrações de pagamento seguras (MBWay, Stripe)", "Gestão de catálogo simplificada", "Simuladores de orçamento e aluguer"]
-        },
-        {
-          icon: ShieldCheck,
-          tag: "Security & Legal",
-          title: "Conformidade RGPD & Infraestrutura Segura",
-          desc: "Garantimos segurança de nível bancário, encriptação SSL e conformidade total com a legislação europeia e nacional.",
-          bullets: ["Políticas de Cookies e RGPD aprovadas", "Proteção contra ataques DDoS e backups regulares", "Alojamento em servidores cloud de alta velocidade"]
-        }
-      ]
+    about: {
+      tag: "SOBRE A P&D AGENCY",
+      title1: "AGÊNCIA DIGITAL",
+      title2: "PERSONALIZADA",
+      p1_num: "01",
+      p1_title: "UMA ABORDAGEM PERSONALIZADA",
+      p1_desc: "Somos uma agência boutique full-service, o que significa que temos a competência para desenvolver o seu projeto de comunicação e tecnologia, desde a conceção estratégica até à aplicação prática, de uma forma relevante para o seu setor de atividade. Estamos consigo ao longo de todo o caminho!",
+      p2_num: "02",
+      p2_title: "DESENVOLVIMENTO & MARKETING SEM LIMITES",
+      p2_desc: "O digital é uma atividade de frequência e consistência. Por essa razão, a nossa consultoria e engenharia não têm qualquer tipo de limitações quanto ao número de atualizações ou funcionalidades a desenvolver. Vamos definir objetivos e fazer tudo o que for preciso para os atingir.",
+      p3_num: "03",
+      p3_title: "UM PARCEIRO DE NEGÓCIO",
+      p3_desc: "Mais do que uma agência digital, somos um parceiro de negócio que o vai ajudar a olhar de forma estratégica para a tecnologia e colocar o poder da comunicação e desenvolvimento ao serviço do seu negócio.",
+      p4_num: "04",
+      p4_title: "UMA EQUIPA DEDICADA",
+      p4_desc: "O seu projeto é extremamente importante para nós, pelo que terá à sua disposição uma equipa multidisciplinar constituída por Engenheiro de Software, Designer UX/UI, Account Manager e Diretor Criativo.",
+      quote: '"Criamos estratégias 100% customizadas e implementamos o que for preciso para atingir os objetivos, sem limites de plataformas. Trabalhamos o seu projeto como um todo."'
+    },
+    services: {
+      tag: "SOLUÇÕES 360º",
+      title1: "O QUE",
+      title2: "FAZEMOS",
+      desc: "Na P&D Agency, oferecemos uma gama completa de serviços de tecnologia, desenvolvimento web e identidade digital. Com estratégias inovadoras e personalizadas, ajudamos a sua marca a destacar-se no mercado.",
+      card1_title: "ENGENHARIA WEB & APLICAÇÕES",
+      card1_desc: "Trabalhamos o desenvolvimento web através de soluções 360º all-inclusive que eliminam o esforço técnico e trazem resultados duradouros.",
+      card1_li1: "Arquitetura Web & React/Next.js",
+      card1_li2: "Alta Carga & Otimização Cloud",
+      card1_li3: "SEO Avançado & Core Web Vitals",
+      card2_title: "IDENTIDADE DE MARCA & BRANDING",
+      card2_desc: "Criamos identidades visuais de autoridade que posicionam a sua empresa como líder indiscutível no seu mercado.",
+      card2_li1: "Design de Marca & Sistemas UI/UX",
+      card2_li2: "Redes Sociais & Estratégia de Conteúdo",
+      card2_li3: "Campanhas de Desempenho & Anúncios",
+      btnMore: "SABER MAIS"
+    },
+    stats: {
+      s1_val: "5+", s1_lab: "Anos de Experiência em Engenharia",
+      s2_val: "4+", s2_lab: "Mais de 4 Projetos Entregues",
+      s3_val: "4-21 Dias", s3_lab: "Tempo de Entrega Típico",
+      s4_val: "24/7", s4_lab: "Monitorização Ativa"
     },
     portfolio: {
-      tag: "O ARQUIVO DE TRABALHOS",
-      title: "PROJETOS REAIS EM PRODUÇÃO",
-      sub: "Uma seleção de plataformas digitais arquitetadas e lançadas pela P&D Agency para os nossos clientes.",
-      filters: ["Todos", "Stands & Mobilidade", "Criativos & Marcas", "Agronegócio & Serviços"],
-      items: [
-        {
-          id: "route109",
-          title: "ROUTE N109 MOBILIDADE",
-          category: "Stands & Mobilidade",
-          label: "Stand de Motos e Scooters Elétricas",
-          desc: "Plataforma digital e catálogo interativo para stand de mobilidade elétrica na Guia, Pombal, com simulador e marcação de revisões.",
-          img: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=85",
-          url: "https://www.routen109mobilidade.com/",
-          tech: ["React", "Vite", "Tailwind CSS", "SEO Pro", "RGPD"],
-          live: true
-        },
-        {
-          id: "iara",
-          title: "IARA BENTO",
-          category: "Criativos & Marcas",
-          label: "Social Media Manager & Branding",
-          desc: "Website com estética champanhe luxuosa, estimador de propostas em tempo real e vitrine editorial para gestão de redes sociais.",
-          img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=85",
-          url: "https://iara-bento.vercel.app/",
-          tech: ["React", "Bilingual PT/EN", "Framer Motion", "Tailwind"],
-          live: true
-        },
-        {
-          id: "agostinho",
-          title: "AGOSTINHO BIKES",
-          category: "Stands & Mobilidade",
-          label: "Stand & Oficina de Bicicletas",
-          desc: "Website e catálogo digital completo com simulador de aluguer, agendamento de oficina e catálogo de bicicletas elétricas e de estrada.",
-          img: "https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&w=1200&q=85",
-          url: "https://agostinho-blond.vercel.app/",
-          tech: ["React", "Rental Simulator", "SEO Multi-Region", "Vite"],
-          live: true
-        },
-        {
-          id: "heliplanta",
-          title: "HELIPLANTA VIVEIROS",
-          category: "Agronegócio & Serviços",
-          label: "Viveiros Hortícolas & Ornamentais",
-          desc: "Plataforma profissional para viveiros hortícolas na Mata Mourisca, com catálogo botânico detalhado e apresentação institucional.",
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85",
-          url: "https://heliplanta-beryl.vercel.app/",
-          tech: ["React", "Cloud Showcase", "Responsive Design"],
-          live: true
-        },
-        {
-          id: "mariajoao",
-          title: "MARIA JOÃO",
-          category: "Criativos & Marcas",
-          label: "Portfólio Pessoal & Showcase",
-          desc: "Showcase pessoal e editorial para apresentação de trabalhos criativos com estética limpa e foco em tipografia.",
-          img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=85",
-          url: "https://maria-joao-portfolio.vercel.app/",
-          tech: ["React", "Editorial UI", "Fast Loading"],
-          live: true
-        },
-        {
-          id: "takos",
-          title: "TAKOS KING",
-          category: "Agronegócio & Serviços",
-          label: "Fast-Food Tacos Gourmet",
-          desc: "Plataforma de restauração rápida focada em tacos gourmet, com menu interativo e localização em Pombal, Guia.",
-          img: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1200&q=85",
-          url: "https://takos-king.vercel.app/",
-          tech: ["React", "Interactive Menu", "Speed Optimized"],
-          live: true
-        }
-      ]
-    },
-    process: {
-      tag: "O NOSSO MÉTODO",
-      title: "COMO TRANSFORMAMOS O SEU PROJETO",
-      sub: "Um processo linear, transparente e rigoroso do primeiro contacto até ao lançamento em produção.",
-      steps: [
-        {
-          num: "01",
-          title: "Descoberta & Arquitetura",
-          desc: "Mapeamos os objetivos do seu negócio, identificamos a sua audiência e desenhamos a estrutura técnica ideal sem suposições."
-        },
-        {
-          num: "02",
-          title: "Design UI/UX Sob Medida",
-          desc: "Criamos protótipos visuais únicos de alta fidelidade. Nada de temas pré-fabricados — cada detalhe é desenhado para a sua marca."
-        },
-        {
-          num: "03",
-          title: "Engenharia & Performance",
-          desc: "Desenvolvemos o código em React e frameworks modernas, assegurando tempos de carregamento instantâneos e pontuação 100/100 em SEO."
-        },
-        {
-          num: "04",
-          title: "Lançamento & Garantia",
-          desc: "Colocamos o seu website em produção na cloud com certificado SSL, conformidade RGPD e acompanhamento contínuo."
-        }
-      ]
+      tag: "TRABALHOS SELECIONADOS",
+      title: "O ARQUIVO",
+      sub: "Exemplos reais do nosso trabalho — websites ao vivo e em desenvolvimento para clientes e projetos próprios.",
+      live: "Ao Vivo",
+      progress: "Em Progresso"
     },
     testimonials: {
-      tag: "PROVA SOCIAL",
-      title: "O QUE DIZEM QUEM TRABALHA CONNOSCO",
-      items: [
-        {
-          quote: "A P&D Agency soube exatamente como posicionar a Route N109 online. O catálogo é super rápido, os clientes elogiam a facilidade de navegação e as conversões aumentaram significativamente.",
-          author: "Equipa Route N109 Mobilidade",
-          role: "Direção & Stand",
-          brand: "Guia, Pombal"
-        },
-        {
-          quote: "Excelente acompanhamento e profissionalismo. Criaram o website e catálogo digital da Agostinho Bikes com enorme atenção ao detalhe e rapidez de resposta exemplar.",
-          author: "Equipa Agostinho BIKES",
-          role: "Gestão Comercial",
-          brand: "Stand de Bicicletas"
-        },
-        {
-          quote: "Desde a imagem da marca até à estrutura da plataforma web, o trabalho foi impecável. Ter uma equipa tão dedicada faz toda a diferença.",
-          author: "Equipa Heliplanta",
-          role: "Administração",
-          brand: "Viveiros Hortícolas"
-        }
-      ]
+      tag: "AVALIAÇÕES & TESTEMUNHOS",
+      title: "O QUE DIZEM OS NOSSOS CLIENTES"
     },
-    cta: {
-      tag: "VAMOS CONVERSAR?",
-      title: "PRONTO PARA CONSTRUIR O FUTURO DA SUA MARCA?",
-      sub: "Agende uma sessão estratégica de 15 minutos ou envie os detalhes do seu projeto para receber uma proposta à medida.",
-      btnWhatsapp: "FALAR NO WHATSAPP",
-      btnEmail: "ENVIAR EMAIL"
+    brands: {
+      tag: "CONFIANÇA & PARCERIA",
+      title: "EMPRESAS COM QUEM JÁ TRABALHAMOS"
+    },
+    ctaMeeting: {
+      title1: "TEM INTERESSE?",
+      title2: "VAMOS MARCAR UMA REUNIÃO.",
+      sub: "Agendamos uma conversa de 30 minutos, sem compromisso, para perceber o que a sua empresa necessita.",
+      btn: "AGENDAR REUNIÃO"
     },
     footer: {
-      about: "P&D Agency — Agência Digital & Engenharia de Software. Arquitetamos presenças digitais que dominam mercados.",
+      sub: "Agência Digital & Comunicação Personalizada. Arquitetando o futuro da presença digital.",
+      navTitle: "NAVEGAÇÃO",
+      socialTitle: "REDES SOCIAIS",
       rights: "© 2026 P&D AGENCY. TODOS OS DIREITOS RESERVADOS.",
-      links: {
-        terms: "Termos de Serviço",
-        privacy: "Política de Privacidade",
-        cookies: "Política de Cookies",
-        complaints: "Livro de Reclamações"
-      }
+      terms: "TERMOS DE USO",
+      privacy: "POLÍTICA DE PRIVACIDADE"
     }
   },
   en: {
     nav: {
-      solutions: "Solutions",
-      portfolio: "The Archive",
-      process: "Methodology",
-      estimator: "Estimator",
-      testimonials: "Testimonials",
-      contact: "Contact",
-      cta: "START A PROJECT"
+      home: "Home",
+      approach: "Approach",
+      services: "Services",
+      portfolio: "Portfolio",
+      testimonials: "Testimonials"
     },
+    cta: "LET'S BUILD",
+    preloader: "CUSTOM DIGITAL AGENCY",
     hero: {
-      statusBadge: "AVAILABLE FOR NEW PROJECTS • Q3/Q4 2026",
-      titlePre: "SOFTWARE ENGINEERING",
-      titleAccent: "& DIGITAL DESIGN",
-      titlePost: "AT SCALE",
-      subtitle: "We architect high-performance web platforms, bespoke systems, and unforgettable brand identities that position businesses as undisputed industry leaders.",
-      btnEstimate: "ESTIMATE PROJECT",
-      btnPortfolio: "EXPLORE ARCHIVE",
-      metrics: [
-        { label: "Years of Engineering", value: "5+" },
-        { label: "Core Web Vitals Score", value: "100/100" },
-        { label: "Average Turnaround", value: "7-21 Days" },
-        { label: "100% Bespoke Code", value: "No Templates" }
-      ],
-      tickerTitle: "TRUSTED BY AMBITIOUS BUSINESSES & BRANDS"
+      badge: "WELCOME TO P&D AGENCY",
+      headline1: "CUSTOM",
+      headline2: "DIGITAL & COMMUNICATION",
+      headline3: "AGENCY",
+      copyBold: "Your brand is unique and deserves fully tailored digital communication.",
+      copySub: "At P&D Agency, we treat your project with the differentiation and engineering excellence it demands.",
+      copyPartner: "We are your technology and marketing team — your long-term business partner.",
+      btnPrimary: "START YOUR PROJECT",
+      btnSecondary: "LEARN MORE"
     },
-    solutions: {
-      tag: "CAPABILITIES & STACK",
-      title: "360º DIGITAL SOLUTIONS",
-      sub: "We eliminate technical friction and build robust digital ecosystems engineered for undeniable authority and revenue growth.",
-      cards: [
-        {
-          icon: Code2,
-          tag: "Core Engineering",
-          title: "Web Engineering & React / Next.js",
-          desc: "Sub-second load times, clean code, modular architecture, and top-tier search engine optimization.",
-          bullets: ["Lightning-fast Single Page Apps", "Cloud & Serverless Infrastructure", "100/100 Technical SEO Standards"]
-        },
-        {
-          icon: Layers,
-          tag: "Bespoke Branding",
-          title: "UI/UX Systems & Brand Identity",
-          desc: "Authoritative visual identities and polished user interfaces crafted to elevate your market standing.",
-          bullets: ["Scalable design systems & tokens", "Fluid spring physics & tactile micro-interactions", "Complete brand assets and guidelines"]
-        },
-        {
-          icon: Zap,
-          tag: "High Conversion",
-          title: "E-Commerce & Interactive Catalogs",
-          desc: "Frictionless shopping experiences engineered to convert qualified visitors into loyal customers.",
-          bullets: ["Secure checkout integrations (MBWay, Stripe)", "Intuitive catalog management", "Dynamic pricing and quote calculators"]
-        },
-        {
-          icon: ShieldCheck,
-          tag: "Security & Legal",
-          title: "GDPR Compliance & Hardened Cloud",
-          desc: "Enterprise-grade SSL encryption, cloud resilience, and full compliance with European privacy frameworks.",
-          bullets: ["GDPR & Cookie Policy certified", "DDoS mitigation & automated backups", "High-availability global cloud CDN"]
-        }
-      ]
+    about: {
+      tag: "ABOUT P&D AGENCY",
+      title1: "CUSTOM DIGITAL",
+      title2: "AGENCY",
+      p1_num: "01",
+      p1_title: "A TAILORED APPROACH",
+      p1_desc: "We are a full-service boutique agency, bringing the expertise to develop your communication and tech project from strategic concept to execution. We stand by you every step of the way!",
+      p2_num: "02",
+      p2_title: "UNLIMITED DEVELOPMENT & MARKETING",
+      p2_desc: "Digital success demands consistency. Our engineering and consulting have zero limits on updates or feature rollouts. We set bold targets and do whatever it takes to achieve them.",
+      p3_num: "03",
+      p3_title: "A BUSINESS PARTNER",
+      p3_desc: "More than a digital agency, we are a strategic business partner dedicated to placing software engineering and high-end design at the service of your revenue growth.",
+      p4_num: "04",
+      p4_title: "A DEDICATED TEAM",
+      p4_desc: "Your project is our top priority. You will work directly with a multidisciplinary team of Senior Software Engineers, UX/UI Designers, Account Managers, and Creative Directors.",
+      quote: '"We craft 100% custom strategies and execute whatever is needed to hit your targets across any platform. We build your project as a unified ecosystem."'
+    },
+    services: {
+      tag: "360º SOLUTIONS",
+      title1: "WHAT WE",
+      title2: "DO",
+      desc: "At P&D Agency, we provide a full suite of software engineering, web development, and digital identity services. With cutting-edge strategies, we elevate your brand to dominate your market.",
+      card1_title: "WEB ARCHITECTURE & APPS",
+      card1_desc: "We engineer 360º all-inclusive web platforms that eliminate technical overhead and deliver lasting high performance.",
+      card1_li1: "Web Architecture & React/Next.js",
+      card1_li2: "High Load & Cloud Optimization",
+      card1_li3: "Advanced SEO & Core Web Vitals",
+      card2_title: "BRAND IDENTITY & BRANDING",
+      card2_desc: "We design authoritative brand identities and UI/UX systems that position your business as the undisputed industry leader.",
+      card2_li1: "Brand Design & UI/UX Systems",
+      card2_li2: "Social Media & Content Strategy",
+      card2_li3: "Performance Marketing & Ads",
+      btnMore: "LEARN MORE"
+    },
+    stats: {
+      s1_val: "5+", s1_lab: "Years of Engineering Expertise",
+      s2_val: "4+", s2_lab: "More than 4 Projects Delivered",
+      s3_val: "4-21 Days", s3_lab: "Typical Project Turnaround",
+      s4_val: "24/7", s4_lab: "Active System Monitoring"
     },
     portfolio: {
-      tag: "THE ARCHIVE",
-      title: "LIVE CLIENT PLATFORMS",
-      sub: "A curated collection of web platforms engineered and deployed by P&D Agency.",
-      filters: ["All", "Mobility & Showrooms", "Creatives & Brands", "Agri & Services"],
-      items: [
-        {
-          id: "route109",
-          title: "ROUTE N109 MOBILITY",
-          category: "Mobility & Showrooms",
-          label: "Electric Motorcycle Showroom & Repair",
-          desc: "High-conversion web platform and interactive catalog for electric mobility dealership in Guia, Pombal.",
-          img: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=85",
-          url: "https://www.routen109mobilidade.com/",
-          tech: ["React", "Vite", "Tailwind CSS", "SEO Pro", "GDPR"],
-          live: true
-        },
-        {
-          id: "iara",
-          title: "IARA BENTO",
-          category: "Creatives & Brands",
-          label: "Social Media Manager & Branding",
-          desc: "Warm luxury champagne aesthetic, dynamic proposal estimator, and editorial showcase for social media management.",
-          img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=85",
-          url: "https://iara-bento.vercel.app/",
-          tech: ["React", "Bilingual PT/EN", "Framer Motion", "Tailwind"],
-          live: true
-        },
-        {
-          id: "agostinho",
-          title: "AGOSTINHO BIKES",
-          category: "Mobility & Showrooms",
-          label: "Bicycle Showroom & Workshop",
-          desc: "Digital catalog platform with rental simulator, workshop booking, and multi-category showroom.",
-          img: "https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&w=1200&q=85",
-          url: "https://agostinho-blond.vercel.app/",
-          tech: ["React", "Rental Simulator", "SEO Multi-Region", "Vite"],
-          live: true
-        },
-        {
-          id: "heliplanta",
-          title: "HELIPLANTA NURSERIES",
-          category: "Agri & Services",
-          label: "Horticultural & Ornamental Nurseries",
-          desc: "Professional platform for wholesale plant nurseries in Mata Mourisca, featuring detailed botanical catalogs.",
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85",
-          url: "https://heliplanta-beryl.vercel.app/",
-          tech: ["React", "Cloud Showcase", "Responsive Design"],
-          live: true
-        },
-        {
-          id: "mariajoao",
-          title: "MARIA JOÃO",
-          category: "Creatives & Brands",
-          label: "Creative Portfolio & Showcase",
-          desc: "Personal editorial showcase for creative work presentation with clean layout and typography focus.",
-          img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=85",
-          url: "https://maria-joao-portfolio.vercel.app/",
-          tech: ["React", "Editorial UI", "Fast Loading"],
-          live: true
-        },
-        {
-          id: "takos",
-          title: "TAKOS KING",
-          category: "Agri & Services",
-          label: "Gourmet Tacos Fast Casual",
-          desc: "Fast casual restaurant web platform for gourmet tacos with interactive menu in Guia, Pombal.",
-          img: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1200&q=85",
-          url: "https://takos-king.vercel.app/",
-          tech: ["React", "Interactive Menu", "Speed Optimized"],
-          live: true
-        }
-      ]
-    },
-    process: {
-      tag: "THE METHOD",
-      title: "HOW WE SHIP EXCELLENCE",
-      sub: "A linear, transparent, and rigorous process from initial consultation to cloud deployment.",
-      steps: [
-        {
-          num: "01",
-          title: "Discovery & Architecture",
-          desc: "We analyze your business metrics, target audience, and engineer the precise architectural roadmap."
-        },
-        {
-          num: "02",
-          title: "Custom UI/UX Design",
-          desc: "We design high-fidelity, bespoke interfaces. No generic templates — every pixel is custom-built."
-        },
-        {
-          num: "03",
-          title: "Engineering & Speed",
-          desc: "We build with React, modern toolchains, and optimized bundling for sub-second load times."
-        },
-        {
-          num: "04",
-          title: "Deployment & Scale",
-          desc: "We deploy on resilient cloud networks with SSL encryption, GDPR compliance, and active support."
-        }
-      ]
+      tag: "SELECTED WORKS",
+      title: "THE ARCHIVE",
+      sub: "Real-world portfolio examples — live and active web platforms engineered for our clients.",
+      live: "Live",
+      progress: "In Progress"
     },
     testimonials: {
-      tag: "PROOF & REPUTATION",
-      title: "WHAT OUR CLIENTS SAY",
-      items: [
-        {
-          quote: "P&D Agency knew exactly how to position Route N109 online. The digital catalog is blazingly fast, customers love the UX, and our conversion rate skyrocketed.",
-          author: "Route N109 Mobility Team",
-          role: "Showroom Management",
-          brand: "Guia, Pombal"
-        },
-        {
-          quote: "Outstanding partnership and execution. They delivered the Agostinho Bikes digital platform with rigorous attention to detail and rapid communication.",
-          author: "Agostinho BIKES Team",
-          role: "Commercial Management",
-          brand: "Bicycle Showroom"
-        },
-        {
-          quote: "From visual branding to the web application infrastructure, their work was truly world-class. Having such a dedicated team made all the difference.",
-          author: "Heliplanta Team",
-          role: "Management",
-          brand: "Plant Nurseries"
-        }
-      ]
+      tag: "REVIEWS & TESTIMONIALS",
+      title: "WHAT OUR CLIENTS SAY"
     },
-    cta: {
-      tag: "LET'S TALK",
-      title: "READY TO BUILD SOMETHING EXTRAORDINARY?",
-      sub: "Book a 15-minute strategic consultation or send your project specifications to receive a tailored proposal.",
-      btnWhatsapp: "TALK ON WHATSAPP",
-      btnEmail: "SEND EMAIL"
+    brands: {
+      tag: "TRUST & PARTNERSHIPS",
+      title: "COMPANIES WE HAVE WORKED WITH"
+    },
+    ctaMeeting: {
+      title1: "INTERESTED?",
+      title2: "LET'S BOOK A MEETING.",
+      sub: "Schedule a no-commitment 30-minute strategic consultation to discuss your business goals.",
+      btn: "BOOK A MEETING"
     },
     footer: {
-      about: "P&D Agency — Digital Agency & Software Engineering. We architect market-dominating digital platforms.",
-      rights: "© 2026 P&D AGENCY. ALL RIGHTS RESERVED.",
-      links: {
-        terms: "Terms of Service",
-        privacy: "Privacy Policy",
-        cookies: "Cookie Policy",
-        complaints: "Complaints Book"
-      }
+      sub: "Custom Digital & Communication Agency. Architecting the future of web presence.",
+      navTitle: "NAVIGATION",
+      socialTitle: "SOCIAL",
+      rights: "© 2026 P&D AGENCY. CUSTOM DIGITAL AGENCY. ALL RIGHTS RESERVED.",
+      terms: "TERMS OF USE",
+      privacy: "PRIVACY POLICY"
     }
   }
 };
 
-export default function LandingPage() {
-  const [lang, setLang] = useState("pt");
-  const [activeFilter, setActiveFilter] = useState("Todos");
-  const [scrolled, setScrolled] = useState(false);
+// ── COMPONENTES AUXILIARES ──
 
-  const t = content[lang];
-  const isPt = lang === "pt";
+const MaterialIcon = ({ name, className = "" }) => (
+  <span className={`material-symbols-outlined ${className}`} aria-hidden="true" data-icon={name}>
+    {name}
+  </span>
+);
+
+const FlagPT = ({ className = "w-4 h-3" }) => (
+  <svg className={`${className} inline-block rounded-[2px] overflow-hidden shrink-0 shadow-xs`} viewBox="0 0 640 480">
+    <path fill="#ff0000" d="M0 0h640v480H0z"/>
+    <path fill="#006600" d="M0 0h256v480H0z"/>
+    <g transform="translate(256 240) scale(1.1)">
+      <circle r="70" fill="#ffcc00" stroke="#000" strokeWidth="4"/>
+      <path fill="#ffffff" stroke="#000" strokeWidth="3" d="M-35-45h70v60a35 35 0 0 1-70 0z"/>
+      <path fill="#ff0000" d="M-28-38h56v48a28 28 0 0 1-56 0z"/>
+      <path fill="#ffffff" d="M-18-26h36v36a18 18 0 0 1-36 0z"/>
+      <circle cx="0" cy="-8" r="3.5" fill="#00247d"/>
+      <circle cx="-9" cy="-8" r="3.5" fill="#00247d"/>
+      <circle cx="9" cy="-8" r="3.5" fill="#00247d"/>
+      <circle cx="0" cy="-17" r="3.5" fill="#00247d"/>
+      <circle cx="0" cy="1" r="3.5" fill="#00247d"/>
+    </g>
+  </svg>
+);
+
+const FlagEN = ({ className = "w-4 h-3" }) => (
+  <svg className={`${className} inline-block rounded-[2px] overflow-hidden shrink-0 shadow-xs`} viewBox="0 0 640 480">
+    <path fill="#00247d" d="M0 0h640v480H0z"/>
+    <path fill="#fff" d="m0 0 640 480M640 0 0 480" stroke="#fff" strokeWidth="60"/>
+    <path fill="#cf142b" d="m0 0 640 480M640 0 0 480" stroke="#cf142b" strokeWidth="40"/>
+    <path fill="#fff" d="M260 0h120v480H260zM0 180h640v120H0z"/>
+    <path fill="#cf142b" d="M280 0h80v480H280zM0 200h640v80H0z"/>
+  </svg>
+);
+
+function CustomSelectDropdown({ value, onChange, options, darkMode }) {
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpen(false);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredPortfolio = activeFilter === "Todos" || activeFilter === "All"
-    ? t.portfolio.items
-    : t.portfolio.items.filter((item) => item.category === activeFilter);
+  return (
+    <div className="relative w-full" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={`w-full px-4 py-3.5 rounded-2xl text-sm font-medium outline-none transition-all border flex items-center justify-between cursor-pointer ${
+          darkMode 
+            ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+            : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+        }`}
+      >
+        <span className="truncate">{value}</span>
+        <MaterialIcon name="expand_more" className={`text-base transition-transform duration-300 shrink-0 ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <div 
+          className={`absolute left-0 top-full mt-2 w-full rounded-2xl border shadow-2xl py-2 z-50 transition-all ${
+            darkMode 
+              ? 'bg-neutral-900 border-neutral-800 text-white' 
+              : 'bg-white border-neutral-200 text-neutral-900'
+          }`}
+        >
+          {options.map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => {
+                onChange(opt);
+                setOpen(false);
+              }}
+              className={`w-full px-4 py-2.5 text-left text-xs font-bold font-headline transition-colors flex items-center justify-between cursor-pointer ${
+                value === opt 
+                  ? 'text-primary bg-primary/10 font-black' 
+                  : darkMode ? 'hover:bg-white/5' : 'hover:bg-neutral-100'
+              }`}
+            >
+              <span>{opt}</span>
+              {value === opt && <MaterialIcon name="check" className="text-sm text-primary" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ContactInlineForm({ lang = 'pt', darkMode = false }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: lang === 'pt' ? 'Desenvolvimento Web & Apps' : 'Web & App Development',
+    location: '',
+    message: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+  const [showChoiceModal, setShowChoiceModal] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('enviado=true')) {
+      setSuccess(true);
+    }
+  }, []);
+
+  const isPt = lang === 'pt';
+
+  const subjectOptions = isPt ? [
+    'Desenvolvimento Web & Apps',
+    'Branding & Identidade Visual',
+    'Consultoria Digital & Marketing',
+    'Manutenção & Suporte',
+    'Outro assunto'
+  ] : [
+    'Web & App Development',
+    'Branding & Visual Identity',
+    'Digital Consulting & Marketing',
+    'Maintenance & Support',
+    'Other'
+  ];
+
+  const handleInitialSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setError(isPt ? 'Por favor, preenche todos os campos obrigatórios (*).' : 'Please fill in all required fields (*).');
+      return;
+    }
+    setError('');
+    setShowChoiceModal(true);
+  };
+
+  const handleSendEmail = async () => {
+    setLoading(true);
+    setError('');
+    setShowChoiceModal(false);
+
+    try {
+      const dataToSend = new FormData();
+      dataToSend.append('Nome', formData.name);
+      dataToSend.append('Email', formData.email);
+      dataToSend.append('Assunto', formData.subject);
+      dataToSend.append('Localização', formData.location || 'Não informada');
+      dataToSend.append('Mensagem', formData.message);
+      dataToSend.append('_subject', `[P&D AGENCY] Novo Pedido de Proposta - ${formData.name}`);
+      dataToSend.append('_template', 'table');
+      dataToSend.append('_captcha', 'false');
+
+      await fetch('https://formsubmit.co/ajax/pd.agency.digital01@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: dataToSend
+      });
+      setSuccess(true);
+    } catch (err) {
+      window.location.href = `mailto:pd.agency.digital01@gmail.com?subject=${encodeURIComponent(`[P&D AGENCY] Pedido de Proposta - ${formData.name}`)}&body=${encodeURIComponent(`Nome: ${formData.name}\nEmail: ${formData.email}\nAssunto: ${formData.subject}\nLocalização: ${formData.location}\n\nMensagem:\n${formData.message}`)}`;
+      setSuccess(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSendWhatsApp = () => {
+    setShowChoiceModal(false);
+    const text = `*Novo Contacto - P&D Agency*\n\n` +
+      `*Nome:* ${formData.name}\n` +
+      `*Email:* ${formData.email || 'Não informado'}\n` +
+      `*Assunto:* ${formData.subject}\n` +
+      `*Localização:* ${formData.location || 'Não informada'}\n\n` +
+      `*Mensagem:*\n${formData.message}`;
+
+    const url = `https://wa.me/3519262568423?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    setSuccess(true);
+  };
+
+  if (success) {
+    return (
+      <div className="py-12 text-center space-y-4" data-testid="inline-contact-success">
+        <span className="material-symbols-outlined text-emerald-500 text-5xl">check_circle</span>
+        <h4 className={`font-headline text-2xl font-bold ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+          {isPt ? 'PROPOSTA ENVIADA COM SUCESSO!' : 'PROPOSAL SENT SUCCESSFULLY!'}
+        </h4>
+        <p className={`text-sm max-w-md mx-auto ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+          {isPt 
+            ? 'Recebemos a tua mensagem e responderemos muito em breve.' 
+            : 'We received your message and will respond very soon.'}
+        </p>
+        <button
+          type="button"
+          onClick={() => {
+            if (typeof window !== 'undefined') {
+              window.history.replaceState({}, document.title, window.location.pathname);
+            }
+            setSuccess(false);
+          }}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-900 text-white text-xs font-bold font-headline uppercase tracking-widest hover:bg-primary transition-all shadow-md mt-2 cursor-pointer"
+        >
+          <span>{isPt ? 'Enviar Outra Mensagem' : 'Send Another Message'}</span>
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-[#06080F] text-neutral-100 font-sans antialiased selection:bg-blue-600 selection:text-white relative bg-grid-pattern overflow-hidden">
-      
-      {/* Ambient Top Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-radial-gradient pointer-events-none" />
+    <form onSubmit={handleInitialSubmit} className="space-y-6" data-testid="inline-contact-form">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+            {isPt ? 'O TEU NOME *' : 'YOUR NAME *'}
+          </label>
+          <input
+            type="text"
+            name="Nome"
+            required
+            placeholder="ex: Ana Maria"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border ${
+              darkMode 
+                ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+                : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+            }`}
+          />
+        </div>
 
-      {/* ── HEADER / NAVBAR ── */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-header border-b border-white/10 py-4 shadow-2xl" : "bg-transparent py-6"
-      }`}>
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
-          
-          {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-black text-white text-sm tracking-widest shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">
-              P&D
-            </div>
-            <div className="flex flex-col text-left">
-              <span className="font-headline font-black text-base uppercase tracking-tight text-white group-hover:text-blue-400 transition-colors">
-                P&D Agency
-              </span>
-              <span className="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">
-                Digital & Software
-              </span>
-            </div>
-          </Link>
+        <div>
+          <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+            {isPt ? 'O TEU EMAIL *' : 'YOUR EMAIL *'}
+          </label>
+          <input
+            type="email"
+            name="Email"
+            required
+            placeholder="ex: ana@email.com"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border ${
+              darkMode 
+                ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+                : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+            }`}
+          />
+        </div>
+      </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-neutral-400">
-            <a href="#solucoes" className="hover:text-white transition-colors">{t.nav.solutions}</a>
-            <a href="#portfolio" className="hover:text-white transition-colors">{t.nav.portfolio}</a>
-            <a href="#processo" className="hover:text-white transition-colors">{t.nav.process}</a>
-            <a href="#estimador" className="hover:text-white transition-colors">{t.nav.estimator}</a>
-            <a href="#testemunhos" className="hover:text-white transition-colors">{t.nav.testimonials}</a>
-          </nav>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+            {isPt ? 'MOTIVO DE CONTACTO / ASSUNTO' : 'SUBJECT / REASON'}
+          </label>
+          <CustomSelectDropdown
+            value={formData.subject}
+            onChange={(val) => setFormData({ ...formData, subject: val })}
+            options={subjectOptions}
+            darkMode={darkMode}
+          />
+        </div>
 
-          {/* Right Controls: Lang Switcher & CTA */}
-          <div className="flex items-center gap-4">
-            
-            {/* Bilingual Toggle */}
-            <div className="flex items-center bg-black/40 border border-white/10 rounded-full p-1 text-[11px] font-bold">
-              <button
-                type="button"
-                onClick={() => setLang("pt")}
-                className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-                  lang === "pt" ? "bg-blue-600 text-white shadow-sm" : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                PT
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang("en")}
-                className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-                  lang === "en" ? "bg-blue-600 text-white shadow-sm" : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                EN
-              </button>
-            </div>
+        <div>
+          <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+            {isPt ? 'LOCALIZAÇÃO' : 'LOCATION'}
+          </label>
+          <input
+            type="text"
+            name="Localização"
+            placeholder={isPt ? "ex: Lisboa, Porto, Leiria..." : "ex: London, Lisbon, NY..."}
+            value={formData.location}
+            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+            className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border ${
+              darkMode 
+                ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+                : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+            }`}
+          />
+        </div>
+      </div>
 
-            {/* Quick Action Button */}
-            <a
-              href="#estimador"
-              className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-blue-600/30 hidden sm:inline-flex items-center gap-2 active:scale-95 cursor-pointer"
+      <div>
+        <label className="block text-[11px] font-black uppercase tracking-wider mb-2 text-neutral-400">
+          {isPt ? 'DESCRIÇÃO DA IDEIA OU MENSAGEM *' : 'MESSAGE OR IDEA DESCRIPTION *'}
+        </label>
+        <textarea
+          name="Mensagem"
+          required
+          rows={4}
+          placeholder={isPt ? "Conta-nos a tua ideia de website, aplicação ou comunicação..." : "Tell us about your website, app, or communication idea..."}
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          className={`w-full px-4 py-3.5 rounded-2xl text-sm outline-none transition-all border resize-none ${
+            darkMode 
+              ? 'bg-neutral-950 border-neutral-800 text-white focus:border-primary' 
+              : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-900'
+          }`}
+        />
+      </div>
+
+      {error && (
+        <p className="text-red-400 text-xs font-bold">
+          {error}
+        </p>
+      )}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full sm:w-auto bg-neutral-900 text-white hover:bg-primary px-8 py-4 rounded-2xl font-headline font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer disabled:opacity-50 border border-neutral-700"
+      >
+        <span>{loading ? (isPt ? 'A ENVIAR...' : 'SENDING...') : (isPt ? 'Enviar Ideia' : 'Send Idea')}</span>
+        <span className="material-symbols-outlined text-base">send</span>
+      </button>
+
+      {/* POPUP MODAL PARA ESCOLHER VIA EMAIL OU WHATSAPP */}
+      {showChoiceModal && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
+          <div className={`relative w-full max-w-md rounded-3xl p-6 sm:p-8 border shadow-2xl transition-all ${
+            darkMode ? 'bg-neutral-900 border-neutral-800 text-white' : 'bg-white border-neutral-200 text-neutral-900'
+          }`}>
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setShowChoiceModal(false)}
+              className="absolute top-5 right-5 p-2 rounded-full hover:bg-neutral-500/10 transition-colors cursor-pointer text-neutral-400 hover:text-white"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{t.nav.cta}</span>
-            </a>
+              <span className="material-symbols-outlined text-xl">close</span>
+            </button>
+
+            <div className="text-center mb-6">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3">
+                <span className="material-symbols-outlined text-2xl">send</span>
+              </div>
+              <h3 className="font-headline font-black text-xl uppercase tracking-tight">
+                {isPt ? 'Como preferes enviar?' : 'How would you like to send?'}
+              </h3>
+              <p className={`text-xs mt-1.5 leading-relaxed ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                {isPt 
+                  ? 'Escolhe o canal preferido para a nossa equipa receber o teu pedido:' 
+                  : 'Choose your preferred channel for our team to receive your request:'}
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <button
+                type="button"
+                onClick={handleSendEmail}
+                className={`w-full p-4 rounded-2xl border text-left flex items-center gap-4 transition-all cursor-pointer group ${
+                  darkMode 
+                    ? 'bg-neutral-950/80 border-neutral-800 hover:border-primary hover:bg-neutral-950' 
+                    : 'bg-neutral-50 border-neutral-200 hover:border-neutral-900 hover:bg-white'
+                }`}
+              >
+                <div className="w-10 h-10 rounded-xl bg-neutral-900 flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform border border-neutral-700">
+                  <span className="material-symbols-outlined text-lg">mail</span>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-headline font-bold text-xs uppercase tracking-wider">
+                    {isPt ? 'Enviar por Email' : 'Send via Email'}
+                  </h4>
+                  <p className="text-[11px] text-neutral-400 mt-0.5">
+                    {isPt ? 'Directo para a nossa caixa de entrada' : 'Directly to our inbox'}
+                  </p>
+                </div>
+                <span className="material-symbols-outlined text-sm text-neutral-400 group-hover:text-primary transition-colors">
+                  arrow_forward
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleSendWhatsApp}
+                className={`w-full p-4 rounded-2xl border text-left flex items-center gap-4 transition-all cursor-pointer group ${
+                  darkMode 
+                    ? 'bg-neutral-950/80 border-neutral-800 hover:border-emerald-500 hover:bg-neutral-950' 
+                    : 'bg-neutral-50 border-neutral-200 hover:border-emerald-600 hover:bg-white'
+                }`}
+              >
+                <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform">
+                  <span className="material-symbols-outlined text-lg">chat</span>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-headline font-bold text-xs uppercase tracking-wider text-emerald-500">
+                    {isPt ? 'Enviar via WhatsApp' : 'Send via WhatsApp'}
+                  </h4>
+                  <p className="text-[11px] text-neutral-400 mt-0.5">
+                    {isPt ? 'Abre conversa direta com texto pronto' : 'Open direct chat with ready text'}
+                  </p>
+                </div>
+                <span className="material-symbols-outlined text-sm text-neutral-400 group-hover:text-emerald-500 transition-colors">
+                  arrow_forward
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </form>
+  );
+}
+
+// ── COMPONENTE PRINCIPAL (COM MODO CLARO/ESCURO & LINGUAGEM PT/EN) ──
+
+export default function LandingPage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState('');
+  const [legalModalOpen, setLegalModalOpen] = useState(false);
+  const [activeLegalTab, setActiveLegalTab] = useState('terms');
+  const [loading, setLoading] = useState(true);
+  const [darkMode, setDarkMode] = useState(false); // Default: Light Mode (Branco)
+  const [lang, setLang] = useState('pt'); // Default: PT
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const t = translations[lang];
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 900);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
+  const toggleLanguage = () => setLang(lang === 'pt' ? 'en' : 'pt');
+
+  const openModal = (pkg = '') => {
+    setSelectedPackage(pkg);
+    setModalOpen(true);
+  };
+
+  const openLegalModal = (tab = 'terms') => {
+    setActiveLegalTab(tab);
+    setLegalModalOpen(true);
+  };
+
+  const brands = [
+    { name: 'TAKOS KING', category: lang === 'pt' ? 'Fast Food • Guia, Pombal' : 'Fast Food • Guia, Pombal', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
+    { name: 'AGOSTINHO BIKES', category: lang === 'pt' ? 'Stand & Oficina de Bicicletas' : 'Bicycle Showroom & Workshop', logo: '/assets/agostinho-bikes.png', link: 'https://agostinho-bikes.vercel.app/' },
+    { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Conceito & Marca • Guia' : 'Concept & Brand • Guia', logo: '/assets/roots-199.png', link: '#' },
+    { name: 'HELIPLANTA', category: lang === 'pt' ? 'Produção Hortícola & Viveiros' : 'Horticultural & Nursery Production', logo: '/assets/heliplanta.png', link: 'https://heliplanta-beryl.vercel.app/' },
+    { name: 'EDU BRASIL', category: lang === 'pt' ? 'Plataforma Educacional' : 'Educational Platform', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
+  ];
+
+  return (
+    <div className={`selection:bg-primary selection:text-white font-body leading-normal transition-colors duration-500 overflow-x-hidden ${
+      darkMode ? 'text-white bg-[#050A13]' : 'text-neutral-900 bg-[#FDFBF7]'
+    }`}>
+      <CustomCursor />
+      
+      {/* ── PRELOADER ── */}
+      {loading && (
+        <div className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-700 ${
+          darkMode ? 'bg-[#050A13]' : 'bg-[#FDFBF7]'
+        }`}>
+          <div className="flex items-center gap-3 animate-pulse">
+            <img src="/assets/pd-agency-logo.png" alt="P&D Agency" className="w-12 h-12 object-contain rounded-xl shadow-lg border border-neutral-800 bg-black p-1" />
+            <span className={`text-2xl font-headline font-black tracking-tighter uppercase italic ${darkMode ? 'text-white' : 'text-neutral-900'}`}>P&D AGENCY</span>
+          </div>
+          <span className="mt-4 text-[10px] font-label uppercase tracking-[0.5em] text-neutral-500 font-bold">{t.preloader}</span>
+        </div>
+      )}
+
+      {/* ── HEADER COM IDIOMA (PT / EN) E TEMA (CLARO / ESCURO) ── */}
+      <header className={`fixed top-0 w-full z-50 border-b backdrop-blur-2xl transition-colors duration-500 ${
+        darkMode ? 'bg-[#050A13]/90 border-neutral-800/80' : 'bg-[#FDFBF7]/90 border-neutral-200/80'
+      }`}>
+        <div className="flex justify-between items-center px-4 sm:px-6 py-4 max-w-7xl mx-auto">
+          <div className="flex items-center gap-3 md:gap-4 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <img src="/assets/pd-agency-logo.png" alt="P&D Agency" className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-xl shadow-md border border-neutral-800 bg-black p-1" />
+            <span className={`text-base sm:text-xl md:text-2xl font-black tracking-tighter uppercase font-headline italic truncate max-w-[130px] sm:max-w-none ${
+              darkMode ? 'text-white' : 'text-neutral-900'
+            }`}>P&D AGENCY</span>
           </div>
 
+          <nav className={`hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-[0.2em] ${
+            darkMode ? 'text-neutral-300' : 'text-neutral-700'
+          }`}>
+            <a href="#welcome" className="hover:text-primary transition-colors">{t.nav.home}</a>
+            <a href="#custom-agency" className="hover:text-primary transition-colors">{t.nav.approach}</a>
+            <a href="#o-que-fazemos" className="hover:text-primary transition-colors">{t.nav.services}</a>
+            <a href="#portfolio" className="hover:text-primary transition-colors">{t.nav.portfolio}</a>
+            <a href="#testemunhos" className="hover:text-primary transition-colors">{t.nav.testimonials}</a>
+          </nav>
+
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+            {/* SELETOR DE IDIOMA (DROPDOWN / SELECT) */}
+            <div className="relative">
+              <button
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                className={`px-2.5 sm:px-3 py-1.5 rounded-full border font-headline font-bold text-[10px] sm:text-[11px] tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                  darkMode 
+                    ? 'bg-neutral-900 border-neutral-700 text-white hover:border-primary' 
+                    : 'bg-neutral-100 border-neutral-300 text-neutral-900 hover:border-primary shadow-sm'
+                }`}
+              >
+                <span className="flex items-center gap-1">
+                  {lang === 'pt' ? <><FlagPT className="w-3.5 h-2.5 sm:w-4 sm:h-3" /> PT</> : <><FlagEN className="w-3.5 h-2.5 sm:w-4 sm:h-3" /> EN</>}
+                </span>
+                <MaterialIcon name="expand_more" className={`text-base transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {langDropdownOpen && (
+                <div 
+                  className={`absolute right-0 mt-2 w-36 rounded-2xl border shadow-2xl py-2 z-50 transition-all ${
+                    darkMode 
+                      ? 'bg-neutral-900 border-neutral-800 text-white' 
+                      : 'bg-white border-neutral-200 text-neutral-900'
+                  }`}
+                >
+                  <button
+                    onClick={() => { setLang('pt'); setLangDropdownOpen(false); }}
+                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2.5 hover:bg-primary/10 transition-colors cursor-pointer ${
+                      lang === 'pt' ? 'text-primary font-black bg-primary/10' : ''
+                    }`}
+                  >
+                    <FlagPT className="w-4 h-3" />
+                    <span>Português</span>
+                  </button>
+                  <button
+                    onClick={() => { setLang('en'); setLangDropdownOpen(false); }}
+                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2.5 hover:bg-primary/10 transition-colors cursor-pointer ${
+                      lang === 'en' ? 'text-primary font-black bg-primary/10' : ''
+                    }`}
+                  >
+                    <FlagEN className="w-4 h-3" />
+                    <span>English</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* BOTÃO MODO CLARO / ESCURO */}
+            <button
+              onClick={toggleTheme}
+              title={darkMode ? "Modo Claro" : "Modo Escuro"}
+              className={`p-2 sm:p-2.5 rounded-full border transition-all flex items-center justify-center ${
+                darkMode ? 'bg-neutral-900 border-neutral-700 text-amber-400 hover:bg-neutral-800' : 'bg-neutral-100 border-neutral-300 text-neutral-800 hover:bg-neutral-200'
+              }`}
+            >
+              <MaterialIcon name={darkMode ? "light_mode" : "dark_mode"} className="text-lg sm:text-xl" />
+            </button>
+
+            {/* HAMBURGER MENU BUTTON (MOBILE / TABLET) */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`p-2 sm:p-2.5 rounded-full border transition-all flex lg:hidden items-center justify-center cursor-pointer ${
+                darkMode ? 'bg-neutral-900 border-neutral-700 text-white' : 'bg-neutral-100 border-neutral-300 text-neutral-900'
+              }`}
+            >
+              <MaterialIcon name={mobileMenuOpen ? "close" : "menu"} className="text-lg sm:text-xl" />
+            </button>
+
+            <a 
+              href="#contacto"
+              className="hidden sm:inline-block bg-primary text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-black font-headline text-[10px] sm:text-[11px] tracking-widest hover:bg-primary/90 active:scale-95 transition-all uppercase shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+            >
+              {t.cta}
+            </a>
+          </div>
         </div>
+
+        {/* ── MOBILE / TABLET MENU DRAWER ── */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            className={`w-full border-b backdrop-blur-3xl p-6 lg:hidden shadow-2xl transition-all ${
+              darkMode ? 'bg-[#050A13]/95 border-neutral-800 text-white' : 'bg-[#FDFBF7]/95 border-neutral-200 text-neutral-900'
+            }`}
+          >
+            <nav className="flex flex-col gap-4 text-xs sm:text-sm font-bold uppercase tracking-[0.2em]">
+              <a href="#welcome" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.home}</a>
+              <a href="#custom-agency" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.approach}</a>
+              <a href="#o-que-fazemos" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.services}</a>
+              <a href="#portfolio" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.portfolio}</a>
+              <a href="#testemunhos" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.testimonials}</a>
+              <a href="#contacto" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-2 text-primary font-black flex items-center justify-between border-t border-neutral-500/20 pt-4">
+                <span>{lang === 'pt' ? 'FALAR COM A AGÊNCIA' : 'TALK TO THE AGENCY'}</span>
+                <MaterialIcon name="arrow_forward" className="text-base" />
+              </a>
+            </nav>
+          </motion.div>
+        )}
       </header>
 
-      {/* ── HERO SECTION ── */}
-      <section className="relative pt-36 sm:pt-44 pb-24 md:pb-32 px-6 sm:px-8 text-center max-w-6xl mx-auto">
-        
-        {/* Availability Status Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2.5 bg-blue-500/10 border border-blue-500/25 px-4 py-2 rounded-full mb-8 backdrop-blur-md"
-        >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[11px] font-bold uppercase tracking-widest text-blue-300">
-            {t.hero.statusBadge}
-          </span>
-        </motion.div>
+      <main className="overflow-x-hidden pt-20">
+        {/* ── HERO SECTION ── */}
+        <section className={`relative min-h-[90vh] flex flex-col items-center justify-center px-4 pt-16 pb-24 overflow-hidden transition-colors duration-500 ${
+          darkMode ? 'bg-[#050A13]' : 'bg-[#FDFBF7]'
+        }`} id="welcome">
+          {/* Ambient Glows */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-        {/* Hero Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-headline text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white leading-[1.02] mb-8 max-w-5xl mx-auto"
-        >
-          <span>{t.hero.titlePre}</span> <br className="hidden sm:inline" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500">
-            {t.hero.titleAccent}
-          </span> <br className="hidden sm:inline" />
-          <span>{t.hero.titlePost}</span>
-        </motion.h1>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-neutral-300 text-base sm:text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto mb-12"
-        >
-          {t.hero.subtitle}
-        </motion.p>
-
-        {/* Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
-        >
-          <a
-            href="#estimador"
-            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-headline font-bold text-xs uppercase tracking-widest transition-all shadow-xl hover:shadow-blue-600/30 flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
-          >
-            <span>{t.hero.btnEstimate}</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-          <a
-            href="#portfolio"
-            className="w-full sm:w-auto border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-full font-headline font-bold text-xs uppercase tracking-widest transition-all backdrop-blur-md flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
-          >
-            <span>{t.hero.btnPortfolio}</span>
-            <ArrowUpRight className="w-4 h-4 text-neutral-400" />
-          </a>
-        </motion.div>
-
-        {/* Metrics Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16 text-left"
-        >
-          {t.hero.metrics.map((m, idx) => (
-            <div key={idx} className="bg-[#0B0F19]/80 border border-white/8 rounded-2xl p-5 backdrop-blur-xl">
-              <span className="font-headline font-black text-2xl sm:text-3xl text-blue-400 block mb-1">
-                {m.value}
-              </span>
-              <span className="text-xs text-neutral-400 font-medium">
-                {m.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Client Brands Continuous Ticker */}
-        <div className="pt-6 border-t border-white/8">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-6">
-            {t.hero.tickerTitle}
-          </p>
-          <div className="w-full overflow-hidden relative py-2">
+          <div className="container max-w-6xl mx-auto relative z-10 text-center">
             <motion.div
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
-              className="flex items-center gap-12 whitespace-nowrap w-max opacity-80 text-xs font-bold uppercase tracking-widest text-neutral-300"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="flex items-center justify-center gap-4 mb-6"
             >
+              <div className="h-[1px] w-12 bg-neutral-400/40"></div>
+              <p className="font-label text-primary uppercase tracking-[0.5em] text-[11px] font-black italic">
+                {t.hero.badge}
+              </p>
+              <div className="h-[1px] w-12 bg-neutral-400/40"></div>
+            </motion.div>
+
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className={`font-headline text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.95] tracking-tighter mb-8 ${
+                darkMode ? 'text-white' : 'text-neutral-900'
+              }`}
+            >
+              {t.hero.headline1} <br />
+              <span className="text-primary italic">{t.hero.headline2}</span> <br />
+              {t.hero.headline3}
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 1 }}
+              className={`max-w-3xl mx-auto mb-12 text-base md:text-xl font-light leading-relaxed italic ${
+                darkMode ? 'text-neutral-300' : 'text-neutral-600'
+              }`}
+            >
+              <p className="mb-4">
+                <strong>{t.hero.copyBold}</strong>
+              </p>
+              <p className="text-sm md:text-lg">
+                {t.hero.copySub} <br className="hidden md:block" />
+                <strong className={darkMode ? 'text-white' : 'text-neutral-900'}>{t.hero.copyPartner}</strong>
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16"
+            >
+              <a 
+                href="#contacto"
+                className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] active:scale-95 inline-block text-center"
+              >
+                {t.hero.btnPrimary}
+              </a>
+              <a 
+                href="#contacto"
+                className={`w-full sm:w-auto border px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase transition-all backdrop-blur-sm ${
+                  darkMode ? 'border-neutral-700 text-white hover:bg-white/10' : 'border-neutral-300 text-neutral-900 hover:bg-black/5'
+                }`}
+              >
+                {t.hero.btnSecondary}
+              </a>
+            </motion.div>
+
+            {/* MARQUEE TICKER DOS CLIENTES HERO (ANIMADO CONTINUO SEM FUNDO) */}
+            <div className="mb-3 text-center">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] font-black">
+                {lang === 'pt' ? 'EMPRESAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES WE HAVE WORKED WITH'}
+              </p>
+            </div>
+            <div className={`w-full overflow-hidden border-y py-4 rounded-2xl ${
+              darkMode ? 'border-neutral-800/80 bg-neutral-900/40' : 'border-neutral-200/80 bg-neutral-100/60'
+            }`}>
+              <motion.div 
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ repeat: Infinity, ease: "linear", duration: 18 }}
+                className={`flex items-center gap-10 whitespace-nowrap w-max opacity-90 text-[11px] font-headline font-black uppercase tracking-[0.2em] ${
+                  darkMode ? 'text-neutral-300' : 'text-neutral-700'
+                }`}
+              >
+                {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
+                  <React.Fragment key={i}>
+                    <span className="flex items-center gap-3">
+                      {b.logo ? (
+                        <img src={b.logo} alt={b.name} className="h-6 w-auto object-contain max-w-[80px]" />
+                      ) : (
+                        <MaterialIcon name={b.icon} className="text-primary text-base" />
+                      )}
+                      <span>{b.name}</span>
+                    </span>
+                    <span className="opacity-30">•</span>
+                  </React.Fragment>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION: CUSTOM DIGITAL AGENCY ── */}
+        <section className={`py-28 border-y transition-colors duration-500 ${
+          darkMode ? 'bg-[#070D1A] border-neutral-800/60' : 'bg-neutral-50 border-neutral-200/80'
+        }`} id="custom-agency">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">{t.about.tag}</p>
+              <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter ${
+                darkMode ? 'text-white' : 'text-neutral-900'
+              }`}>
+                {t.about.title1} <br />
+                <span className="text-primary italic">{t.about.title2}</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
               {[
-                "Route N109 Mobilidade",
-                "Agostinho BIKES",
-                "Iara Bento",
-                "Heliplanta Viveiros",
-                "Maria João Creative",
-                "Takos King Pombal",
-                "Route N109 Mobilidade",
-                "Agostinho BIKES",
-                "Iara Bento",
-                "Heliplanta Viveiros",
-                "Maria João Creative",
-                "Takos King Pombal",
-              ].map((brand, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                  <span>{brand}</span>
+                { num: t.about.p1_num, title: t.about.p1_title, desc: t.about.p1_desc },
+                { num: t.about.p2_num, title: t.about.p2_title, desc: t.about.p2_desc },
+                { num: t.about.p3_num, title: t.about.p3_title, desc: t.about.p3_desc },
+                { num: t.about.p4_num, title: t.about.p4_title, desc: t.about.p4_desc }
+              ].map((pillar, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between transition-all duration-500 shadow-xl group ${
+                    darkMode 
+                      ? 'bg-neutral-900/90 border-neutral-800 hover:border-primary/50' 
+                      : 'bg-white border-neutral-200 hover:border-primary/50'
+                  }`}
+                >
+                  <div>
+                    <span className="font-headline text-4xl font-black text-primary/40 group-hover:text-primary transition-colors block mb-6">{pillar.num}</span>
+                    <h3 className={`font-headline text-2xl font-black uppercase mb-4 tracking-tight group-hover:text-primary transition-colors ${
+                      darkMode ? 'text-white' : 'text-neutral-900'
+                    }`}>{pillar.title}</h3>
+                    <p className={`text-sm md:text-base leading-relaxed font-body font-normal ${
+                      darkMode ? 'text-neutral-300' : 'text-neutral-600'
+                    }`}>{pillar.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Banner Destaque */}
+            <div className={`border rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto ${
+              darkMode ? 'bg-primary/10 border-primary/30 text-white' : 'bg-primary/5 border-primary/20 text-neutral-900'
+            }`}>
+              <p className="text-lg md:text-2xl font-headline font-bold leading-relaxed tracking-tight">
+                {t.about.quote}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION: O QUE FAZEMOS ── */}
+        <section className={`py-28 border-b transition-colors duration-500 ${
+          darkMode ? 'bg-[#050A13] border-neutral-800/60' : 'bg-[#FDFBF7] border-neutral-200'
+        }`} id="o-que-fazemos">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="max-w-3xl mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">{t.services.tag}</p>
+              <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 ${
+                darkMode ? 'text-white' : 'text-neutral-900'
+              }`}>
+                {t.services.title1} <span className="text-primary italic">{t.services.title2}</span>
+              </h2>
+              <p className={`text-base md:text-lg font-light leading-relaxed ${
+                darkMode ? 'text-neutral-400' : 'text-neutral-600'
+              }`}>
+                {t.services.desc}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <motion.div 
+                whileHover={{ y: -6 }}
+                className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between group transition-all ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800 hover:border-primary/40' : 'bg-white border-neutral-200 hover:border-primary/40 shadow-sm'
+                }`}
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors">
+                    <MaterialIcon name="web" className="text-3xl" />
+                  </div>
+                  <h3 className={`font-headline text-3xl font-black uppercase mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>{t.services.card1_title}</h3>
+                  <p className={`text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                    {t.services.card1_desc}
+                  </p>
+                  <ul className={`space-y-3 text-xs uppercase tracking-wider font-bold mb-8 ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card1_li1}</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card1_li2}</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card1_li3}</li>
+                  </ul>
                 </div>
+                <a href="#contacto" className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all text-center inline-block">
+                  {t.services.btnMore}
+                </a>
+              </motion.div>
+
+              <motion.div 
+                whileHover={{ y: -6 }}
+                className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between group transition-all ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800 hover:border-primary/40' : 'bg-white border-neutral-200 hover:border-primary/40 shadow-sm'
+                }`}
+              >
+                <div>
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors">
+                    <MaterialIcon name="brush" className="text-3xl" />
+                  </div>
+                  <h3 className={`font-headline text-3xl font-black uppercase mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>{t.services.card2_title}</h3>
+                  <p className={`text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                    {t.services.card2_desc}
+                  </p>
+                  <ul className={`space-y-3 text-xs uppercase tracking-wider font-bold mb-8 ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card2_li1}</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card2_li2}</li>
+                    <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card2_li3}</li>
+                  </ul>
+                </div>
+                <a href="#contacto" className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all text-center inline-block">
+                  {t.services.btnMore}
+                </a>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── STATS SECTION ── */}
+        <section className={`py-20 border-b relative overflow-hidden transition-colors duration-500 ${
+          darkMode ? 'bg-[#070D1A] border-neutral-800/60' : 'bg-neutral-100 border-neutral-200'
+        }`}>
+          <div className="container mx-auto px-8 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+              {[
+                { val: t.stats.s1_val, lab: t.stats.s1_lab },
+                { val: t.stats.s2_val, lab: t.stats.s2_lab },
+                { val: t.stats.s3_val, lab: t.stats.s3_lab },
+                { val: t.stats.s4_val, lab: t.stats.s4_lab }
+              ].map((stat, i) => (
+                <div key={i} className="flex flex-col items-center text-center w-full relative group">
+                  <span className={`text-5xl md:text-6xl font-black font-headline tracking-tighter ${
+                    darkMode ? 'text-white' : 'text-neutral-900'
+                  }`}>
+                    {stat.val}
+                  </span>
+                  <p className="text-primary text-[10px] uppercase font-bold tracking-[0.3em] mt-3 italic">
+                    {stat.lab}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── PORTFOLIO ("O ARQUIVO") ── */}
+        <section className={`py-28 border-b transition-colors duration-500 ${
+          darkMode ? 'bg-[#050A13] border-neutral-800/60' : 'bg-[#FDFBF7] border-neutral-200'
+        }`} id="portfolio">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">{t.portfolio.tag}</p>
+              <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter ${
+                darkMode ? 'text-white' : 'text-neutral-900'
+              }`}>{t.portfolio.title}</h2>
+              <p className={`text-sm mt-4 max-w-lg mx-auto ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>{t.portfolio.sub}</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {[
+                {
+                  label: lang === 'pt' ? 'Mobilidade Elétrica / 2026' : 'Electric Mobility / 2026',
+                  labelColor: 'text-primary',
+                  title: 'ROUTE N109 MOBILIDADE',
+                  subtitle: lang === 'pt' ? 'Stand e oficina de motos e scooters elétricas na Guia — catálogo interativo e presença digital de alta conversão.' : 'Electric motorcycle showroom & workshop in Guia — interactive catalog and high-conversion web platform.',
+                  img: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=85',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-primary text-white font-bold',
+                  link: 'https://www.routen109mobilidade.com/',
+                },
+                {
+                  label: lang === 'pt' ? 'Social Media & Branding / 2026' : 'Social Media & Branding / 2026',
+                  labelColor: 'text-amber-300',
+                  title: 'IARA BENTO',
+                  subtitle: lang === 'pt' ? 'Gestão de redes sociais e criação de conteúdos estratégicos — estimador interativo de propostas e branding luxuoso.' : 'Social media management & content creation — interactive budget estimator and luxury aesthetic.',
+                  img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=85',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-amber-500 text-black font-bold',
+                  link: 'https://iara-bento.vercel.app/',
+                },
+                {
+                  label: lang === 'pt' ? 'Stand & Oficina / 2026' : 'Showroom & Workshop / 2026',
+                  labelColor: 'text-primary',
+                  title: 'AGOSTINHO BIKES',
+                  subtitle: lang === 'pt' ? 'Stand e oficina de bicicletas — catálogo digital, simulador de aluguer, serviços e presença web.' : 'Bicycle showroom & repair shop — digital catalog, rental simulator, services & web presence.',
+                  img: 'https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&w=1200&q=85',
+                  logo: '/assets/agostinho-bikes.png',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-primary text-white font-bold',
+                  link: 'https://agostinho-blond.vercel.app/',
+                },
+                {
+                  label: lang === 'pt' ? 'Agronegócio & Viveiros / 2026' : 'Agribusiness & Nurseries / 2026',
+                  labelColor: 'text-emerald-400',
+                  title: 'HELIPLANTA',
+                  subtitle: lang === 'pt' ? 'Plataforma digital para viveiros hortícolas e ornamentais na Mata Mourisca — catálogo e serviços.' : 'Digital platform for horticultural and ornamental nurseries in Mata Mourisca — catalog & services.',
+                  img: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85',
+                  logo: '/assets/heliplanta.png',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-emerald-600 text-white font-bold',
+                  link: 'https://heliplanta-beryl.vercel.app/',
+                },
+                {
+                  label: lang === 'pt' ? 'Portfólio Criativo / 2026' : 'Creative Showcase / 2026',
+                  labelColor: 'text-primary',
+                  title: 'MARIA JOÃO',
+                  subtitle: lang === 'pt' ? 'Portfólio pessoal e showcase criativo de apresentação profissional.' : 'Personal portfolio and creative showcase for professional presentation.',
+                  img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=85',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-primary text-white font-bold',
+                  link: 'https://maria-joao-portfolio.vercel.app/',
+                },
+                {
+                  label: lang === 'pt' ? 'Restauração & Fast Food / 2026' : 'Food & Fast Casual / 2026',
+                  labelColor: 'text-amber-400',
+                  title: 'TAKOS KING',
+                  subtitle: lang === 'pt' ? 'Plataforma web para restaurante de fast food focado em tacos — Guia, Pombal.' : 'Web platform for taco fast-casual brand in Guia, Pombal.',
+                  img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1200&q=85',
+                  logo: '/assets/takos-king.png',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-amber-500 text-black font-bold',
+                  link: 'https://takos-king.vercel.app/',
+                },
+              ].map((item, i) => (
+                <motion.a
+                  href={item.link}
+                  target={item.link === '#' ? '_self' : '_blank'}
+                  rel="noopener noreferrer"
+                  key={i}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -8 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`relative aspect-[4/3] overflow-hidden rounded-3xl group cursor-pointer block border shadow-2xl transition-all duration-500 ${
+                    darkMode ? 'bg-neutral-900 border-neutral-800 hover:border-primary/50 hover:shadow-primary/20' : 'bg-white border-neutral-200 hover:border-primary/50 hover:shadow-primary/10'
+                  }`}
+                >
+                  <img
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+                    src={item.img}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050A13] via-[#050A13]/60 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+                  
+                  {item.logo && (
+                    <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 p-1.5 flex items-center justify-center">
+                      <img src={item.logo} alt={item.title} className="w-full h-full object-contain" />
+                    </div>
+                  )}
+
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md ${item.badgeClass}`}>
+                      {item.badge}
+                    </span>
+                  </div>
+                  
+                  <div className="absolute bottom-0 left-0 p-6 w-full z-10">
+                    <p className={`font-label text-[10px] tracking-[0.3em] uppercase mb-1 font-bold ${item.labelColor}`}>{item.label}</p>
+                    <h4 className="font-headline text-2xl font-black text-white uppercase mb-1 tracking-tighter group-hover:text-primary transition-colors">{item.title}</h4>
+                    <p className="text-neutral-300 text-xs md:text-sm font-light leading-relaxed line-clamp-2">{item.subtitle}</p>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── TESTEMUNHOS & AVALIAÇÕES ── */}
+        <section className={`py-28 border-b transition-colors duration-500 ${
+          darkMode ? 'bg-[#070D1A] border-neutral-800/60' : 'bg-neutral-100 border-neutral-200'
+        }`} id="testemunhos">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">{t.testimonials.tag}</p>
+              <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter ${
+                darkMode ? 'text-white' : 'text-neutral-900'
+              }`}>{t.testimonials.title}</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  quote: lang === 'pt' 
+                    ? "Trabalhamos com a P&D Agency e a verdade é que não podíamos estar mais satisfeitos. Souberam ler a nossa visão desde o primeiro instante, têm uma equipa muito dedicada e apresentam um serviço super personalizado."
+                    : "Working with P&D Agency exceeded all expectations. They captured our brand vision instantly, delivered dedicated support, and provided truly personalized engineering.",
+                  author: "Ana Dominguez",
+                  role: "Owner & Founder",
+                  brand: "Ana Dominguez Ceramics"
+                },
+                {
+                  quote: lang === 'pt'
+                    ? "A parceria tem sido uma excelente experiência. Começando pelo profissionalismo, dedicação e rápida resposta a todas as solicitações no desenvolvimento do nosso website e catálogo digital."
+                    : "Our partnership has been an outstanding experience. Their professionalism, rapid response times, and execution on our digital catalog website were second to none.",
+                  author: "Equipa Agostinho Bikes",
+                  role: "Gestão & Stand",
+                  brand: "Agostinho Bikes"
+                },
+                {
+                  quote: lang === 'pt'
+                    ? "Contactámos a P&D Agency para a criação da nossa marca e website. Fiquei muito feliz com todos os resultados: imagem da marca, site e presença digital – cada elemento em perfeita sintonia."
+                    : "We hired P&D Agency for our brand identity and web platform. The results speak for themselves — brand image, website, and digital presence in complete harmony.",
+                  author: "Equipa Heliplanta",
+                  role: "Direção & Vendas",
+                  brand: "Heliplanta Viveiros"
+                }
+              ].map((testi, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.12 }}
+                  className={`p-8 rounded-3xl border flex flex-col justify-between shadow-xl relative group transition-all ${
+                    darkMode ? 'bg-neutral-900/90 border-neutral-800 hover:border-primary/40' : 'bg-white border-neutral-200 hover:border-primary/40'
+                  }`}
+                >
+                  <div className="mb-8">
+                    <p className="text-primary text-5xl font-headline font-black mb-2 opacity-50">“</p>
+                    <p className={`text-sm md:text-base leading-relaxed italic font-light ${
+                      darkMode ? 'text-neutral-300' : 'text-neutral-600'
+                    }`}>
+                      "{testi.quote}"
+                    </p>
+                  </div>
+                  <div className={`pt-6 border-t ${darkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
+                    <h4 className={`font-headline font-black text-base uppercase tracking-tight ${
+                      darkMode ? 'text-white' : 'text-neutral-900'
+                    }`}>{testi.author}</h4>
+                    <p className="text-primary text-xs font-semibold uppercase tracking-wider">{testi.role} • {testi.brand}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── MARCAS QUE CONFIAM EM NÓS (ESTILO THEAGENCY.PT — LOGOS DIRETOS SEM FUNDO) ── */}
+        <section className={`py-20 border-b overflow-hidden transition-colors duration-500 ${
+          darkMode ? 'bg-[#03060C] border-neutral-800/80' : 'bg-neutral-100/80 border-neutral-300'
+        }`}>
+          <div className="text-center mb-12">
+            <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-2 font-bold">{t.brands.tag}</p>
+            <h3 className={`font-headline text-3xl md:text-4xl font-black uppercase tracking-tighter ${
+              darkMode ? 'text-white' : 'text-neutral-900'
+            }`}>
+              {t.brands.title}
+            </h3>
+          </div>
+
+          <div className="relative w-full overflow-hidden flex items-center py-4">
+            <motion.div 
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 22 }}
+              className="flex items-center gap-14 md:gap-20 whitespace-nowrap w-max"
+            >
+              {[...brands, ...brands, ...brands, ...brands].map((brand, i) => (
+                <a
+                  key={i}
+                  href={brand.link}
+                  target={brand.link === '#' ? '_self' : '_blank'}
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 group opacity-85 hover:opacity-100 transition-opacity cursor-pointer"
+                >
+                  {brand.logo ? (
+                    <img 
+                      src={brand.logo} 
+                      alt={brand.name} 
+                      className="h-10 md:h-12 w-auto object-contain max-w-[140px] transition-transform duration-300 group-hover:scale-105" 
+                    />
+                  ) : (
+                    <MaterialIcon name={brand.icon} className="text-primary text-3xl" />
+                  )}
+                  <div className="text-left">
+                    <h4 className={`font-headline font-black text-sm uppercase tracking-tight group-hover:text-primary transition-colors ${
+                      darkMode ? 'text-white' : 'text-neutral-900'
+                    }`}>{brand.name}</h4>
+                    <p className={`text-[10px] font-medium italic ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>{brand.category}</p>
+                  </div>
+                </a>
               ))}
             </motion.div>
           </div>
-        </div>
+        </section>
 
-      </section>
-
-      {/* ── SECTION: 360º SOLUTIONS / BENTO GRID ── */}
-      <section id="solucoes" className="py-28 px-6 sm:px-8 max-w-7xl mx-auto text-left relative">
-        <div className="max-w-2xl mb-16">
-          <div className="inline-flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-widest mb-3">
-            <Cpu className="w-4 h-4" />
-            <span>{t.solutions.tag}</span>
-          </div>
-          <h2 className="font-headline text-3xl sm:text-5xl font-black uppercase tracking-tight text-white mb-4">
-            {t.solutions.title}
-          </h2>
-          <p className="text-neutral-400 text-sm sm:text-base font-light leading-relaxed">
-            {t.solutions.sub}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {t.solutions.cards.map((card, i) => {
-            const Icon = card.icon;
-            return (
-              <SpotlightCard key={i} className="p-8 sm:p-10 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-600/15 border border-blue-500/30 text-blue-400 flex items-center justify-center">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 px-3 py-1 rounded-full bg-white/5 border border-white/5">
-                      {card.tag}
-                    </span>
-                  </div>
-
-                  <h3 className="font-headline text-xl sm:text-2xl font-bold uppercase tracking-tight text-white mb-3">
-                    {card.title}
-                  </h3>
-                  <p className="text-sm text-neutral-400 font-light leading-relaxed mb-6">
-                    {card.desc}
-                  </p>
-                </div>
-
-                <div className="pt-6 border-t border-white/8 space-y-2.5">
-                  {card.bullets.map((b, bi) => (
-                    <div key={bi} className="flex items-center gap-2.5 text-xs text-neutral-300">
-                      <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
-                      <span>{b}</span>
-                    </div>
-                  ))}
-                </div>
-              </SpotlightCard>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ── SECTION: THE ARCHIVE / PORTFOLIO SHOWCASE ── */}
-      <section id="portfolio" className="py-28 px-6 sm:px-8 max-w-7xl mx-auto text-left relative">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
-          <div>
-            <div className="inline-flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-widest mb-3">
-              <Compass className="w-4 h-4" />
-              <span>{t.portfolio.tag}</span>
+        {/* ── SECÇÃO DE CONTACTO NO FIM DA PÁGINA (DESIGN MARIA JOÃO) ── */}
+        <section className={`py-28 border-b transition-colors duration-500 ${
+          darkMode ? 'bg-[#050A13] border-neutral-800' : 'bg-[#FDFBF7] border-neutral-200'
+        }`} id="contacto">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] mb-3 font-bold">
+                {lang === 'pt' ? 'CONTACTO' : 'CONTACT US'}
+              </p>
+              <h2 className={`font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter ${
+                darkMode ? 'text-white' : 'text-neutral-900'
+              }`}>
+                {lang === 'pt' ? 'FALAR COM A ' : 'TALK TO THE '}
+                <span className="text-primary italic underline decoration-primary decoration-4 underline-offset-8">
+                  {lang === 'pt' ? 'AGÊNCIA' : 'AGENCY'}
+                </span>
+              </h2>
             </div>
-            <h2 className="font-headline text-3xl sm:text-5xl font-black uppercase tracking-tight text-white mb-4">
-              {t.portfolio.title}
-            </h2>
-            <p className="text-neutral-400 text-sm sm:text-base font-light max-w-xl">
-              {t.portfolio.sub}
-            </p>
-          </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-2">
-            {t.portfolio.filters.map((filter) => (
-              <button
-                key={filter}
-                type="button"
-                onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border ${
-                  activeFilter === filter
-                    ? "bg-blue-600 border-blue-500 text-white shadow-md shadow-blue-600/20"
-                    : "bg-black/40 border-white/10 text-neutral-400 hover:text-white hover:border-white/20"
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence>
-            {filteredPortfolio.map((item, index) => (
-              <motion.a
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-[#0B0F19] border border-white/8 hover:border-blue-500/40 rounded-3xl overflow-hidden flex flex-col justify-between shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
-              >
-                {/* Image Cover */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-neutral-900">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent opacity-90" />
-                  
-                  {/* Status Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="inline-flex items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-emerald-400">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Live Platform</span>
-                    </span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto">
+              {/* LADO ESQUERDO: CARTÕES DE CONTACTO */}
+              <div className="lg:col-span-5 flex flex-col gap-5">
+                {/* CARTÃO EMAIL */}
+                <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                }`}>
+                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
+                    <MaterialIcon name="mail" className="text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">EMAIL</p>
+                    <a href="mailto:pd.agency.digital01@gmail.com" className={`font-headline font-bold text-sm hover:text-primary transition-colors ${
+                      darkMode ? 'text-white' : 'text-neutral-900'
+                    }`}>
+                      pd.agency.digital01@gmail.com
+                    </a>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                {/* CARTÃO WHATSAPP */}
+                <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                }`}>
+                  <div className="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center text-white shrink-0">
+                    <MaterialIcon name="chat" className="text-xl" />
+                  </div>
                   <div>
-                    <div className="text-[11px] font-bold uppercase tracking-widest text-blue-400 mb-2">
-                      {item.label}
-                    </div>
-                    <h3 className="font-headline text-xl sm:text-2xl font-bold uppercase tracking-tight text-white mb-2 group-hover:text-blue-400 transition-colors flex items-center justify-between">
-                      <span>{item.title}</span>
-                      <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-blue-400" />
-                    </h3>
-                    <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed line-clamp-2 mb-6">
-                      {item.desc}
+                    <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">WHATSAPP</p>
+                    <a 
+                      href="https://wa.me/3519262568423" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className={`font-headline font-bold text-sm hover:text-emerald-500 transition-colors ${
+                        darkMode ? 'text-white' : 'text-neutral-900'
+                      }`}
+                    >
+                      +351 926 256 8423
+                    </a>
+                  </div>
+                </div>
+
+                {/* CARTÃO INSTAGRAM */}
+                <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                }`}>
+                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
+                    <MaterialIcon name="share" className="text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">INSTAGRAM</p>
+                    <a href="https://www.instagram.com/p.d_agency/" target="_blank" rel="noopener noreferrer" className={`font-headline font-bold text-sm hover:text-primary transition-colors ${
+                      darkMode ? 'text-white' : 'text-neutral-900'
+                    }`}>
+                      @p.d_agency
+                    </a>
+                  </div>
+                </div>
+
+                {/* CARTÃO LOCALIZAÇÃO */}
+                <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
+                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                }`}>
+                  <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
+                    <MaterialIcon name="location_on" className="text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">LOCALIZAÇÃO</p>
+                    <p className={`font-headline font-bold text-sm ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+                      Leiria / Pombal • Portugal
                     </p>
                   </div>
-
-                  {/* Tech Stack Pills */}
-                  <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/8">
-                    {item.tech.map((tItem, ti) => (
-                      <span key={ti} className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-white/5 text-neutral-300 border border-white/5">
-                        {tItem}
-                      </span>
-                    ))}
-                  </div>
                 </div>
-              </motion.a>
-            ))}
-          </AnimatePresence>
-        </div>
-      </section>
 
-      {/* ── SECTION: PROCESS / METHODOLOGY ── */}
-      <section id="processo" className="py-28 px-6 sm:px-8 max-w-7xl mx-auto text-left relative">
-        <div className="max-w-2xl mb-16">
-          <div className="inline-flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-widest mb-3">
-            <Terminal className="w-4 h-4" />
-            <span>{t.process.tag}</span>
-          </div>
-          <h2 className="font-headline text-3xl sm:text-5xl font-black uppercase tracking-tight text-white mb-4">
-            {t.process.title}
-          </h2>
-          <p className="text-neutral-400 text-sm sm:text-base font-light leading-relaxed">
-            {t.process.sub}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {t.process.steps.map((step, idx) => (
-            <SpotlightCard key={idx} className="p-8 flex flex-col justify-between">
-              <div>
-                <span className="font-headline text-4xl font-black text-blue-400/40 block mb-6">
-                  {step.num}
-                </span>
-                <h3 className="font-headline text-lg font-bold uppercase tracking-tight text-white mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed">
-                  {step.desc}
-                </p>
-              </div>
-            </SpotlightCard>
-          ))}
-        </div>
-      </section>
-
-      {/* ── SECTION: ESTIMATOR & CALCULATOR ── */}
-      <section id="estimador" className="py-24 px-6 sm:px-8 max-w-6xl mx-auto relative">
-        <AgencyCalculator lang={lang} />
-      </section>
-
-      {/* ── SECTION: TESTIMONIALS ── */}
-      <section id="testemunhos" className="py-28 px-6 sm:px-8 max-w-7xl mx-auto text-left relative">
-        <div className="max-w-2xl mb-16">
-          <div className="inline-flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-widest mb-3">
-            <Award className="w-4 h-4" />
-            <span>{t.testimonials.tag}</span>
-          </div>
-          <h2 className="font-headline text-3xl sm:text-5xl font-black uppercase tracking-tight text-white mb-4">
-            {t.testimonials.title}
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {t.testimonials.items.map((testi, idx) => (
-            <div key={idx} className="bg-[#0B0F19]/80 border border-white/8 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
-              <div>
-                <div className="flex gap-1 text-amber-400 mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
-                  ))}
+                {/* CARTÃO PROPOSTAS & COLABORAÇÕES */}
+                <div className={`p-8 rounded-3xl border transition-all ${
+                  darkMode ? 'bg-neutral-900/50 border-neutral-800' : 'bg-neutral-100/70 border-neutral-200'
+                }`}>
+                  <h4 className={`font-headline font-bold text-lg mb-2 ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+                    {lang === 'pt' ? 'Propostas & Colaborações' : 'Proposals & Collaborations'}
+                  </h4>
+                  <p className={`text-xs leading-relaxed ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                    {lang === 'pt' 
+                      ? 'Se tens uma ideia para um projeto de desenvolvimento web, aplicação, branding ou consultoria digital, entra em contacto diretamente connosco.'
+                      : 'If you have an idea for a web development, app, branding, or digital consulting project, reach out directly to us.'}
+                  </p>
                 </div>
-                <p className="text-sm sm:text-base text-neutral-300 font-light leading-relaxed italic mb-8">
-                  "{testi.quote}"
-                </p>
               </div>
 
-              <div className="pt-6 border-t border-white/8">
-                <h4 className="font-headline font-bold text-sm uppercase tracking-tight text-white">
-                  {testi.author}
-                </h4>
-                <p className="text-xs text-blue-400 mt-0.5">
-                  {testi.role} • {testi.brand}
-                </p>
+              {/* LADO DIREITO: FORMULÁRIO DE CONTACTO DA PÁGINA */}
+              <div className="lg:col-span-7">
+                <div className={`p-8 md:p-10 rounded-3xl border shadow-2xl ${
+                  darkMode ? 'bg-neutral-900 border-neutral-800' : 'bg-white border-neutral-200'
+                }`}>
+                  <h3 className={`font-headline text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
+                    {lang === 'pt' ? 'Envia a tua proposta' : 'Send your proposal'}
+                  </h3>
+
+                  <ContactInlineForm lang={lang} darkMode={darkMode} />
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── SECTION: FINAL CTA ── */}
-      <section id="contacto" className="py-24 px-6 sm:px-8 max-w-5xl mx-auto text-center relative">
-        <div className="bg-gradient-to-b from-blue-900/20 via-[#0B0F19] to-[#0B0F19] border border-blue-500/30 rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden">
-          
-          <div className="inline-flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-widest mb-4">
-            <Flame className="w-4 h-4" />
-            <span>{t.cta.tag}</span>
           </div>
+        </section>
 
-          <h2 className="font-headline text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-white mb-6">
-            {t.cta.title}
-          </h2>
 
-          <p className="text-neutral-300 text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto mb-10">
-            {t.cta.sub}
-          </p>
+      </main>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://api.whatsapp.com/send?phone=351913904586&text=Ol%C3%A1%20P%26D%20Agency!%20Gostaria%20de%20conversar%20sobre%20um%20projeto."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-full font-headline font-bold text-xs uppercase tracking-widest transition-all shadow-xl hover:shadow-emerald-600/30 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-            >
-              <MessageSquare className="w-4 h-4" />
-              <span>{t.cta.btnWhatsapp}</span>
-            </a>
-
-            <a
-              href="mailto:pd.agency.digital01@gmail.com?subject=Contacto%20P%26D%20Agency"
-              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-headline font-bold text-xs uppercase tracking-widest transition-all shadow-xl hover:shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-            >
-              <Mail className="w-4 h-4" />
-              <span>{t.cta.btnEmail}</span>
-            </a>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── FOOTER WITH LEGAL LINKS & LIVRO DE RECLAMAÇÕES ── */}
-      <footer className="border-t border-white/10 bg-[#04060A] py-16 px-6 sm:px-8 text-left relative">
+      {/* ── FOOTER ── */}
+      <footer className={`w-full pt-24 pb-16 px-6 font-body border-t transition-colors duration-500 ${
+        darkMode ? 'bg-[#03060C] border-neutral-800' : 'bg-neutral-100 border-neutral-200'
+      }`}>
         <div className="max-w-7xl mx-auto">
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            
-            {/* Col 1: Brand */}
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center font-black text-white text-xs tracking-wider">
-                  P&D
-                </div>
-                <span className="font-headline font-bold text-lg uppercase tracking-tight text-white">
-                  P&D Agency
-                </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+            <div className="lg:col-span-2 space-y-6">
+              <div className="flex items-center gap-3">
+                <img src="/assets/pd-agency-logo.png" alt="P&D Agency" className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-xl border border-neutral-800 bg-black p-1 shadow-lg" />
+                <h2 className={`font-headline font-black text-3xl uppercase tracking-tighter italic ${
+                  darkMode ? 'text-white' : 'text-neutral-900'
+                }`}>P&D AGENCY</h2>
               </div>
-              <p className="text-neutral-400 text-xs sm:text-sm font-light max-w-md leading-relaxed mb-4">
-                {t.footer.about}
+              <p className={`font-light leading-relaxed max-w-sm text-base ${
+                darkMode ? 'text-neutral-400' : 'text-neutral-600'
+              }`}>
+                {t.footer.sub}
               </p>
-              <div className="text-xs text-neutral-400 font-mono">
-                Direct: <a href="mailto:pd.agency.digital01@gmail.com" className="text-blue-400 hover:underline">pd.agency.digital01@gmail.com</a>
-              </div>
             </div>
-
-            {/* Col 2: Navigation */}
+            
             <div>
-              <h4 className="font-headline font-bold text-xs uppercase tracking-widest text-white mb-4">
-                {isPt ? "Navegação" : "Navigation"}
-              </h4>
-              <ul className="space-y-2.5 text-xs text-neutral-400">
-                <li><a href="#solucoes" className="hover:text-white transition-colors">{t.nav.solutions}</a></li>
-                <li><a href="#portfolio" className="hover:text-white transition-colors">{t.nav.portfolio}</a></li>
-                <li><a href="#processo" className="hover:text-white transition-colors">{t.nav.process}</a></li>
-                <li><a href="#estimador" className="hover:text-white transition-colors">{t.nav.estimator}</a></li>
+              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">{t.footer.navTitle}</h4>
+              <ul className={`space-y-3 text-sm font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                <li><a className="hover:text-primary transition-colors" href="#welcome">{t.nav.home}</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#custom-agency">{t.nav.approach}</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#o-que-fazemos">{t.nav.services}</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#portfolio">{t.nav.portfolio}</a></li>
+                <li><a className="hover:text-primary transition-colors" href="#testemunhos">{t.nav.testimonials}</a></li>
               </ul>
             </div>
-
-            {/* Col 3: Legal & Compliance */}
+            
             <div>
-              <h4 className="font-headline font-bold text-xs uppercase tracking-widest text-white mb-4">
-                {isPt ? "Legal & RGPD" : "Legal & GDPR"}
-              </h4>
-              <ul className="space-y-2.5 text-xs text-neutral-400">
+              <h4 className="font-headline text-primary font-black mb-6 uppercase tracking-[0.3em] text-xs">{lang === 'pt' ? 'CONTACTO' : 'CONTACT'}</h4>
+              <ul className={`space-y-3 text-sm font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
                 <li>
-                  <Link to="/termos-servico" className="hover:text-blue-400 transition-colors">
-                    {t.footer.links.terms}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/politica-privacidade" className="hover:text-blue-400 transition-colors">
-                    {t.footer.links.privacy}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/politica-cookies" className="hover:text-blue-400 transition-colors">
-                    {t.footer.links.cookies}
-                  </Link>
+                  <a 
+                    className="hover:text-primary transition-colors flex items-center gap-2 font-bold" 
+                    href="mailto:pd.agency.digital01@gmail.com" 
+                  >
+                    <MaterialIcon name="mail" className="text-primary text-base" />
+                    <span className="truncate">pd.agency.digital01@gmail.com</span>
+                  </a>
                 </li>
                 <li>
                   <a 
-                    href="https://www.livroreclamacoes.pt/Inicio/" 
+                    className="hover:text-primary transition-colors flex items-center gap-2" 
+                    href="https://www.instagram.com/p.d_agency/" 
                     target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="hover:text-blue-400 transition-colors flex items-center gap-1"
+                    rel="noopener noreferrer"
                   >
-                    <span>{t.footer.links.complaints}</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <MaterialIcon name="share" className="text-primary text-base" />
+                    <span>Instagram</span>
                   </a>
                 </li>
               </ul>
             </div>
-
           </div>
-
-          {/* Copyright Bottom Bar */}
-          <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-400 font-medium">
-            <p>{t.footer.rights}</p>
-            <p className="text-neutral-400 font-mono">
-              Engineered with React 18, Vite & Tailwind CSS
+          
+          <div className={`pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-6 ${
+            darkMode ? 'border-neutral-800/80' : 'border-neutral-300'
+          }`}>
+            <p className="text-neutral-500 text-[10px] uppercase tracking-[0.25em] font-bold text-center md:text-left">
+              {t.footer.rights}
             </p>
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+              <Link 
+                to="/termos-servico"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+              >
+                {t.footer.terms}
+              </Link>
+              <Link 
+                to="/politica-privacidade"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+              >
+                {t.footer.privacy}
+              </Link>
+              <Link 
+                to="/politica-cookies"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+              >
+                {lang === 'pt' ? 'POLÍTICA DE COOKIES' : 'COOKIE POLICY'}
+              </Link>
+              <a 
+                href="https://www.livroreclamacoes.pt/Inicio/"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors flex items-center gap-1.5"
+              >
+                <span>{lang === 'pt' ? 'LIVRO DE RECLAMAÇÕES' : 'COMPLAINTS BOOK'}</span>
+                <span className="material-symbols-outlined text-[12px]">open_in_new</span>
+              </a>
+            </div>
           </div>
-
         </div>
       </footer>
 
+      <ContactModal 
+        open={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        defaultPackage={selectedPackage} 
+        lang={lang}
+      />
+
+      <LegalModal 
+        open={legalModalOpen} 
+        onClose={() => setLegalModalOpen(false)} 
+        defaultTab={activeLegalTab} 
+        lang={lang}
+      />
     </div>
   );
 }
+
+
+
