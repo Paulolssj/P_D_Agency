@@ -3,15 +3,52 @@ import { motion } from 'framer-motion';
 import { Send, PhoneCall, Mail, CheckCircle2, Sparkles, Shield, Clock, MessageSquare, ArrowRight } from 'lucide-react';
 
 const SERVICES = [
-  { id: 'web', label: 'Website Institucional / Landing Page', icon: '🌐' },
-  { id: 'catalog', label: 'Catálogo Digital / Loja Online', icon: '🛍️' },
-  { id: 'branding', label: 'Identidade de Marca & Redes Sociais', icon: '💎' },
-  { id: 'ads', label: 'Campanhas Google Ads & SEO', icon: '🚀' },
-  { id: 'custom', label: 'Outro / Solução Personalizada', icon: '⚡' },
+  { 
+    id: 'landing', 
+    label: 'Landing Page de Alta Conversão', 
+    price: 'A partir de 350€', 
+    icon: '⚡',
+    desc: 'Página única focada em captar contactos e maximizar conversões'
+  },
+  { 
+    id: 'web', 
+    label: 'Website Institucional', 
+    price: 'A partir de 550€', 
+    icon: '💻',
+    desc: 'Website corporativo multi-página com engenharia e SEO à medida'
+  },
+  { 
+    id: 'branding', 
+    label: 'Identidade de Marca & Social Media', 
+    price: 'Design & Redes', 
+    icon: '💎',
+    desc: 'Logótipo, branding visual, templates e presença nas redes sociais'
+  },
+  { 
+    id: 'catalog', 
+    label: 'Catálogo Digital / Loja Online', 
+    price: 'A partir de 800€', 
+    icon: '🛍️',
+    desc: 'Catálogo dinâmico de produtos com filtros e pedidos diretos'
+  },
+  { 
+    id: 'ads', 
+    label: 'Campanhas Google Ads & SEO', 
+    price: 'Tráfego & Visibilidade', 
+    icon: '🚀',
+    desc: 'Anúncios direcionados no Google e otimização para o topo dos motores de busca'
+  },
+  { 
+    id: 'custom', 
+    label: 'Solução Personalizada 360º', 
+    price: 'Sob Medida', 
+    icon: '👑',
+    desc: 'Projeto completo unindo tecnologia, branding e marketing digital'
+  },
 ];
 
 export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }) {
-  const [selectedService, setSelectedService] = useState('catalog');
+  const [selectedService, setSelectedService] = useState('landing');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -22,17 +59,17 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
 
   const buildWhatsAppUrl = () => {
     const text = lang === 'pt'
-      ? `Olá P&D Agency! 👋\n\nGostaria de solicitar uma proposta para o meu projeto:\n\n📌 *Serviço de Interesse:* ${selectedServiceObj.icon} ${selectedServiceObj.label}\n👤 *Nome / Empresa:* ${name.trim() || 'Cliente'}\n📞 *Contacto:* ${phone.trim() || 'Não especificado'}\n✉️ *E-mail:* ${email.trim() || 'Não especificado'}\n\n📝 *Detalhes:* ${message.trim() || 'Gostaria de agendar uma reunião / receber mais detalhes.'}\n\nPodemos conversar?`
-      : `Hello P&D Agency! 👋\n\nI would like to request a proposal for my project:\n\n📌 *Service:* ${selectedServiceObj.icon} ${selectedServiceObj.label}\n👤 *Name / Company:* ${name.trim() || 'Client'}\n📞 *Phone:* ${phone.trim() || 'Not specified'}\n✉️ *E-mail:* ${email.trim() || 'Not specified'}\n\n📝 *Details:* ${message.trim() || 'I would like to schedule a call / get more details.'}\n\nCan we talk?`;
+      ? `Olá P&D Agency! 👋\n\nGostaria de solicitar uma proposta para o meu projeto:\n\n📌 *Serviço Selecionado:* ${selectedServiceObj.icon} ${selectedServiceObj.label} (${selectedServiceObj.price})\n👤 *Nome / Empresa:* ${name.trim() || 'Cliente'}\n📞 *Contacto:* ${phone.trim() || 'Não especificado'}\n✉️ *E-mail:* ${email.trim() || 'Não especificado'}\n\n📝 *Detalhes:* ${message.trim() || 'Gostaria de obter uma proposta detalhada e agendar uma reunião.'}\n\nPodemos conversar?`
+      : `Hello P&D Agency! 👋\n\nI would like to request a proposal for my project:\n\n📌 *Selected Service:* ${selectedServiceObj.icon} ${selectedServiceObj.label} (${selectedServiceObj.price})\n👤 *Name / Company:* ${name.trim() || 'Client'}\n📞 *Phone:* ${phone.trim() || 'Not specified'}\n✉️ *E-mail:* ${email.trim() || 'Not specified'}\n\n📝 *Details:* ${message.trim() || 'I would like to get a detailed proposal and schedule a call.'}\n\nCan we talk?`;
 
     return `https://wa.me/3519262568423?text=${encodeURIComponent(text)}`;
   };
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Pedido de Proposta - ${selectedServiceObj.label} - ${name || 'Cliente'}`);
+    const subject = encodeURIComponent(`Pedido de Proposta - ${selectedServiceObj.label} (${selectedServiceObj.price}) - ${name || 'Cliente'}`);
     const body = encodeURIComponent(
-      `Nome: ${name}\nTelemóvel: ${phone}\nE-mail: ${email}\nServiço: ${selectedServiceObj.label}\n\nDetalhes do Projeto:\n${message}`
+      `Nome: ${name}\nTelemóvel: ${phone}\nE-mail: ${email}\nServiço: ${selectedServiceObj.label} (${selectedServiceObj.price})\n\nDetalhes do Projeto:\n${message}`
     );
     window.location.href = `mailto:pd.agency.digital01@gmail.com?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -67,8 +104,8 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
             darkMode ? 'text-neutral-400' : 'text-neutral-600'
           }`}>
             {lang === 'pt' 
-              ? 'Conte-nos sobre a sua ideia ou negócio. Analisamos os seus objetivos e enviamos uma proposta sob medida com resposta em menos de 24 horas.'
-              : 'Tell us about your idea or business. We analyze your goals and send a tailored proposal with response in less than 24 hours.'}
+              ? 'Selecione a solução que procura para a sua marca. Receba uma proposta sob medida com resposta rápida em menos de 24 horas.'
+              : 'Select the solution you are looking for. Receive a tailored proposal with fast response in less than 24 hours.'}
           </p>
         </div>
 
@@ -89,10 +126,10 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
               <label className={`block text-xs font-bold uppercase tracking-wider mb-3 ${
                 darkMode ? 'text-neutral-300' : 'text-neutral-700'
               }`}>
-                1. {lang === 'pt' ? 'Selecione o Serviço Principal:' : 'Select Main Service:'}
+                1. {lang === 'pt' ? 'Selecione a Solução Pretendida:' : 'Select Desired Solution:'}
               </label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
                 {SERVICES.map((srv) => {
                   const isSelected = selectedService === srv.id;
                   return (
@@ -100,7 +137,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                       key={srv.id}
                       type="button"
                       onClick={() => setSelectedService(srv.id)}
-                      className={`p-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
+                      className={`p-4 rounded-2xl border text-left flex flex-col justify-between transition-all cursor-pointer ${
                         isSelected
                           ? 'border-[#0071E3] bg-[#0071E3]/10 text-primary ring-2 ring-[#0071E3]/30 shadow-md font-bold'
                           : darkMode 
@@ -108,8 +145,26 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                             : 'border-neutral-200 bg-neutral-50 text-neutral-700 hover:border-neutral-300 hover:bg-neutral-100'
                       }`}
                     >
-                      <span className="text-xl">{srv.icon}</span>
-                      <span className="text-xs font-headline leading-snug">{srv.label}</span>
+                      <div className="flex items-center justify-between w-full mb-2">
+                        <span className="text-2xl">{srv.icon}</span>
+                        <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md border ${
+                          isSelected
+                            ? 'bg-[#0071E3] text-white border-[#0071E3]'
+                            : darkMode
+                              ? 'bg-neutral-900 text-primary border-primary/30'
+                              : 'bg-white text-primary border-primary/30'
+                        }`}>
+                          {srv.price}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-xs font-headline font-bold block mb-1 leading-snug">{srv.label}</span>
+                        <p className={`text-[11px] leading-tight font-normal ${
+                          isSelected ? (darkMode ? 'text-neutral-200' : 'text-neutral-800') : (darkMode ? 'text-neutral-400' : 'text-neutral-500')
+                        }`}>
+                          {srv.desc}
+                        </p>
+                      </div>
                     </button>
                   );
                 })}
@@ -185,8 +240,8 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder={lang === 'pt' 
-                  ? 'Ex: Preciso de um catálogo digital com formulário de encomendas e integração WhatsApp para a minha empresa...' 
-                  : 'E.g., I need a digital catalog with quote request forms and WhatsApp integration for my business...'}
+                  ? 'Ex: Gostaria de criar uma nova presença digital com catálogo de produtos e integração direta com o WhatsApp...' 
+                  : 'E.g., I would like to create a digital presence with product catalog and direct WhatsApp integration...'}
                 className={`w-full px-4 py-3.5 rounded-2xl text-xs outline-none border transition-all resize-none ${
                   darkMode 
                     ? 'bg-neutral-950 border-neutral-800 text-white placeholder-neutral-500 focus:border-primary' 
