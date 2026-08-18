@@ -643,7 +643,7 @@ export default function LandingPage() {
 
   const brands = [
     { name: 'TAKOS KING', category: lang === 'pt' ? 'Fast Food • Guia, Pombal' : 'Fast Food • Guia, Pombal', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
-    { name: 'AGOSTINHO BIKES', category: lang === 'pt' ? 'Stand & Oficina de Bicicletas' : 'Bicycle Showroom & Workshop', logo: '/assets/agostinho-bikes.png', link: 'https://agostinho-bikes.vercel.app/' },
+    { name: 'AGOSTINHO BIKES', category: lang === 'pt' ? 'Stand & Oficina de Bicicletas' : 'Bicycle Showroom & Workshop', logo: '/assets/agostinho-bikes.png', link: 'https://www.agostinhobikes.com/' },
     { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Mobilidade Elétrica • Guia' : 'Electric Mobility • Guia', logo: '/assets/roots-199.png', link: 'https://www.routen109mobilidade.com/' },
     { name: 'HELIPLANTA', category: lang === 'pt' ? 'Produção Hortícola & Viveiros' : 'Horticultural & Nursery Production', logo: '/assets/heliplanta.png', link: 'https://heliplanta-beryl.vercel.app/' },
     { name: 'EDU BRASIL', category: lang === 'pt' ? 'Plataforma Educacional' : 'Educational Platform', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
@@ -1136,7 +1136,7 @@ export default function LandingPage() {
                   logo: '/assets/agostinho-bikes.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-red-600 text-white font-bold',
-                  link: 'https://agostinho-blond.vercel.app/',
+                  link: 'https://www.agostinhobikes.com/',
                 },
                 {
                   label: lang === 'pt' ? 'Social Media & Branding / 2026' : 'Social Media & Branding / 2026',
