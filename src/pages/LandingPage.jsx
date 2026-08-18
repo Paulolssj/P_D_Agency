@@ -794,16 +794,16 @@ export default function LandingPage() {
         )}
       </header>
 
-      <main className="overflow-x-hidden pt-20">
+      <main className="overflow-x-hidden pt-16">
         {/* ── HERO SECTION (ESTILO IARA BENTO + APPLE ELEGANCE) ── */}
-        <section className={`relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-6 pt-16 pb-20 overflow-hidden transition-colors duration-500 ${
+        <section className={`relative min-h-[85vh] flex flex-col justify-center px-4 sm:px-6 pt-6 sm:pt-8 pb-16 overflow-hidden transition-colors duration-500 ${
           darkMode ? 'bg-[#050A13]' : 'bg-[#FDFBF7]'
         }`} id="welcome">
           {/* Ambient Lighting (Apple Style Depth) */}
           <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[450px] bg-gradient-to-b from-blue-500/15 via-sky-500/10 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
 
           <div className="container max-w-7xl mx-auto relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mb-14">
               
               {/* Lado Esquerdo: Copywriting, CTAs & Métricas (7 colunas) */}
               <div className="lg:col-span-7 space-y-6 text-left">
@@ -813,14 +813,14 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className={`font-headline text-4xl sm:text-6xl lg:text-7xl font-black uppercase leading-[0.96] tracking-[-0.03em] ${
+                  className={`font-headline text-4xl sm:text-6xl lg:text-7xl font-black uppercase leading-[0.98] tracking-[-0.03em] ${
                     darkMode ? 'text-white' : 'text-neutral-900'
                   }`}
                 >
                   <span className={darkMode ? 'bg-gradient-to-b from-white via-white/95 to-neutral-400 bg-clip-text text-transparent' : 'text-neutral-900'}>
                     {t.hero.headline1}
                   </span> <br />
-                  <span className="bg-gradient-to-r from-blue-400 via-sky-400 to-indigo-400 bg-clip-text text-transparent italic">
+                  <span className="text-[#0071E3] dark:text-[#3B82F6] inline-block pr-2">
                     {t.hero.headline2}
                   </span> <br />
                   <span className={darkMode ? 'bg-gradient-to-b from-white via-white/95 to-neutral-400 bg-clip-text text-transparent' : 'text-neutral-900'}>
