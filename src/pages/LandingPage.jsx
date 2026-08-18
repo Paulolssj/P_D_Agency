@@ -640,7 +640,7 @@ export default function LandingPage() {
   const brands = [
     { name: 'TAKOS KING', category: lang === 'pt' ? 'Fast Food • Guia, Pombal' : 'Fast Food • Guia, Pombal', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
     { name: 'AGOSTINHO BIKES', category: lang === 'pt' ? 'Stand & Oficina de Bicicletas' : 'Bicycle Showroom & Workshop', logo: '/assets/agostinho-bikes.png', link: 'https://agostinho-bikes.vercel.app/' },
-    { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Conceito & Marca • Guia' : 'Concept & Brand • Guia', logo: '/assets/roots-199.png', link: '#' },
+    { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Mobilidade Elétrica • Guia' : 'Electric Mobility • Guia', logo: '/assets/roots-199.png', link: 'https://www.routen109mobilidade.com/' },
     { name: 'HELIPLANTA', category: lang === 'pt' ? 'Produção Hortícola & Viveiros' : 'Horticultural & Nursery Production', logo: '/assets/heliplanta.png', link: 'https://heliplanta-beryl.vercel.app/' },
     { name: 'EDU BRASIL', category: lang === 'pt' ? 'Plataforma Educacional' : 'Educational Platform', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
   ];
@@ -1209,11 +1209,11 @@ export default function LandingPage() {
                 },
                 {
                   quote: lang === 'pt'
-                    ? "Contactámos a P&D Agency para a criação da nossa marca e website. Fiquei muito feliz com todos os resultados: imagem da marca, site e presença digital – cada elemento em perfeita sintonia."
-                    : "We hired P&D Agency for our brand identity and web platform. The results speak for themselves — brand image, website, and digital presence in complete harmony.",
-                  author: "Equipa Heliplanta",
-                  role: "Direção & Vendas",
-                  brand: "Heliplanta Viveiros"
+                    ? "A P&D Agency soube exatamente como posicionar a Route N109 no digital. O catálogo de motos e scooters elétricas é rápido, intuitivo e os clientes elogiam a facilidade de navegação. O aumento de pedidos e contactos foi imediato!"
+                    : "P&D Agency knew exactly how to position Route N109 digitally. The electric motorcycle and scooter catalog is blazing fast, intuitive, and customer bookings increased right away!",
+                  author: "Equipa Route N109 Mobilidade",
+                  role: "Stand & Oficina",
+                  brand: "Route N109 Guia"
                 }
               ].map((testi, idx) => (
                 <motion.div
