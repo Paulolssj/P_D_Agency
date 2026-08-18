@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import ContactModal from '../components/ContactModal';
 import LegalModal from '../components/LegalModal';
@@ -1069,25 +1070,35 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {[
                 {
+                  label: lang === 'pt' ? 'Mobilidade Elétrica / 2026' : 'Electric Mobility / 2026',
+                  labelColor: 'text-primary',
+                  title: 'ROUTE N109 MOBILIDADE',
+                  subtitle: lang === 'pt' ? 'Stand e oficina de motos e scooters elétricas na Guia — catálogo interativo e presença digital de alta conversão.' : 'Electric motorcycle showroom & workshop in Guia — interactive catalog and high-conversion web platform.',
+                  img: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=85',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-primary text-white font-bold',
+                  link: 'https://www.routen109mobilidade.com/',
+                },
+                {
+                  label: lang === 'pt' ? 'Social Media & Branding / 2026' : 'Social Media & Branding / 2026',
+                  labelColor: 'text-amber-300',
+                  title: 'IARA BENTO',
+                  subtitle: lang === 'pt' ? 'Gestão de redes sociais e criação de conteúdos estratégicos — estimador interativo de propostas e branding luxuoso.' : 'Social media management & content creation — interactive budget estimator and luxury aesthetic.',
+                  img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=85',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-amber-500 text-black font-bold',
+                  link: 'https://iara-bento.vercel.app/',
+                },
+                {
                   label: lang === 'pt' ? 'Stand & Oficina / 2026' : 'Showroom & Workshop / 2026',
                   labelColor: 'text-primary',
                   title: 'AGOSTINHO BIKES',
-                  subtitle: lang === 'pt' ? 'Stand e oficina de bicicletas — catálogo digital, serviços e presença web.' : 'Bicycle showroom & repair shop — digital catalog, services & web presence.',
+                  subtitle: lang === 'pt' ? 'Stand e oficina de bicicletas — catálogo digital, simulador de aluguer, serviços e presença web.' : 'Bicycle showroom & repair shop — digital catalog, rental simulator, services & web presence.',
                   img: 'https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&w=1200&q=85',
                   logo: '/assets/agostinho-bikes.png',
                   badge: t.portfolio.live,
-                  badgeClass: 'bg-primary text-white',
-                  link: 'https://agostinho-bikes.vercel.app/',
-                },
-                {
-                  label: lang === 'pt' ? 'Portfólio / 2026' : 'Portfolio / 2026',
-                  labelColor: 'text-primary',
-                  title: 'MARIA JOÃO',
-                  subtitle: lang === 'pt' ? 'Portfólio pessoal e showcase criativo de apresentação profissional.' : 'Personal portfolio and creative showcase for professional presentation.',
-                  img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=85',
-                  badge: t.portfolio.live,
-                  badgeClass: 'bg-primary text-white',
-                  link: 'https://maria-joao-portfolio.vercel.app/',
+                  badgeClass: 'bg-primary text-white font-bold',
+                  link: 'https://agostinho-blond.vercel.app/',
                 },
                 {
                   label: lang === 'pt' ? 'Agronegócio & Viveiros / 2026' : 'Agribusiness & Nurseries / 2026',
@@ -1097,41 +1108,29 @@ export default function LandingPage() {
                   img: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85',
                   logo: '/assets/heliplanta.png',
                   badge: t.portfolio.live,
-                  badgeClass: 'bg-emerald-600 text-white',
+                  badgeClass: 'bg-emerald-600 text-white font-bold',
                   link: 'https://heliplanta-beryl.vercel.app/',
                 },
                 {
-                  label: lang === 'pt' ? 'Restauração / 2025' : 'Restoration & Fast Food / 2025',
+                  label: lang === 'pt' ? 'Portfólio Criativo / 2026' : 'Creative Showcase / 2026',
+                  labelColor: 'text-primary',
+                  title: 'MARIA JOÃO',
+                  subtitle: lang === 'pt' ? 'Portfólio pessoal e showcase criativo de apresentação profissional.' : 'Personal portfolio and creative showcase for professional presentation.',
+                  img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=85',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-primary text-white font-bold',
+                  link: 'https://maria-joao-portfolio.vercel.app/',
+                },
+                {
+                  label: lang === 'pt' ? 'Restauração & Fast Food / 2026' : 'Food & Fast Casual / 2026',
                   labelColor: 'text-amber-400',
                   title: 'TAKOS KING',
-                  subtitle: lang === 'pt' ? 'Fast food focado em tacos — em desenvolvimento para Pombal, Guia.' : 'Taco-focused fast food chain — under development in Pombal, Guia.',
+                  subtitle: lang === 'pt' ? 'Plataforma web para restaurante de fast food focado em tacos — Guia, Pombal.' : 'Web platform for taco fast-casual brand in Guia, Pombal.',
                   img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1200&q=85',
                   logo: '/assets/takos-king.png',
-                  badge: t.portfolio.progress,
-                  badgeClass: 'bg-amber-500 text-black font-bold',
-                  link: 'https://www.facebook.com/TakosKing.Guia.Pombal/',
-                },
-                {
-                  label: lang === 'pt' ? 'Conceito & Marca / 2025' : 'Concept & Brand / 2025',
-                  labelColor: 'text-amber-400',
-                  title: 'ROUTE 109 GUIA',
-                  subtitle: lang === 'pt' ? 'Identidade de marca e conceito de comunicação para Route 109 Guia.' : 'Brand identity and communication concept for Route 109 Guia.',
-                  img: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85',
-                  logo: '/assets/roots-199.png',
-                  badge: t.portfolio.progress,
-                  badgeClass: 'bg-amber-500 text-black font-bold',
-                  link: '#',
-                },
-                {
-                  label: lang === 'pt' ? 'Plataforma Web / 2025' : 'Web Platform / 2025',
-                  labelColor: 'text-primary',
-                  title: 'EDU BRASIL',
-                  subtitle: lang === 'pt' ? 'Aplicação web para estudantes brasileiros — dashboard e conteúdos educativos.' : 'Web application for Brazilian students — dashboard & learning content.',
-                  img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85',
-                  logo: '/assets/edu-brasil.png',
                   badge: t.portfolio.live,
-                  badgeClass: 'bg-primary text-white',
-                  link: 'https://mobileapp-taupe.vercel.app/',
+                  badgeClass: 'bg-amber-500 text-black font-bold',
+                  link: 'https://takos-king.vercel.app/',
                 },
               ].map((item, i) => (
                 <motion.a
@@ -1483,22 +1482,37 @@ export default function LandingPage() {
           <div className={`pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-6 ${
             darkMode ? 'border-neutral-800/80' : 'border-neutral-300'
           }`}>
-            <p className="text-neutral-500 text-[10px] uppercase tracking-[0.25em] font-bold">
+            <p className="text-neutral-500 text-[10px] uppercase tracking-[0.25em] font-bold text-center md:text-left">
               {t.footer.rights}
             </p>
-            <div className="flex gap-8">
-              <button 
-                onClick={() => openLegalModal('terms')}
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+              <Link 
+                to="/termos-servico"
                 className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
               >
                 {t.footer.terms}
-              </button>
-              <button 
-                onClick={() => openLegalModal('privacy')}
+              </Link>
+              <Link 
+                to="/politica-privacidade"
                 className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
               >
                 {t.footer.privacy}
-              </button>
+              </Link>
+              <Link 
+                to="/politica-cookies"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+              >
+                {lang === 'pt' ? 'POLÍTICA DE COOKIES' : 'COOKIE POLICY'}
+              </Link>
+              <a 
+                href="https://www.livroreclamacoes.pt/Inicio/"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors flex items-center gap-1.5"
+              >
+                <span>{lang === 'pt' ? 'LIVRO DE RECLAMAÇÕES' : 'COMPLAINTS BOOK'}</span>
+                <span className="material-symbols-outlined text-[12px]">open_in_new</span>
+              </a>
             </div>
           </div>
         </div>
