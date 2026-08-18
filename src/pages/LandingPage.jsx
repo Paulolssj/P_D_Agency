@@ -801,13 +801,14 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex items-center justify-center gap-4 mb-6"
+              className="flex items-center justify-center gap-3 mb-6"
             >
-              <div className="h-[1px] w-12 bg-neutral-400/40"></div>
-              <p className="font-label text-primary uppercase tracking-[0.5em] text-[11px] font-black italic">
-                {t.hero.badge}
-              </p>
-              <div className="h-[1px] w-12 bg-neutral-400/40"></div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <p className="font-label text-primary uppercase tracking-[0.3em] text-[11px] font-black italic">
+                  {t.hero.badge}
+                </p>
+              </div>
             </motion.div>
 
             <motion.h1 
@@ -848,29 +849,33 @@ export default function LandingPage() {
             >
               <a 
                 href="#contacto"
-                className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase hover:bg-blue-600 transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)] active:scale-95 inline-block text-center"
+                className="w-full sm:w-auto bg-primary hover:bg-blue-600 text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase transition-all shadow-[0_4px_25px_rgba(37,99,235,0.4)] hover:shadow-[0_6px_30px_rgba(37,99,235,0.6)] active:scale-95 hover:-translate-y-0.5 inline-block text-center cursor-pointer"
               >
                 {t.hero.btnPrimary}
               </a>
               <a 
-                href="#contacto"
-                className={`w-full sm:w-auto border px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase transition-all backdrop-blur-sm ${
-                  darkMode ? 'border-neutral-700 text-white hover:bg-white/10' : 'border-neutral-300 text-neutral-900 hover:bg-black/5'
+                href="#o-que-fazemos"
+                className={`w-full sm:w-auto border px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase transition-all backdrop-blur-sm hover:-translate-y-0.5 active:scale-95 cursor-pointer ${
+                  darkMode ? 'border-neutral-700 text-white hover:bg-white/10 hover:border-neutral-500' : 'border-neutral-300 text-neutral-900 hover:bg-black/5 hover:border-neutral-400'
                 }`}
               >
                 {t.hero.btnSecondary}
               </a>
             </motion.div>
 
-            {/* MARQUEE TICKER DOS CLIENTES HERO (ANIMADO CONTINUO SEM FUNDO) */}
+            {/* MARQUEE TICKER DOS CLIENTES HERO (ANIMADO CONTINUO COM FADE LATERAL) */}
             <div className="mb-3 text-center">
               <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] font-black">
                 {lang === 'pt' ? 'EMPRESAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES WE HAVE WORKED WITH'}
               </p>
             </div>
-            <div className={`w-full overflow-hidden border-y py-4 rounded-2xl ${
+            <div className={`w-full overflow-hidden border-y py-4 rounded-2xl relative ${
               darkMode ? 'border-neutral-800/80 bg-neutral-900/40' : 'border-neutral-200/80 bg-neutral-100/60'
-            }`}>
+            }`}
+            style={{
+              maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)'
+            }}>
               <motion.div 
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{ repeat: Infinity, ease: "linear", duration: 18 }}
@@ -1220,14 +1225,21 @@ export default function LandingPage() {
                   key={idx}
                   initial={{ opacity: 0, y: 25 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -6 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.12 }}
-                  className={`p-8 rounded-3xl border flex flex-col justify-between shadow-xl relative group transition-all ${
-                    darkMode ? 'bg-neutral-900/90 border-neutral-800 hover:border-primary/40' : 'bg-white border-neutral-200 hover:border-primary/40'
+                  className={`p-8 md:p-9 rounded-3xl border flex flex-col justify-between shadow-xl relative group transition-all duration-300 ${
+                    darkMode ? 'bg-neutral-900/90 border-neutral-800 hover:border-primary/50 hover:shadow-primary/10' : 'bg-white border-neutral-200 hover:border-primary/50 hover:shadow-primary/5'
                   }`}
                 >
                   <div className="mb-8">
-                    <p className="text-primary text-5xl font-headline font-black mb-2 opacity-50">“</p>
+                    <div className="flex items-center gap-1 text-amber-400 mb-4">
+                      <MaterialIcon name="star" className="text-base" />
+                      <MaterialIcon name="star" className="text-base" />
+                      <MaterialIcon name="star" className="text-base" />
+                      <MaterialIcon name="star" className="text-base" />
+                      <MaterialIcon name="star" className="text-base" />
+                    </div>
                     <p className={`text-sm md:text-base leading-relaxed italic font-light ${
                       darkMode ? 'text-neutral-300' : 'text-neutral-600'
                     }`}>
@@ -1235,10 +1247,10 @@ export default function LandingPage() {
                     </p>
                   </div>
                   <div className={`pt-6 border-t ${darkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
-                    <h4 className={`font-headline font-black text-base uppercase tracking-tight ${
+                    <h4 className={`font-headline font-black text-base uppercase tracking-tight group-hover:text-primary transition-colors ${
                       darkMode ? 'text-white' : 'text-neutral-900'
                     }`}>{testi.author}</h4>
-                    <p className="text-primary text-xs font-semibold uppercase tracking-wider">{testi.role} • {testi.brand}</p>
+                    <p className="text-primary text-xs font-semibold uppercase tracking-wider mt-0.5">{testi.role} • {testi.brand}</p>
                   </div>
                 </motion.div>
               ))}
@@ -1259,7 +1271,13 @@ export default function LandingPage() {
             </h3>
           </div>
 
-          <div className="relative w-full overflow-hidden flex items-center py-4">
+          <div 
+            className="relative w-full overflow-hidden flex items-center py-4"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)'
+            }}
+          >
             <motion.div 
               animate={{ x: ["0%", "-50%"] }}
               transition={{ repeat: Infinity, ease: "linear", duration: 22 }}
