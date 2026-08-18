@@ -793,73 +793,66 @@ export default function LandingPage() {
         <section className={`relative min-h-[90vh] flex flex-col items-center justify-center px-4 pt-16 pb-24 overflow-hidden transition-colors duration-500 ${
           darkMode ? 'bg-[#050A13]' : 'bg-[#FDFBF7]'
         }`} id="welcome">
-          {/* Ambient Glows */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"></div>
+          {/* Ambient Lighting (Apple Style Depth) */}
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[450px] bg-gradient-to-b from-blue-500/15 to-transparent rounded-full blur-[130px] pointer-events-none"></div>
 
           <div className="container max-w-6xl mx-auto relative z-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex items-center justify-center gap-3 mb-6"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <p className="font-label text-primary uppercase tracking-[0.3em] text-[11px] font-black italic">
-                  {t.hero.badge}
-                </p>
-              </div>
-            </motion.div>
-
             <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className={`font-headline text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.95] tracking-tighter mb-8 ${
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className={`font-headline text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.94] tracking-[-0.04em] mb-8 ${
                 darkMode ? 'text-white' : 'text-neutral-900'
               }`}
             >
-              {t.hero.headline1} <br />
-              <span className="text-primary italic">{t.hero.headline2}</span> <br />
-              {t.hero.headline3}
+              <span className={darkMode ? 'bg-gradient-to-b from-white via-white/95 to-neutral-400 bg-clip-text text-transparent' : 'text-neutral-900'}>
+                {t.hero.headline1}
+              </span> <br />
+              <span className="bg-gradient-to-r from-blue-400 via-sky-400 to-indigo-400 bg-clip-text text-transparent italic">
+                {t.hero.headline2}
+              </span> <br />
+              <span className={darkMode ? 'bg-gradient-to-b from-white via-white/95 to-neutral-400 bg-clip-text text-transparent' : 'text-neutral-900'}>
+                {t.hero.headline3}
+              </span>
             </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 1 }}
-              className={`max-w-3xl mx-auto mb-12 text-base md:text-xl font-light leading-relaxed italic ${
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className={`max-w-2xl mx-auto mb-10 text-base sm:text-lg md:text-xl font-normal leading-relaxed ${
                 darkMode ? 'text-neutral-300' : 'text-neutral-600'
               }`}
             >
-              <p className="mb-4">
-                <strong>{t.hero.copyBold}</strong>
+              <p className="mb-2 font-medium">
+                {t.hero.copyBold}
               </p>
-              <p className="text-sm md:text-lg">
-                {t.hero.copySub} <br className="hidden md:block" />
-                <strong className={darkMode ? 'text-white' : 'text-neutral-900'}>{t.hero.copyPartner}</strong>
+              <p className={`text-sm sm:text-base font-light ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                {t.hero.copySub} <strong className={darkMode ? 'text-white font-medium' : 'text-neutral-900 font-medium'}>{t.hero.copyPartner}</strong>
               </p>
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16"
+              transition={{ delay: 0.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
             >
               <a 
                 href="#contacto"
-                className="w-full sm:w-auto bg-primary hover:bg-blue-600 text-white px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase transition-all shadow-[0_4px_25px_rgba(37,99,235,0.4)] hover:shadow-[0_6px_30px_rgba(37,99,235,0.6)] active:scale-95 hover:-translate-y-0.5 inline-block text-center cursor-pointer"
+                className="w-full sm:w-auto bg-[#0071E3] hover:bg-[#0077ED] text-white px-9 py-4 rounded-full font-headline font-bold text-sm tracking-wide transition-all shadow-[0_4px_20px_rgba(0,113,227,0.35)] hover:shadow-[0_8px_30px_rgba(0,113,227,0.5)] active:scale-[0.98] hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 text-center cursor-pointer"
               >
-                {t.hero.btnPrimary}
+                <span>{t.hero.btnPrimary}</span>
+                <MaterialIcon name="arrow_forward" className="text-base" />
               </a>
               <a 
                 href="#o-que-fazemos"
-                className={`w-full sm:w-auto border px-10 py-5 rounded-full font-headline font-black text-xs tracking-[0.25em] uppercase transition-all backdrop-blur-sm hover:-translate-y-0.5 active:scale-95 cursor-pointer ${
-                  darkMode ? 'border-neutral-700 text-white hover:bg-white/10 hover:border-neutral-500' : 'border-neutral-300 text-neutral-900 hover:bg-black/5 hover:border-neutral-400'
+                className={`w-full sm:w-auto border px-9 py-4 rounded-full font-headline font-semibold text-sm tracking-wide transition-all backdrop-blur-xl hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 cursor-pointer ${
+                  darkMode ? 'bg-white/5 border-white/15 text-white hover:bg-white/10 hover:border-white/30' : 'bg-black/5 border-black/10 text-neutral-900 hover:bg-black/10 hover:border-black/20'
                 }`}
               >
-                {t.hero.btnSecondary}
+                <span>{t.hero.btnSecondary}</span>
+                <MaterialIcon name="expand_more" className="text-base" />
               </a>
             </motion.div>
 
@@ -1233,12 +1226,12 @@ export default function LandingPage() {
                   }`}
                 >
                   <div className="mb-8">
-                    <div className="flex items-center gap-1 text-amber-400 mb-4">
-                      <MaterialIcon name="star" className="text-base" />
-                      <MaterialIcon name="star" className="text-base" />
-                      <MaterialIcon name="star" className="text-base" />
-                      <MaterialIcon name="star" className="text-base" />
-                      <MaterialIcon name="star" className="text-base" />
+                    <div className="flex items-center gap-1.5 text-amber-400 mb-5">
+                      {[1, 2, 3, 4, 5].map((s) => (
+                        <svg key={s} className="w-5 h-5 fill-amber-400" viewBox="0 0 24 24">
+                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                      ))}
                     </div>
                     <p className={`text-sm md:text-base leading-relaxed italic font-light ${
                       darkMode ? 'text-neutral-300' : 'text-neutral-600'
