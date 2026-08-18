@@ -80,11 +80,11 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
             <div className="flex items-center gap-5 mb-4">
               {/* Profile Avatar matching Instagram @pdagency.pt */}
               <div className="relative shrink-0">
-                <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden bg-black border-2 border-neutral-700/60 p-2 flex items-center justify-center shadow-lg">
+                <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden bg-black border-2 border-neutral-700/60 shadow-lg">
                   <img
                     src="/assets/pd-agency-logo.png"
                     alt="P&D Agency"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>

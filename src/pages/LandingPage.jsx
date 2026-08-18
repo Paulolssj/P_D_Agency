@@ -1201,33 +1201,64 @@ export default function LandingPage() {
                   whileHover={{ y: -8 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className={`relative aspect-[4/3] overflow-hidden rounded-3xl group cursor-pointer block border shadow-2xl transition-all duration-500 ${
-                    darkMode ? 'bg-neutral-900 border-neutral-800 hover:border-primary/50 hover:shadow-primary/20' : 'bg-white border-neutral-200 hover:border-primary/50 hover:shadow-primary/10'
+                  className={`rounded-[28px] overflow-hidden group cursor-pointer block border shadow-xl transition-all duration-500 flex flex-col justify-between ${
+                    darkMode 
+                      ? 'bg-neutral-900/90 border-neutral-800 hover:border-primary/50 hover:shadow-primary/10' 
+                      : 'bg-white border-neutral-200 hover:border-primary/50 hover:shadow-2xl'
                   }`}
                 >
-                  <img
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-                    src={item.img}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050A13] via-[#050A13]/60 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
-                  
-                  {item.logo && (
-                    <div className="absolute top-4 left-4 z-10 w-10 h-10 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 p-1.5 flex items-center justify-center">
-                      <img src={item.logo} alt={item.title} className="w-full h-full object-contain" />
+                  {/* Mockup Window Header */}
+                  <div className={`px-4 py-2.5 border-b flex items-center justify-between ${
+                    darkMode ? 'bg-neutral-950/90 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                  }`}>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                     </div>
-                  )}
-
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md ${item.badgeClass}`}>
+                    <span className={`text-[10px] font-mono font-medium truncate max-w-[160px] px-2 py-0.5 rounded-md ${
+                      darkMode ? 'bg-neutral-900 text-neutral-400' : 'bg-white text-neutral-600'
+                    }`}>
+                      {item.link.replace('https://', '').replace('/', '')}
+                    </span>
+                    <span className={`text-[9px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm ${item.badgeClass}`}>
                       {item.badge}
                     </span>
                   </div>
-                  
-                  <div className="absolute bottom-0 left-0 p-6 w-full z-10">
-                    <p className={`font-label text-[10px] tracking-[0.3em] uppercase mb-1 font-bold ${item.labelColor}`}>{item.label}</p>
-                    <h4 className="font-headline text-2xl font-black text-white uppercase mb-1 tracking-tighter group-hover:text-primary transition-colors">{item.title}</h4>
-                    <p className="text-neutral-300 text-xs md:text-sm font-light leading-relaxed line-clamp-2">{item.subtitle}</p>
+
+                  {/* Full Image Container — Fits 100% of the screenshot */}
+                  <div className={`relative w-full aspect-[16/9] overflow-hidden flex items-center justify-center p-1.5 ${
+                    darkMode ? 'bg-neutral-950' : 'bg-neutral-100'
+                  }`}>
+                    <img
+                      alt={item.title}
+                      className="w-full h-full object-contain rounded-lg group-hover:scale-[1.02] transition-transform duration-500"
+                      src={item.img}
+                    />
+                  </div>
+
+                  {/* Info Panel Below */}
+                  <div className="p-6 text-left flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <p className={`font-label text-[10px] tracking-[0.2em] uppercase font-bold ${item.labelColor}`}>
+                          {item.label}
+                        </p>
+                        <span className="text-xs text-primary font-black group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform inline-flex items-center gap-1">
+                          {lang === 'pt' ? 'Ver Site' : 'Visit'} ↗
+                        </span>
+                      </div>
+                      <h4 className={`font-headline text-xl font-black uppercase mb-2 tracking-tight group-hover:text-primary transition-colors ${
+                        darkMode ? 'text-white' : 'text-neutral-900'
+                      }`}>
+                        {item.title}
+                      </h4>
+                      <p className={`text-xs md:text-sm font-normal leading-relaxed ${
+                        darkMode ? 'text-neutral-400' : 'text-neutral-600'
+                      }`}>
+                        {item.subtitle}
+                      </p>
+                    </div>
                   </div>
                 </motion.a>
               ))}
