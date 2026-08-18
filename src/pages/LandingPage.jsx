@@ -4,6 +4,8 @@ import { motion, useInView } from 'framer-motion';
 import ContactModal from '../components/ContactModal';
 import LegalModal from '../components/LegalModal';
 import CustomCursor from '../components/CustomCursor';
+import InstagramMockupCard from '../components/InstagramMockupCard';
+import BudgetCalculatorSection from '../components/BudgetCalculatorSection';
 
 // ── DICIONÁRIO BILINGUE (DEFAULT PT) ──
 const translations = {
@@ -12,6 +14,7 @@ const translations = {
       home: "Início",
       approach: "Abordagem",
       services: "Serviços",
+      estimator: "Orçamento",
       portfolio: "Portfólio",
       testimonials: "Testemunhos"
     },
@@ -104,6 +107,7 @@ const translations = {
       home: "Home",
       approach: "Approach",
       services: "Services",
+      estimator: "Estimator",
       portfolio: "Portfolio",
       testimonials: "Testimonials"
     },
@@ -676,12 +680,13 @@ export default function LandingPage() {
             }`}>P&D AGENCY</span>
           </div>
 
-          <nav className={`hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-[0.2em] ${
+          <nav className={`hidden lg:flex items-center gap-7 text-xs font-bold uppercase tracking-[0.2em] ${
             darkMode ? 'text-neutral-300' : 'text-neutral-700'
           }`}>
             <a href="#welcome" className="hover:text-primary transition-colors">{t.nav.home}</a>
             <a href="#custom-agency" className="hover:text-primary transition-colors">{t.nav.approach}</a>
             <a href="#o-que-fazemos" className="hover:text-primary transition-colors">{t.nav.services}</a>
+            <a href="#orcamento" className="hover:text-primary transition-colors text-primary font-black">{t.nav.estimator}</a>
             <a href="#portfolio" className="hover:text-primary transition-colors">{t.nav.portfolio}</a>
             <a href="#testemunhos" className="hover:text-primary transition-colors">{t.nav.testimonials}</a>
           </nav>
@@ -777,6 +782,7 @@ export default function LandingPage() {
               <a href="#welcome" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.home}</a>
               <a href="#custom-agency" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.approach}</a>
               <a href="#o-que-fazemos" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.services}</a>
+              <a href="#orcamento" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5 text-primary font-black">{t.nav.estimator}</a>
               <a href="#portfolio" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.portfolio}</a>
               <a href="#testemunhos" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-1.5">{t.nav.testimonials}</a>
               <a href="#contacto" onClick={() => setMobileMenuOpen(false)} className="hover:text-primary transition-colors py-2 text-primary font-black flex items-center justify-between border-t border-neutral-500/20 pt-4">
@@ -789,72 +795,123 @@ export default function LandingPage() {
       </header>
 
       <main className="overflow-x-hidden pt-20">
-        {/* ── HERO SECTION ── */}
-        <section className={`relative min-h-[90vh] flex flex-col items-center justify-center px-4 pt-16 pb-24 overflow-hidden transition-colors duration-500 ${
+        {/* ── HERO SECTION (ESTILO IARA BENTO + APPLE ELEGANCE) ── */}
+        <section className={`relative min-h-[90vh] flex flex-col justify-center px-4 sm:px-6 pt-16 pb-20 overflow-hidden transition-colors duration-500 ${
           darkMode ? 'bg-[#050A13]' : 'bg-[#FDFBF7]'
         }`} id="welcome">
           {/* Ambient Lighting (Apple Style Depth) */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[450px] bg-gradient-to-b from-blue-500/15 to-transparent rounded-full blur-[130px] pointer-events-none"></div>
+          <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[450px] bg-gradient-to-b from-blue-500/15 via-sky-500/10 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
 
-          <div className="container max-w-6xl mx-auto relative z-10 text-center">
-            <motion.h1 
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className={`font-headline text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.94] tracking-[-0.04em] mb-8 ${
-                darkMode ? 'text-white' : 'text-neutral-900'
-              }`}
-            >
-              <span className={darkMode ? 'bg-gradient-to-b from-white via-white/95 to-neutral-400 bg-clip-text text-transparent' : 'text-neutral-900'}>
-                {t.hero.headline1}
-              </span> <br />
-              <span className="bg-gradient-to-r from-blue-400 via-sky-400 to-indigo-400 bg-clip-text text-transparent italic">
-                {t.hero.headline2}
-              </span> <br />
-              <span className={darkMode ? 'bg-gradient-to-b from-white via-white/95 to-neutral-400 bg-clip-text text-transparent' : 'text-neutral-900'}>
-                {t.hero.headline3}
-              </span>
-            </motion.h1>
+          <div className="container max-w-7xl mx-auto relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mb-16">
+              
+              {/* Lado Esquerdo: Copywriting, CTAs & Métricas (7 colunas) */}
+              <div className="lg:col-span-7 space-y-6 text-left">
+                
+                {/* Editorial Headline */}
+                <motion.h1 
+                  initial={{ opacity: 0, y: 25 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className={`font-headline text-4xl sm:text-6xl lg:text-7xl font-black uppercase leading-[0.96] tracking-[-0.03em] ${
+                    darkMode ? 'text-white' : 'text-neutral-900'
+                  }`}
+                >
+                  <span className={darkMode ? 'bg-gradient-to-b from-white via-white/95 to-neutral-400 bg-clip-text text-transparent' : 'text-neutral-900'}>
+                    {t.hero.headline1}
+                  </span> <br />
+                  <span className="bg-gradient-to-r from-blue-400 via-sky-400 to-indigo-400 bg-clip-text text-transparent italic">
+                    {t.hero.headline2}
+                  </span> <br />
+                  <span className={darkMode ? 'bg-gradient-to-b from-white via-white/95 to-neutral-400 bg-clip-text text-transparent' : 'text-neutral-900'}>
+                    {t.hero.headline3}
+                  </span>
+                </motion.h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className={`max-w-2xl mx-auto mb-10 text-base sm:text-lg md:text-xl font-normal leading-relaxed ${
-                darkMode ? 'text-neutral-300' : 'text-neutral-600'
-              }`}
-            >
-              <p className="mb-2 font-medium">
-                {t.hero.copyBold}
-              </p>
-              <p className={`text-sm sm:text-base font-light ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-                {t.hero.copySub} <strong className={darkMode ? 'text-white font-medium' : 'text-neutral-900 font-medium'}>{t.hero.copyPartner}</strong>
-              </p>
-            </motion.div>
+                {/* Subtitle */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className={`max-w-2xl text-base sm:text-lg font-normal leading-relaxed ${
+                    darkMode ? 'text-neutral-300' : 'text-neutral-600'
+                  }`}
+                >
+                  <p className="mb-2 font-medium">
+                    {t.hero.copyBold}
+                  </p>
+                  <p className={`text-sm sm:text-base font-light ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                    {t.hero.copySub} <strong className={darkMode ? 'text-white font-medium' : 'text-neutral-900 font-medium'}>{t.hero.copyPartner}</strong>
+                  </p>
+                </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
-            >
-              <a 
-                href="#contacto"
-                className="w-full sm:w-auto bg-[#0071E3] hover:bg-[#0077ED] text-white px-9 py-4 rounded-full font-headline font-bold text-sm tracking-wide transition-all shadow-[0_4px_20px_rgba(0,113,227,0.35)] hover:shadow-[0_8px_30px_rgba(0,113,227,0.5)] active:scale-[0.98] hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 text-center cursor-pointer"
+                {/* Action Buttons */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-wrap items-center gap-4 pt-2"
+                >
+                  <a 
+                    href="#contacto"
+                    className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-8 py-4 rounded-full font-headline font-bold text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(0,113,227,0.35)] hover:shadow-[0_8px_30px_rgba(0,113,227,0.5)] active:scale-[0.98] hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <span>{t.hero.btnPrimary}</span>
+                    <MaterialIcon name="arrow_forward" className="text-base" />
+                  </a>
+                  <a 
+                    href="#orcamento"
+                    className={`border px-8 py-4 rounded-full font-headline font-bold text-xs uppercase tracking-wider transition-all backdrop-blur-xl hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 cursor-pointer ${
+                      darkMode ? 'bg-white/5 border-white/15 text-white hover:bg-white/10 hover:border-white/30' : 'bg-black/5 border-black/10 text-neutral-900 hover:bg-black/10 hover:border-black/20'
+                    }`}
+                  >
+                    <span>{lang === 'pt' ? 'SIMULAR ORÇAMENTO' : 'CALCULATE ESTIMATE'}</span>
+                    <MaterialIcon name="calculate" className="text-base" />
+                  </a>
+                </motion.div>
+
+                {/* Key Value Props Bar (Estilo Iara Bento) */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.45, duration: 0.8 }}
+                  className={`pt-6 border-t grid grid-cols-1 sm:grid-cols-3 gap-4 text-left ${
+                    darkMode ? 'border-neutral-800/80' : 'border-neutral-200'
+                  }`}
+                >
+                  <div>
+                    <span className="block text-2xl font-black font-headline text-primary">+340%</span>
+                    <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                      {lang === 'pt' ? 'Alcance & Conversão' : 'Organic Reach'}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="block text-2xl font-black font-headline text-primary">100%</span>
+                    <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                      {lang === 'pt' ? 'Design & Código Sob Medida' : 'Custom Built'}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="block text-2xl font-black font-headline text-primary">4-21 Dias</span>
+                    <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                      {lang === 'pt' ? 'Prazo de Entrega Ágil' : 'Agile Delivery'}
+                    </span>
+                  </div>
+                </motion.div>
+
+              </div>
+
+              {/* Lado Direito: Mockup Interativo Instagram @pdagency.pt com Posts Reais (5 colunas) */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="lg:col-span-5 relative flex justify-center"
               >
-                <span>{t.hero.btnPrimary}</span>
-                <MaterialIcon name="arrow_forward" className="text-base" />
-              </a>
-              <a 
-                href="#o-que-fazemos"
-                className={`w-full sm:w-auto border px-9 py-4 rounded-full font-headline font-semibold text-sm tracking-wide transition-all backdrop-blur-xl hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 cursor-pointer ${
-                  darkMode ? 'bg-white/5 border-white/15 text-white hover:bg-white/10 hover:border-white/30' : 'bg-black/5 border-black/10 text-neutral-900 hover:bg-black/10 hover:border-black/20'
-                }`}
-              >
-                <span>{t.hero.btnSecondary}</span>
-                <MaterialIcon name="expand_more" className="text-base" />
-              </a>
-            </motion.div>
+                <InstagramMockupCard darkMode={darkMode} lang={lang} />
+              </motion.div>
+
+            </div>
 
             {/* MARQUEE TICKER DOS CLIENTES HERO (ANIMADO CONTINUO COM FADE LATERAL) */}
             <div className="mb-3 text-center">
@@ -1051,6 +1108,9 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        {/* ── SIMULADOR & CALCULADORA DE ORÇAMENTO (ESTILO IARA BENTO) ── */}
+        <BudgetCalculatorSection darkMode={darkMode} lang={lang} />
 
         {/* ── PORTFOLIO ("O ARQUIVO") ── */}
         <section className={`py-28 border-b transition-colors duration-500 ${
