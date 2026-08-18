@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, MessageCircle, Link2, MoreHorizontal, Grid, Film, User, UserPlus, X, ExternalLink } from 'lucide-react';
+import { Heart, MessageCircle, Link2, MoreHorizontal, Grid, Film, User, UserPlus, Settings, X, ExternalLink } from 'lucide-react';
 
 const POSTS = [
   {
@@ -191,10 +191,10 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
                   darkMode ? 'border-neutral-700 bg-neutral-900' : 'border-neutral-300 bg-neutral-100'
                 }`}>
                   <div className="w-full h-full rounded-full flex items-center justify-center bg-gradient-to-tr from-sky-500/20 to-blue-500/10">
-                    <span className="text-base">⚙️</span>
+                    <Settings className="w-5 h-5 text-sky-400" />
                   </div>
                 </div>
-                <span className={`text-[10px] font-bold ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>serviços ⚙️</span>
+                <span className={`text-[10px] font-bold ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>serviços</span>
               </div>
             </div>
 

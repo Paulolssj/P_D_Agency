@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Send, PhoneCall, Mail, CheckCircle2, Sparkles, Shield, Clock, ArrowRight, Check, Zap, Layers, Globe, ShoppingBag } from 'lucide-react';
+import { Send, PhoneCall, Mail, CheckCircle2, Sparkles, Shield, Clock, ArrowRight, Check, Zap, Globe, Palette, ShoppingBag, Layout, Code2 } from 'lucide-react';
 
 const PACKAGES = [
   {
@@ -9,7 +9,9 @@ const PACKAGES = [
     category: 'Conversão & Captação Rápida',
     price: 'A partir de 350€',
     time: '3-5 Dias',
-    icon: '⚡',
+    icon: Zap,
+    iconColor: 'text-amber-400',
+    iconBg: 'bg-amber-500/10 border-amber-500/20',
     features: [
       'Design Responsivo & Mobile-First',
       'Estrutura Otimizada para Conversão',
@@ -24,7 +26,9 @@ const PACKAGES = [
     category: 'Branding & Presença Digital',
     price: 'Sob Consulta',
     time: '5-10 Dias',
-    icon: '💎',
+    icon: Palette,
+    iconColor: 'text-sky-400',
+    iconBg: 'bg-sky-500/10 border-sky-500/20',
     features: [
       'Logótipo Vetorial & Guia de Estilo',
       'Pack de Templates para Instagram (Posts & Stories)',
@@ -39,7 +43,9 @@ const PACKAGES = [
     category: 'Website Corporativo Multi-Página',
     price: 'A partir de 550€',
     time: '5-10 Dias',
-    icon: '💻',
+    icon: Globe,
+    iconColor: 'text-blue-500',
+    iconBg: 'bg-blue-500/10 border-blue-500/20',
     features: [
       'Website Multi-Página Completo',
       'Arquitetura de Código & Design Sob Medida',
@@ -55,7 +61,9 @@ const PACKAGES = [
     price: 'A partir de 800€',
     time: '7-14 Dias',
     popular: true,
-    icon: '🛍️',
+    icon: ShoppingBag,
+    iconColor: 'text-emerald-400',
+    iconBg: 'bg-emerald-500/10 border-emerald-500/20',
     features: [
       'Catálogo de Produtos com Filtros Dinâmicos',
       'Sistema de Pedidos / Carrinho / WhatsApp',
@@ -76,6 +84,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
   const formRef = useRef(null);
 
   const currentPkg = PACKAGES.find(p => p.id === selectedPkg) || PACKAGES[0];
+  const CurrentIcon = currentPkg.icon;
 
   const handleSelectPackage = (pkgId) => {
     setSelectedPkg(pkgId);
@@ -86,8 +95,8 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
 
   const buildWhatsAppUrl = () => {
     const text = lang === 'pt'
-      ? `Olá P&D Agency! 👋\n\nGostaria de solicitar uma proposta para o meu projeto:\n\n📌 *Plano Selecionado:* ${currentPkg.icon} ${currentPkg.title} (${currentPkg.price})\n⏱️ *Prazo Indicativo:* ${currentPkg.time}\n👤 *Nome / Empresa:* ${name.trim() || 'Cliente'}\n📞 *Contacto:* ${phone.trim() || 'Não especificado'}\n✉️ *E-mail:* ${email.trim() || 'Não especificado'}\n\n📝 *Detalhes:* ${message.trim() || 'Gostaria de agendar uma reunião / obter proposta formal.'}\n\nPodemos conversar?`
-      : `Hello P&D Agency! 👋\n\nI would like to request a proposal for my project:\n\n📌 *Selected Plan:* ${currentPkg.icon} ${currentPkg.title} (${currentPkg.price})\n⏱️ *Estimated Delivery:* ${currentPkg.time}\n👤 *Name / Company:* ${name.trim() || 'Client'}\n📞 *Phone:* ${phone.trim() || 'Not specified'}\n✉️ *E-mail:* ${email.trim() || 'Not specified'}\n\n📝 *Details:* ${message.trim() || 'I would like to schedule a call / receive a proposal.'}\n\nCan we talk?`;
+      ? `Olá P&D Agency! 👋\n\nGostaria de solicitar uma proposta para o meu projeto:\n\n📌 *Plano Selecionado:* ${currentPkg.title} (${currentPkg.price})\n⏱️ *Prazo Indicativo:* ${currentPkg.time}\n👤 *Nome / Empresa:* ${name.trim() || 'Cliente'}\n📞 *Contacto:* ${phone.trim() || 'Não especificado'}\n✉️ *E-mail:* ${email.trim() || 'Não especificado'}\n\n📝 *Detalhes:* ${message.trim() || 'Gostaria de agendar uma reunião / obter proposta formal.'}\n\nPodemos conversar?`
+      : `Hello P&D Agency! 👋\n\nI would like to request a proposal for my project:\n\n📌 *Selected Plan:* ${currentPkg.title} (${currentPkg.price})\n⏱️ *Estimated Delivery:* ${currentPkg.time}\n👤 *Name / Company:* ${name.trim() || 'Client'}\n📞 *Phone:* ${phone.trim() || 'Not specified'}\n✉️ *E-mail:* ${email.trim() || 'Not specified'}\n\n📝 *Details:* ${message.trim() || 'I would like to schedule a call / receive a proposal.'}\n\nCan we talk?`;
 
     return `https://wa.me/3519262568423?text=${encodeURIComponent(text)}`;
   };
@@ -136,10 +145,11 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
           </p>
         </div>
 
-        {/* ── 4 BANNERS / CARDS DOS PLANOS (ESTILO BENTO DE ALTO IMPACTO) ── */}
+        {/* ── 4 BANNERS / CARDS DOS PLANOS (100% VETOR SVG) ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {PACKAGES.map((pkg) => {
             const isSelected = selectedPkg === pkg.id;
+            const PkgIcon = pkg.icon;
             return (
               <motion.div
                 key={pkg.id}
@@ -161,9 +171,11 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                 )}
 
                 <div>
-                  {/* Category & Icon */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl">{pkg.icon}</span>
+                  {/* Category & SVG Icon */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center ${pkg.iconBg} ${pkg.iconColor}`}>
+                      <PkgIcon className="w-6 h-6" />
+                    </div>
                     <span className={`text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border ${
                       darkMode ? 'border-neutral-800 bg-neutral-950 text-neutral-400' : 'border-neutral-200 bg-neutral-100 text-neutral-600'
                     }`}>
@@ -232,15 +244,20 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
             }`}
           >
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-neutral-500/20">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-primary block mb-1">
-                  {lang === 'pt' ? 'PLANO SELECIONADO:' : 'SELECTED PLAN:'}
-                </span>
-                <h3 className={`font-headline text-xl sm:text-2xl font-black uppercase ${
-                  darkMode ? 'text-white' : 'text-neutral-900'
-                }`}>
-                  {currentPkg.icon} {currentPkg.title}
-                </h3>
+              <div className="flex items-center gap-3.5">
+                <div className={`w-10 h-10 rounded-xl border flex items-center justify-center shrink-0 ${currentPkg.iconBg} ${currentPkg.iconColor}`}>
+                  <CurrentIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-primary block mb-0.5">
+                    {lang === 'pt' ? 'PLANO SELECIONADO:' : 'SELECTED PLAN:'}
+                  </span>
+                  <h3 className={`font-headline text-xl sm:text-2xl font-black uppercase ${
+                    darkMode ? 'text-white' : 'text-neutral-900'
+                  }`}>
+                    {currentPkg.title}
+                  </h3>
+                </div>
               </div>
               <div className="sm:text-right">
                 <span className="font-headline font-black text-2xl text-[#0071E3] dark:text-[#3B82F6] block">
