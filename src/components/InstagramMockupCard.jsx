@@ -78,31 +78,29 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
           <div className="p-5">
             {/* Header: Avatar + Profile Stats */}
             <div className="flex items-center gap-5 mb-4">
-              {/* Profile Avatar with Instagram Story Ring */}
+              {/* Profile Avatar matching Instagram @pdagency.pt */}
               <div className="relative shrink-0">
-                <div className="w-18 h-18 rounded-full p-[2.5px] bg-gradient-to-tr from-[#f9ce0f] via-[#e1306c] to-[#833ab4]">
-                  <div className={`w-full h-full rounded-full p-[2px] overflow-hidden ${darkMode ? 'bg-[#0B111E]' : 'bg-white'}`}>
-                    <img
-                      src="/assets/pd-agency-logo.png"
-                      alt="P&D Agency"
-                      className="w-full h-full rounded-full object-cover bg-black"
-                    />
-                  </div>
+                <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden bg-black border-2 border-neutral-700/60 p-2 flex items-center justify-center shadow-lg">
+                  <img
+                    src="/assets/pd-agency-logo.png"
+                    alt="P&D Agency"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               </div>
 
               {/* Stats Bar */}
               <div className="flex-1 flex justify-around text-center">
                 <div>
-                  <span className={`block text-base font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>36</span>
+                  <span className={`block text-base sm:text-lg font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>36</span>
                   <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>posts</span>
                 </div>
                 <div>
-                  <span className={`block text-base font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>280</span>
+                  <span className={`block text-base sm:text-lg font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>280</span>
                   <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>seguidores</span>
                 </div>
                 <div>
-                  <span className={`block text-base font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>44</span>
+                  <span className={`block text-base sm:text-lg font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>44</span>
                   <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>seguindo</span>
                 </div>
               </div>
@@ -144,7 +142,7 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
                     : 'bg-primary hover:bg-blue-600 text-white shadow-md'
                 }`}
               >
-                <span>{isFollowing ? (lang === 'pt' ? 'A Seguir ∨' : 'Following ∨') : (lang === 'pt' ? 'Seguir' : 'Follow')}</span>
+                <span>{isFollowing ? (lang === 'pt' ? 'Seguindo ∨' : 'Following ∨') : (lang === 'pt' ? 'Seguir' : 'Follow')}</span>
               </button>
 
               <a
@@ -175,8 +173,10 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
             }`}>
               {/* Highlight 1: Clientes */}
               <div className="flex flex-col items-center gap-1 shrink-0 cursor-pointer group">
-                <div className="w-13 h-13 rounded-full p-[2px] bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
-                  <div className={`w-full h-full rounded-full flex items-center justify-center ${darkMode ? 'bg-[#0B111E]' : 'bg-white'}`}>
+                <div className={`w-14 h-14 rounded-full p-[2px] border flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform ${
+                  darkMode ? 'border-neutral-700 bg-neutral-900' : 'border-neutral-300 bg-neutral-100'
+                }`}>
+                  <div className="w-full h-full rounded-full flex items-center justify-center bg-gradient-to-tr from-sky-500/20 to-blue-500/10">
                     <User className="w-5 h-5 text-sky-400" />
                   </div>
                 </div>
@@ -185,9 +185,11 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
 
               {/* Highlight 2: Serviços */}
               <div className="flex flex-col items-center gap-1 shrink-0 cursor-pointer group">
-                <div className="w-13 h-13 rounded-full p-[2px] bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
-                  <div className={`w-full h-full rounded-full flex items-center justify-center ${darkMode ? 'bg-[#0B111E]' : 'bg-white'}`}>
-                    <span className="text-sm">⚙️</span>
+                <div className={`w-14 h-14 rounded-full p-[2px] border flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform ${
+                  darkMode ? 'border-neutral-700 bg-neutral-900' : 'border-neutral-300 bg-neutral-100'
+                }`}>
+                  <div className="w-full h-full rounded-full flex items-center justify-center bg-gradient-to-tr from-sky-500/20 to-blue-500/10">
+                    <span className="text-base">⚙️</span>
                   </div>
                 </div>
                 <span className={`text-[10px] font-bold ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>serviços ⚙️</span>
