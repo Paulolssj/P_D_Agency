@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, MessageCircle, Link2, MoreHorizontal, Grid, Film, User, X, ExternalLink } from 'lucide-react';
+import { Heart, MessageCircle, Link2, MoreHorizontal, Grid, Film, User, UserPlus, X, ExternalLink } from 'lucide-react';
 
 const POSTS = [
   {
@@ -41,7 +41,7 @@ const POSTS = [
 export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
   const [activeTab, setActiveTab] = useState('posts');
   const [selectedPost, setSelectedPost] = useState(null);
-  const [isFollowing, setIsFollowing] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   return (
     <>
@@ -61,7 +61,7 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
             darkMode ? 'border-neutral-800/80 text-neutral-400' : 'border-neutral-100 text-neutral-500'
           }`}>
             <div className="flex items-center gap-1.5 font-headline font-bold text-xs">
-              <span className={`w-2 h-2 rounded-full ${isFollowing ? 'bg-emerald-400 animate-pulse' : 'bg-neutral-500'}`} />
+              <span className={`w-2 h-2 rounded-full ${isFollowing ? 'bg-emerald-400 animate-pulse' : 'bg-primary'}`} />
               <span className={darkMode ? 'text-white' : 'text-neutral-900'}>pdagency.pt</span>
             </div>
             <a 
@@ -131,24 +131,26 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
               </div>
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons (Exatamente como o screenshot do utilizador) */}
             <div className="flex items-center gap-2 mb-4">
-              <button
-                type="button"
+              <a
+                href="https://www.instagram.com/pdagency.pt/"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsFollowing(!isFollowing)}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer flex items-center justify-center gap-1.5 ${
+                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer flex items-center justify-center gap-1.5 shadow-md ${
                   isFollowing
-                    ? darkMode ? 'bg-neutral-800 hover:bg-neutral-700 text-white' : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-900'
-                    : 'bg-primary hover:bg-blue-600 text-white shadow-md'
+                    ? darkMode ? 'bg-neutral-800 hover:bg-neutral-700 text-white' : 'bg-[#efefef] hover:bg-[#dbdbdb] text-neutral-900'
+                    : 'bg-[#386df2] hover:bg-[#2c5ad6] text-white'
                 }`}
               >
                 <span>{isFollowing ? (lang === 'pt' ? 'Seguindo ∨' : 'Following ∨') : (lang === 'pt' ? 'Seguir' : 'Follow')}</span>
-              </button>
+              </a>
 
               <a
                 href="#contacto"
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer ${
-                  darkMode ? 'bg-neutral-800 hover:bg-neutral-700 text-white' : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-900'
+                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer ${
+                  darkMode ? 'bg-neutral-800/90 hover:bg-neutral-700 text-white' : 'bg-[#f0f2f5] hover:bg-[#e4e6eb] text-neutral-900'
                 }`}
               >
                 {lang === 'pt' ? 'Enviar mensagem' : 'Message'}
@@ -158,12 +160,12 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
                 href="https://www.instagram.com/pdagency.pt/"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Abrir perfil oficial"
-                className={`p-2 rounded-xl text-xs transition-colors ${
-                  darkMode ? 'bg-neutral-800 hover:bg-neutral-700 text-white' : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-900'
+                title="Conectar"
+                className={`p-2.5 rounded-xl text-xs transition-colors flex items-center justify-center ${
+                  darkMode ? 'bg-neutral-800/90 hover:bg-neutral-700 text-white' : 'bg-[#f0f2f5] hover:bg-[#e4e6eb] text-neutral-900'
                 }`}
               >
-                <ExternalLink className="w-3.5 h-3.5" />
+                <UserPlus className="w-4 h-4" />
               </a>
             </div>
 
