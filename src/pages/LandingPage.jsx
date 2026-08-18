@@ -14,7 +14,7 @@ const translations = {
       home: "Início",
       approach: "Abordagem",
       services: "Serviços",
-      estimator: "Orçamento",
+      estimator: "Proposta",
       portfolio: "Portfólio",
       testimonials: "Testemunhos"
     },
@@ -107,7 +107,7 @@ const translations = {
       home: "Home",
       approach: "Approach",
       services: "Services",
-      estimator: "Estimator",
+      estimator: "Proposal",
       portfolio: "Portfolio",
       testimonials: "Testimonials"
     },
@@ -865,8 +865,8 @@ export default function LandingPage() {
                       darkMode ? 'bg-white/5 border-white/15 text-white hover:bg-white/10 hover:border-white/30' : 'bg-black/5 border-black/10 text-neutral-900 hover:bg-black/10 hover:border-black/20'
                     }`}
                   >
-                    <span>{lang === 'pt' ? 'SIMULAR ORÇAMENTO' : 'CALCULATE ESTIMATE'}</span>
-                    <MaterialIcon name="calculate" className="text-base" />
+                    <span>{lang === 'pt' ? 'PEDIR PROPOSTA' : 'REQUEST PROPOSAL'}</span>
+                    <MaterialIcon name="description" className="text-base" />
                   </a>
                 </motion.div>
 
