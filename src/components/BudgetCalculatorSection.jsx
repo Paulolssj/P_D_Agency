@@ -7,11 +7,12 @@ const PACKAGES = [
     id: 'landing',
     title: 'Landing Page de Alta Conversão',
     category: 'Conversão & Captação Rápida',
-    price: 'A partir de 350€',
+    price: 'A partir de 400€',
     time: '3-7 Dias',
     icon: Zap,
     iconColor: 'text-amber-400',
-    iconBg: 'bg-amber-500/10 border-amber-500/20',
+    iconBg: 'bg-amber-500/10 border-amber-500/20 shadow-amber-500/10',
+    accentGlow: 'from-amber-500/15 via-transparent to-transparent',
     features: [
       'Design Responsivo & Mobile-First',
       'Estrutura Otimizada para Conversão',
@@ -28,7 +29,8 @@ const PACKAGES = [
     time: '3-7 Dias',
     icon: Palette,
     iconColor: 'text-sky-400',
-    iconBg: 'bg-sky-500/10 border-sky-500/20',
+    iconBg: 'bg-sky-500/10 border-sky-500/20 shadow-sky-500/10',
+    accentGlow: 'from-sky-500/15 via-transparent to-transparent',
     features: [
       'Logótipo Vetorial & Guia de Estilo',
       'Pack de Templates para Instagram (Posts & Stories)',
@@ -41,11 +43,12 @@ const PACKAGES = [
     id: 'web',
     title: 'Website Institucional',
     category: 'Website Corporativo Multi-Página',
-    price: 'A partir de 550€',
+    price: 'A partir de 600€',
     time: '5-10 Dias',
     icon: Globe,
     iconColor: 'text-blue-500',
-    iconBg: 'bg-blue-500/10 border-blue-500/20',
+    iconBg: 'bg-blue-500/10 border-blue-500/20 shadow-blue-500/10',
+    accentGlow: 'from-blue-500/15 via-transparent to-transparent',
     features: [
       'Website Multi-Página Completo',
       'Arquitetura de Código & Design Sob Medida',
@@ -63,7 +66,8 @@ const PACKAGES = [
     popular: true,
     icon: ShoppingBag,
     iconColor: 'text-emerald-400',
-    iconBg: 'bg-emerald-500/10 border-emerald-500/20',
+    iconBg: 'bg-emerald-500/10 border-emerald-500/20 shadow-emerald-500/10',
+    accentGlow: 'from-emerald-500/15 via-transparent to-transparent',
     features: [
       'Catálogo de Produtos com Filtros Dinâmicos',
       'Sistema de Pedidos / Carrinho / WhatsApp',
@@ -145,7 +149,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
           </p>
         </div>
 
-        {/* ── 4 BANNERS / CARDS DOS PLANOS (100% VETOR SVG) ── */}
+        {/* ── 4 BANNERS / CARDS DOS PLANOS (100% VETOR SVG & 3D DEPTH) ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {PACKAGES.map((pkg) => {
             const isSelected = selectedPkg === pkg.id;
@@ -153,34 +157,43 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
             return (
               <motion.div
                 key={pkg.id}
-                whileHover={{ y: -6 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
                 onClick={() => handleSelectPackage(pkg.id)}
-                className={`p-7 rounded-[28px] border flex flex-col justify-between transition-all duration-300 relative cursor-pointer shadow-xl ${
+                className={`p-7 rounded-[28px] border flex flex-col justify-between transition-all duration-300 relative cursor-pointer overflow-hidden ${
                   isSelected
-                    ? 'border-[#0071E3] bg-[#0071E3]/10 ring-2 ring-[#0071E3] shadow-blue-500/10'
+                    ? 'border-[#0071E3] border-t-2 border-t-blue-400 bg-gradient-to-b from-[#0071E3]/20 via-neutral-900/90 to-neutral-950 ring-2 ring-[#0071E3] shadow-[0_25px_50px_rgba(0,113,227,0.25)]'
                     : darkMode
-                      ? 'bg-neutral-900/80 border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900'
-                      : 'bg-white border-neutral-200 hover:border-neutral-300 hover:shadow-md'
+                      ? 'bg-gradient-to-b from-neutral-900/95 to-neutral-950/95 border-neutral-800 border-t-neutral-700/80 hover:border-neutral-600 hover:shadow-[0_25px_45px_rgba(0,0,0,0.5)] shadow-[0_15px_30px_rgba(0,0,0,0.35)]'
+                      : 'bg-gradient-to-b from-white to-neutral-50/80 border-neutral-200 border-t-white hover:border-neutral-300 hover:shadow-2xl shadow-xl'
                 }`}
               >
+                {/* 3D Ambient Top Light Orb */}
+                <div className={`absolute -top-10 -right-10 w-44 h-44 bg-gradient-to-bl ${pkg.accentGlow} rounded-full blur-3xl pointer-events-none opacity-80`} />
+                
+                {/* 3D Top Specular Edge */}
+                <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+
                 {/* Popular Badge */}
                 {pkg.popular && (
-                  <div className="absolute -top-3 right-6 bg-[#0071E3] text-white px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md">
+                  <div className="absolute top-4 right-5 bg-gradient-to-r from-[#0071E3] to-[#0095FF] text-white px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md shadow-blue-500/30 border border-blue-300/30">
                     {lang === 'pt' ? 'Destaque' : 'Popular'}
                   </div>
                 )}
 
-                <div>
-                  {/* Category & SVG Icon */}
+                <div className="relative z-10">
+                  {/* Category & 3D SVG Icon Box */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center ${pkg.iconBg} ${pkg.iconColor}`}>
+                    <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center shadow-lg border-t-white/30 backdrop-blur-sm ${pkg.iconBg} ${pkg.iconColor}`}>
                       <PkgIcon className="w-6 h-6" />
                     </div>
-                    <span className={`text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border ${
-                      darkMode ? 'border-neutral-800 bg-neutral-950 text-neutral-400' : 'border-neutral-200 bg-neutral-100 text-neutral-600'
-                    }`}>
-                      {pkg.time}
-                    </span>
+                    {!pkg.popular && (
+                      <span className={`text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border shadow-sm ${
+                        darkMode ? 'border-neutral-800 bg-neutral-950/80 text-neutral-400' : 'border-neutral-200 bg-white text-neutral-600'
+                      }`}>
+                        {pkg.time}
+                      </span>
+                    )}
                   </div>
 
                   <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
@@ -193,18 +206,27 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                     {pkg.title}
                   </h3>
 
-                  {/* Price */}
+                  {/* 3D Price Display */}
                   <div className="mb-6 pb-6 border-b border-neutral-500/20">
-                    <span className="font-headline font-black text-2xl md:text-3xl text-[#0071E3] dark:text-[#3B82F6]">
+                    <span className="font-headline font-black text-2xl md:text-3xl text-[#0071E3] dark:text-[#3B82F6] drop-shadow-sm">
                       {pkg.price}
                     </span>
+                    {pkg.popular && (
+                      <span className={`block text-[10px] uppercase font-bold tracking-wider mt-1 ${
+                        darkMode ? 'text-neutral-400' : 'text-neutral-500'
+                      }`}>
+                        {lang === 'pt' ? `Prazo: ${pkg.time}` : `Delivery: ${pkg.time}`}
+                      </span>
+                    )}
                   </div>
 
                   {/* Features List */}
                   <ul className="space-y-3 text-xs mb-8">
                     {pkg.features.map((feat, fIdx) => (
                       <li key={fIdx} className="flex items-start gap-2 leading-relaxed">
-                        <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        <div className="w-4 h-4 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-primary" />
+                        </div>
                         <span className={darkMode ? 'text-neutral-300' : 'text-neutral-700'}>
                           {feat}
                         </span>
@@ -213,15 +235,15 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                   </ul>
                 </div>
 
-                {/* Card Action Button */}
+                {/* 3D Card Action Button */}
                 <button
                   type="button"
-                  className={`w-full py-3 px-4 rounded-xl text-xs font-headline font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`w-full py-3.5 px-4 rounded-xl text-xs font-headline font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer relative z-10 active:scale-98 ${
                     isSelected
-                      ? 'bg-[#0071E3] hover:bg-[#0077ED] text-white shadow-lg'
+                      ? 'bg-gradient-to-r from-[#0071E3] to-[#0084FF] text-white shadow-lg shadow-blue-500/30 border border-blue-300/30'
                       : darkMode
-                        ? 'border border-neutral-700 text-white hover:bg-white/10'
-                        : 'border border-neutral-300 text-neutral-900 hover:bg-black/5'
+                        ? 'bg-neutral-900/90 border border-neutral-700/80 text-white hover:bg-neutral-800 hover:border-neutral-600 shadow-md shadow-black/40'
+                        : 'bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-50 shadow-sm'
                   }`}
                 >
                   <span>{isSelected ? (lang === 'pt' ? 'Plano Selecionado ✓' : 'Selected Plan ✓') : (lang === 'pt' ? 'Selecionar Plano' : 'Select Plan')}</span>
