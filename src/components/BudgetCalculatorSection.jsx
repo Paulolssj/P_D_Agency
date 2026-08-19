@@ -164,11 +164,11 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                 className={`p-7 rounded-[26px] border flex flex-col justify-between transition-all duration-200 relative cursor-pointer ${
                   isSelected
                     ? darkMode
-                      ? 'bg-neutral-900 border-[#0071E3] border-b-[8px] border-b-[#005bb5] shadow-[0_12px_28px_rgba(0,113,227,0.25)]'
-                      : 'bg-white border-[#0071E3] border-b-[8px] border-b-[#005bb5] shadow-[0_12px_28px_rgba(0,113,227,0.2)]'
+                      ? 'bg-neutral-900 border-[#0071E3] border-l-[6px] border-l-[#0060bf] border-b-[8px] border-b-[#005bb5] shadow-[0_12px_28px_rgba(0,113,227,0.25)]'
+                      : 'bg-white border-[#0071E3] border-l-[6px] border-l-[#0060bf] border-b-[8px] border-b-[#005bb5] shadow-[0_12px_28px_rgba(0,113,227,0.2)]'
                     : darkMode
-                      ? 'bg-[#0A101D] border-neutral-800 border-b-[8px] border-b-[#02050B] hover:border-neutral-700 hover:border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)]'
-                      : 'bg-white border-neutral-200 border-b-[8px] border-b-neutral-300 hover:border-neutral-300 hover:border-b-neutral-400 shadow-[0_10px_25px_rgba(0,0,0,0.06)]'
+                      ? 'bg-[#0A101D] border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] hover:border-neutral-700 hover:border-l-[#050A14] hover:border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)]'
+                      : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 hover:border-neutral-300 hover:border-l-neutral-400 hover:border-b-neutral-400 shadow-[0_10px_25px_rgba(0,0,0,0.06)]'
                 }`}
               >
                 {/* Popular Badge */}
@@ -228,12 +228,12 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                 {/* 3D Block Action Button */}
                 <button
                   type="button"
-                  className={`w-full py-3.5 px-4 rounded-xl text-xs font-headline font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer border-b-[4px] active:border-b-[1px] active:translate-y-1 ${
+                  className={`w-full py-3.5 px-4 rounded-xl text-xs font-headline font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer border-l-[3px] border-b-[4px] active:border-b-[1px] active:border-l-[1px] active:translate-y-1 ${
                     isSelected
-                      ? 'bg-[#0071E3] hover:bg-[#0077ED] border-[#005bb5] text-white shadow-md'
+                      ? 'bg-[#0071E3] hover:bg-[#0077ED] border-l-[#0060bf] border-b-[#005bb5] text-white shadow-md'
                       : darkMode
-                        ? 'bg-neutral-800 hover:bg-neutral-700 border-neutral-950 text-white shadow-sm'
-                        : 'bg-neutral-100 hover:bg-neutral-200 border-neutral-300 text-neutral-900 shadow-sm'
+                        ? 'bg-neutral-800 hover:bg-neutral-700 border-l-neutral-900 border-b-neutral-950 text-white shadow-sm'
+                        : 'bg-neutral-100 hover:bg-neutral-200 border-l-neutral-200 border-b-neutral-300 text-neutral-900 shadow-sm'
                   }`}
                 >
                   <span>{isSelected ? (lang === 'pt' ? 'Plano Selecionado ✓' : 'Selected Plan ✓') : (lang === 'pt' ? 'Selecionar Plano' : 'Select Plan')}</span>
