@@ -1796,10 +1796,10 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400">INSTAGRAM</p>
-                    <a href="https://www.instagram.com/pdagencydigital/" target="_blank" rel="noopener noreferrer" className={`font-headline font-bold text-sm hover:text-primary transition-colors ${
+                    <a href="https://www.instagram.com/pd_agency_digital/" target="_blank" rel="noopener noreferrer" className={`font-headline font-bold text-sm hover:text-primary transition-colors ${
                       darkMode ? 'text-white' : 'text-neutral-900'
                     }`}>
-                      @pdagencydigital
+                      @pd_agency_digital
                     </a>
                   </div>
                 </div>
@@ -1905,7 +1905,7 @@ export default function LandingPage() {
                 <li>
                   <a 
                     className="hover:text-primary transition-colors flex items-center gap-2" 
-                    href="https://www.instagram.com/pdagencydigital/" 
+                    href="https://www.instagram.com/pd_agency_digital/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                   >

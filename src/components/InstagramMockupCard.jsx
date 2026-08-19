@@ -62,10 +62,10 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
           }`}>
             <div className="flex items-center gap-1.5 font-headline font-bold text-xs">
               <span className={`w-2 h-2 rounded-full ${isFollowing ? 'bg-emerald-400 animate-pulse' : 'bg-primary'}`} />
-              <span className={darkMode ? 'text-white' : 'text-neutral-900'}>pdagencydigital</span>
+              <span className={darkMode ? 'text-white' : 'text-neutral-900'}>pd_agency_digital</span>
             </div>
             <a 
-              href="https://www.instagram.com/pdagencydigital/" 
+              href="https://www.instagram.com/pd_agency_digital/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-1 hover:text-primary transition-colors"
@@ -78,7 +78,7 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
           <div className="p-5">
             {/* Header: Avatar + Profile Stats */}
             <div className="flex items-center gap-5 mb-4">
-              {/* Profile Avatar matching Instagram @pdagencydigital */}
+              {/* Profile Avatar matching Instagram @pd_agency_digital */}
               <div className="relative shrink-0">
                 <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden bg-black border-2 border-neutral-700/60 shadow-lg">
                   <img
@@ -134,7 +134,7 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
             {/* Action Buttons (Exatamente como o screenshot do utilizador) */}
             <div className="flex items-center gap-2 mb-4">
               <a
-                href="https://www.instagram.com/pdagencydigital/"
+                href="https://www.instagram.com/pd_agency_digital/"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsFollowing(!isFollowing)}
@@ -157,7 +157,7 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
               </a>
 
               <a
-                href="https://www.instagram.com/pdagencydigital/"
+                href="https://www.instagram.com/pd_agency_digital/"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Conectar"
