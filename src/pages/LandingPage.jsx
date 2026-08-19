@@ -1129,7 +1129,7 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className={`font-headline text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[1.02] sm:leading-[0.98] tracking-[-0.03em] ${
+                  className={`font-headline text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[84px] font-black uppercase leading-[1.0] sm:leading-[0.95] tracking-[-0.03em] ${
                     darkMode ? 'text-white' : 'text-neutral-900'
                   }`}
                 >
@@ -1191,7 +1191,7 @@ export default function LandingPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.45, duration: 0.8 }}
-                  className={`pt-6 border-t grid grid-cols-3 gap-2 sm:gap-4 text-left ${
+                  className={`pt-6 border-t grid grid-cols-3 gap-2 sm:gap-4 text-center sm:text-left ${
                     darkMode ? 'border-neutral-800/80' : 'border-neutral-200'
                   }`}
                 >
