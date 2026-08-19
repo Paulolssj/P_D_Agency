@@ -2,12 +2,22 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Send, PhoneCall, Mail, CheckCircle2, Sparkles, Shield, Clock, ArrowRight, Check, Zap, Globe, Palette, ShoppingBag, Layout, Code2 } from 'lucide-react';
 
+const getPriceLabel = (lang) => {
+  switch (lang) {
+    case 'en': return 'Upon Request';
+    case 'es': return 'Bajo Consulta';
+    case 'fr': return 'Sur Demande';
+    case 'de': return 'Auf Anfrage';
+    default: return 'Sob Consulta';
+  }
+};
+
 const PACKAGES = [
   {
     id: 'landing',
     title: 'Landing Page de Alta Conversão',
     category: 'Conversão & Captação Rápida',
-    price: 'A partir de 400€',
+    price: 'Sob Consulta',
     time: '3-7 Dias',
     icon: Zap,
     iconColor: 'text-amber-400',
@@ -43,7 +53,7 @@ const PACKAGES = [
     id: 'web',
     title: 'Website Institucional',
     category: 'Website Corporativo Multi-Página',
-    price: 'A partir de 600€',
+    price: 'Sob Consulta',
     time: '5-10 Dias',
     icon: Globe,
     iconColor: 'text-blue-500',
@@ -61,7 +71,7 @@ const PACKAGES = [
     id: 'catalog',
     title: 'Catálogo Digital / Loja Online',
     category: 'E-commerce & Catálogo Dinâmico',
-    price: 'A partir de 800€',
+    price: 'Sob Consulta',
     time: '7-21 Dias',
     popular: true,
     icon: ShoppingBag,
@@ -98,18 +108,20 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
   };
 
   const buildWhatsAppUrl = () => {
+    const priceText = getPriceLabel(lang);
     const text = lang === 'pt'
-      ? `Olá P&D Agency! 👋\n\nGostaria de solicitar uma proposta para o meu projeto:\n\n📌 *Plano Selecionado:* ${currentPkg.title} (${currentPkg.price})\n⏱️ *Prazo Indicativo:* ${currentPkg.time}\n👤 *Nome / Empresa:* ${name.trim() || 'Cliente'}\n📞 *Contacto:* ${phone.trim() || 'Não especificado'}\n✉️ *E-mail:* ${email.trim() || 'Não especificado'}\n\n📝 *Detalhes:* ${message.trim() || 'Gostaria de agendar uma reunião / obter proposta formal.'}\n\nPodemos conversar?`
-      : `Hello P&D Agency! 👋\n\nI would like to request a proposal for my project:\n\n📌 *Selected Plan:* ${currentPkg.title} (${currentPkg.price})\n⏱️ *Estimated Delivery:* ${currentPkg.time}\n👤 *Name / Company:* ${name.trim() || 'Client'}\n📞 *Phone:* ${phone.trim() || 'Not specified'}\n✉️ *E-mail:* ${email.trim() || 'Not specified'}\n\n📝 *Details:* ${message.trim() || 'I would like to schedule a call / receive a proposal.'}\n\nCan we talk?`;
+      ? `Olá P&D Agency! 👋\n\nGostaria de solicitar uma proposta para o meu projeto:\n\n📌 *Plano Selecionado:* ${currentPkg.title} (${priceText})\n⏱️ *Prazo Indicativo:* ${currentPkg.time}\n👤 *Nome / Empresa:* ${name.trim() || 'Cliente'}\n📞 *Contacto:* ${phone.trim() || 'Não especificado'}\n✉️ *E-mail:* ${email.trim() || 'Não especificado'}\n\n📝 *Detalhes:* ${message.trim() || 'Gostaria de agendar uma reunião / obter proposta formal.'}\n\nPodemos conversar?`
+      : `Hello P&D Agency! 👋\n\nI would like to request a proposal for my project:\n\n📌 *Selected Plan:* ${currentPkg.title} (${priceText})\n⏱️ *Estimated Delivery:* ${currentPkg.time}\n👤 *Name / Company:* ${name.trim() || 'Client'}\n📞 *Phone:* ${phone.trim() || 'Not specified'}\n✉️ *E-mail:* ${email.trim() || 'Not specified'}\n\n📝 *Details:* ${message.trim() || 'I would like to schedule a call / receive a proposal.'}\n\nCan we talk?`;
 
     return `https://wa.me/3519262568423?text=${encodeURIComponent(text)}`;
   };
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Pedido de Proposta - ${currentPkg.title} (${currentPkg.price}) - ${name || 'Cliente'}`);
+    const priceText = getPriceLabel(lang);
+    const subject = encodeURIComponent(`Pedido de Proposta - ${currentPkg.title} (${priceText}) - ${name || 'Cliente'}`);
     const body = encodeURIComponent(
-      `Nome: ${name}\nTelemóvel: ${phone}\nE-mail: ${email}\nPlano Selecionado: ${currentPkg.title} (${currentPkg.price})\nPrazo Indicativo: ${currentPkg.time}\n\nDetalhes do Projeto:\n${message}`
+      `Nome: ${name}\nTelemóvel: ${phone}\nE-mail: ${email}\nPlano Selecionado: ${currentPkg.title} (${priceText})\nPrazo Indicativo: ${currentPkg.time}\n\nDetalhes do Projeto:\n${message}`
     );
     window.location.href = `mailto:pd.agency.digital01@gmail.com?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -206,7 +218,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                   {/* Price Display */}
                   <div className="mb-6 pb-6 border-b border-neutral-500/20">
                     <span className="font-headline font-black text-2xl md:text-3xl text-[#0071E3] dark:text-[#3B82F6]">
-                      {pkg.price}
+                      {getPriceLabel(lang)}
                     </span>
                   </div>
 
@@ -275,7 +287,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
               </div>
               <div className="sm:text-right">
                 <span className="font-headline font-black text-2xl text-[#0071E3] dark:text-[#3B82F6] block">
-                  {currentPkg.price}
+                  {getPriceLabel(lang)}
                 </span>
                 <span className={`text-[10px] uppercase font-bold ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
                   {lang === 'pt' ? `Prazo: ${currentPkg.time}` : `Delivery: ${currentPkg.time}`}
