@@ -194,6 +194,285 @@ const translations = {
       terms: "TERMS OF USE",
       privacy: "PRIVACY POLICY"
     }
+  },
+  es: {
+    nav: {
+      home: "Inicio",
+      approach: "Enfoque",
+      services: "Servicios",
+      estimator: "Propuesta",
+      portfolio: "Portafolio",
+      testimonials: "Testimonios"
+    },
+    cta: "CONSTRUYAMOS",
+    preloader: "AGENCIA DIGITAL & COMUNICACIÓN",
+    hero: {
+      badge: "BIENVENIDO A P&D AGENCY",
+      headline1: "AGENCIA DIGITAL",
+      headline2: "Y COMUNICACIÓN",
+      headline3: "PERSONALIZADA",
+      copyBold: "Tu marca es única y merece una comunicación totalmente a medida.",
+      copySub: "En P&D Agency, tratamos tu proyecto con la diferenciación y la ingeniería de excelencia que requiere.",
+      copyPartner: "Somos tu equipo de tecnología y marketing, tu socio comercial estratégico.",
+      btnPrimary: "INICIAR TU PROYECTO",
+      btnSecondary: "SABER MÁS"
+    },
+    about: {
+      tag: "SOBRE P&D AGENCY",
+      title1: "AGENCIA DIGITAL",
+      title2: "A MEDIDA",
+      p1_num: "01",
+      p1_title: "UN ENFOQUE PERSONALIZADO",
+      p1_desc: "Somos una agencia boutique full-service. Desarrollamos tu proyecto de tecnología y comunicación desde el concepto estratégico hasta la ejecución práctica.",
+      p2_num: "02",
+      p2_title: "DESARROLLO Y MARKETING SIN LÍMITES",
+      p2_desc: "El éxito digital exige constancia. Nuestra ingeniería y consultoría no tienen límites en actualizaciones o características a desarrollar.",
+      p3_num: "03",
+      p3_title: "UN SOCIO COMERCIAL",
+      p3_desc: "Más que una agencia digital, somos un socio estratégico dedicado a poner el desarrollo de software y el diseño al servicio de tus ventas.",
+      p4_num: "04",
+      p4_title: "UN EQUIPO DEDICADO",
+      p4_desc: "Tu proyecto es nuestra prioridad. Trabajarás directamente con un equipo multidisciplinar: Ingeniero de Software, Diseñador UX/UI y Director Creativo.",
+      quote: '"Creamos estrategias 100% personalizadas e implementamos todo lo necesario para alcanzar tus objetivos sin límites de plataformas."'
+    },
+    services: {
+      tag: "SOLUCIONES 360º",
+      title1: "LO QUE",
+      title2: "HACEMOS",
+      desc: "En P&D Agency ofrecemos una gama completa de ingeniería de software, desarrollo web e identidad digital para posicionar tu marca en el mercado.",
+      card1_title: "INGENIERÍA WEB Y APLICACIONES",
+      card1_desc: "Desarrollamos plataformas web 360º all-inclusive que eliminan el esfuerzo técnico y entregan un alto rendimiento.",
+      card1_li1: "Arquitectura Web y React/Next.js",
+      card1_li2: "Alta Carga y Optimización Cloud",
+      card1_li3: "SEO Avanzado y Core Web Vitals",
+      card2_title: "IDENTIDAD DE MARCA Y BRANDING",
+      card2_desc: "Diseñamos identidades visuales de autoridad y sistemas UI/UX que posicionan a tu empresa como líder del sector.",
+      card2_li1: "Diseño de Marca y Sistemas UI/UX",
+      card2_li2: "Redes Sociales y Estrategia de Contenido",
+      card2_li3: "Marketing de Rendimiento y Anuncios",
+      btnMore: "SABER MÁS"
+    },
+    stats: {
+      s1_val: "5+", s1_lab: "Años de Experiencia en Ingeniería",
+      s2_val: "4+", s2_lab: "Más de 4 Proyectos Entregados",
+      s3_val: "4-21 Días", s3_lab: "Tiempo de Entrega Típico",
+      s4_val: "24/7", s4_lab: "Monitoreo Activo de Sistemas"
+    },
+    portfolio: {
+      tag: "TRABAJOS SELECCIONADOS",
+      title: "EL ARCHIVO",
+      sub: "Ejemplos reales de nuestro trabajo — sitios web en vivo y en desarrollo para nuestros clientes.",
+      live: "En Vivo",
+      progress: "En Progreso"
+    },
+    testimonials: {
+      tag: "EVALUACIONES Y TESTIMONIOS",
+      title: "LO QUE DICEN NUESTROS CLIENTES"
+    },
+    brands: {
+      tag: "CONFIANZA Y ALIANZAS",
+      title: "EMPRESAS CON LAS QUE TRABAJAMOS"
+    },
+    ctaMeeting: {
+      title1: "¿INTERESADO?",
+      title2: "REUNÁMONOS.",
+      sub: "Agenda una consulta estratégica de 30 minutos sin compromiso para analizar los objetivos de tu empresa.",
+      btn: "AGENDAR REUNIÓN"
+    },
+    footer: {
+      sub: "Agencia Digital y Comunicación Personalizada. Arquitectando el futuro de la presencia digital.",
+      navTitle: "NAVEGACIÓN",
+      socialTitle: "REDES SOCIALES",
+      rights: "© 2026 P&D AGENCY. TODOS LOS DERECHOS RESERVADOS.",
+      terms: "TÉRMINOS DE USO",
+      privacy: "POLÍTICA DE PRIVACIDAD"
+    }
+  },
+  fr: {
+    nav: {
+      home: "Accueil",
+      approach: "Approche",
+      services: "Services",
+      estimator: "Proposition",
+      portfolio: "Portfolio",
+      testimonials: "Témoignages"
+    },
+    cta: "CONSTRUISONS",
+    preloader: "AGENCE DIGITALE SUR MESURE",
+    hero: {
+      badge: "BIENVENUE CHEZ P&D AGENCY",
+      headline1: "AGENCE DIGITALE",
+      headline2: "ET COMMUNICATION",
+      headline3: "SUR MESURE",
+      copyBold: "Votre marque est unique et mérite une communication parfaitement personnalisée.",
+      copySub: "Chez P&D Agency, nous traitons votre projet avec le niveau de différenciation et l'excellence technique qu'il exige.",
+      copyPartner: "Nous sommes votre équipe de technologie et de marketing, votre partenaire d'affaires stratégique.",
+      btnPrimary: "LANCER VOTRE PROJET",
+      btnSecondary: "EN SAVOIR PLUS"
+    },
+    about: {
+      tag: "À PROPOS DE P&D AGENCY",
+      title1: "AGENCE DIGITALE",
+      title2: "SUR MESURE",
+      p1_num: "01",
+      p1_title: "UNE APPROCHE PERSONNALISÉE",
+      p1_desc: "Agence boutique full-service, nous développons votre projet technologique et de communication du concept stratégique à la réalisation concrète.",
+      p2_num: "02",
+      p2_title: "DÉVELOPPEMENT & MARKETING SANS LIMITES",
+      p2_desc: "Le succès digital exige de la constance. Notre ingénierie et notre conseil n'ont aucune limite sur le nombre de mises à jour ou de fonctionnalités.",
+      p3_num: "03",
+      p3_title: "UN PARTENAIRE D'AFFAIRES",
+      p3_desc: "Plus qu'une agence digitale, nous sommes un partenaire stratégique dédié à mettre le développement logiciel et le design au service de vos ventes.",
+      p4_num: "04",
+      p4_title: "UNE ÉQUIPE DÉDIÉE",
+      p4_desc: "Votre projet est notre priorité absolue. Vous collaborerez directement avec une équipe pluridisciplinaire : Ingénieur Logiciel, Designer UX/UI et Directeur Créatif.",
+      quote: '"Nous concevons des stratégies 100% sur mesure et mettons en œuvre tout le nécessaire pour atteindre vos objectifs sans limites de plateforme."'
+    },
+    services: {
+      tag: "SOLUTIONS 360º",
+      title1: "CE QUE NOUS",
+      title2: "FAISONS",
+      desc: "Chez P&D Agency, nous offrons une gamme complète de services en ingénierie logicielle, développement web et identité numérique pour faire rayonner votre marque.",
+      card1_title: "INGÉNIERIE WEB & APPLICATIONS",
+      card1_desc: "Nous développons des plateformes web 360º all-inclusive qui éliminent la complexité technique et garantissent une haute performance.",
+      card1_li1: "Architecture Web & React/Next.js",
+      card1_li2: "Haute Charge & Optimisation Cloud",
+      card1_li3: "SEO Avancé & Core Web Vitals",
+      card2_title: "IDENTITÉ DE MARQUE & BRANDING",
+      card2_desc: "Nous créons des identités visuelles fortes et des systèmes UI/UX qui positionnent votre entreprise comme leader incontesté sur votre marché.",
+      card2_li1: "Design de Marque & Systèmes UI/UX",
+      card2_li2: "Réseaux Sociaux & Stratégie de Contenu",
+      card2_li3: "Marketing de Performance & Publicité",
+      btnMore: "EN SAVOIR PLUS"
+    },
+    stats: {
+      s1_val: "5+", s1_lab: "Années d'Expérience en Ingénierie",
+      s2_val: "4+", s2_lab: "Plus de 4 Projets Livrés",
+      s3_val: "4-21 Jours", s3_lab: "Délai de Livraison Type",
+      s4_val: "24/7", s4_lab: "Surveillance Système Active"
+    },
+    portfolio: {
+      tag: "PROJETS SÉLECTIONNÉS",
+      title: "LES ARCHIVES",
+      sub: "Exemples réels de nos réalisations — sites web en ligne et sur mesure développés pour nos clients.",
+      live: "En Ligne",
+      progress: "En Cours"
+    },
+    testimonials: {
+      tag: "AVIS & TÉMOIGNAGES",
+      title: "CE QUE DISENT NOS CLIENTS"
+    },
+    brands: {
+      tag: "CONFIANCE & PARTENARIATS",
+      title: "ENTREPRISES AVEC LESQUELLES NOUS TRAVAILLONS"
+    },
+    ctaMeeting: {
+      title1: "INTÉRESSÉ ?",
+      title2: "PRENONS RENDEZ-VOUS.",
+      sub: "Réservez une consultation stratégique de 30 minutes sans engagement pour discuter de vos objectifs.",
+      btn: "RÉSERVER UN RENDEZ-VOUS"
+    },
+    footer: {
+      sub: "Agence Digitale & Communication Sur Mesure. Façonner l'avenir de votre présence web.",
+      navTitle: "NAVIGATION",
+      socialTitle: "RÉSEAUX SOCIAUX",
+      rights: "© 2026 P&D AGENCY. TOUS DROITS RÉSERVÉS.",
+      terms: "CONDITIONS D'UTILISATION",
+      privacy: "POLITIQUE DE CONFIDENTIALITÉ"
+    }
+  },
+  de: {
+    nav: {
+      home: "Startseite",
+      approach: "Ansatz",
+      services: "Leistungen",
+      estimator: "Angebot",
+      portfolio: "Portfolio",
+      testimonials: "Referenzen"
+    },
+    cta: "PROJEKT STARTEN",
+    preloader: "INDIVIDUELLE DIGITALAGENTUR",
+    hero: {
+      badge: "WILLKOMMEN BEI P&D AGENCY",
+      headline1: "INDIVIDUELLE",
+      headline2: "DIGITAL- UND MEDIEN",
+      headline3: "AGENTUR",
+      copyBold: "Ihre Marke ist einzigartig und verdient eine maßgeschneiderte digitale Kommunikation.",
+      copySub: "Bei P&D Agency betreuen wir Ihr Projekt mit der geforderten Differenzierung und exzellenter Technik.",
+      copyPartner: "Wir sind Ihr Technologie- und Marketingteam — Ihr langfristiger Geschäftspartner.",
+      btnPrimary: "PROJEKT JETZT STARTEN",
+      btnSecondary: "MEHR ERFAHREN"
+    },
+    about: {
+      tag: "ÜBER P&D AGENCY",
+      title1: "INDIVIDUELLE",
+      title2: "DIGITALAGENTUR",
+      p1_num: "01",
+      p1_title: "EIN MAßGESCHNEIDERTER ANSATZ",
+      p1_desc: "Als Full-Service-Boutique-Agentur entwickeln wir Ihr Technologie- und Kommunikationsprojekt vom strategischen Konzept bis zur perfekten Umsetzung.",
+      p2_num: "02",
+      p2_title: "ENTWICKLUNG & MARKETING OHNE GRENZEN",
+      p2_desc: "Digitaler Erfolg erfordert Kontinuität. Unsere Entwicklung und Beratung kennen keine Grenzen bei Updates oder Funktionserweiterungen.",
+      p3_num: "03",
+      p3_title: "EIN STARKER GESCHÄFTSPARTNER",
+      p3_desc: "Mehr als eine Digitalagentur: Wir sind ein strategischer Partner, der Softwareentwicklung und Design gezielt in den Dienst Ihres Umsatzwachstums stellt.",
+      p4_num: "04",
+      p4_title: "EIN DEDIZIERTES TEAM",
+      p4_desc: "Ihr Projekt hat für uns höchste Priorität. Sie arbeiten direkt mit einem multidisziplinären Team aus Software-Ingenieuren, UX/UI-Designern und Creative Directorn.",
+      quote: '"Wir entwickeln 100% individuelle Strategien und setzen alles um, was nötig ist, um Ihre Ziele plattformübergreifend zu erreichen."'
+    },
+    services: {
+      tag: "360º-LÖSUNGEN",
+      title1: "WAS WIR",
+      title2: "TUN",
+      desc: "Bei P&D Agency bieten wir ein umfassendes Spektrum an Softwareentwicklung, Webdesign und digitaler Markenidentität, um Ihre Marke im Markt zu etablieren.",
+      card1_title: "WEB-ENTWICKLUNG & APPS",
+      card1_desc: "Wir entwickeln All-inclusive-Webplattformen, die technische Hürden beseitigen und dauerhaft höchste Performance liefern.",
+      card1_li1: "Webarchitektur & React/Next.js",
+      card1_li2: "High-Load & Cloud-Optimierung",
+      card1_li3: "Erweitertes SEO & Core Web Vitals",
+      card2_title: "MARKENIDENTITÄT & BRANDING",
+      card2_desc: "Wir gestalten ausdrucksstarke Markenidentitäten und UI/UX-Systeme, die Ihr Unternehmen als Branchenführer positionieren.",
+      card2_li1: "Markendesign & UI/UX-Systeme",
+      card2_li2: "Social Media & Content-Strategie",
+      card2_li3: "Performance Marketing & Ads",
+      btnMore: "MEHR ERFAHREN"
+    },
+    stats: {
+      s1_val: "5+", s1_lab: "Jahre Erfahrung in Softwareentwicklung",
+      s2_val: "4+", s2_lab: "Über 4 Erfolgreich Gelieferte Projekte",
+      s3_val: "4-21 Tage", s3_lab: "Typische Lieferzeit",
+      s4_val: "24/7", s4_lab: "Aktive Systemüberwachung"
+    },
+    portfolio: {
+      tag: "AUSGEWÄHLTE ARBEITEN",
+      title: "DAS ARCHIV",
+      sub: "Reale Einblicke in unsere Arbeiten — Live-Websites und Plattformen für Kunden und Eigenprojekte.",
+      live: "Live",
+      progress: "In Bearbeitung"
+    },
+    testimonials: {
+      tag: "BEWERTUNGEN & REFERENZEN",
+      title: "WAS UNSERE KUNDEN SAGEN"
+    },
+    brands: {
+      tag: "VERTRAUEN & PARTNERSCHAFTEN",
+      title: "UNSERE PARTNER UND KUNDEN"
+    },
+    ctaMeeting: {
+      title1: "INTERESSIERT?",
+      title2: "BERATUNGSGESPRÄCH VEREINBAREN.",
+      sub: "Buchen Sie ein unverbindliches 30-minütiges Gespräch, um Ihre Unternehmensziele zu besprechen.",
+      btn: "TERMIN VEREINBAREN"
+    },
+    footer: {
+      sub: "Individuelle Digital- & Medienagentur. Wir gestalten die Zukunft Ihrer digitalen Präsenz.",
+      navTitle: "NAVIGATION",
+      socialTitle: "SOCIAL MEDIA",
+      rights: "© 2026 P&D AGENCY. ALLE RECHTE VORBEHALTEN.",
+      terms: "NUTZUNGSBEDINGUNGEN",
+      privacy: "DATENSCHUTZERKLÄRUNG"
+    }
   }
 };
 
@@ -232,6 +511,37 @@ const FlagEN = ({ className = "w-4 h-3" }) => (
     <path fill="#cf142b" d="M280 0h80v480H280zM0 200h640v80H0z"/>
   </svg>
 );
+
+const FlagES = ({ className = "w-4 h-3" }) => (
+  <svg className={`${className} inline-block rounded-[2px] overflow-hidden shrink-0 shadow-xs`} viewBox="0 0 640 480">
+    <path fill="#c60b1e" d="M0 0h640v480H0z"/>
+    <path fill="#ffc400" d="M0 120h640v240H0z"/>
+  </svg>
+);
+
+const FlagFR = ({ className = "w-4 h-3" }) => (
+  <svg className={`${className} inline-block rounded-[2px] overflow-hidden shrink-0 shadow-xs`} viewBox="0 0 640 480">
+    <path fill="#051440" d="M0 0h213.3v480H0z"/>
+    <path fill="#fff" d="M213.3 0h213.4v480H213.3z"/>
+    <path fill="#ec1920" d="M426.7 0H640v480H426.7z"/>
+  </svg>
+);
+
+const FlagDE = ({ className = "w-4 h-3" }) => (
+  <svg className={`${className} inline-block rounded-[2px] overflow-hidden shrink-0 shadow-xs`} viewBox="0 0 640 480">
+    <path fill="#000" d="M0 0h640v160H0z"/>
+    <path fill="#dd0000" d="M0 160h640v160H0z"/>
+    <path fill="#ffce00" d="M0 320h640v160H0z"/>
+  </svg>
+);
+
+const LANG_MAP = {
+  pt: { label: 'PT', name: 'Português', Flag: FlagPT },
+  en: { label: 'EN', name: 'English', Flag: FlagEN },
+  es: { label: 'ES', name: 'Español', Flag: FlagES },
+  fr: { label: 'FR', name: 'Français', Flag: FlagFR },
+  de: { label: 'DE', name: 'Deutsch', Flag: FlagDE }
+};
 
 function CustomSelectDropdown({ value, onChange, options, darkMode }) {
   const [open, setOpen] = useState(false);
@@ -703,37 +1013,43 @@ export default function LandingPage() {
                 }`}
               >
                 <span className="flex items-center gap-1">
-                  {lang === 'pt' ? <><FlagPT className="w-3.5 h-2.5 sm:w-4 sm:h-3" /> PT</> : <><FlagEN className="w-3.5 h-2.5 sm:w-4 sm:h-3" /> EN</>}
+                  {(() => {
+                    const currentLangObj = LANG_MAP[lang] || LANG_MAP.pt;
+                    const ActiveFlag = currentLangObj.Flag;
+                    return (
+                      <>
+                        <ActiveFlag className="w-3.5 h-2.5 sm:w-4 sm:h-3" />
+                        <span>{currentLangObj.label}</span>
+                      </>
+                    );
+                  })()}
                 </span>
                 <MaterialIcon name="expand_more" className={`text-base transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {langDropdownOpen && (
                 <div 
-                  className={`absolute right-0 mt-2 w-36 rounded-2xl border shadow-2xl py-2 z-50 transition-all ${
+                  className={`absolute right-0 mt-2 w-40 rounded-2xl border shadow-2xl py-2 z-50 transition-all ${
                     darkMode 
                       ? 'bg-neutral-900 border-neutral-800 text-white' 
                       : 'bg-white border-neutral-200 text-neutral-900'
                   }`}
                 >
-                  <button
-                    onClick={() => { setLang('pt'); setLangDropdownOpen(false); }}
-                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2.5 hover:bg-primary/10 transition-colors cursor-pointer ${
-                      lang === 'pt' ? 'text-primary font-black bg-primary/10' : ''
-                    }`}
-                  >
-                    <FlagPT className="w-4 h-3" />
-                    <span>Português</span>
-                  </button>
-                  <button
-                    onClick={() => { setLang('en'); setLangDropdownOpen(false); }}
-                    className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2.5 hover:bg-primary/10 transition-colors cursor-pointer ${
-                      lang === 'en' ? 'text-primary font-black bg-primary/10' : ''
-                    }`}
-                  >
-                    <FlagEN className="w-4 h-3" />
-                    <span>English</span>
-                  </button>
+                  {Object.entries(LANG_MAP).map(([key, item]) => {
+                    const FlagComp = item.Flag;
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => { setLang(key); setLangDropdownOpen(false); }}
+                        className={`w-full px-4 py-2 text-left text-[11px] font-bold font-headline flex items-center gap-2.5 hover:bg-primary/10 transition-colors cursor-pointer ${
+                          lang === key ? 'text-primary font-black bg-primary/10' : ''
+                        }`}
+                      >
+                        <FlagComp className="w-4 h-3" />
+                        <span>{item.name}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
