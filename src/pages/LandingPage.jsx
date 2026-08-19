@@ -813,7 +813,7 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className={`font-headline text-4xl sm:text-6xl lg:text-7xl font-black uppercase leading-[0.98] tracking-[-0.03em] ${
+                  className={`font-headline text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[1.02] sm:leading-[0.98] tracking-[-0.03em] ${
                     darkMode ? 'text-white' : 'text-neutral-900'
                   }`}
                 >
@@ -833,14 +833,14 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className={`max-w-2xl text-base sm:text-lg font-normal leading-relaxed ${
+                  className={`max-w-2xl text-sm sm:text-base md:text-lg font-normal leading-relaxed ${
                     darkMode ? 'text-neutral-300' : 'text-neutral-600'
                   }`}
                 >
                   <p className="mb-2 font-medium">
                     {t.hero.copyBold}
                   </p>
-                  <p className={`text-sm sm:text-base font-light ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                  <p className={`text-xs sm:text-sm md:text-base font-light ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
                     {t.hero.copySub} <strong className={darkMode ? 'text-white font-medium' : 'text-neutral-900 font-medium'}>{t.hero.copyPartner}</strong>
                   </p>
                 </motion.div>
@@ -850,18 +850,18 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-wrap items-center gap-4 pt-2"
+                  className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto"
                 >
                   <a 
                     href="#contacto"
-                    className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-8 py-4 rounded-full font-headline font-bold text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(0,113,227,0.35)] hover:shadow-[0_8px_30px_rgba(0,113,227,0.5)] active:scale-[0.98] hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full sm:w-auto bg-[#0071E3] hover:bg-[#0077ED] text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-headline font-bold text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(0,113,227,0.35)] hover:shadow-[0_8px_30px_rgba(0,113,227,0.5)] active:scale-[0.98] hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 cursor-pointer text-center"
                   >
                     <span>{t.hero.btnPrimary}</span>
                     <MaterialIcon name="arrow_forward" className="text-base" />
                   </a>
                   <a 
                     href="#orcamento"
-                    className={`border px-8 py-4 rounded-full font-headline font-bold text-xs uppercase tracking-wider transition-all backdrop-blur-xl hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 cursor-pointer ${
+                    className={`w-full sm:w-auto border px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-headline font-bold text-xs uppercase tracking-wider transition-all backdrop-blur-xl hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 cursor-pointer text-center ${
                       darkMode ? 'bg-white/5 border-white/15 text-white hover:bg-white/10 hover:border-white/30' : 'bg-black/5 border-black/10 text-neutral-900 hover:bg-black/10 hover:border-black/20'
                     }`}
                   >
@@ -875,26 +875,26 @@ export default function LandingPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.45, duration: 0.8 }}
-                  className={`pt-6 border-t grid grid-cols-1 sm:grid-cols-3 gap-4 text-left ${
+                  className={`pt-6 border-t grid grid-cols-3 gap-2 sm:gap-4 text-left ${
                     darkMode ? 'border-neutral-800/80' : 'border-neutral-200'
                   }`}
                 >
                   <div>
-                    <span className="block text-2xl font-black font-headline text-primary">+340%</span>
-                    <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                    <span className="block text-xl sm:text-2xl font-black font-headline text-primary">+340%</span>
+                    <span className={`text-[9px] sm:text-[10px] uppercase font-bold tracking-wider leading-tight block ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
                       {lang === 'pt' ? 'Alcance & Conversão' : 'Organic Reach'}
                     </span>
                   </div>
                   <div>
-                    <span className="block text-2xl font-black font-headline text-primary">100%</span>
-                    <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-                      {lang === 'pt' ? 'Design & Código Sob Medida' : 'Custom Built'}
+                    <span className="block text-xl sm:text-2xl font-black font-headline text-primary">100%</span>
+                    <span className={`text-[9px] sm:text-[10px] uppercase font-bold tracking-wider leading-tight block ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                      {lang === 'pt' ? 'Sob Medida' : 'Custom Built'}
                     </span>
                   </div>
                   <div>
-                    <span className="block text-2xl font-black font-headline text-primary">3-21 Dias</span>
-                    <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-                      {lang === 'pt' ? 'Prazo de Entrega Ágil' : 'Agile Delivery'}
+                    <span className="block text-xl sm:text-2xl font-black font-headline text-primary">3-21 Dias</span>
+                    <span className={`text-[9px] sm:text-[10px] uppercase font-bold tracking-wider leading-tight block ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                      {lang === 'pt' ? 'Entrega Ágil' : 'Agile Delivery'}
                     </span>
                   </div>
                 </motion.div>
@@ -906,7 +906,7 @@ export default function LandingPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="lg:col-span-5 relative flex justify-center"
+                className="lg:col-span-5 relative flex justify-center w-full"
               >
                 <InstagramMockupCard darkMode={darkMode} lang={lang} />
               </motion.div>
@@ -1093,7 +1093,7 @@ export default function LandingPage() {
           darkMode ? 'bg-[#070D1A] border-neutral-800/60' : 'bg-neutral-100 border-neutral-200'
         }`}>
           <div className="container mx-auto px-8 relative z-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-12">
               {[
                 { val: t.stats.s1_val, lab: t.stats.s1_lab },
                 { val: t.stats.s2_val, lab: t.stats.s2_lab },
@@ -1101,12 +1101,12 @@ export default function LandingPage() {
                 { val: t.stats.s4_val, lab: t.stats.s4_lab }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center text-center w-full relative group">
-                  <span className={`text-5xl md:text-6xl font-black font-headline tracking-tighter ${
+                  <span className={`text-3xl sm:text-5xl md:text-6xl font-black font-headline tracking-tighter ${
                     darkMode ? 'text-white' : 'text-neutral-900'
                   }`}>
                     {stat.val}
                   </span>
-                  <p className="text-primary text-[10px] uppercase font-bold tracking-[0.3em] mt-3 italic">
+                  <p className="text-primary text-[9px] sm:text-[10px] uppercase font-bold tracking-[0.2em] sm:tracking-[0.3em] mt-2 sm:mt-3 italic">
                     {stat.lab}
                   </p>
                 </div>

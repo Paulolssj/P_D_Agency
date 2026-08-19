@@ -150,7 +150,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
         </div>
 
         {/* ── 4 BANNERS / CARDS DOS PLANOS (ESTILO BLOCO 3D COM ALTURA & PROFUNDIDADE) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
           {PACKAGES.map((pkg) => {
             const isSelected = selectedPkg === pkg.id;
             const PkgIcon = pkg.icon;
@@ -161,7 +161,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                 whileTap={{ y: 2 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 onClick={() => handleSelectPackage(pkg.id)}
-                className={`p-7 rounded-[26px] border flex flex-col justify-between transition-all duration-200 relative cursor-pointer ${
+                className={`p-6 sm:p-7 rounded-[26px] border flex flex-col justify-between transition-all duration-200 relative cursor-pointer ${
                   isSelected
                     ? darkMode
                       ? 'bg-neutral-900 border-[#0071E3] border-l-[6px] border-l-[#0060bf] border-b-[8px] border-b-[#005bb5] shadow-[0_12px_28px_rgba(0,113,227,0.25)]'
@@ -225,18 +225,18 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                   </ul>
                 </div>
 
-                {/* 3D Block Action Button */}
+                {/* Select Button */}
                 <button
                   type="button"
-                  className={`w-full py-3.5 px-4 rounded-xl text-xs font-headline font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer border-l-[3px] border-b-[4px] active:border-b-[1px] active:border-l-[1px] active:translate-y-1 ${
+                  className={`w-full py-3.5 px-4 rounded-xl font-headline font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer border-l-[3px] border-b-[4px] active:translate-y-0.5 active:border-b-[1px] active:border-l-[1px] ${
                     isSelected
-                      ? 'bg-[#0071E3] hover:bg-[#0077ED] border-l-[#0060bf] border-b-[#005bb5] text-white shadow-md'
+                      ? 'bg-[#0071E3] text-white border-l-[#005bb5] border-b-[#004a94] shadow-md shadow-blue-900/40'
                       : darkMode
-                        ? 'bg-neutral-800 hover:bg-neutral-700 border-l-neutral-900 border-b-neutral-950 text-white shadow-sm'
-                        : 'bg-neutral-100 hover:bg-neutral-200 border-l-neutral-200 border-b-neutral-300 text-neutral-900 shadow-sm'
+                        ? 'bg-neutral-800 text-white border-l-neutral-900 border-b-neutral-950 hover:bg-neutral-700'
+                        : 'bg-neutral-100 text-neutral-900 border-l-neutral-300 border-b-neutral-400 hover:bg-neutral-200'
                   }`}
                 >
-                  <span>{isSelected ? (lang === 'pt' ? 'Plano Selecionado ✓' : 'Selected Plan ✓') : (lang === 'pt' ? 'Selecionar Plano' : 'Select Plan')}</span>
+                  <span>{isSelected ? (lang === 'pt' ? 'Selecionado' : 'Selected') : (lang === 'pt' ? 'Escolher Plano' : 'Choose Plan')}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </motion.div>
@@ -251,7 +251,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className={`p-8 sm:p-12 rounded-[32px] border transition-all duration-300 ${
+            className={`p-6 sm:p-8 md:p-12 rounded-[28px] sm:rounded-[32px] border transition-all duration-300 ${
               darkMode 
                 ? 'bg-neutral-900/95 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_15px_35px_rgba(0,0,0,0.6)] text-white backdrop-blur-xl' 
                 : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_15px_35px_rgba(0,0,0,0.08)] text-neutral-900 backdrop-blur-xl'
