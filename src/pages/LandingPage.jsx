@@ -1129,7 +1129,7 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className={`font-headline text-[34px] xs:text-[45px] sm:text-[57px] md:text-[68px] lg:text-[87px] xl:text-[90px] font-black uppercase leading-[1.0] sm:leading-[0.95] tracking-[-0.03em] text-center lg:text-left break-words ${
+                  className={`font-headline text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[92px] xl:text-[95px] font-black uppercase leading-[0.98] sm:leading-[0.94] tracking-[-0.03em] text-center lg:text-left break-words ${
                     darkMode ? 'text-white' : 'text-neutral-900'
                   }`}
                 >
@@ -1222,47 +1222,87 @@ export default function LandingPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="lg:col-span-5 relative flex justify-center w-full"
+                className="lg:col-span-5 relative flex flex-col items-center justify-center w-full"
               >
+                {/* TICKER DE PARCEIROS EM TELEMÓVEL (APENAS EM MOBILE / TABLET - lg:hidden) */}
+                <div className="block lg:hidden mb-6 w-full">
+                  <div className="mb-2 text-center">
+                    <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] font-black">
+                      {lang === 'pt' ? 'EMPRESAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES WE HAVE WORKED WITH'}
+                    </p>
+                  </div>
+                  <div className={`w-full overflow-hidden border-y py-4 rounded-2xl relative ${
+                    darkMode ? 'border-neutral-800/80 bg-neutral-900/40' : 'border-neutral-200/80 bg-neutral-100/60'
+                  }`}
+                  style={{
+                    maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+                    WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)'
+                  }}>
+                    <motion.div 
+                      animate={{ x: ["0%", "-50%"] }}
+                      transition={{ repeat: Infinity, ease: "linear", duration: 18 }}
+                      className={`flex items-center gap-10 whitespace-nowrap w-max opacity-90 text-[11px] font-headline font-black uppercase tracking-[0.2em] ${
+                        darkMode ? 'text-neutral-300' : 'text-neutral-700'
+                      }`}
+                    >
+                      {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
+                        <React.Fragment key={i}>
+                          <span className="flex items-center gap-3">
+                            {b.logo ? (
+                              <img src={b.logo} alt={b.name} className="h-6 w-auto object-contain max-w-[80px]" />
+                            ) : (
+                              <MaterialIcon name={b.icon} className="text-primary text-base" />
+                            )}
+                            <span>{b.name}</span>
+                          </span>
+                          <span className="opacity-30">•</span>
+                        </React.Fragment>
+                      ))}
+                    </motion.div>
+                  </div>
+                </div>
+
                 <InstagramMockupCard darkMode={darkMode} lang={lang} />
               </motion.div>
 
             </div>
 
-            {/* MARQUEE TICKER DOS CLIENTES HERO (ANIMADO CONTINUO COM FADE LATERAL) */}
-            <div className="mb-3 text-center">
-              <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] font-black">
-                {lang === 'pt' ? 'EMPRESAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES WE HAVE WORKED WITH'}
-              </p>
-            </div>
-            <div className={`w-full overflow-hidden border-y py-4 rounded-2xl relative ${
-              darkMode ? 'border-neutral-800/80 bg-neutral-900/40' : 'border-neutral-200/80 bg-neutral-100/60'
-            }`}
-            style={{
-              maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)'
-            }}>
-              <motion.div 
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ repeat: Infinity, ease: "linear", duration: 18 }}
-                className={`flex items-center gap-10 whitespace-nowrap w-max opacity-90 text-[11px] font-headline font-black uppercase tracking-[0.2em] ${
-                  darkMode ? 'text-neutral-300' : 'text-neutral-700'
-                }`}
-              >
-                {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
-                  <React.Fragment key={i}>
-                    <span className="flex items-center gap-3">
-                      {b.logo ? (
-                        <img src={b.logo} alt={b.name} className="h-6 w-auto object-contain max-w-[80px]" />
-                      ) : (
-                        <MaterialIcon name={b.icon} className="text-primary text-base" />
-                      )}
-                      <span>{b.name}</span>
-                    </span>
-                    <span className="opacity-30">•</span>
-                  </React.Fragment>
-                ))}
-              </motion.div>
+            {/* MARQUEE TICKER DOS CLIENTES HERO EM DESKTOP (APENAS EM DESKTOP - hidden lg:block) */}
+            <div className="hidden lg:block w-full">
+              <div className="mb-3 text-center">
+                <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] font-black">
+                  {lang === 'pt' ? 'EMPRESAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES WE HAVE WORKED WITH'}
+                </p>
+              </div>
+              <div className={`w-full overflow-hidden border-y py-4 rounded-2xl relative ${
+                darkMode ? 'border-neutral-800/80 bg-neutral-900/40' : 'border-neutral-200/80 bg-neutral-100/60'
+              }`}
+              style={{
+                maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)'
+              }}>
+                <motion.div 
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ repeat: Infinity, ease: "linear", duration: 18 }}
+                  className={`flex items-center gap-10 whitespace-nowrap w-max opacity-90 text-[11px] font-headline font-black uppercase tracking-[0.2em] ${
+                    darkMode ? 'text-neutral-300' : 'text-neutral-700'
+                  }`}
+                >
+                  {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
+                    <React.Fragment key={i}>
+                      <span className="flex items-center gap-3">
+                        {b.logo ? (
+                          <img src={b.logo} alt={b.name} className="h-6 w-auto object-contain max-w-[80px]" />
+                        ) : (
+                          <MaterialIcon name={b.icon} className="text-primary text-base" />
+                        )}
+                        <span>{b.name}</span>
+                      </span>
+                      <span className="opacity-30">•</span>
+                    </React.Fragment>
+                  ))}
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
