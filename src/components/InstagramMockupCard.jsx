@@ -79,37 +79,56 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
             {/* Header: Avatar + Profile Stats */}
             <div className="flex items-center gap-5 mb-4">
               {/* Profile Avatar matching Instagram @pd_agency_digital */}
-              <div className="relative shrink-0">
-                <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden bg-black border-2 border-neutral-700/60 shadow-lg">
+              <a 
+                href="https://www.instagram.com/pd_agency_digital/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="relative shrink-0 group/avatar cursor-pointer"
+                title="Ver perfil no Instagram"
+              >
+                <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden bg-black border-2 border-neutral-700/60 shadow-lg group-hover/avatar:border-primary transition-colors">
                   <img
                     src="/assets/pd-agency-logo.png"
-                    alt="P&D Agency"
-                    className="w-full h-full object-cover"
+                    alt="P&D Agency @pd_agency_digital"
+                    className="w-full h-full object-cover group-hover/avatar:scale-105 transition-transform duration-300"
                   />
                 </div>
-              </div>
+              </a>
 
               {/* Stats Bar */}
-              <div className="flex-1 flex justify-around text-center">
-                <div>
+              <a 
+                href="https://www.instagram.com/pd_agency_digital/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex-1 flex justify-around text-center cursor-pointer group/stats"
+                title="Ver estatísticas no Instagram"
+              >
+                <div className="group-hover/stats:scale-105 transition-transform">
                   <span className={`block text-base sm:text-lg font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>36</span>
                   <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>posts</span>
                 </div>
-                <div>
+                <div className="group-hover/stats:scale-105 transition-transform">
                   <span className={`block text-base sm:text-lg font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>280</span>
                   <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>seguidores</span>
                 </div>
-                <div>
+                <div className="group-hover/stats:scale-105 transition-transform">
                   <span className={`block text-base sm:text-lg font-black font-headline ${darkMode ? 'text-white' : 'text-neutral-900'}`}>44</span>
                   <span className={`text-[10px] uppercase font-bold tracking-wider ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>seguindo</span>
                 </div>
-              </div>
+              </a>
             </div>
 
             {/* Profile Bio Details */}
             <div className="space-y-1 text-left mb-4">
               <div className="flex items-center gap-1.5">
-                <span className={`font-headline font-black text-sm ${darkMode ? 'text-white' : 'text-neutral-900'}`}>P&D Agency</span>
+                <a 
+                  href="https://www.instagram.com/pd_agency_digital/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={`font-headline font-black text-sm hover:text-primary transition-colors ${darkMode ? 'text-white' : 'text-neutral-900'}`}
+                >
+                  P&D Agency (@pd_agency_digital)
+                </a>
                 <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 font-bold border border-blue-500/20">Agência Digital</span>
               </div>
               <p className={`text-[11px] font-medium ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>Empreendedor(a)</p>
@@ -131,24 +150,25 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
               </div>
             </div>
 
-            {/* Action Buttons (Exatamente como o screenshot do utilizador) */}
+            {/* Action Buttons */}
             <div className="flex items-center gap-2 mb-4">
               <a
                 href="https://www.instagram.com/pd_agency_digital/"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setIsFollowing(!isFollowing)}
                 className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer flex items-center justify-center gap-1.5 border-l-[3px] border-b-[4px] active:translate-y-0.5 active:border-b-[1px] active:border-l-[1px] shadow-md ${
                   isFollowing
                     ? darkMode ? 'bg-neutral-800 hover:bg-neutral-700 border-l-neutral-900 border-b-neutral-950 text-white' : 'bg-[#efefef] hover:bg-[#dbdbdb] border-l-neutral-300 border-b-neutral-400 text-neutral-900'
                     : 'bg-[#386df2] hover:bg-[#2c5ad6] border-l-[#2552c7] border-b-[#1e44a8] text-white'
                 }`}
               >
-                <span>{isFollowing ? (lang === 'pt' ? 'Seguindo ∨' : 'Following ∨') : (lang === 'pt' ? 'Seguir' : 'Follow')}</span>
+                <span>{isFollowing ? (lang === 'pt' ? 'Seguindo ∨' : 'Following ∨') : (lang === 'pt' ? 'Seguir no Instagram' : 'Follow on Instagram')}</span>
               </a>
 
               <a
-                href="#contacto"
+                href="https://www.instagram.com/pd_agency_digital/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer border-l-[3px] border-b-[4px] active:translate-y-0.5 active:border-b-[1px] active:border-l-[1px] ${
                   darkMode ? 'bg-neutral-800/90 hover:bg-neutral-700 border-l-neutral-900 border-b-neutral-950 text-white' : 'bg-[#f0f2f5] hover:bg-[#e4e6eb] border-l-neutral-300 border-b-neutral-400 text-neutral-900'
                 }`}
@@ -160,7 +180,7 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
                 href="https://www.instagram.com/pd_agency_digital/"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Conectar"
+                title="Ver Perfil Oficial no Instagram"
                 className={`p-2.5 rounded-xl text-xs transition-colors flex items-center justify-center border-l-[3px] border-b-[4px] active:translate-y-0.5 active:border-b-[1px] active:border-l-[1px] ${
                   darkMode ? 'bg-neutral-800/90 hover:bg-neutral-700 border-l-neutral-900 border-b-neutral-950 text-white' : 'bg-[#f0f2f5] hover:bg-[#e4e6eb] border-l-neutral-300 border-b-neutral-400 text-neutral-900'
                 }`}
@@ -174,7 +194,13 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
               darkMode ? 'border-neutral-800/80' : 'border-neutral-100'
             }`}>
               {/* Highlight 1: Clientes */}
-              <div className="flex flex-col items-center gap-1 shrink-0 cursor-pointer group">
+              <a 
+                href="https://www.instagram.com/pd_agency_digital/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-1 shrink-0 cursor-pointer group"
+                title="Ver destaques no Instagram"
+              >
                 <div className={`w-14 h-14 rounded-full p-[2px] border flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform ${
                   darkMode ? 'border-neutral-700 bg-neutral-900' : 'border-neutral-300 bg-neutral-100'
                 }`}>
@@ -183,10 +209,16 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
                   </div>
                 </div>
                 <span className={`text-[10px] font-bold ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>Clientes</span>
-              </div>
+              </a>
 
               {/* Highlight 2: Serviços */}
-              <div className="flex flex-col items-center gap-1 shrink-0 cursor-pointer group">
+              <a 
+                href="https://www.instagram.com/pd_agency_digital/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-1 shrink-0 cursor-pointer group"
+                title="Ver destaques no Instagram"
+              >
                 <div className={`w-14 h-14 rounded-full p-[2px] border flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform ${
                   darkMode ? 'border-neutral-700 bg-neutral-900' : 'border-neutral-300 bg-neutral-100'
                 }`}>
@@ -195,16 +227,17 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
                   </div>
                 </div>
                 <span className={`text-[10px] font-bold ${darkMode ? 'text-neutral-300' : 'text-neutral-700'}`}>serviços</span>
-              </div>
+              </a>
             </div>
 
             {/* Grid Tabs */}
             <div className={`flex text-center text-xs font-bold uppercase tracking-wider border-b ${
               darkMode ? 'border-neutral-800/80 text-neutral-400' : 'border-neutral-100 text-neutral-500'
             }`}>
-              <button
-                type="button"
-                onClick={() => setActiveTab('posts')}
+              <a
+                href="https://www.instagram.com/pd_agency_digital/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`flex-1 py-2.5 flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                   activeTab === 'posts'
                     ? darkMode ? 'border-b-2 border-primary text-primary font-black' : 'border-b-2 border-primary text-primary font-black'
@@ -213,65 +246,72 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
               >
                 <Grid className="w-3.5 h-3.5" />
                 <span className="text-[10px]">Posts</span>
-              </button>
+              </a>
 
-              <button
-                type="button"
-                onClick={() => setActiveTab('reels')}
-                className={`flex-1 py-2.5 flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
-                  activeTab === 'reels'
-                    ? darkMode ? 'border-b-2 border-primary text-primary font-black' : 'border-b-2 border-primary text-primary font-black'
-                    : 'hover:text-primary'
-                }`}
+              <a
+                href="https://www.instagram.com/pd_agency_digital/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex-1 py-2.5 flex items-center justify-center gap-1.5 transition-colors cursor-pointer hover:text-primary`}
               >
                 <Film className="w-3.5 h-3.5" />
                 <span className="text-[10px]">Reels</span>
-              </button>
+              </a>
 
-              <button
-                type="button"
-                onClick={() => setActiveTab('tagged')}
-                className={`flex-1 py-2.5 flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
-                  activeTab === 'tagged'
-                    ? darkMode ? 'border-b-2 border-primary text-primary font-black' : 'border-b-2 border-primary text-primary font-black'
-                    : 'hover:text-primary'
-                }`}
+              <a
+                href="https://www.instagram.com/pd_agency_digital/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex-1 py-2.5 flex items-center justify-center gap-1.5 transition-colors cursor-pointer hover:text-primary`}
               >
                 <User className="w-3.5 h-3.5" />
                 <span className="text-[10px]">Marcadas</span>
-              </button>
+              </a>
             </div>
 
             {/* 3 Real Posts Grid */}
             <div className="grid grid-cols-3 gap-1.5 pt-2">
               {POSTS.map((post) => (
-                <div
+                <a
                   key={post.id}
-                  onClick={() => setSelectedPost(post)}
+                  href="https://www.instagram.com/pd_agency_digital/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="relative group aspect-square rounded-lg overflow-hidden bg-neutral-900 cursor-pointer shadow-xs border border-neutral-800/40"
+                  title="Ver publicação no Instagram @pd_agency_digital"
                 >
                   <img
                     src={post.image}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  {/* Hover Overlay with Likes/Comments */}
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 text-white text-[11px] font-bold z-10">
-                    <span className="flex items-center gap-1">
-                      <Heart className="w-3.5 h-3.5 fill-white" /> {post.likes}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MessageCircle className="w-3.5 h-3.5 fill-white" /> {post.comments}
+                  {/* Hover Overlay with Likes/Comments & Instagram Icon */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 text-white text-[11px] font-bold z-10 p-2 text-center">
+                    <div className="flex items-center gap-2">
+                      <span className="flex items-center gap-1">
+                        <Heart className="w-3.5 h-3.5 fill-white" /> {post.likes}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MessageCircle className="w-3.5 h-3.5 fill-white" /> {post.comments}
+                      </span>
+                    </div>
+                    <span className="text-[9px] uppercase tracking-wider text-sky-300 flex items-center gap-1">
+                      Ver no IG <ExternalLink className="w-2.5 h-2.5" />
                     </span>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
 
             {/* Card Footer Hint */}
-            <p className={`text-[10px] text-center mt-3 font-medium italic ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-              {lang === 'pt' ? 'Clique em qualquer post para ver detalhes' : 'Click on any post to preview'}
-            </p>
+            <a 
+              href="https://www.instagram.com/pd_agency_digital/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`block text-[10px] text-center mt-3 font-semibold hover:text-primary transition-colors ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}
+            >
+              {lang === 'pt' ? 'Clique para visitar @pd_agency_digital no Instagram ↗' : 'Click to visit @pd_agency_digital on Instagram ↗'}
+            </a>
           </div>
         </div>
       </div>
