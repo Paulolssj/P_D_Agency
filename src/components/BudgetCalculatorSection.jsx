@@ -251,13 +251,15 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className={`p-8 sm:p-12 rounded-[32px] border shadow-2xl backdrop-blur-xl ${
-              darkMode ? 'bg-neutral-900/90 border-neutral-800 text-white' : 'bg-white border-neutral-200 text-neutral-900'
+            className={`p-8 sm:p-12 rounded-[32px] border transition-all duration-300 ${
+              darkMode 
+                ? 'bg-neutral-900/95 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_15px_35px_rgba(0,0,0,0.6)] text-white backdrop-blur-xl' 
+                : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_15px_35px_rgba(0,0,0,0.08)] text-neutral-900 backdrop-blur-xl'
             }`}
           >
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-neutral-500/20">
               <div className="flex items-center gap-3.5">
-                <div className={`w-10 h-10 rounded-xl border flex items-center justify-center shrink-0 ${currentPkg.iconBg} ${currentPkg.iconColor}`}>
+                <div className={`w-10 h-10 rounded-xl border border-l-2 border-b-2 flex items-center justify-center shrink-0 ${currentPkg.iconBg} ${currentPkg.iconColor}`}>
                   <CurrentIcon className="w-5 h-5" />
                 </div>
                 <div>
@@ -375,7 +377,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                   href={buildWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:flex-1 py-4 px-6 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-headline font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-900/30 active:scale-98 hover:-translate-y-0.5 cursor-pointer text-center"
+                  className="w-full sm:flex-1 py-4 px-6 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-headline font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-900/30 border-l-[3px] border-b-[4px] border-l-emerald-700 border-b-emerald-800 active:border-b-[1px] active:border-l-[1px] active:translate-y-0.5 cursor-pointer text-center"
                 >
                   <PhoneCall className="w-4 h-4" />
                   <span>{lang === 'pt' ? 'Pedir Proposta via WhatsApp' : 'Request via WhatsApp'}</span>
@@ -384,7 +386,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                 {/* Email Direct Dispatch */}
                 <button
                   type="submit"
-                  className="w-full sm:flex-1 py-4 px-6 bg-[#0071E3] hover:bg-[#0077ED] text-white rounded-2xl font-headline font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg shadow-blue-900/30 active:scale-98 hover:-translate-y-0.5 cursor-pointer text-center"
+                  className="w-full sm:flex-1 py-4 px-6 bg-[#0071E3] hover:bg-[#0077ED] text-white rounded-2xl font-headline font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg shadow-blue-900/30 border-l-[3px] border-b-[4px] border-l-[#005bb5] border-b-[#004a94] active:border-b-[1px] active:border-l-[1px] active:translate-y-0.5 cursor-pointer text-center"
                 >
                   <Send className="w-4 h-4" />
                   <span>{lang === 'pt' ? 'Enviar Pedido por E-mail' : 'Send Request via Email'}</span>

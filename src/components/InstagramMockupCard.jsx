@@ -52,8 +52,8 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
         {/* Card Container */}
         <div className={`relative rounded-[28px] border shadow-2xl overflow-hidden transition-colors duration-500 ${
           darkMode 
-            ? 'bg-[#0B111E]/95 border-neutral-800 text-white backdrop-blur-2xl' 
-            : 'bg-white/95 border-neutral-200 text-neutral-900 backdrop-blur-2xl'
+            ? 'bg-[#0B111E]/95 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_12px_32px_rgba(0,0,0,0.6)] text-white backdrop-blur-2xl' 
+            : 'bg-white/95 border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_12px_32px_rgba(0,0,0,0.08)] text-neutral-900 backdrop-blur-2xl'
         }`}>
           
           {/* Mockup Top Status Bar (Subtle IG Aesthetic) */}
@@ -138,10 +138,10 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsFollowing(!isFollowing)}
-                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer flex items-center justify-center gap-1.5 shadow-md ${
+                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer flex items-center justify-center gap-1.5 border-l-[3px] border-b-[4px] active:translate-y-0.5 active:border-b-[1px] active:border-l-[1px] shadow-md ${
                   isFollowing
-                    ? darkMode ? 'bg-neutral-800 hover:bg-neutral-700 text-white' : 'bg-[#efefef] hover:bg-[#dbdbdb] text-neutral-900'
-                    : 'bg-[#386df2] hover:bg-[#2c5ad6] text-white'
+                    ? darkMode ? 'bg-neutral-800 hover:bg-neutral-700 border-l-neutral-900 border-b-neutral-950 text-white' : 'bg-[#efefef] hover:bg-[#dbdbdb] border-l-neutral-300 border-b-neutral-400 text-neutral-900'
+                    : 'bg-[#386df2] hover:bg-[#2c5ad6] border-l-[#2552c7] border-b-[#1e44a8] text-white'
                 }`}
               >
                 <span>{isFollowing ? (lang === 'pt' ? 'Seguindo ∨' : 'Following ∨') : (lang === 'pt' ? 'Seguir' : 'Follow')}</span>
@@ -149,8 +149,8 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
 
               <a
                 href="#contacto"
-                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer ${
-                  darkMode ? 'bg-neutral-800/90 hover:bg-neutral-700 text-white' : 'bg-[#f0f2f5] hover:bg-[#e4e6eb] text-neutral-900'
+                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold font-headline transition-all text-center cursor-pointer border-l-[3px] border-b-[4px] active:translate-y-0.5 active:border-b-[1px] active:border-l-[1px] ${
+                  darkMode ? 'bg-neutral-800/90 hover:bg-neutral-700 border-l-neutral-900 border-b-neutral-950 text-white' : 'bg-[#f0f2f5] hover:bg-[#e4e6eb] border-l-neutral-300 border-b-neutral-400 text-neutral-900'
                 }`}
               >
                 {lang === 'pt' ? 'Enviar mensagem' : 'Message'}
@@ -161,8 +161,8 @@ export default function InstagramMockupCard({ darkMode = true, lang = 'pt' }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Conectar"
-                className={`p-2.5 rounded-xl text-xs transition-colors flex items-center justify-center ${
-                  darkMode ? 'bg-neutral-800/90 hover:bg-neutral-700 text-white' : 'bg-[#f0f2f5] hover:bg-[#e4e6eb] text-neutral-900'
+                className={`p-2.5 rounded-xl text-xs transition-colors flex items-center justify-center border-l-[3px] border-b-[4px] active:translate-y-0.5 active:border-b-[1px] active:border-l-[1px] ${
+                  darkMode ? 'bg-neutral-800/90 hover:bg-neutral-700 border-l-neutral-900 border-b-neutral-950 text-white' : 'bg-[#f0f2f5] hover:bg-[#e4e6eb] border-l-neutral-300 border-b-neutral-400 text-neutral-900'
                 }`}
               >
                 <UserPlus className="w-4 h-4" />

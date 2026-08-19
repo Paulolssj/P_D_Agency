@@ -979,10 +979,10 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between transition-all duration-500 shadow-xl group ${
+                  className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between transition-all duration-300 group ${
                     darkMode 
-                      ? 'bg-neutral-900/90 border-neutral-800 hover:border-primary/50' 
-                      : 'bg-white border-neutral-200 hover:border-primary/50'
+                      ? 'bg-neutral-900/90 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)] hover:border-primary/50' 
+                      : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)] hover:border-primary/50'
                   }`}
                 >
                   <div>
@@ -999,8 +999,10 @@ export default function LandingPage() {
             </div>
 
             {/* Banner Destaque */}
-            <div className={`border rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto ${
-              darkMode ? 'bg-primary/10 border-primary/30 text-white' : 'bg-primary/5 border-primary/20 text-neutral-900'
+            <div className={`border rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto border-l-[6px] border-b-[8px] shadow-xl ${
+              darkMode 
+                ? 'bg-primary/10 border-primary/30 border-l-blue-900 border-b-blue-950 text-white shadow-blue-950/40' 
+                : 'bg-primary/5 border-primary/20 border-l-blue-200 border-b-blue-300 text-neutral-900 shadow-blue-100'
             }`}>
               <p className="text-lg md:text-2xl font-headline font-bold leading-relaxed tracking-tight">
                 {t.about.quote}
@@ -1031,12 +1033,14 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <motion.div 
                 whileHover={{ y: -6 }}
-                className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between group transition-all ${
-                  darkMode ? 'bg-neutral-900/80 border-neutral-800 hover:border-primary/40' : 'bg-white border-neutral-200 hover:border-primary/40 shadow-sm'
+                className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between group transition-all duration-300 ${
+                  darkMode 
+                    ? 'bg-neutral-900/80 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)] hover:border-primary/40' 
+                    : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)] hover:border-primary/40'
                 }`}
               >
                 <div>
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 border-l-2 border-b-2 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors shadow-sm">
                     <MaterialIcon name="web" className="text-3xl" />
                   </div>
                   <h3 className={`font-headline text-3xl font-black uppercase mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>{t.services.card1_title}</h3>
@@ -1049,19 +1053,21 @@ export default function LandingPage() {
                     <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card1_li3}</li>
                   </ul>
                 </div>
-                <a href="#contacto" className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all text-center inline-block">
+                <a href="#contacto" className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all text-center inline-block border-l-[3px] border-b-[4px] border-l-blue-900 border-b-blue-950 active:translate-y-1">
                   {t.services.btnMore}
                 </a>
               </motion.div>
 
               <motion.div 
                 whileHover={{ y: -6 }}
-                className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between group transition-all ${
-                  darkMode ? 'bg-neutral-900/80 border-neutral-800 hover:border-primary/40' : 'bg-white border-neutral-200 hover:border-primary/40 shadow-sm'
+                className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between group transition-all duration-300 ${
+                  darkMode 
+                    ? 'bg-neutral-900/80 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)] hover:border-primary/40' 
+                    : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)] hover:border-primary/40'
                 }`}
               >
                 <div>
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 border-l-2 border-b-2 flex items-center justify-center mb-8 group-hover:bg-primary text-primary group-hover:text-white transition-colors shadow-sm">
                     <MaterialIcon name="brush" className="text-3xl" />
                   </div>
                   <h3 className={`font-headline text-3xl font-black uppercase mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-neutral-900'}`}>{t.services.card2_title}</h3>
@@ -1074,7 +1080,7 @@ export default function LandingPage() {
                     <li className="flex items-center gap-2"><MaterialIcon name="check_circle" className="text-primary text-base" /> {t.services.card2_li3}</li>
                   </ul>
                 </div>
-                <a href="#contacto" className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all text-center inline-block">
+                <a href="#contacto" className="w-full py-4 rounded-xl border border-primary/40 text-primary font-headline font-black text-xs tracking-widest uppercase hover:bg-primary hover:text-white transition-all text-center inline-block border-l-[3px] border-b-[4px] border-l-blue-900 border-b-blue-950 active:translate-y-1">
                   {t.services.btnMore}
                 </a>
               </motion.div>
@@ -1201,10 +1207,10 @@ export default function LandingPage() {
                   whileHover={{ y: -8 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className={`rounded-[28px] overflow-hidden group cursor-pointer block border shadow-xl transition-all duration-500 flex flex-col justify-between ${
+                  className={`rounded-[28px] overflow-hidden group cursor-pointer block border shadow-xl transition-all duration-300 flex flex-col justify-between ${
                     darkMode 
-                      ? 'bg-neutral-900/90 border-neutral-800 hover:border-primary/50 hover:shadow-primary/10' 
-                      : 'bg-white border-neutral-200 hover:border-primary/50 hover:shadow-2xl'
+                      ? 'bg-neutral-900/90 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)] hover:border-primary/50' 
+                      : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)] hover:border-primary/50'
                   }`}
                 >
                   {/* Mockup Window Header */}
@@ -1313,7 +1319,9 @@ export default function LandingPage() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.12 }}
                   className={`p-8 md:p-9 rounded-3xl border flex flex-col justify-between shadow-xl relative group transition-all duration-300 ${
-                    darkMode ? 'bg-neutral-900/90 border-neutral-800 hover:border-primary/50 hover:shadow-primary/10' : 'bg-white border-neutral-200 hover:border-primary/50 hover:shadow-primary/5'
+                    darkMode 
+                      ? 'bg-neutral-900/90 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)] hover:border-primary/50' 
+                      : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)] hover:border-primary/50'
                   }`}
                 >
                   <div className="mb-8">
@@ -1420,7 +1428,9 @@ export default function LandingPage() {
               <div className="lg:col-span-5 flex flex-col gap-5">
                 {/* CARTÃO EMAIL */}
                 <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
-                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                  darkMode 
+                    ? 'bg-neutral-900/80 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)]' 
+                    : 'bg-neutral-100/90 border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)]'
                 }`}>
                   <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
                     <MaterialIcon name="mail" className="text-xl" />
@@ -1437,7 +1447,9 @@ export default function LandingPage() {
 
                 {/* CARTÃO WHATSAPP */}
                 <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
-                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                  darkMode 
+                    ? 'bg-neutral-900/80 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)]' 
+                    : 'bg-neutral-100/90 border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)]'
                 }`}>
                   <div className="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center text-white shrink-0">
                     <MaterialIcon name="chat" className="text-xl" />
@@ -1459,7 +1471,9 @@ export default function LandingPage() {
 
                 {/* CARTÃO INSTAGRAM */}
                 <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
-                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                  darkMode 
+                    ? 'bg-neutral-900/80 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)]' 
+                    : 'bg-neutral-100/90 border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)]'
                 }`}>
                   <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
                     <MaterialIcon name="share" className="text-xl" />
@@ -1476,7 +1490,9 @@ export default function LandingPage() {
 
                 {/* CARTÃO LOCALIZAÇÃO */}
                 <div className={`p-6 rounded-3xl border transition-all flex items-center gap-4 ${
-                  darkMode ? 'bg-neutral-900/80 border-neutral-800' : 'bg-neutral-100/90 border-neutral-200'
+                  darkMode 
+                    ? 'bg-neutral-900/80 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)]' 
+                    : 'bg-neutral-100/90 border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)]'
                 }`}>
                   <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shrink-0">
                     <MaterialIcon name="location_on" className="text-xl" />
@@ -1491,7 +1507,9 @@ export default function LandingPage() {
 
                 {/* CARTÃO PROPOSTAS & COLABORAÇÕES */}
                 <div className={`p-8 rounded-3xl border transition-all ${
-                  darkMode ? 'bg-neutral-900/50 border-neutral-800' : 'bg-neutral-100/70 border-neutral-200'
+                  darkMode 
+                    ? 'bg-neutral-900/80 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_10px_25px_rgba(0,0,0,0.5)]' 
+                    : 'bg-neutral-100/90 border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_10px_25px_rgba(0,0,0,0.06)]'
                 }`}>
                   <h4 className={`font-headline font-bold text-lg mb-2 ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
                     {lang === 'pt' ? 'Propostas & Colaborações' : 'Proposals & Collaborations'}
@@ -1507,7 +1525,9 @@ export default function LandingPage() {
               {/* LADO DIREITO: FORMULÁRIO DE CONTACTO DA PÁGINA */}
               <div className="lg:col-span-7">
                 <div className={`p-8 md:p-10 rounded-3xl border shadow-2xl ${
-                  darkMode ? 'bg-neutral-900 border-neutral-800' : 'bg-white border-neutral-200'
+                  darkMode 
+                    ? 'bg-neutral-900 border-neutral-800 border-l-[6px] border-l-[#050A14] border-b-[8px] border-b-[#02050B] shadow-[0_15px_35px_rgba(0,0,0,0.6)]' 
+                    : 'bg-white border-neutral-200 border-l-[6px] border-l-neutral-300 border-b-[8px] border-b-neutral-300 shadow-[0_15px_35px_rgba(0,0,0,0.08)]'
                 }`}>
                   <h3 className={`font-headline text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-neutral-900'}`}>
                     {lang === 'pt' ? 'Envia a tua proposta' : 'Send your proposal'}
