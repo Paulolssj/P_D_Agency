@@ -173,7 +173,7 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
               >
                 {/* Popular Badge */}
                 {pkg.popular && (
-                  <div className="absolute -top-3.5 right-6 bg-[#0071E3] border-b-2 border-b-[#005bb5] text-white px-3.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md">
+                  <div className="absolute -top-3.5 left-6 bg-[#0071E3] border-b-2 border-b-[#005bb5] text-white px-3.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md z-20">
                     {lang === 'pt' ? 'Destaque' : 'Popular'}
                   </div>
                 )}
