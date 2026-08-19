@@ -1129,7 +1129,7 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className={`font-headline text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-[98px] font-black uppercase leading-[0.98] sm:leading-[0.93] tracking-[-0.03em] text-center lg:text-left ${
+                  className={`font-headline text-[34px] xs:text-[45px] sm:text-[57px] md:text-[68px] lg:text-[87px] xl:text-[90px] font-black uppercase leading-[1.0] sm:leading-[0.95] tracking-[-0.03em] text-center lg:text-left break-words ${
                     darkMode ? 'text-white' : 'text-neutral-900'
                   }`}
                 >
