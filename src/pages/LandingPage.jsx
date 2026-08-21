@@ -1110,9 +1110,9 @@ export default function LandingPage() {
         )}
       </header>
 
-      <main className="overflow-x-hidden pt-12 sm:pt-14">
+      <main className="overflow-x-hidden pt-16">
         {/* ── HERO SECTION (ESTILO IARA BENTO + APPLE ELEGANCE) ── */}
-        <section className={`relative min-h-[80vh] flex flex-col justify-center px-4 sm:px-6 pt-3 sm:pt-4 pb-14 overflow-hidden transition-colors duration-500 ${
+        <section className={`relative min-h-[85vh] flex flex-col justify-center px-4 sm:px-6 pt-6 sm:pt-8 pb-16 overflow-hidden transition-colors duration-500 ${
           darkMode ? 'bg-[#050A13]' : 'bg-[#FDFBF7]'
         }`} id="welcome">
           {/* Ambient Lighting (Apple Style Depth) */}
