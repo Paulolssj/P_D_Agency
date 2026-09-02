@@ -47,9 +47,9 @@ export default function TermsPage() {
             <div className="relative flex items-center justify-center">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-blue-600 via-primary to-sky-400 opacity-70 blur-sm group-hover:opacity-100 transition duration-300" />
               <img 
-                src="/assets/pd-logo.png" 
+                src="/assets/pd-agency-logo.png" 
                 alt="P&D Agency" 
-                className="relative h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="relative h-10 w-10 object-contain rounded-xl shadow-md border border-neutral-800 bg-black p-1 transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div className="flex flex-col">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Dialog,
   DialogContent,
@@ -259,6 +260,25 @@ export default function ContactModal({ open, onClose, defaultPackage, lang = 'pt
                 {error}
               </p>
             )}
+
+            {/* Informação de Privacidade RGPD */}
+            <p className="text-[11px] text-neutral-400 leading-relaxed text-left">
+              {isPt ? (
+                <>
+                  Os dados fornecidos serão tratados pela P&D Agency para analisar o seu pedido de projeto e realizar as diligências pré-contratuais solicitadas. Para saber mais sobre como tratamos os seus dados e os seus direitos, consulte a nossa{' '}
+                  <Link to="/politica-privacidade" onClick={onClose} className="text-primary font-bold underline hover:text-white transition-colors">
+                    Política de Privacidade
+                  </Link>.
+                </>
+              ) : (
+                <>
+                  The data provided will be processed by P&D Agency to analyze your project request and perform pre-contractual steps. To learn more about how we process your data and your rights, please read our{' '}
+                  <Link to="/politica-privacidade" onClick={onClose} className="text-primary font-bold underline hover:text-white transition-colors">
+                    Privacy Policy
+                  </Link>.
+                </>
+              )}
+            </p>
 
             <button
               type="submit"

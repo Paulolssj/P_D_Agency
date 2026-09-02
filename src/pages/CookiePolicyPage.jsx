@@ -13,8 +13,8 @@ export default function CookiePolicyPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = lang === 'pt' 
-      ? "Política de Cookies | P&D Agency — Agência Digital & Software"
-      : "Cookie Policy | P&D Agency — Digital Agency & Software";
+      ? "Política de Cookies & Armazenamento | P&D Agency"
+      : "Cookie & Local Storage Policy | P&D Agency";
   }, [lang]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function CookiePolicyPage() {
   };
 
   const resetCookies = () => {
-    localStorage.removeItem("pdagency_cookie_consent");
+    localStorage.removeItem("pdagency_privacy_notice");
     window.location.reload();
   };
 
@@ -52,260 +52,189 @@ export default function CookiePolicyPage() {
             <div className="relative flex items-center justify-center">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-blue-600 via-primary to-sky-400 opacity-70 blur-sm group-hover:opacity-100 transition duration-300" />
               <img 
-                src="/assets/pd-logo.png" 
+                src="/assets/pd-agency-logo.png" 
                 alt="P&D Agency" 
-                className="relative h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="relative h-10 w-10 object-contain rounded-xl shadow-md border border-neutral-800 bg-black p-1 transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-headline font-black tracking-tight text-base sm:text-lg uppercase leading-none">
-                P&D <span className="text-[#0071E3] dark:text-[#3B82F6]">AGENCY</span>
+              <span className="font-headline font-black text-lg tracking-tight uppercase leading-none">
+                P&D Agency
               </span>
-              <span className={`text-[9px] uppercase tracking-[0.25em] font-bold ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-                Digital & Software
+              <span className="text-[10px] text-blue-400 font-mono tracking-widest uppercase">
+                Digital & Web
               </span>
             </div>
           </Link>
 
-          <div className="flex items-center gap-3 sm:gap-4">
-            <Link 
-              to="/" 
-              className={`px-4 py-2 rounded-full border text-xs font-bold font-headline uppercase tracking-wider transition-all flex items-center gap-2 ${
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                 darkMode 
-                  ? 'bg-neutral-900 border-neutral-700 text-white hover:border-[#0071E3] hover:text-[#3B82F6]' 
-                  : 'bg-white border-neutral-300 text-neutral-900 hover:border-[#0071E3] hover:text-[#0071E3] shadow-sm'
+                  ? 'bg-neutral-900 border-neutral-800 text-neutral-300 hover:text-white' 
+                  : 'bg-white border-neutral-200 text-neutral-600 hover:text-neutral-900 shadow-sm'
+              }`}
+              aria-label="Alternar Tema"
+            >
+              {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-neutral-700" />}
+            </button>
+            <Link
+              to="/"
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold font-headline uppercase tracking-wider transition-all ${
+                darkMode
+                  ? 'bg-neutral-900 border border-neutral-800 text-white hover:bg-neutral-800'
+                  : 'bg-white border border-neutral-200 text-neutral-900 hover:bg-neutral-50 shadow-sm'
               }`}
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>{lang === 'pt' ? 'Voltar ao Início' : 'Back to Home'}</span>
+              <span>Voltar</span>
             </Link>
-
-            <button
-              onClick={toggleTheme}
-              title={darkMode ? "Modo Claro" : "Modo Escuro"}
-              className={`p-2.5 rounded-full border transition-all flex items-center justify-center cursor-pointer ${
-                darkMode ? 'bg-neutral-900 border-neutral-700 text-amber-400 hover:bg-neutral-800' : 'bg-white border-neutral-300 text-neutral-800 hover:bg-neutral-100 shadow-sm'
-              }`}
-            >
-              {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
           </div>
         </div>
       </header>
 
-      {/* ── CONTEÚDO PRINCIPAL DA POLÍTICA DE COOKIES ── */}
-      <main className="pt-32 pb-24 relative overflow-hidden">
-        {/* Ambient Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#0071E3]/10 rounded-full blur-[140px] pointer-events-none" />
-
-        <div className="container max-w-4xl mx-auto px-6 relative z-10">
-          
-          {/* Breadcrumb */}
-          <div className="mb-8">
-            <Link 
-              to="/" 
-              className={`inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold transition-colors ${
-                darkMode ? 'text-neutral-400 hover:text-[#3B82F6]' : 'text-neutral-500 hover:text-[#0071E3]'
-              }`}
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Início / Política de Cookies</span>
-            </Link>
+      {/* ── CONTEÚDO PRINCIPAL ── */}
+      <main className="container max-w-4xl mx-auto px-6 pt-32 pb-24">
+        
+        {/* Header da Política */}
+        <div className={`p-8 md:p-12 rounded-3xl border mb-12 relative overflow-hidden transition-all duration-300 ${
+          darkMode ? 'bg-neutral-900/60 border-neutral-800/80' : 'bg-white border-neutral-200/80 shadow-sm'
+        }`}>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider mb-4 border bg-blue-500/10 border-blue-500/20 text-blue-400">
+            <Cookie className="w-3.5 h-3.5" />
+            <span>Lei n.º 41/2004 — Privacidade e Comunicações Eletrónicas (ePrivacy) & RGPD</span>
           </div>
 
-          {/* Header Card */}
-          <div className={`rounded-[32px] p-8 md:p-12 border border-l-[8px] border-l-[#0071E3] shadow-2xl mb-12 relative overflow-hidden backdrop-blur-xl transition-colors duration-300 ${
-            darkMode 
-              ? 'bg-[#0A101D] border-neutral-800/90 shadow-[0_20px_50px_rgba(0,0,0,0.5)]' 
-              : 'bg-white border-neutral-200 shadow-[0_20px_50px_rgba(0,0,0,0.06)]'
+          <h1 className="text-3xl md:text-5xl font-headline font-black uppercase tracking-tight mb-4">
+            Política de Cookies & Armazenamento Local
+          </h1>
+
+          <p className={`text-sm md:text-base leading-relaxed max-w-2xl font-light ${
+            darkMode ? 'text-neutral-300' : 'text-neutral-600'
           }`}>
-            <div className="inline-flex items-center gap-2 bg-[#0071E3]/10 text-[#0071E3] dark:text-[#3B82F6] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 border border-[#0071E3]/20">
-              <Cookie className="w-4 h-4" />
-              <span>Diretiva de Privacidade e Comunicações Eletrónicas</span>
+            Em conformidade com a <strong>Lei n.º 41/2004</strong> (na sua redação atual) e com o <strong>Regulamento (UE) 2016/679 (RGPD)</strong>, este documento esclarece de forma transparente como utilizamos tecnologias de armazenamento local estritamente necessárias para a estabilidade, preferências visuais e navegação no website da <strong>P&D Agency</strong>.
+          </p>
+
+          <div className={`mt-6 pt-6 border-t flex flex-wrap gap-4 text-xs ${
+            darkMode ? 'border-neutral-800 text-neutral-400' : 'border-neutral-100 text-neutral-500'
+          }`}>
+            <span><strong>Última atualização:</strong> Agosto de 2026</span>
+            <span>•</span>
+            <span><strong>Domínio:</strong> pdagencydigital.com</span>
+          </div>
+        </div>
+
+        {/* Secções */}
+        <div className="space-y-8">
+          
+          {/* 1. O que são */}
+          <section className={`p-6 md:p-8 rounded-3xl border transition-all ${
+            darkMode ? 'bg-neutral-900/40 border-neutral-800/80' : 'bg-white border-neutral-200 shadow-sm'
+          }`}>
+            <div className="flex items-center gap-3 mb-4">
+              <Shield className="w-5 h-5 text-blue-500" />
+              <h2 className="text-lg font-headline font-bold uppercase tracking-wide">
+                1. O que são Cookies e Armazenamento Local (LocalStorage)?
+              </h2>
             </div>
-
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-black font-headline uppercase tracking-tight mb-4 ${
-              darkMode ? 'text-white' : 'text-neutral-900'
-            }`}>
-              Política de Cookies
-            </h1>
-
-            <p className={`text-sm md:text-base leading-relaxed font-light ${
+            <p className={`text-xs md:text-sm leading-relaxed mb-3 ${
               darkMode ? 'text-neutral-300' : 'text-neutral-600'
             }`}>
-              O website da <strong>P&D Agency</strong> utiliza cookies e tecnologias de armazenamento local para garantir uma navegação fluida, segura e personalizada, memorizar as suas preferências de tema e idioma e analisar estatísticas anónimas de utilização.
+              Cookies e chaves de armazenamento local (<em>localStorage</em>) são pequenas instruções técnicas guardadas pelo seu navegador no seu dispositivo. Permitem que a aplicação web preserve as suas escolhas durante a navegação (como o modo escuro ou o idioma) sem necessidade de consultar bases de dados externas a cada clique.
             </p>
-
-            <div className={`mt-6 pt-6 border-t flex flex-wrap gap-4 text-xs font-medium ${
-              darkMode ? 'border-neutral-800 text-neutral-400' : 'border-neutral-200 text-neutral-500'
+            <p className={`text-xs md:text-sm leading-relaxed font-semibold ${
+              darkMode ? 'text-blue-300' : 'text-blue-700'
             }`}>
-              <span><strong>Última atualização:</strong> Agosto de 2026</span>
-              <span>•</span>
-              <span><strong>Entidade:</strong> P&D Agency — Agência Digital & Software</span>
+              A P&D Agency não utiliza cookies de publicidade comportamental ou ferramentas de criação de perfis de utilizadores para venda de anúncios.
+            </p>
+          </section>
+
+          {/* 2. Tecnologias Efetivamente Utilizadas */}
+          <section className={`p-6 md:p-8 rounded-3xl border transition-all ${
+            darkMode ? 'bg-neutral-900/40 border-neutral-800/80' : 'bg-white border-neutral-200 shadow-sm'
+          }`}>
+            <div className="flex items-center gap-3 mb-4">
+              <Settings className="w-5 h-5 text-blue-500" />
+              <h2 className="text-lg font-headline font-bold uppercase tracking-wide">
+                2. Tecnologias Efetivamente Utilizadas
+              </h2>
             </div>
-          </div>
 
-          {/* Seções da Política */}
-          <div className="space-y-8 text-sm md:text-base leading-relaxed">
-            
-            {/* 1. O que são */}
-            <section className={`rounded-[28px] p-8 border transition-all ${
-              darkMode ? 'bg-[#0A101D] border-neutral-800/90 text-neutral-300' : 'bg-white border-neutral-200 text-neutral-700 shadow-md'
-            }`}>
-              <div className="flex items-center gap-3 mb-4 font-headline font-black text-xl uppercase">
-                <Shield className="w-5 h-5 text-[#0071E3] dark:text-[#3B82F6]" />
-                <h2 className={darkMode ? 'text-white' : 'text-neutral-900'}>1. O que são Cookies?</h2>
-              </div>
-              <p>
-                Cookies são pequenos ficheiros de texto armazenados no navegador do seu dispositivo (computador, tablet ou smartphone) quando visita um website. Permitem identificar o dispositivo em visitas futuras, manter as suas opções de tema e idioma, e otimizar a velocidade de carregamento da aplicação web.
-              </p>
-            </section>
-
-            {/* 2. Tipos de Cookies */}
-            <section className={`rounded-[28px] p-8 border transition-all ${
-              darkMode ? 'bg-[#0A101D] border-neutral-800/90 text-neutral-300' : 'bg-white border-neutral-200 text-neutral-700 shadow-md'
-            }`}>
-              <div className="flex items-center gap-3 mb-6 font-headline font-black text-xl uppercase">
-                <Settings className="w-5 h-5 text-[#0071E3] dark:text-[#3B82F6]" />
-                <h2 className={darkMode ? 'text-white' : 'text-neutral-900'}>2. Que Tipos de Cookies Utilizamos?</h2>
-              </div>
-              
-              <div className="space-y-6">
-                
-                {/* Cookies Essenciais */}
-                <div className={`border rounded-2xl p-5 ${
-                  darkMode ? 'border-neutral-800 bg-neutral-950/60' : 'border-neutral-200 bg-neutral-50/80'
-                }`}>
-                  <div className="flex items-center gap-2 font-bold text-base mb-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                    <h3 className={darkMode ? 'text-white' : 'text-neutral-900'}>Cookies Estritamente Necessários (Essenciais)</h3>
-                  </div>
-                  <p className={`text-xs md:text-sm mb-4 ${darkMode ? 'text-neutral-300' : 'text-neutral-600'}`}>
-                    Indispensáveis para a navegação básica, funcionamento seguro dos formulários e memorização das escolhas de idioma (PT/EN) e modo de visualização (Dark/Light).
-                  </p>
-                  <div className="overflow-x-auto">
-                    <table className={`w-full text-left text-xs border rounded-xl overflow-hidden ${
-                      darkMode ? 'border-neutral-800 bg-neutral-900 text-neutral-300' : 'border-neutral-200 bg-white text-neutral-700'
-                    }`}>
-                      <thead className={`font-headline font-bold uppercase text-[10px] tracking-wider ${
-                        darkMode ? 'bg-neutral-950 text-neutral-300 border-b border-neutral-800' : 'bg-neutral-100 text-neutral-800 border-b border-neutral-200'
-                      }`}>
-                        <tr>
-                          <th className="p-3">Nome</th>
-                          <th className="p-3">Finalidade</th>
-                          <th className="p-3">Duração</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className={`border-b ${darkMode ? 'border-neutral-800' : 'border-neutral-100'}`}>
-                          <td className="p-3 font-mono text-[#0071E3] dark:text-[#3B82F6] font-bold">pdagency_cookie_consent</td>
-                          <td className="p-3">Armazena o estado de consentimento do banner de cookies</td>
-                          <td className="p-3">1 ano</td>
-                        </tr>
-                        <tr>
-                          <td className="p-3 font-mono text-[#0071E3] dark:text-[#3B82F6] font-bold">pd_theme_preference</td>
-                          <td className="p-3">Memoriza o tema selecionado (Escuro / Claro)</td>
-                          <td className="p-3">Sessão / Persistente</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+            <div className="space-y-4">
+              <div className={`p-5 rounded-2xl border ${
+                darkMode ? 'bg-neutral-950/80 border-neutral-800' : 'bg-neutral-50 border-neutral-200'
+              }`}>
+                <div className="flex items-center gap-2 font-bold text-sm mb-2 text-emerald-500">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Armazenamento Estritamente Necessário (Essencial)</span>
                 </div>
+                <p className={`text-xs mb-3 ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                  Chaves técnicas indispensáveis para o funcionamento da interface, segurança e memorização de preferências.
+                </p>
 
-                {/* Cookies Analíticos */}
-                <div className={`border rounded-2xl p-5 ${
-                  darkMode ? 'border-neutral-800 bg-neutral-950/60' : 'border-neutral-200 bg-neutral-50/80'
-                }`}>
-                  <div className="flex items-center gap-2 font-bold text-base mb-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#0071E3] dark:text-[#3B82F6]" />
-                    <h3 className={darkMode ? 'text-white' : 'text-neutral-900'}>Cookies Analíticos & Desempenho (Opcionais)</h3>
-                  </div>
-                  <p className={`text-xs md:text-sm mb-4 ${darkMode ? 'text-neutral-300' : 'text-neutral-600'}`}>
-                    Permitem analisar de forma agregada e anónima o tráfego do website (ex.: páginas mais consultadas, projetos mais vistos), para melhoria contínua da experiência do utilizador.
-                  </p>
-                  <div className="overflow-x-auto">
-                    <table className={`w-full text-left text-xs border rounded-xl overflow-hidden ${
-                      darkMode ? 'border-neutral-800 bg-neutral-900 text-neutral-300' : 'border-neutral-200 bg-white text-neutral-700'
-                    }`}>
-                      <thead className={`font-headline font-bold uppercase text-[10px] tracking-wider ${
-                        darkMode ? 'bg-neutral-950 text-neutral-300 border-b border-neutral-800' : 'bg-neutral-100 text-neutral-800 border-b border-neutral-200'
-                      }`}>
-                        <tr>
-                          <th className="p-3">Nome</th>
-                          <th className="p-3">Fornecedor</th>
-                          <th className="p-3">Finalidade</th>
-                          <th className="p-3">Duração</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className={`border-b ${darkMode ? 'border-neutral-800' : 'border-neutral-100'}`}>
-                          <td className="p-3 font-mono font-bold">_ga</td>
-                          <td className="p-3">Google Analytics</td>
-                          <td className="p-3">Distingue utilizadores únicos de forma anónima</td>
-                          <td className="p-3">2 anos</td>
-                        </tr>
-                        <tr>
-                          <td className="p-3 font-mono font-bold">_ga_*</td>
-                          <td className="p-3">Google Analytics</td>
-                          <td className="p-3">Mantém o estado da sessão estatística</td>
-                          <td className="p-3">2 anos</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border border-neutral-800">
+                    <thead className={darkMode ? 'bg-neutral-900 text-white' : 'bg-neutral-200 text-neutral-900'}>
+                      <tr>
+                        <th className="p-2.5 border-b border-neutral-700 font-bold">Identificador</th>
+                        <th className="p-2.5 border-b border-neutral-700 font-bold">Tecnologia</th>
+                        <th className="p-2.5 border-b border-neutral-700 font-bold">Finalidade Concreta</th>
+                        <th className="p-2.5 border-b border-neutral-700 font-bold">Duração</th>
+                      </tr>
+                    </thead>
+                    <tbody className={darkMode ? 'bg-neutral-950 text-neutral-300' : 'bg-white text-neutral-700'}>
+                      <tr className="border-b border-neutral-800">
+                        <td className="p-2.5 font-mono text-blue-400 font-bold">pd_theme_preference</td>
+                        <td className="p-2.5">LocalStorage</td>
+                        <td className="p-2.5">Memoriza a preferência visual de tema (Modo Claro / Modo Escuro)</td>
+                        <td className="p-2.5">Persistente (até eliminação pelo utilizador)</td>
+                      </tr>
+                      <tr className="border-b border-neutral-800">
+                        <td className="p-2.5 font-mono text-blue-400 font-bold">pdagency_privacy_notice</td>
+                        <td className="p-2.5">LocalStorage</td>
+                        <td className="p-2.5">Regista a visualização e fecho do aviso informativo sobre o funcionamento essencial do website</td>
+                        <td className="p-2.5">Persistente (até eliminação pelo utilizador)</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-
               </div>
-            </section>
+            </div>
+          </section>
 
-            {/* 3. Gerir / Revogar */}
-            <section className={`rounded-[28px] p-8 border transition-all ${
-              darkMode ? 'bg-[#0A101D] border-neutral-800/90 text-neutral-300' : 'bg-white border-neutral-200 text-neutral-700 shadow-md'
+          {/* 3. Limpar Preferências */}
+          <section className={`p-6 md:p-8 rounded-3xl border transition-all ${
+            darkMode ? 'bg-neutral-900/40 border-neutral-800/80' : 'bg-white border-neutral-200 shadow-sm'
+          }`}>
+            <div className="flex items-center gap-3 mb-4">
+              <AlertCircle className="w-5 h-5 text-blue-500" />
+              <h2 className="text-lg font-headline font-bold uppercase tracking-wide">
+                3. Como Limpar ou Gerir as Preferências
+              </h2>
+            </div>
+            <p className={`text-xs md:text-sm leading-relaxed mb-4 ${
+              darkMode ? 'text-neutral-300' : 'text-neutral-600'
             }`}>
-              <div className="flex items-center gap-3 mb-4 font-headline font-black text-xl uppercase">
-                <AlertCircle className="w-5 h-5 text-[#0071E3] dark:text-[#3B82F6]" />
-                <h2 className={darkMode ? 'text-white' : 'text-neutral-900'}>3. Como Gerir ou Redefinir Preferências</h2>
-              </div>
-              <p className="mb-6">
-                Pode redefinir a sua escolha de cookies a qualquer momento clicando no botão abaixo para reativar a barra de consentimento:
-              </p>
-              
-              <div className="mb-6">
-                <button
-                  onClick={resetCookies}
-                  className="inline-flex items-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white font-headline font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all cursor-pointer shadow-lg hover:shadow-blue-500/30 active:scale-95"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                  <span>Redefinir Preferências de Cookies</span>
-                </button>
-              </div>
-
-              <p className={`text-xs sm:text-sm ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-                Pode também configurar o seu navegador de internet (Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge) para bloquear ou eliminar cookies a qualquer momento através das definições de privacidade do browser.
-              </p>
-            </section>
-
-          </div>
+              Pode redefinir as preferências locais guardadas no seu dispositivo a qualquer momento clicando no botão abaixo:
+            </p>
+            <div className="mb-4">
+              <button
+                onClick={resetCookies}
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all cursor-pointer shadow-lg hover:shadow-blue-600/30 active:scale-95"
+              >
+                <RefreshCw className="w-4 h-4" />
+                <span>Limpar Preferências Guardadas</span>
+              </button>
+            </div>
+            <p className={`text-xs ${darkMode ? 'text-neutral-500' : 'text-neutral-400'}`}>
+              Pode igualmente limpar o histórico, cache e cookies através do menu de Definições / Privacidade do seu navegador web.
+            </p>
+          </section>
 
         </div>
+
       </main>
-
-      {/* ── FOOTER DA PÁGINA ── */}
-      <footer className={`py-12 border-t text-xs transition-colors duration-500 ${
-        darkMode ? 'bg-[#03060C] border-neutral-800/80 text-neutral-400' : 'bg-[#F9F7F2] border-neutral-300 text-neutral-600'
-      }`}>
-        <div className="container max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="font-headline font-bold text-[10px] uppercase tracking-widest text-neutral-500">
-            © 2026 P&D Agency — Agência Digital. Todos os direitos reservados.
-          </p>
-          <div className="flex flex-wrap items-center gap-6 text-[10px] font-bold uppercase tracking-wider">
-            <Link to="/termos-servico" className="hover:text-primary transition-colors">Termos de Serviço</Link>
-            <Link to="/politica-privacidade" className="hover:text-primary transition-colors">Política de Privacidade</Link>
-            <Link to="/politica-cookies" className="text-[#0071E3] dark:text-[#3B82F6]">Política de Cookies</Link>
-          </div>
-        </div>
-      </footer>
-
     </div>
   );
 }

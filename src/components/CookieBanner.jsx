@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Cookie, Shield, Check, X } from "lucide-react";
+import { Cookie, Check, X } from "lucide-react";
 
 export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("pdagency_cookie_consent");
-    if (!consent) {
+    const acknowledged = localStorage.getItem("pdagency_privacy_notice");
+    if (!acknowledged) {
       const timer = setTimeout(() => {
         setIsVisible(true);
       }, 1000);
@@ -15,13 +15,8 @@ export default function CookieBanner() {
     }
   }, []);
 
-  const handleAcceptAll = () => {
-    localStorage.setItem("pdagency_cookie_consent", "all");
-    setIsVisible(false);
-  };
-
-  const handleAcceptNecessary = () => {
-    localStorage.setItem("pdagency_cookie_consent", "necessary");
+  const handleAcknowledge = () => {
+    localStorage.setItem("pdagency_privacy_notice", "acknowledged");
     setIsVisible(false);
   };
 
@@ -38,47 +33,48 @@ export default function CookieBanner() {
           <div className="w-10 h-10 rounded-2xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
             <Cookie className="w-5 h-5" />
           </div>
-          <div>
+          <div className="flex-1 pr-2">
             <h3 className="font-headline font-bold text-sm uppercase tracking-wider text-white">
-              Gestão de Privacidade & Cookies
+              Privacidade & Armazenamento Local
             </h3>
             <p className="text-neutral-300 text-xs mt-1 leading-relaxed font-light">
-              Utilizamos cookies essenciais para o funcionamento seguro do website e cookies analíticos para compreender o tráfego da plataforma.
+              Este website utiliza armazenamento local estritamente necessário para o seu funcionamento, incluindo para memorizar as suas preferências e a interação com este aviso. Não utilizamos cookies de publicidade comportamental ou ferramentas de rastreamento para criar perfis de navegação.
             </p>
           </div>
-        </div>
-
-        <div className="flex items-center gap-3 text-[11px] text-neutral-400 mb-4 pl-1">
-          <Link 
-            to="/politica-cookies" 
-            className="text-blue-400 hover:underline font-semibold"
-          >
-            Política de Cookies
-          </Link>
-          <span>•</span>
-          <Link 
-            to="/politica-privacidade" 
-            className="text-blue-400 hover:underline font-semibold"
-          >
-            Privacidade
-          </Link>
-        </div>
-
-        <div className="flex items-center gap-2.5">
           <button
             type="button"
-            onClick={handleAcceptNecessary}
-            className="flex-1 px-4 py-2.5 rounded-xl border border-white/15 hover:border-white/30 text-white text-xs font-bold uppercase tracking-wider transition-all hover:bg-white/5 cursor-pointer text-center"
+            onClick={handleAcknowledge}
+            className="text-neutral-400 hover:text-white transition-colors cursor-pointer p-1"
+            aria-label="Fechar aviso"
           >
-            Só Necessários
+            <X className="w-4 h-4" />
           </button>
+        </div>
+
+        <div className="flex items-center justify-between gap-3 pt-2">
+          <div className="flex items-center gap-2 text-[11px] text-neutral-400 pl-1">
+            <Link 
+              to="/politica-cookies" 
+              className="text-blue-400 hover:underline font-semibold"
+            >
+              Política de Cookies
+            </Link>
+            <span>•</span>
+            <Link 
+              to="/politica-privacidade" 
+              className="text-blue-400 hover:underline font-semibold"
+            >
+              Privacidade
+            </Link>
+          </div>
+
           <button
             type="button"
-            onClick={handleAcceptAll}
-            className="flex-1 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-blue-600/30 cursor-pointer text-center flex items-center justify-center gap-1.5"
+            onClick={handleAcknowledge}
+            className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-lg hover:shadow-blue-600/30 cursor-pointer text-center flex items-center justify-center gap-1.5 active:scale-95"
           >
             <Check className="w-3.5 h-3.5" />
-            <span>Aceitar Todos</span>
+            <span>Entendido</span>
           </button>
         </div>
 

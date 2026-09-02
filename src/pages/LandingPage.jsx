@@ -1965,12 +1965,6 @@ export default function LandingPage() {
             </p>
             <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
               <Link 
-                to="/termos-servico"
-                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
-              >
-                {t.footer.terms}
-              </Link>
-              <Link 
                 to="/politica-privacidade"
                 className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
               >
@@ -1991,6 +1985,21 @@ export default function LandingPage() {
                 <span>{lang === 'pt' ? 'LIVRO DE RECLAMAÇÕES' : 'COMPLAINTS BOOK'}</span>
                 <span className="material-symbols-outlined text-[12px]">open_in_new</span>
               </a>
+              <a 
+                href="https://www.cniacc.pt"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors flex items-center gap-1.5"
+              >
+                <span>{lang === 'pt' ? 'RESOLUÇÃO DE LITÍGIOS (RAL)' : 'ADR DISPUTES (RAL)'}</span>
+                <span className="material-symbols-outlined text-[12px]">open_in_new</span>
+              </a>
+              <Link 
+                to="/termos-servico"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+              >
+                {t.footer.terms}
+              </Link>
             </div>
           </div>
         </div>

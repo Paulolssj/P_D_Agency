@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Send, PhoneCall, Mail, CheckCircle2, Sparkles, Shield, Clock, ArrowRight, Check, Zap, Globe, Palette, ShoppingBag, Layout, Code2 } from 'lucide-react';
 
@@ -381,6 +382,25 @@ export default function BudgetCalculatorSection({ darkMode = true, lang = 'pt' }
                   }`}
                 />
               </div>
+
+              {/* Informação de Privacidade RGPD */}
+              <p className={`text-[11px] leading-relaxed text-left ${darkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
+                {lang === 'pt' ? (
+                  <>
+                    Os dados fornecidos serão tratados pela P&D Agency para analisar e responder ao seu pedido de orçamento e realizar as diligências pré-contratuais solicitadas. Para saber mais sobre como tratamos os seus dados e os seus direitos, consulte a nossa{' '}
+                    <Link to="/politica-privacidade" className="text-primary font-bold underline hover:text-white transition-colors">
+                      Política de Privacidade
+                    </Link>.
+                  </>
+                ) : (
+                  <>
+                    The data provided will be processed by P&D Agency to analyze your quote request and perform pre-contractual steps. To learn more about how we process your data and your rights, please read our{' '}
+                    <Link to="/politica-privacidade" className="text-primary font-bold underline hover:text-white transition-colors">
+                      Privacy Policy
+                    </Link>.
+                  </>
+                )}
+              </p>
 
               {/* Action Buttons */}
               <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
