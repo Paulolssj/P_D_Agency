@@ -13,6 +13,14 @@ export default function CookieBanner() {
       }, 1000);
       return () => clearTimeout(timer);
     }
+
+    const handleReset = () => {
+      localStorage.removeItem("pdagency_privacy_notice");
+      setIsVisible(true);
+    };
+
+    window.addEventListener("reset_cookie_consent", handleReset);
+    return () => window.removeEventListener("reset_cookie_consent", handleReset);
   }, []);
 
   const handleAcknowledge = () => {

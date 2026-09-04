@@ -35,7 +35,7 @@ export default function CookiePolicyPage() {
 
   const resetCookies = () => {
     localStorage.removeItem("pdagency_privacy_notice");
-    window.location.reload();
+    window.dispatchEvent(new Event("reset_cookie_consent"));
   };
 
   return (

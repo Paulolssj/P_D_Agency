@@ -952,11 +952,12 @@ export default function LandingPage() {
   };
 
   const brands = [
-    { name: 'TAKOS KING', category: lang === 'pt' ? 'Fast Food • Guia, Pombal' : 'Fast Food • Guia, Pombal', logo: '/assets/takos-king.png', link: 'https://www.facebook.com/TakosKing.Guia.Pombal/' },
     { name: 'AGOSTINHO BIKES', category: lang === 'pt' ? 'Stand & Oficina de Bicicletas' : 'Bicycle Showroom & Workshop', logo: '/assets/agostinho-bikes.png', link: 'https://www.agostinhobikes.com/' },
     { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Mobilidade Elétrica • Guia' : 'Electric Mobility • Guia', logo: '/assets/roots-199.png', link: 'https://www.routen109mobilidade.com/' },
+    { name: 'ROTA DO CORTE', category: lang === 'pt' ? 'Barbearia & Agendamento • Paião' : 'Barbershop & Online Booking', logo: '/assets/rotadocorte-logo.png', link: 'https://rotadocorte.vercel.app/' },
     { name: 'DRA. ÁUREA AGOSTINHO', category: lang === 'pt' ? 'Medicina Estética & Harmonização' : 'Aesthetic Medicine & Facial Harmony', logo: '/assets/aurea-logo.png', link: 'https://dra-aurea-agostinho.vercel.app/' },
-    { name: 'EDU BRASIL', category: lang === 'pt' ? 'Plataforma Educacional' : 'Educational Platform', logo: '/assets/edu-brasil-icon.png', link: 'https://mobileapp-taupe.vercel.app/' }
+    { name: 'IARA BENTO', category: lang === 'pt' ? 'Social Media & Branding' : 'Social Media & Branding', logo: '/assets/pd-agency-logo-round.png', link: 'https://iara-bento.vercel.app/' },
+    { name: 'MARIA JOÃO SIMÕES', category: lang === 'pt' ? 'Design Gráfico & Artes' : 'Graphic Design & Creative', logo: '/assets/maria-simoes-avatar.png', link: 'https://maria-joao-portfolio.vercel.app/' }
   ];
 
   return (
@@ -1501,24 +1502,25 @@ export default function LandingPage() {
                   link: 'https://www.agostinhobikes.com/',
                 },
                 {
-                  label: lang === 'pt' ? 'Social Media & Branding / 2026' : 'Social Media & Branding / 2026',
-                  labelColor: 'text-amber-300',
-                  title: 'IARA BENTO',
-                  subtitle: lang === 'pt' ? 'Gestão de redes sociais e criação de conteúdos estratégicos — estimador interativo de propostas e branding de luxo.' : 'Social media management & content creation — interactive proposal estimator and luxury aesthetic.',
-                  img: '/assets/portfolio-iara-bento.png',
-                  badge: t.portfolio.live,
-                  badgeClass: 'bg-amber-500 text-black font-bold',
-                  link: 'https://iara-bento.vercel.app/',
-                },
-                {
                   label: lang === 'pt' ? 'Mobilidade Elétrica / 2026' : 'Electric Mobility / 2026',
-                  labelColor: 'text-primary',
+                  labelColor: 'text-orange-400',
                   title: 'ROUTE N109 MOBILIDADE',
                   subtitle: lang === 'pt' ? 'Stand e oficina de motos e scooters elétricas na Guia — catálogo interativo e presença digital de alta performance.' : 'Electric motorcycle showroom & workshop in Guia — interactive catalog and high-performance digital platform.',
                   img: '/assets/portfolio-route109.png',
                   badge: t.portfolio.live,
-                  badgeClass: 'bg-primary text-white font-bold',
+                  badgeClass: 'bg-orange-500 text-white font-bold',
                   link: 'https://www.routen109mobilidade.com/',
+                },
+                {
+                  label: lang === 'pt' ? 'Barbearia & Agendamento / 2026' : 'Barbershop & Booking / 2026',
+                  labelColor: 'text-amber-400',
+                  title: 'ROTA DO CORTE',
+                  subtitle: lang === 'pt' ? 'Atelier de barbearia e barboterapia no Paião — agendamento online em tempo real com gestão inteligente de horários e confirmação instantânea.' : 'Barbershop & beard spa in Paião — real-time online appointment engine, automated slot management & instant confirmation.',
+                  img: '/assets/portfolio-rota-do-corte.png',
+                  logo: '/assets/rotadocorte-logo.png',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-amber-500 text-black font-bold',
+                  link: 'https://rotadocorte.vercel.app/',
                 },
                 {
                   label: lang === 'pt' ? 'Medicina Estética / 2026' : 'Aesthetic Medicine / 2026',
@@ -1532,25 +1534,24 @@ export default function LandingPage() {
                   link: 'https://dra-aurea-agostinho.vercel.app/',
                 },
                 {
-                  label: lang === 'pt' ? 'Portfólio Criativo / 2026' : 'Creative Showcase / 2026',
-                  labelColor: 'text-primary',
-                  title: 'MARIA JOÃO',
-                  subtitle: lang === 'pt' ? 'Portfólio pessoal e showcase criativo de apresentação profissional.' : 'Personal portfolio and creative showcase for professional presentation.',
-                  img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=85',
-                  badge: t.portfolio.live,
-                  badgeClass: 'bg-primary text-white font-bold',
-                  link: 'https://maria-joao-portfolio.vercel.app/',
-                },
-                {
-                  label: lang === 'pt' ? 'Restauração & Fast Food / 2026' : 'Food & Fast Casual / 2026',
-                  labelColor: 'text-amber-400',
-                  title: 'TAKOS KING',
-                  subtitle: lang === 'pt' ? 'Plataforma web para restaurante de fast food focado em tacos — Guia, Pombal.' : 'Web platform for taco fast-casual brand in Guia, Pombal.',
-                  img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1200&q=85',
-                  logo: '/assets/takos-king.png',
+                  label: lang === 'pt' ? 'Social Media & Branding / 2026' : 'Social Media & Branding / 2026',
+                  labelColor: 'text-amber-300',
+                  title: 'IARA BENTO',
+                  subtitle: lang === 'pt' ? 'Gestão de redes sociais e criação de conteúdos estratégicos — estimador interativo de propostas e branding de luxo.' : 'Social media management & content creation — interactive proposal estimator and luxury aesthetic.',
+                  img: '/assets/portfolio-iara-bento.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-amber-500 text-black font-bold',
-                  link: 'https://takos-king.vercel.app/',
+                  link: 'https://iara-bento.vercel.app/',
+                },
+                {
+                  label: lang === 'pt' ? 'Design Gráfico & Artes / 2026' : 'Graphic Design & Creative / 2026',
+                  labelColor: 'text-emerald-400',
+                  title: 'MARIA JOÃO SIMÕES',
+                  subtitle: lang === 'pt' ? 'Estúdio criativo e portfólio de design gráfico, paginação editorial, artes visuais e conteúdos digitais de alta precisão.' : 'Creative studio and portfolio for graphic design, editorial publishing, visual arts and high-precision digital media.',
+                  img: '/assets/portfolio-maria-joao.png',
+                  badge: t.portfolio.live,
+                  badgeClass: 'bg-emerald-500 text-black font-bold',
+                  link: 'https://maria-joao-portfolio.vercel.app/',
                 },
               ].map((item, i) => (
                 <motion.a
@@ -1963,24 +1964,30 @@ export default function LandingPage() {
             <p className="text-neutral-500 text-[10px] uppercase tracking-[0.25em] font-bold text-center md:text-left">
               {t.footer.rights}
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8">
               <Link 
                 to="/politica-privacidade"
-                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors whitespace-nowrap"
               >
                 {t.footer.privacy}
               </Link>
               <Link 
                 to="/politica-cookies"
-                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors whitespace-nowrap"
               >
                 {lang === 'pt' ? 'POLÍTICA DE COOKIES' : 'COOKIE POLICY'}
+              </Link>
+              <Link 
+                to="/termos-condicoes"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors whitespace-nowrap"
+              >
+                {t.footer.terms}
               </Link>
               <a 
                 href="https://www.livroreclamacoes.pt/Inicio/"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors flex items-center gap-1.5"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors flex items-center gap-1.5 whitespace-nowrap"
               >
                 <span>{lang === 'pt' ? 'LIVRO DE RECLAMAÇÕES' : 'COMPLAINTS BOOK'}</span>
                 <span className="material-symbols-outlined text-[12px]">open_in_new</span>
@@ -1989,17 +1996,11 @@ export default function LandingPage() {
                 href="https://www.cniacc.pt"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors flex items-center gap-1.5"
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors flex items-center gap-1.5 whitespace-nowrap"
               >
                 <span>{lang === 'pt' ? 'RESOLUÇÃO DE LITÍGIOS (RAL)' : 'ADR DISPUTES (RAL)'}</span>
                 <span className="material-symbols-outlined text-[12px]">open_in_new</span>
               </a>
-              <Link 
-                to="/termos-servico"
-                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors"
-              >
-                {t.footer.terms}
-              </Link>
             </div>
           </div>
         </div>

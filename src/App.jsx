@@ -37,6 +37,7 @@ function App() {
         <Route path="/politica-cookies" element={<CookiePolicyPage />} />
         <Route path="/cookie-policy" element={<CookiePolicyPage />} />
         <Route path="/termos-servico" element={<TermsPage />} />
+        <Route path="/termos-condicoes" element={<TermsPage />} />
         <Route path="/terms" element={<TermsPage />} />
       </Routes>
       <CookieBanner />
