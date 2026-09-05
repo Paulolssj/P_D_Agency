@@ -956,7 +956,7 @@ export default function LandingPage() {
     { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Mobilidade Elétrica • Guia' : 'Electric Mobility • Guia', logo: '/assets/roots-199.png', link: 'https://www.routen109mobilidade.com/' },
     { name: 'ROTA DO CORTE', category: lang === 'pt' ? 'Barbearia & Agendamento • Paião' : 'Barbershop & Online Booking', logo: '/assets/rotadocorte-logo.png', link: 'https://rotadocorte.vercel.app/' },
     { name: 'DRA. ÁUREA AGOSTINHO', category: lang === 'pt' ? 'Medicina Estética & Harmonização' : 'Aesthetic Medicine & Facial Harmony', logo: '/assets/aurea-logo.png', link: 'https://dra-aurea-agostinho.vercel.app/' },
-    { name: 'IARA BENTO', category: lang === 'pt' ? 'Social Media & Branding' : 'Social Media & Branding', logo: '/assets/pd-agency-logo-round.png', link: 'https://iara-bento.vercel.app/' },
+    { name: 'IARA BENTO', category: lang === 'pt' ? 'Social Media & Branding' : 'Social Media & Branding', logo: '/assets/iara-bento-logo.png', link: 'https://iara-bento.vercel.app/' },
     { name: 'MARIA JOÃO SIMÕES', category: lang === 'pt' ? 'Design Gráfico & Artes' : 'Graphic Design & Creative', logo: '/assets/maria-simoes-avatar.png', link: 'https://maria-joao-portfolio.vercel.app/' }
   ];
 
