@@ -85,7 +85,7 @@ const translations = {
     },
     brands: {
       tag: "CONFIANÇA & PARCERIA",
-      title: "EMPRESAS COM QUEM JÁ TRABALHAMOS"
+      title: "EMPRESAS & PESSOAS COM QUEM JÁ TRABALHAMOS"
     },
     ctaMeeting: {
       title1: "TEM INTERESSE?",
@@ -178,7 +178,7 @@ const translations = {
     },
     brands: {
       tag: "TRUST & PARTNERSHIPS",
-      title: "COMPANIES WE HAVE WORKED WITH"
+      title: "COMPANIES & PEOPLE WE HAVE WORKED WITH"
     },
     ctaMeeting: {
       title1: "INTERESTED?",
@@ -271,7 +271,7 @@ const translations = {
     },
     brands: {
       tag: "CONFIANZA Y ALIANZAS",
-      title: "EMPRESAS CON LAS QUE TRABAJAMOS"
+      title: "EMPRESAS Y PERSONAS CON LAS QUE TRABAJAMOS"
     },
     ctaMeeting: {
       title1: "¿INTERESADO?",
@@ -364,7 +364,7 @@ const translations = {
     },
     brands: {
       tag: "CONFIANCE & PARTENARIATS",
-      title: "ENTREPRISES AVEC LESQUELLES NOUS TRAVAILLONS"
+      title: "ENTREPRISES ET PERSONNES AVEC LESQUELLES NOUS TRAVAILLONS"
     },
     ctaMeeting: {
       title1: "INTÉRESSÉ ?",
@@ -457,7 +457,7 @@ const translations = {
     },
     brands: {
       tag: "VERTRAUEN & PARTNERSCHAFTEN",
-      title: "UNSERE PARTNER UND KUNDEN"
+      title: "UNTERNEHMEN & PERSONEN, MIT DENEN WIR ARBEITEN"
     },
     ctaMeeting: {
       title1: "INTERESSIERT?",
@@ -1229,7 +1229,7 @@ export default function LandingPage() {
                 <div className="block lg:hidden mb-6 w-full">
                   <div className="mb-2 text-center">
                     <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] font-black">
-                      {lang === 'pt' ? 'EMPRESAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES WE HAVE WORKED WITH'}
+                      {lang === 'pt' ? 'EMPRESAS & PESSOAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES & PEOPLE WE HAVE WORKED WITH'}
                     </p>
                   </div>
                   <div className={`w-full overflow-hidden border-y py-4 rounded-2xl relative ${
@@ -1272,7 +1272,7 @@ export default function LandingPage() {
             <div className="hidden lg:block w-full">
               <div className="mb-3 text-center">
                 <p className="font-label text-primary uppercase tracking-[0.4em] text-[10px] font-black">
-                  {lang === 'pt' ? 'EMPRESAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES WE HAVE WORKED WITH'}
+                  {lang === 'pt' ? 'EMPRESAS & PESSOAS COM QUEM JÁ TRABALHAMOS' : 'COMPANIES & PEOPLE WE HAVE WORKED WITH'}
                 </p>
               </div>
               <div className={`w-full overflow-hidden border-y py-4 rounded-2xl relative ${
