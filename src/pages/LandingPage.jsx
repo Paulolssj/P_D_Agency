@@ -954,9 +954,9 @@ export default function LandingPage() {
   const brands = [
     { name: 'AGOSTINHO BIKES', category: lang === 'pt' ? 'Stand & Oficina de Bicicletas' : 'Bicycle Showroom & Workshop', logo: '/assets/agostinho-bikes.png', link: 'https://www.agostinhobikes.com/' },
     { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Mobilidade Elétrica • Guia' : 'Electric Mobility • Guia', logo: '/assets/roots-199.png', link: 'https://www.routen109mobilidade.com/' },
-    { name: 'ROTA DO CORTE', category: lang === 'pt' ? 'Barbearia & Agendamento • Paião' : 'Barbershop & Online Booking', logo: '/assets/rotadocorte-logo.png', link: 'https://rotadocorte.vercel.app/' },
-    { name: 'DRA. ÁUREA AGOSTINHO', category: lang === 'pt' ? 'Medicina Estética & Harmonização' : 'Aesthetic Medicine & Facial Harmony', logo: '/assets/aurea-logo.png', link: 'https://dra-aurea-agostinho.vercel.app/' },
-    { name: 'IARA BENTO', category: lang === 'pt' ? 'Social Media & Branding' : 'Social Media & Branding', logo: '/assets/iara-bento-logo.png', link: 'https://iara-bento.vercel.app/' },
+    { name: 'ROTA DO CORTE', category: lang === 'pt' ? 'Barbearia & Agendamento • Paião' : 'Barbershop & Online Booking', logo: '/assets/rotadocorte-logo.png', link: 'https://www.rotadocorte.com/' },
+    { name: 'DRA. ÁUREA AGOSTINHO', category: lang === 'pt' ? 'Medicina Estética & Harmonização' : 'Aesthetic Medicine & Facial Harmony', logo: '/assets/aurea-logo.png', link: 'https://www.dra-aurea-agostinho.com/' },
+    { name: 'IARA BENTO', category: lang === 'pt' ? 'Social Media & Branding' : 'Social Media & Branding', logo: '/assets/iara-bento-logo.png', link: 'https://www.iarabento.com/' },
     { name: 'MARIA JOÃO SIMÕES', category: lang === 'pt' ? 'Design Gráfico & Artes' : 'Graphic Design & Creative', logo: '/assets/maria-simoes-avatar.png', link: 'https://maria-joao-portfolio.vercel.app/' }
   ];
 
@@ -1520,7 +1520,7 @@ export default function LandingPage() {
                   logo: '/assets/rotadocorte-logo.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-amber-500 text-black font-bold',
-                  link: 'https://rotadocorte.vercel.app/',
+                  link: 'https://www.rotadocorte.com/',
                 },
                 {
                   label: lang === 'pt' ? 'Medicina Estética / 2026' : 'Aesthetic Medicine / 2026',
@@ -1531,7 +1531,7 @@ export default function LandingPage() {
                   logo: '/assets/aurea-logo.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-[#C5A880] text-black font-bold',
-                  link: 'https://dra-aurea-agostinho.vercel.app/',
+                  link: 'https://www.dra-aurea-agostinho.com/',
                 },
                 {
                   label: lang === 'pt' ? 'Social Media & Branding / 2026' : 'Social Media & Branding / 2026',
@@ -1541,7 +1541,7 @@ export default function LandingPage() {
                   img: '/assets/portfolio-iara-bento.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-amber-500 text-black font-bold',
-                  link: 'https://iara-bento.vercel.app/',
+                  link: 'https://www.iarabento.com/',
                 },
                 {
                   label: lang === 'pt' ? 'Design Gráfico & Artes / 2026' : 'Graphic Design & Creative / 2026',
