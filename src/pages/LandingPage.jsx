@@ -36,31 +36,31 @@ const translations = {
       title1: "AGÊNCIA DIGITAL",
       title2: "PERSONALIZADA",
       p1_num: "01",
-      p1_title: "UMA ABORDAGEM PERSONALIZADA",
-      p1_desc: "Somos uma agência boutique full-service, o que significa que temos a competência para desenvolver o seu projeto de comunicação e tecnologia, desde a conceção estratégica até à aplicação prática, de uma forma relevante para o seu setor de atividade. Estamos consigo ao longo de todo o caminho!",
+      p1_title: "ABORDAGEM À MEDIDA",
+      p1_desc: "Desenvolvemos soluções digitais exclusivas para o seu setor, da estratégia técnica ao lançamento com acompanhamento contínuo.",
       p2_num: "02",
-      p2_title: "DESENVOLVIMENTO & MARKETING SEM LIMITES",
-      p2_desc: "O digital é uma atividade de frequência e consistência. Por essa razão, a nossa consultoria e engenharia não têm qualquer tipo de limitações quanto ao número de atualizações ou funcionalidades a desenvolver. Vamos definir objetivos e fazer tudo o que for preciso para os atingir.",
+      p2_title: "ENGENHARIA SEM LIMITES",
+      p2_desc: "Sem restrições técnicas ou de plataformas. Criamos tecnologia rápida, escalável e focada em resultados comerciais.",
       p3_num: "03",
-      p3_title: "UM PARCEIRO DE NEGÓCIO",
-      p3_desc: "Mais do que uma agência digital, somos um parceiro de negócio que o vai ajudar a olhar de forma estratégica para a tecnologia e colocar o poder da comunicação e desenvolvimento ao serviço do seu negócio.",
+      p3_title: "PARCEIRO DE NEGÓCIO",
+      p3_desc: "Alinhamos tecnologia e design estratégico com os seus objetivos para transformar visitantes em clientes reais.",
       p4_num: "04",
-      p4_title: "UMA EQUIPA DEDICADA",
-      p4_desc: "O seu projeto é extremamente importante para nós, pelo que terá à sua disposição uma equipa multidisciplinar constituída por Engenheiro de Software, Designer UX/UI, Account Manager e Diretor Criativo.",
-      quote: '"Criamos estratégias 100% customizadas e implementamos o que for preciso para atingir os objetivos, sem limites de plataformas. Trabalhamos o seu projeto como um todo."'
+      p4_title: "EQUIPA DEDICADA",
+      p4_desc: "Acesso direto a especialistas dedicados em engenharia de software, design UI/UX e estratégia digital.",
+      quote: '"Estratégias digitais 100% personalizadas e engenharia de topo para posicionar a sua marca como líder de mercado."'
     },
     services: {
       tag: "SOLUÇÕES 360º",
       title1: "O QUE",
       title2: "FAZEMOS",
-      desc: "Na P&D Agency, oferecemos uma gama completa de serviços de tecnologia, desenvolvimento web e identidade digital. Com estratégias inovadoras e personalizadas, ajudamos a sua marca a destacar-se no mercado.",
+      desc: "Desenvolvemos plataformas web de alto desempenho e identidades visuais de autoridade para transformar o posicionamento do seu negócio.",
       card1_title: "ENGENHARIA WEB & APLICAÇÕES",
-      card1_desc: "Trabalhamos o desenvolvimento web através de soluções 360º all-inclusive que eliminam o esforço técnico e trazem resultados duradouros.",
+      card1_desc: "Websites ultra-rápidos, plataformas à medida e aplicações com foco absoluto em conversão e velocidade.",
       card1_li1: "Arquitetura Web & React/Next.js",
       card1_li2: "Alta Carga & Otimização Cloud",
       card1_li3: "SEO Avançado & Core Web Vitals",
       card2_title: "IDENTIDADE DE MARCA & BRANDING",
-      card2_desc: "Criamos identidades visuais de autoridade que posicionam a sua empresa como líder indiscutível no seu mercado.",
+      card2_desc: "Identidades visuais marcantes e interfaces intuitivas que transmitem autoridade e confiança imediata.",
       card2_li1: "Design de Marca & Sistemas UI/UX",
       card2_li2: "Redes Sociais & Estratégia de Conteúdo",
       card2_li3: "Campanhas de Desempenho & Anúncios",
@@ -68,7 +68,7 @@ const translations = {
     },
     stats: {
       s1_val: "5+", s1_lab: "Anos de Experiência em Engenharia",
-      s2_val: "4+", s2_lab: "Mais de 4 Projetos Entregues",
+      s2_val: "6+", s2_lab: "Mais de 6 Projetos Entregues",
       s3_val: "4-21 Dias", s3_lab: "Tempo de Entrega Típico",
       s4_val: "24/7", s4_lab: "Monitorização Ativa"
     },
@@ -129,31 +129,31 @@ const translations = {
       title1: "CUSTOM DIGITAL",
       title2: "AGENCY",
       p1_num: "01",
-      p1_title: "A TAILORED APPROACH",
-      p1_desc: "We are a full-service boutique agency, bringing the expertise to develop your communication and tech project from strategic concept to execution. We stand by you every step of the way!",
+      p1_title: "TAILORED APPROACH",
+      p1_desc: "Bespoke digital solutions crafted for your industry, from technical strategy to deployment with ongoing support.",
       p2_num: "02",
-      p2_title: "UNLIMITED DEVELOPMENT & MARKETING",
-      p2_desc: "Digital success demands consistency. Our engineering and consulting have zero limits on updates or feature rollouts. We set bold targets and do whatever it takes to achieve them.",
+      p2_title: "UNLIMITED ENGINEERING",
+      p2_desc: "Zero technical barriers or platform limits. We build fast, scalable systems focused on real business results.",
       p3_num: "03",
-      p3_title: "A BUSINESS PARTNER",
-      p3_desc: "More than a digital agency, we are a strategic business partner dedicated to placing software engineering and high-end design at the service of your revenue growth.",
+      p3_title: "GROWTH PARTNER",
+      p3_desc: "We align modern software and UI/UX design directly with your revenue goals to turn visits into loyal clients.",
       p4_num: "04",
-      p4_title: "A DEDICATED TEAM",
-      p4_desc: "Your project is our top priority. You will work directly with a multidisciplinary team of Senior Software Engineers, UX/UI Designers, Account Managers, and Creative Directors.",
-      quote: '"We craft 100% custom strategies and execute whatever is needed to hit your targets across any platform. We build your project as a unified ecosystem."'
+      p4_title: "DEDICATED TEAM",
+      p4_desc: "Direct access to dedicated senior software engineers, UI/UX designers, and brand strategists.",
+      quote: '"100% custom digital strategies and premier engineering to position your brand at the top of your market."'
     },
     services: {
       tag: "360º SOLUTIONS",
       title1: "WHAT WE",
       title2: "DO",
-      desc: "At P&D Agency, we provide a full suite of software engineering, web development, and digital identity services. With cutting-edge strategies, we elevate your brand to dominate your market.",
+      desc: "We engineer high-performance web platforms and authoritative brand identities that elevate your business to the top.",
       card1_title: "WEB ARCHITECTURE & APPS",
-      card1_desc: "We engineer 360º all-inclusive web platforms that eliminate technical overhead and deliver lasting high performance.",
+      card1_desc: "Blazing-fast websites, custom platforms, and web apps built for maximum speed and conversion.",
       card1_li1: "Web Architecture & React/Next.js",
       card1_li2: "High Load & Cloud Optimization",
       card1_li3: "Advanced SEO & Core Web Vitals",
       card2_title: "BRAND IDENTITY & BRANDING",
-      card2_desc: "We design authoritative brand identities and UI/UX systems that position your business as the undisputed industry leader.",
+      card2_desc: "Distinctive brand identities and intuitive interfaces that establish immediate authority and trust.",
       card2_li1: "Brand Design & UI/UX Systems",
       card2_li2: "Social Media & Content Strategy",
       card2_li3: "Performance Marketing & Ads",
@@ -161,7 +161,7 @@ const translations = {
     },
     stats: {
       s1_val: "5+", s1_lab: "Years of Engineering Expertise",
-      s2_val: "4+", s2_lab: "More than 4 Projects Delivered",
+      s2_val: "6+", s2_lab: "More than 6 Projects Delivered",
       s3_val: "4-21 Days", s3_lab: "Typical Project Turnaround",
       s4_val: "24/7", s4_lab: "Active System Monitoring"
     },
@@ -222,31 +222,31 @@ const translations = {
       title1: "AGENCIA DIGITAL",
       title2: "A MEDIDA",
       p1_num: "01",
-      p1_title: "UN ENFOQUE PERSONALIZADO",
-      p1_desc: "Somos una agencia boutique full-service. Desarrollamos tu proyecto de tecnología y comunicación desde el concepto estratégico hasta la ejecución práctica.",
+      p1_title: "ENFOQUE A MEDIDA",
+      p1_desc: "Plataformas digitales diseñadas desde cero para tu sector, de la estrategia al lanzamiento con soporte continuo.",
       p2_num: "02",
-      p2_title: "DESARROLLO Y MARKETING SIN LÍMITES",
-      p2_desc: "El éxito digital exige constancia. Nuestra ingeniería y consultoría no tienen límites en actualizaciones o características a desarrollar.",
+      p2_title: "INGENIERÍA SIN LÍMITES",
+      p2_desc: "Sin barreras técnicas. Desarrollamos soluciones rápidas, escalables y orientadas a resultados comerciales.",
       p3_num: "03",
-      p3_title: "UN SOCIO COMERCIAL",
-      p3_desc: "Más que una agencia digital, somos un socio estratégico dedicado a poner el desarrollo de software y el diseño al servicio de tus ventas.",
+      p3_title: "SOCIO ESTRATÉGICO",
+      p3_desc: "Alineamos tecnología y diseño de alta gama para convertir visitantes en clientes reales.",
       p4_num: "04",
-      p4_title: "UN EQUIPO DEDICADO",
-      p4_desc: "Tu proyecto es nuestra prioridad. Trabajarás directamente con un equipo multidisciplinar: Ingeniero de Software, Diseñador UX/UI y Director Creativo.",
-      quote: '"Creamos estrategias 100% personalizadas e implementamos todo lo necesario para alcanzar tus objetivos sin límites de plataformas."'
+      p4_title: "EQUIPO DEDICADO",
+      p4_desc: "Trato directo con ingenieros de software, diseñadores UI/UX y estrategas de marca.",
+      quote: '"Estrategias 100% personalizadas y tecnología punta para posicionar tu marca como referente de tu sector."'
     },
     services: {
       tag: "SOLUCIONES 360º",
       title1: "LO QUE",
       title2: "HACEMOS",
-      desc: "En P&D Agency ofrecemos una gama completa de ingeniería de software, desarrollo web e identidad digital para posicionar tu marca en el mercado.",
+      desc: "Desarrollamos plataformas web de alto rendimiento e identidades de marca de autoridad para tu negocio.",
       card1_title: "INGENIERÍA WEB Y APLICACIONES",
-      card1_desc: "Desarrollamos plataformas web 360º all-inclusive que eliminan el esfuerzo técnico y entregan un alto rendimiento.",
+      card1_desc: "Sitios web ultrarrápidos, sistemas a medida y aplicaciones optimizadas para conversión y velocidad.",
       card1_li1: "Arquitectura Web y React/Next.js",
       card1_li2: "Alta Carga y Optimización Cloud",
       card1_li3: "SEO Avanzado y Core Web Vitals",
       card2_title: "IDENTIDAD DE MARCA Y BRANDING",
-      card2_desc: "Diseñamos identidades visuales de autoridad y sistemas UI/UX que posicionan a tu empresa como líder del sector.",
+      card2_desc: "Identidades visuales memorables e interfaces intuitivas que generan confianza inmediata en tus clientes.",
       card2_li1: "Diseño de Marca y Sistemas UI/UX",
       card2_li2: "Redes Sociales y Estrategia de Contenido",
       card2_li3: "Marketing de Rendimiento y Anuncios",
@@ -254,7 +254,7 @@ const translations = {
     },
     stats: {
       s1_val: "5+", s1_lab: "Años de Experiencia en Ingeniería",
-      s2_val: "4+", s2_lab: "Más de 4 Proyectos Entregados",
+      s2_val: "6+", s2_lab: "Más de 6 Proyectos Entregados",
       s3_val: "4-21 Días", s3_lab: "Tiempo de Entrega Típico",
       s4_val: "24/7", s4_lab: "Monitoreo Activo de Sistemas"
     },
@@ -315,31 +315,31 @@ const translations = {
       title1: "AGENCE DIGITALE",
       title2: "SUR MESURE",
       p1_num: "01",
-      p1_title: "UNE APPROCHE PERSONNALISÉE",
-      p1_desc: "Agence boutique full-service, nous développons votre projet technologique et de communication du concept stratégique à la réalisation concrète.",
+      p1_title: "APPROCHE SUR MESURE",
+      p1_desc: "Solutions digitales uniques conçues pour votre secteur, de la stratégie technique au déploiement avec suivi continu.",
       p2_num: "02",
-      p2_title: "DÉVELOPPEMENT & MARKETING SANS LIMITES",
-      p2_desc: "Le succès digital exige de la constance. Notre ingénierie et notre conseil n'ont aucune limite sur le nombre de mises à jour ou de fonctionnalités.",
+      p2_title: "INGÉNIERIE SANS LIMITES",
+      p2_desc: "Zéro contrainte technique. Nous développons des systèmes rapides, évolutifs e axés sur vos résultats commerciaux.",
       p3_num: "03",
-      p3_title: "UN PARTENAIRE D'AFFAIRES",
-      p3_desc: "Plus qu'une agence digitale, nous sommes un partenaire stratégique dédié à mettre le développement logiciel et le design au service de vos ventes.",
+      p3_title: "PARTENAIRE DE CROISSANCE",
+      p3_desc: "Nous alignons technologie moderne et design UI/UX sur vos objectifs pour convertir vos visiteurs en clients fidèles.",
       p4_num: "04",
-      p4_title: "UNE ÉQUIPE DÉDIÉE",
-      p4_desc: "Votre projet est notre priorité absolue. Vous collaborerez directement avec une équipe pluridisciplinaire : Ingénieur Logiciel, Designer UX/UI et Directeur Créatif.",
-      quote: '"Nous concevons des stratégies 100% sur mesure et mettons en œuvre tout le nécessaire pour atteindre vos objectifs sans limites de plateforme."'
+      p4_title: "ÉQUIPE DÉDIÉE",
+      p4_desc: "Accès direct à des experts confirmés en ingénierie logicielle, design UI/UX et stratégie de marque.",
+      quote: '"Stratégies digitales 100% sur mesure et ingénierie de pointe pour positionner votre marque au sommet."'
     },
     services: {
       tag: "SOLUTIONS 360º",
       title1: "CE QUE NOUS",
       title2: "FAISONS",
-      desc: "Chez P&D Agency, nous offrons une gamme complète de services en ingénierie logicielle, développement web et identité numérique pour faire rayonner votre marque.",
+      desc: "Nous concevons des plateformes web ultra-performantes et des identités visuelles fortes pour faire rayonner votre marque.",
       card1_title: "INGÉNIERIE WEB & APPLICATIONS",
-      card1_desc: "Nous développons des plateformes web 360º all-inclusive qui éliminent la complexité technique et garantissent une haute performance.",
+      card1_desc: "Sites web ultra-rapides, outils sur mesure et applications optimisées pour convertir et performer.",
       card1_li1: "Architecture Web & React/Next.js",
       card1_li2: "Haute Charge & Optimisation Cloud",
       card1_li3: "SEO Avancé & Core Web Vitals",
       card2_title: "IDENTITÉ DE MARQUE & BRANDING",
-      card2_desc: "Nous créons des identités visuelles fortes et des systèmes UI/UX qui positionnent votre entreprise comme leader incontesté sur votre marché.",
+      card2_desc: "Identités visuelles fortes et interfaces intuitives créant une confiance immédiate auprès de vos clients.",
       card2_li1: "Design de Marque & Systèmes UI/UX",
       card2_li2: "Réseaux Sociaux & Stratégie de Contenu",
       card2_li3: "Marketing de Performance & Publicité",
@@ -347,7 +347,7 @@ const translations = {
     },
     stats: {
       s1_val: "5+", s1_lab: "Années d'Expérience en Ingénierie",
-      s2_val: "4+", s2_lab: "Plus de 4 Projets Livrés",
+      s2_val: "6+", s2_lab: "Plus de 6 Projets Livrés",
       s3_val: "4-21 Jours", s3_lab: "Délai de Livraison Type",
       s4_val: "24/7", s4_lab: "Surveillance Système Active"
     },
@@ -408,31 +408,31 @@ const translations = {
       title1: "INDIVIDUELLE",
       title2: "DIGITALAGENTUR",
       p1_num: "01",
-      p1_title: "EIN MAßGESCHNEIDERTER ANSATZ",
-      p1_desc: "Als Full-Service-Boutique-Agentur entwickeln wir Ihr Technologie- und Kommunikationsprojekt vom strategischen Konzept bis zur perfekten Umsetzung.",
+      p1_title: "MAßGESCHNEIDERTER ANSATZ",
+      p1_desc: "Individuelle Digitallösungen für Ihre Branche — vom strategischen Konzept bis zum erfolgreichen Launch.",
       p2_num: "02",
-      p2_title: "ENTWICKLUNG & MARKETING OHNE GRENZEN",
-      p2_desc: "Digitaler Erfolg erfordert Kontinuität. Unsere Entwicklung und Beratung kennen keine Grenzen bei Updates oder Funktionserweiterungen.",
+      p2_title: "ENTWICKLUNG OHNE GRENZEN",
+      p2_desc: "Keine technischen Hürden. Wir entwickeln schnelle, skalierbare und ergebnisorientierte Systeme.",
       p3_num: "03",
-      p3_title: "EIN STARKER GESCHÄFTSPARTNER",
-      p3_desc: "Mehr als eine Digitalagentur: Wir sind ein strategischer Partner, der Softwareentwicklung und Design gezielt in den Dienst Ihres Umsatzwachstums stellt.",
+      p3_title: "STRATEGISCHER PARTNER",
+      p3_desc: "Wir verknüpfen moderne Software und UI/UX-Design direkt mit Ihren Geschäftszielen für nachhaltiges Wachstum.",
       p4_num: "04",
-      p4_title: "EIN DEDIZIERTES TEAM",
-      p4_desc: "Ihr Projekt hat für uns höchste Priorität. Sie arbeiten direkt mit einem multidisziplinären Team aus Software-Ingenieuren, UX/UI-Designern und Creative Directorn.",
-      quote: '"Wir entwickeln 100% individuelle Strategien und setzen alles um, was nötig ist, um Ihre Ziele plattformübergreifend zu erreichen."'
+      p4_title: "ENGAGIERTES TEAM",
+      p4_desc: "Direkte Zusammenarbeit mit Software-Ingenieuren, UI/UX-Designern und Markenstrategen.",
+      quote: '"100% maßgeschneiderte Digitalstrategien und Spitzenengineering, um Ihre Marke an die Marktspitze zu bringen."'
     },
     services: {
       tag: "360º-LÖSUNGEN",
       title1: "WAS WIR",
       title2: "TUN",
-      desc: "Bei P&D Agency bieten wir ein umfassendes Spektrum an Softwareentwicklung, Webdesign und digitaler Markenidentität, um Ihre Marke im Markt zu etablieren.",
+      desc: "Wir entwickeln performante Webplattformen und markante Identitäten, die Ihr Unternehmen etablieren.",
       card1_title: "WEB-ENTWICKLUNG & APPS",
-      card1_desc: "Wir entwickeln All-inclusive-Webplattformen, die technische Hürden beseitigen und dauerhaft höchste Performance liefern.",
+      card1_desc: "Ultraschnelle Websites, maßgeschneiderte Systeme und Web-Apps für maximale Performance und Conversion.",
       card1_li1: "Webarchitektur & React/Next.js",
       card1_li2: "High-Load & Cloud-Optimierung",
       card1_li3: "Erweitertes SEO & Core Web Vitals",
       card2_title: "MARKENIDENTITÄT & BRANDING",
-      card2_desc: "Wir gestalten ausdrucksstarke Markenidentitäten und UI/UX-Systeme, die Ihr Unternehmen als Branchenführer positionieren.",
+      card2_desc: "Ausdrucksstarke Markenidentitäten und intuitive Interfaces, die sofortiges Kundenvertrauen schaffen.",
       card2_li1: "Markendesign & UI/UX-Systeme",
       card2_li2: "Social Media & Content-Strategie",
       card2_li3: "Performance Marketing & Ads",
@@ -440,7 +440,7 @@ const translations = {
     },
     stats: {
       s1_val: "5+", s1_lab: "Jahre Erfahrung in Softwareentwicklung",
-      s2_val: "4+", s2_lab: "Über 4 Erfolgreich Gelieferte Projekte",
+      s2_val: "6+", s2_lab: "Über 6 Erfolgreich Gelieferte Projekte",
       s3_val: "4-21 Tage", s3_lab: "Typische Lieferzeit",
       s4_val: "24/7", s4_lab: "Aktive Systemüberwachung"
     },
@@ -956,7 +956,7 @@ export default function LandingPage() {
     { name: 'ROUTE 109 GUIA', category: lang === 'pt' ? 'Mobilidade Elétrica • Guia' : 'Electric Mobility • Guia', logo: '/assets/roots-199.png', link: 'https://www.routen109mobilidade.com/' },
     { name: 'ROTA DO CORTE', category: lang === 'pt' ? 'Barbearia & Agendamento • Paião' : 'Barbershop & Online Booking', logo: '/assets/rotadocorte-logo.png', link: 'https://www.rotadocorte.com/' },
     { name: 'DRA. ÁUREA AGOSTINHO', category: lang === 'pt' ? 'Medicina Estética & Harmonização' : 'Aesthetic Medicine & Facial Harmony', logo: '/assets/aurea-logo.png', link: 'https://www.dra-aurea-agostinho.com/' },
-    { name: 'IARA BENTO', category: lang === 'pt' ? 'Social Media & Branding' : 'Social Media & Branding', logo: '/assets/iara-bento-logo.png', link: 'https://www.iarabento.com/' },
+    { name: 'IARA BENTO', category: lang === 'pt' ? 'Social Media & Branding' : 'Social Media & Branding', logo: '/assets/iara-bento-logo.png', link: 'https://iarabento.com/' },
     { name: 'MARIA JOÃO SIMÕES', category: lang === 'pt' ? 'Design Gráfico & Artes' : 'Graphic Design & Creative', logo: '/assets/maria-simoes-avatar.png', link: 'https://maria-joao-portfolio.vercel.app/' }
   ];
 
@@ -1541,7 +1541,7 @@ export default function LandingPage() {
                   img: '/assets/portfolio-iara-bento.png',
                   badge: t.portfolio.live,
                   badgeClass: 'bg-amber-500 text-black font-bold',
-                  link: 'https://www.iarabento.com/',
+                  link: 'https://iarabento.com/',
                 },
                 {
                   label: lang === 'pt' ? 'Design Gráfico & Artes / 2026' : 'Graphic Design & Creative / 2026',
@@ -1645,11 +1645,17 @@ export default function LandingPage() {
               {[
                 {
                   quote: lang === 'pt' 
-                    ? "Trabalhamos com a P&D Agency e a verdade é que não podíamos estar mais satisfeitos. Souberam ler a nossa visão desde o primeiro instante, têm uma equipa muito dedicada e apresentam um serviço super personalizado."
-                    : "Working with P&D Agency exceeded all expectations. They captured our brand vision instantly, delivered dedicated support, and provided truly personalized engineering.",
-                  author: "Ana Dominguez",
-                  role: "Owner & Founder",
-                  brand: "Ana Dominguez Ceramics"
+                    ? "O website e o sistema de marcações online desenvolvido pela P&D Agency revolucionou a Rota Do Corte. Os clientes marcam em segundos, poupamos horas de telefone e elevámos a barbearia a um padrão digital de excelência."
+                    : lang === 'es'
+                    ? "El sitio web y el sistema de reservas online de P&D Agency transformaron Rota Do Corte. Los clientes reservan en segundos, ahorramos horas de llamadas y elevamos la barbería a un estándar digital de referencia."
+                    : lang === 'fr'
+                    ? "Le site web et le système de réservation en ligne de P&D Agency ont transformé Rota Do Corte. Les clients réservent en quelques secondes, nous gagnons un temps précieux et notre salon bénéficie d'une vraie référence digitale."
+                    : lang === 'de'
+                    ? "Die maßgeschneiderte Website und das Online-Buchungssystem von P&D Agency haben Rota Do Corte revolutioniert. Kunden buchen sekundenschnell und wir sparen täglich wertvolle Zeit."
+                    : "The custom website and online booking system built by P&D Agency revolutionized Rota Do Corte. Clients book appointments in seconds, saving us hours of phone calls and giving our barbershop a premium digital edge.",
+                  author: "Gabriel Silva",
+                  role: lang === 'pt' ? "Fundador & Barbeiro" : lang === 'es' ? "Fundador y Barbero" : lang === 'fr' ? "Fondateur & Barbier" : lang === 'de' ? "Gründer & Barbier" : "Founder & Master Barber",
+                  brand: "Rota Do Corte"
                 },
                 {
                   quote: lang === 'pt'
@@ -1977,6 +1983,13 @@ export default function LandingPage() {
               >
                 {lang === 'pt' ? 'POLÍTICA DE COOKIES' : 'COOKIE POLICY'}
               </Link>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("reset_cookie_consent"))}
+                className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors whitespace-nowrap cursor-pointer underline"
+              >
+                {lang === 'pt' ? 'GERIR COOKIES' : 'MANAGE COOKIES'}
+              </button>
               <Link 
                 to="/termos-condicoes"
                 className="text-neutral-500 hover:text-primary text-[10px] uppercase tracking-[0.2em] font-bold transition-colors whitespace-nowrap"

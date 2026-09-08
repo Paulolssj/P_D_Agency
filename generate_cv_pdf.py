@@ -723,10 +723,10 @@ html_content = f"""<!DOCTYPE html>
       <!-- TESTIMONIAL VALIDATION BANNER -->
       <div class="testimonial-bar">
         <div class="testimonial-text">
-          "A P&D Agency soube ler a nossa visão desde o primeiro instante e prestou um serviço 100% personalizado e impecável."
+          "O website e o sistema de marcações online da P&D Agency revolucionaram a Rota Do Corte e o nosso atendimento."
         </div>
         <div class="testimonial-author">
-          — Ana Dominguez Ceramics
+          — Gabriel Silva • Rota Do Corte
         </div>
       </div>
 

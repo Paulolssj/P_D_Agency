@@ -161,40 +161,154 @@ export default function CookiePolicyPage() {
               </h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
+              {/* Categoria 1: Essenciais */}
               <div className={`p-5 rounded-2xl border ${
                 darkMode ? 'bg-neutral-950/80 border-neutral-800' : 'bg-neutral-50 border-neutral-200'
               }`}>
                 <div className="flex items-center gap-2 font-bold text-sm mb-2 text-emerald-500">
                   <CheckCircle2 className="w-4 h-4" />
-                  <span>Armazenamento Estritamente Necessário (Essencial)</span>
+                  <span>1. Tecnologias Estritamente Necessárias (Essenciais)</span>
                 </div>
                 <p className={`text-xs mb-3 ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
-                  Chaves técnicas indispensáveis para o funcionamento da interface, segurança e memorização de preferências.
+                  Chaves técnicas indispensáveis para garantir segurança, estabilidade da sessão e o registo fidedigno do consentimento do utilizador. Não requerem consentimento prévio (Artigo 5.º, n.º 2 da Lei n.º 41/2004).
                 </p>
 
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs border border-neutral-800">
+                  <table className="w-full text-left text-[11px] border border-neutral-800">
                     <thead className={darkMode ? 'bg-neutral-900 text-white' : 'bg-neutral-200 text-neutral-900'}>
                       <tr>
-                        <th className="p-2.5 border-b border-neutral-700 font-bold">Identificador</th>
-                        <th className="p-2.5 border-b border-neutral-700 font-bold">Tecnologia</th>
-                        <th className="p-2.5 border-b border-neutral-700 font-bold">Finalidade Concreta</th>
-                        <th className="p-2.5 border-b border-neutral-700 font-bold">Duração</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Identificador</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Tipo</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Fornecedor</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Finalidade Concreta</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Duração</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Categoria</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Base Jurídica</th>
                       </tr>
                     </thead>
                     <tbody className={darkMode ? 'bg-neutral-950 text-neutral-300' : 'bg-white text-neutral-700'}>
                       <tr className="border-b border-neutral-800">
-                        <td className="p-2.5 font-mono text-blue-400 font-bold">pd_theme_preference</td>
-                        <td className="p-2.5">LocalStorage</td>
-                        <td className="p-2.5">Memoriza a preferência visual de tema (Modo Claro / Modo Escuro)</td>
-                        <td className="p-2.5">Persistente (até eliminação pelo utilizador)</td>
+                        <td className="p-2 font-mono text-blue-400 font-bold">pdagency_cookie_consent_v2</td>
+                        <td className="p-2">LocalStorage</td>
+                        <td className="p-2">P&D Agency</td>
+                        <td className="p-2">Regista o estado e a granularidade do consentimento do utilizador</td>
+                        <td className="p-2">12 meses</td>
+                        <td className="p-2 font-semibold text-emerald-500">Essencial</td>
+                        <td className="p-2">Art. 6.º/1/c RGPD (Obrigação legal)</td>
                       </tr>
                       <tr className="border-b border-neutral-800">
-                        <td className="p-2.5 font-mono text-blue-400 font-bold">pdagency_privacy_notice</td>
-                        <td className="p-2.5">LocalStorage</td>
-                        <td className="p-2.5">Regista a visualização e fecho do aviso informativo sobre o funcionamento essencial do website</td>
-                        <td className="p-2.5">Persistente (até eliminação pelo utilizador)</td>
+                        <td className="p-2 font-mono text-blue-400 font-bold">pdagency_privacy_notice</td>
+                        <td className="p-2">LocalStorage</td>
+                        <td className="p-2">P&D Agency</td>
+                        <td className="p-2">Regista a tomada de conhecimento do aviso informativo inicial</td>
+                        <td className="p-2">12 meses</td>
+                        <td className="p-2 font-semibold text-emerald-500">Essencial</td>
+                        <td className="p-2">Art. 6.º/1/f RGPD (Interesse legítimo)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Categoria 2: Preferências & Funcionais */}
+              <div className={`p-5 rounded-2xl border ${
+                darkMode ? 'bg-neutral-950/80 border-neutral-800' : 'bg-neutral-50 border-neutral-200'
+              }`}>
+                <div className="flex items-center gap-2 font-bold text-sm mb-2 text-blue-400">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>2. Tecnologias de Preferências e Funcionalidades (Opcionais)</span>
+                </div>
+                <p className={`text-xs mb-3 ${darkMode ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                  Permitem que o website memorize escolhas personalizadas do utilizador para melhorar a experiência de navegação.
+                </p>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-[11px] border border-neutral-800">
+                    <thead className={darkMode ? 'bg-neutral-900 text-white' : 'bg-neutral-200 text-neutral-900'}>
+                      <tr>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Identificador</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Tipo</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Fornecedor</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Finalidade Concreta</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Duração</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Categoria</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Base Jurídica</th>
+                      </tr>
+                    </thead>
+                    <tbody className={darkMode ? 'bg-neutral-950 text-neutral-300' : 'bg-white text-neutral-700'}>
+                      <tr className="border-b border-neutral-800">
+                        <td className="p-2 font-mono text-blue-400 font-bold">pd_theme_preference</td>
+                        <td className="p-2">LocalStorage</td>
+                        <td className="p-2">P&D Agency</td>
+                        <td className="p-2">Memoriza a preferência visual de tema (Modo Claro / Modo Escuro)</td>
+                        <td className="p-2">Persistente</td>
+                        <td className="p-2 font-semibold text-blue-400">Funcional</td>
+                        <td className="p-2">Art. 6.º/1/a (Consentimento)</td>
+                      </tr>
+                      <tr className="border-b border-neutral-800">
+                        <td className="p-2 font-mono text-blue-400 font-bold">pd_agency_lang</td>
+                        <td className="p-2">LocalStorage</td>
+                        <td className="p-2">P&D Agency</td>
+                        <td className="p-2">Memoriza o idioma selecionado (Português / Inglês)</td>
+                        <td className="p-2">Persistente</td>
+                        <td className="p-2 font-semibold text-blue-400">Funcional</td>
+                        <td className="p-2">Art. 6.º/1/a (Consentimento)</td>
+                      </tr>
+                      <tr className="border-b border-neutral-800">
+                        <td className="p-2 font-mono text-blue-400 font-bold">pd_calculator_state</td>
+                        <td className="p-2">SessionStorage</td>
+                        <td className="p-2">P&D Agency</td>
+                        <td className="p-2">Conserva o estado transitório do simulador de orçamento durante a navegação</td>
+                        <td className="p-2">Sessão</td>
+                        <td className="p-2 font-semibold text-blue-400">Funcional</td>
+                        <td className="p-2">Art. 6.º/1/b (Diligências pré-contratuais)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Categoria 3: Scripts de Terceiros e Recursos Externos */}
+              <div className={`p-5 rounded-2xl border ${
+                darkMode ? 'bg-neutral-950/80 border-neutral-800' : 'bg-neutral-50 border-neutral-200'
+              }`}>
+                <div className="flex items-center gap-2 font-bold text-sm mb-2 text-neutral-300">
+                  <Shield className="w-4 h-4 text-blue-400" />
+                  <span>3. Recursos Externos & Terceiros Estritamente Auditados</span>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-[11px] border border-neutral-800">
+                    <thead className={darkMode ? 'bg-neutral-900 text-white' : 'bg-neutral-200 text-neutral-900'}>
+                      <tr>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Serviço / Terceiro</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Entidade</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Finalidade</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Instala Cookies?</th>
+                        <th className="p-2 border-b border-neutral-700 font-bold">Salvaguarda Internacional</th>
+                      </tr>
+                    </thead>
+                    <tbody className={darkMode ? 'bg-neutral-950 text-neutral-300' : 'bg-white text-neutral-700'}>
+                      <tr className="border-b border-neutral-800">
+                        <td className="p-2 font-bold">Alojamento Web (Hosting)</td>
+                        <td className="p-2">Vercel Inc. (EUA / EEE)</td>
+                        <td className="p-2">Entrega e segurança de tráfego HTTPS / CDN</td>
+                        <td className="p-2 text-emerald-500 font-bold">Não</td>
+                        <td className="p-2">EU-US Data Privacy Framework / SCCs</td>
+                      </tr>
+                      <tr className="border-b border-neutral-800">
+                        <td className="p-2 font-bold">Tipografia Web (Google Fonts)</td>
+                        <td className="p-2">Google Ireland Ltd.</td>
+                        <td className="p-2">Renderização estética de fontes Space Grotesk e Manrope</td>
+                        <td className="p-2 text-emerald-500 font-bold">Não (HTTP font assets)</td>
+                        <td className="p-2">Decisão de Adequação / EEE</td>
+                      </tr>
+                      <tr className="border-b border-neutral-800">
+                        <td className="p-2 font-bold">Canal WhatsApp (wa.me)</td>
+                        <td className="p-2">Meta Platforms Ireland Ltd.</td>
+                        <td className="p-2">Ligação direta de suporte acionada por clique voluntário</td>
+                        <td className="p-2 text-emerald-500 font-bold">Não no website (abre app externa)</td>
+                        <td className="p-2">Termos próprios do WhatsApp</td>
                       </tr>
                     </tbody>
                   </table>
